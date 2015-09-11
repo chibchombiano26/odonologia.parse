@@ -14,6 +14,7 @@ angular.module('hefesoft.google')
 
 	
 	dataFactory.connectGoogle = function(token) {
+	    var deferred = $q.defer();
           gapi.auth.authorize({
             client_id: token,
             immediate: true,
@@ -21,22 +22,27 @@ angular.module('hefesoft.google')
             cookie_policy: 'single_host_origin'
           }, function(response) {
             if (response.status.signed_in) {
-              dataFactory.connectGoogleSuccess(response);
+              dataFactory.connectGoogleSuccess(response, deferred);
+            }
+            else{
+                deferred.reject();
             }
           });
-         };
+          
+          return deferred.promise;
+     };
 
     dataFactory.connectGoogleSuccess = function(result, deferred){
            // Carga las bibliotecas oauth2 para habilitar los métodos userinfo.
           gapi.client.load('oauth2', 'v2', function() {
             var request = gapi.client.oauth2.userinfo.get();
             request.execute(function(data){
-               dataFactory.saveGoogleUserParse(data);
+               dataFactory.saveGoogleUserParse(data, deferred);
             });
           });
        }
 
-    dataFactory.saveGoogleUserParse =  function(data){
+    dataFactory.saveGoogleUserParse =  function(data, deferred){
           var user = new Parse.User();
           user.set("username", data.email);
           user.set("name", data.name);
@@ -46,10 +52,10 @@ angular.module('hefesoft.google')
 
           dataFactory.existUser(data.email).then(function(result){
             if(result.length == 0){
-              dataFactory.signUp(user);
+              dataFactory.signUp(user, deferred);
             }
             else{
-              dataFactory.login(data.email, data.id);
+              dataFactory.login(data.email, data.id, deferred);
             }
           });
        }
@@ -67,24 +73,28 @@ angular.module('hefesoft.google')
          return deferred.promise;
        }
 
-     dataFactory.signUp =  function(user){
+     dataFactory.signUp =  function(user, deferred){
          user.signUp(null, {
            success: function(user) {
              console.log(user);
+             deferred.resolve(user);
            },
            error: function(user, error) {
              // Show the error message somewhere and let the user try again.
+             deferred.reject();
              alert("Error: " + error.code + " " + error.message);
            }
          });
        }
 
-      dataFactory.login =  function(username, pass){
+      dataFactory.login =  function(username, pass, deferred){
          Parse.User.logIn(username, pass, {
           success: function(user) {
             console.log(user);
+            deferred.resolve(user);
           },
           error: function(user, error) {
+              deferred.reject();
             alert("Error: " + error.code + " " + error.message);
           }
         });

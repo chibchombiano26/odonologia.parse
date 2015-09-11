@@ -274,31 +274,29 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state){
 
         //Status
-
-        var SCOPES = [
-          'https://www.googleapis.com/auth/photos',
-          'https://www.googleapis.com/auth/drive',
-          "https://www.googleapis.com/auth/photos.upload",
-          "https://www.googleapis.com/auth/plus.login"
-         ];
-
         this.login = 1;
         this.register = 0;
         this.forgot = 0;
 
-        $scope.fnSigIn = function(item){
-          console.log(item);
-        }
-
+       
         $scope.$on('event:google-plus-signin-success', function (event,authResult) {
-          authGoogleService.connectGoogle(authResult.client_id);
+          authGoogleService.connectGoogle(authResult.client_id).then(success, error);
         });
         $scope.$on('event:google-plus-signin-failure', function (event,authResult) {
           // Auth failure or signout detected
         });
+        
+        function success(result){
+            console.log("Ingreso");
+            $state.go("home");
+        }
+        
+        function error(error){
+            
+        }
     })
 
 
