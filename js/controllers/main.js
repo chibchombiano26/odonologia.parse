@@ -282,13 +282,9 @@ materialAdmin
         this.register = 0;
         this.forgot = 0;
 
-        $scope.$on('event:google-plus-signin-success', function (event,authResult) {
-          // Send login to server or save into cookie
-          console.log(event, authResult);
-        });
-        $scope.$on('event:google-plus-signin-failure', function (event,authResult) {
-          // Auth failure or signout detected
-        });
+        $scope.fnSigIn = function(item){          
+          console.log(item);
+        }
     })
 
 

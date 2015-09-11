@@ -1,0 +1,58 @@
+<ion-view view-title="Cargar archivos" ng-controller="uploadCtrl as vm">
+<ion-content has-subheader="false">
+
+<div>                
+    <p>
+        <br/>
+        <span class="input-control text">
+            <input type="file" 
+            id="file" 
+            name="file" 
+            ng-disabled="{{!mostrarUploadButton}}" 
+            file-model="handleFileSelect(myFile)" 
+            multiple/>
+        </span>
+    </p>
+</div>
+
+
+ <div>
+  <ion-item ng-repeat="n in files">
+        <div class="item item-button-right">
+        {{n.name}}
+        <button ng-click="eliminar(n)" class="button button-balanced">
+          <i class="icon ion-android-cancel"></i>
+        </button>
+
+        <span class="item-note">
+        {{n.percent}}
+        </span>
+      </div>
+  </ion-item>
+</div>
+
+<div class="list" ng-show="mostrarCargar">
+
+  <div class="item item-divider">
+    Archivo en carga:
+  </div>
+
+  <a class="item" href="#">
+    <span id="fileName"> {{fileName}} </span>
+  </a>
+
+  <div class="item item-divider">
+    Progreso
+  </div>
+
+  <a class="item" href="#">
+    <span id="fileName"> {{fileUploadProgress}} </span>
+  </a>
+
+  <a class="item" href="#">
+    <input type="button" value="Cargar archivos" ng-disabled="{{!mostrarUploadButton}}" ng-click="uploadFileInBlocks()"/>
+  </a> 
+</div>
+
+</ion-content>
+</ion-view>

@@ -7,7 +7,7 @@ materialAdmin
         window.fbAsyncInit = function() {
           Parse.FacebookUtils.init({ // this line replaces FB.init({
             appId      : '{facebook-app-id}', // Facebook App ID
-            status     : true,  // check Facebook Login status
+            status     : false,  // check Facebook Login status
             cookie     : true,  // enable cookies to allow Parse to access the session
             xfbml      : true,  // initialize Facebook social plugins on the page
             version    : 'v2.3' // point to the latest Facebook Graph API version

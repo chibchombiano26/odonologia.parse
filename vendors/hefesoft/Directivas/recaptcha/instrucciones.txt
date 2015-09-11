@@ -1,0 +1,4 @@
+.state('captcha', {
+  url: '/captcha',
+  templateUrl: 'lib/hefesoft.standard/Directivas/recaptcha/Vista/captcha.html'  
+})

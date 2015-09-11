@@ -1,0 +1,104 @@
+<div class="hefesoft-full-calendar"></div>
+
+<div id="calendar-widget"></div>
+                    
+<!-- Add event -->
+<div 
+    class="modal fade" 
+    id="addNew-event" 
+    data-backdrop="static" 
+    data-keyboard="false">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Adicionar evento</h4>
+            </div>
+            <div class="modal-body">
+                <form class="addEvent" role="form">
+                    
+                    <div class="form-group">
+                        <label for="eventName">nombre del evento</label>
+                        <div class="fg-line">
+                            <input                            
+                            type="text" 
+                            class="input-sm form-control" 
+                            id="eventName"
+                            ng-model="titulo" 
+                            placeholder="ej: Control medico">
+                        </div>
+                    </div>
+
+                    <div class="form-group">                        
+                        <div class="fg-line">
+                            <time-picker 
+                                id="horaInicial" 
+                                titulo="'Hora inicial'" 
+                                ng-model="inicio"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">                        
+                        <div class="fg-line">
+                            <time-picker
+                                id="horaFinal" 
+                                titulo="'Hora final'" 
+                                ng-model="fin"/>
+                        </div>
+                    </div>
+
+                    <div class="checkbox m-b-15">
+                        <label>
+                            <input type="checkbox" ng-model="todoElDia" value="">
+                            <i class="input-helper"></i>
+                            Todo el dia
+                        </label>
+                    </div>
+
+                    
+                    
+                    
+                    <div class="form-group">
+                        <label for="eventName">Color</label>
+                        <div class="event-tag">
+                            <span data-tag="bgm-teal" class="bgm-teal selected"></span>
+                            <span data-tag="bgm-red" class="bgm-red"></span>
+                            <span data-tag="bgm-pink" class="bgm-pink"></span>
+                            <span data-tag="bgm-blue" class="bgm-blue"></span>
+                            <span data-tag="bgm-lime" class="bgm-lime"></span>
+                            <span data-tag="bgm-green" class="bgm-green"></span>
+                            <span data-tag="bgm-cyan" class="bgm-cyan"></span>
+                            <span data-tag="bgm-orange" class="bgm-orange"></span>
+                            <span data-tag="bgm-purple" class="bgm-purple"></span>
+                            <span data-tag="bgm-gray" class="bgm-gray"></span>
+                            <span data-tag="bgm-black" class="bgm-black"></span>
+                        </div>
+                    </div>
+
+
+                   
+                </form>
+            </div>
+            
+            <div class="modal-footer">
+                <button 
+                    type="submit" 
+                    class="btn btn-link" 
+                    id="addEvent">Adicionar
+                </button>
+
+                <button 
+                    type="submit" 
+                    class="btn btn-link" 
+                    id="deleteEvent">Eliminar
+                </button>
+                
+                <button 
+                    type="button" 
+                    class="btn btn-link" 
+                    data-dismiss="modal">Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

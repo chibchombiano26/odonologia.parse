@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google-signin-client_id" content="505952414500-c04fnrdu3njem1cl2ug9h5gbd6rs025k.apps.googleusercontent.com">
         <title>Material Admin</title>
 
         <!-- Vendor CSS -->
@@ -74,7 +75,7 @@
                 </div>
             </div>
 
-            <google-plus-signin clientid="505952414500-c04fnrdu3njem1cl2ug9h5gbd6rs025k.apps.googleusercontent.com" language="es"></google-plus-signin>
+            <sign-up-google fnSigIn="fnSigIn(item)"></sign-up-google>
 
             <div class="clearfix"></div>
 
@@ -167,6 +168,8 @@
         <script src="vendors/bower_components/angular-animate/angular-animate.min.js"></script>
         <script src="vendors/bower_components/angular-resource/angular-resource.min.js"></script>
 
+        <!--Register-->
+        <script src="vendors/hefesoft/modules/register.js"></script>
 
         <!-- Angular Modules -->
         <script src="vendors/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -180,9 +183,10 @@
         <script src="vendors/bower_components/angular-nouislider/src/nouislider.min.js"></script>
         <script src="vendors/bower_components/ng-table/dist/ng-table.min.js"></script>
 
-        <!-- Auth -->
+
+
+        <!-- Parse -->
         <script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
-        <script src="vendors/bower_components/angular-directive.g-signin/google-plus-signin.js"></script>
 
         <!-- Placeholder for IE9 -->
         <!--[if IE 9 ]>
@@ -198,10 +202,21 @@
         <script src="js/controllers/ui-bootstrap.js"></script>
         <script src="js/controllers/table.js"></script>
 
+        <!-- Auth -->
+        <script src="vendors/hefesoft/google/directivas/signUp/directive/directive.js"/>
 
         <!-- Template Modules -->
         <script src="js/modules/template.js"></script>
         <script src="js/modules/ui.js"></script>
         <script src="js/modules/form.js"></script>
+
+        <!-- Google-->
+        <script src="vendors/hefesoft/google/js/onload.js"></script>
+        <script src="https://apis.google.com/js/client.js?onload=onload"></script>
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script src="https://apis.google.com/js/platform.js?onload=onLoadPLatform" async defer></script>
+
+
+
     </body>
 </html>

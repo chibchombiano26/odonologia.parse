@@ -1,0 +1,27 @@
+<ion-view view-title="Mis tarjetas">
+
+<ion-content has-subheader="false">
+
+  		<ion-list show-delete="shouldShowDelete"
+		          show-reorder="shouldShowReorder"
+		          can-swipe="listCanSwipe">
+		  
+		  <ion-item ng-repeat="item in items"
+		            class="item item-avatar">
+		   
+		    <h2>Ultimos 4 numeros: {{item.card.last4}}</h2>
+		    <p>Compañia: {{item.card.brand}}</p>		    	    
+		    
+		    <ion-option-button class="button-positive"
+		                       ng-click="eliminar(item)">
+		      Eliminar tarjeta de esta app
+		    </ion-option-button>
+		    
+
+		  </ion-item>
+		</ion-list>
+
+
+</ion-content>
+
+</ion-view>

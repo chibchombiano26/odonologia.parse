@@ -1,0 +1,28 @@
+<ion-view view-title="Eres humano?" ng-controller="recaptchaController as vm">
+<ion-content has-subheader="false">
+
+
+	<div class="list card">
+	  <div class="item item-avatar">
+	    <img src="img/icon.png">
+	    <h2>Bienvenido a hefesoft odontologia</h2>
+	    <p>Nuestra aplicacion desea validar que eres un ser humano y no un robot antes de ingresar, Por favor da click en no soy un robot y sigue las instrucciones</p>
+	  </div>
+
+	  <div class="item item-image">
+	    <form>
+		      <div id="captcha" recaptcha="setCaptcha(response)"></div>
+		      <br> 		      
+		 </form>
+	  </div>
+
+	  <a class="item item-icon-left assertive" ng-show="activarIngreso" ng-click="irLogin()" href="#">
+	   	Ingresar   
+	  </a>
+
+	</div>
+
+	
+</ion-content>
+</ion-view>
+

@@ -1,0 +1,36 @@
+<div class="card">
+    <div role="tabpanel" class="tab-pane fade in active" id="friends">
+        <div class="listview">
+            
+            <a class="lv-item" ng-click='getBack()' ng-show="parentLevel" href="#">
+                <div class="media">
+                    <div class="pull-left p-relative">
+                        <i class="md md-menu"></i>
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">{{ parentLevel[title] }}...</div>
+                        <small class="lv-small"></small>
+                    </div>
+                </div>
+            </a>
+
+
+            <a 
+            class="lv-item" 
+            ng-click='displayNextLevel($index, source)' 
+            ng-repeat="source in currentLevel" 
+            href="#">
+            
+                <div class="media">
+                    <div class="pull-left p-relative">
+                        <i class="md md-keyboard-arrow-right"></i>
+                    </div>
+                    <div class="media-body">
+                        <div class="lv-title">{{ source[title] }}</div>
+                        <small class="lv-small"></small>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

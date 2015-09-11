@@ -1,0 +1,33 @@
+<ion-view view-title="Listado adjuntos" ng-controller="adjuntosListCtrl as vm">
+
+<ion-content has-subheader="false">
+
+<div class="list card" ng-repeat="n in items">
+ 
+ <div class="item item-avatar"> 
+    <img src="img/icon.png">
+    <h2>{{n.name}}</h2>
+    <p>{{n.type}}</p>
+  </div>
+
+  <div class="item item-image">
+    <img src="{{n.path}}">
+  </div>
+
+  <a class="item item-icon-left assertive" href="{{n.path}}">    
+    Abrir
+  </a>
+
+  <a class="item item-icon-left assertive" ng-click="eliminar(n)">    
+    Eliminar
+  </a>
+
+
+</div>
+
+
+
+
+</ion-content>
+
+</ion-view>

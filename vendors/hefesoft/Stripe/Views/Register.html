@@ -1,0 +1,64 @@
+<ion-view>
+      <ion-content>
+
+      <form name="form" name="form" id="payment-form">
+      <div class="list">
+       
+        <label class="item item-input">
+          <span class="input-label">Numero de tarjeta</span>
+          <input type="text" id="numberStripeCard" ng-model="card" size="20" data-stripe="number" ng-keyup="validateCard(card)" required/>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">{{cardType}}</span>          
+        </label>
+
+       
+
+         <label class="item item-input">
+          <h5>{{tipoTarjeta}}</h5>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">CVC</span>
+          <input type="text" size="4" ng-model="cvc" validate-cvc data-stripe="cvc" required/>          
+        </label>        
+
+        <label class="item item-input">
+          <span class="input-label">Año expiracion</span>
+          <input type="text" ng-model="selectedYear" ng-keyup="year(selectedYear)" size="4" data-stripe="exp-year" required/>          
+        </label>        
+
+        <label class="item item-input">
+          <span class="input-label">Mes expiracion</span>
+          <input type="text" ng-model="selectedMonth" ng-keyup="month(selectedMonth)" size="2" data-stripe="exp-month" required/>
+        </label> 
+
+        <ul class="list">
+          <li class="item item-checkbox">
+             <label class="checkbox">
+               <input type="checkbox" ng-model="tieneCupon" ng-change="cuponChange(tieneCupon)">
+             </label>
+             Tengo un cupon
+          </li>
+        </ul>
+
+         <label class="item item-input" ng-show="tieneCupon">
+          <span class="input-label">Cupon</span>
+          <input type="text" ng-model="cupon" ng-keyup="cuponText(cupon)"/>
+        </label> 
+
+     
+          <div class="row">            
+             <button ng-disabled="form.name.$dirty && form.name.$invalid ||
+                form.password.$dirty || form.$invalid || MesAnioNoValido || tarjetaNoValida"
+          		class="button button-block button-positive" ng-click="submit()" type="submit">Suscribirse</button>            
+          </div>
+        
+
+      </div>
+	</form>
+
+      </ion-content>
+</ion-view>
+
