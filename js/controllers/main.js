@@ -274,7 +274,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q){
+    .controller('loginCtrl', function($scope, $q, authGoogleService){
 
         //Status
 
@@ -294,89 +294,11 @@ materialAdmin
         }
 
         $scope.$on('event:google-plus-signin-success', function (event,authResult) {
-          connectGoogle(authResult.client_id);
+          authGoogleService.connectGoogle(authResult.client_id);
         });
         $scope.$on('event:google-plus-signin-failure', function (event,authResult) {
           // Auth failure or signout detected
         });
-
-        function connectGoogle(token) {
-          gapi.auth.authorize({
-            client_id: token,
-            immediate: true,
-            scope: SCOPES,
-            cookie_policy: 'single_host_origin'
-          }, function(response) {
-            if (response.status.signed_in) {
-              connectGoogleSuccess(response);
-            }
-          });
-         };
-
-      function connectGoogleSuccess(result, deferred){
-           // Carga las bibliotecas oauth2 para habilitar los métodos userinfo.
-          gapi.client.load('oauth2', 'v2', function() {
-            var request = gapi.client.oauth2.userinfo.get();
-            request.execute(function(data){
-               saveGoogleUserParse(data);
-            });
-          });
-       }
-
-       function saveGoogleUserParse(data){
-          var user = new Parse.User();
-          user.set("username", data.email);
-          user.set("name", data.name);
-          user.set("password", data.id);
-          user.set("email", data.email);
-          user.set("pictureUrl", data.picture);
-
-          existUser(data.email).then(function(result){
-            debugger
-            if(result.length == 0){
-              signUp(user);
-            }
-            else{
-              login(data.email, data.id);
-            }
-          });
-       }
-
-       function existUser(user){
-         var deferred = $q.defer();
-         var query = new Parse.Query(Parse.User);
-         query.equalTo("username", user);
-         query.find({
-           success: function(result) {
-             console.log(result);
-             deferred.resolve(result);
-           }
-         });
-         return deferred.promise;
-       }
-
-       function signUp(user){
-         user.signUp(null, {
-           success: function(user) {
-             console.log(user);
-           },
-           error: function(user, error) {
-             // Show the error message somewhere and let the user try again.
-             alert("Error: " + error.code + " " + error.message);
-           }
-         });
-       }
-
-       function login(username, pass){
-         Parse.User.logIn(username, pass, {
-          success: function(user) {
-            console.log(user);
-          },
-          error: function(user, error) {
-            alert("Error: " + error.code + " " + error.message);
-          }
-        });
-       }
     })
 
 
