@@ -6,6 +6,6 @@ var materialAdmin = angular.module('materialAdmin', [
     'angular-loading-bar',
     'oc.lazyLoad',
     'nouislider',
-    'ngTable'
+    'ngTable',
+    'directive.g+signin'
 ])
- 
