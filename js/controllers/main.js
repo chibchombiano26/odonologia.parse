@@ -290,10 +290,11 @@ materialAdmin
         });
         
         function success(result){
-            console.log("Ingreso");
+            debugger
             pushGcmService.push({
                 message: "Mensaje de prueba",
-                rid : "APA91bEOO5f2ELJndrBkwCDFDc-I_P6ZtGC3u3x7u12rc9_2-Ge1qRr4cZvcgjV1FuqhGqOg_HZFgZ-tle8figo0NMF26oPIm3abmU8eIupx085FR-vLs2JYEZr_yorA1Z0F1x0htNv-BtVoF-yI4-5XkScGgFmwV6GXXJVduy3awPFWu8DuRFgoOsUQl_12IUpq1cdZ0RdAUqHJvPAl2wQlOZadMAVQJg"
+                id: subscriptionId,
+                rid : subscriptionId
             });
             $state.go("home");
         }

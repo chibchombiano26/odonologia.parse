@@ -2,6 +2,7 @@
 
 var API_KEY = window.GoogleSamples.Config.gcmAPIKey;
 var GCM_ENDPOINT = 'https://android.googleapis.com/gcm/send';
+var subscriptionId;
 
 //var curlCommandDiv = document.querySelector('.js-curl-command');
 var isPushEnabled = false;
@@ -55,7 +56,7 @@ function showCurlCommand(mergedEndpoint) {
   }
 
   var endpointSections = mergedEndpoint.split('/');
-  var subscriptionId = endpointSections[endpointSections.length - 1];
+  subscriptionId = endpointSections[endpointSections.length - 1];
 
   var curlCommand = 'curl --header "Authorization: key=' + API_KEY +
     '" --header Content-Type:"application/json" ' + GCM_ENDPOINT +

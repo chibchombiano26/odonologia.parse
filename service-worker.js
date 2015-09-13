@@ -12,9 +12,12 @@ self.addEventListener('push', function(event) {
 
   event.waitUntil(
     self.registration.pushManager.getSubscription().then(function(subscription) {
-      fetch(baseUrl + 'notifications', {
-        method: 'post',
-        body: JSON.stringify(subscription)
+      fetch(baseUrl + 'notifications', {  
+        method: 'post',  
+        headers: {  
+          "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+        },  
+        body: 'subscriptionId='+subscription.subscriptionId  
       })
       .then(function(response) {
         if (response.type === 'opaque') {

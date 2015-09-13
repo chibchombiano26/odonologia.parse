@@ -2,7 +2,7 @@ angular.module('hefesoft.google')
 .service('pushGcmService',
 	['$http', function ($http) {
 
-var baseUrl = "https://gcm-hefesoft.azurewebsites.net/";
+var baseUrl = "https://gcm-node-chibchombiano26.c9.io/";
 	var dataFactory = {};
 	
 	dataFactory.push = function(data){
