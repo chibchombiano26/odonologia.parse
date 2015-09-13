@@ -4,6 +4,7 @@
 'use strict';
 
 self.addEventListener('push', function(event) {
+  
   var title = 'Nuevo mensaje';
   var body = 'Has recibido un mensaje';
   var icon = '/images/icon-192x192.png';
@@ -13,12 +14,21 @@ self.addEventListener('push', function(event) {
 
   event.waitUntil(
     self.registration.pushManager.getSubscription().then(function(subscription) {
+  
+      var endpoint = subscription.toJSON().endpoint;
+      var idSubscription = subscription.subscriptionId;
+      
+      //If idSubscription does not have any value extract from endpoint 
+      if(!idSubscription){
+        idSubscription = endpoint.toString().replace("https://android.googleapis.com/gcm/send/","").replace("http://android.googleapis.com/gcm/send/","");
+      }
+      
       fetch(baseUrl + 'notifications', {  
         method: 'post',  
         headers: {  
           "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
         },  
-        body: 'subscriptionId='+subscription.subscriptionId  
+        body: 'subscriptionId='+idSubscription  
       })
       .then(function(response) {
         if (response.type === 'opaque') {

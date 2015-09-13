@@ -69,9 +69,7 @@ angular.module('hefesoft.google')
              console.log(result);
              deferred.resolve(result);
            },
-           error : function(er) {
-               deferred.reject(er);
-           }
+           error : function(e){ parseService.error(e, deferred)}
          });
          return deferred.promise;
        }
@@ -82,7 +80,7 @@ angular.module('hefesoft.google')
              deferred.resolve(user);
              saveRegistrationId(user);
            },
-           error: parseService.error(er, deferred)
+           error: function(e){ parseService.error(e, deferred)}
          });
        }
 
@@ -92,7 +90,7 @@ angular.module('hefesoft.google')
             deferred.resolve(user);
             saveRegistrationId(user);
           },
-          error: parseService.error(er, deferred)
+          error: function(e){ parseService.error(e, deferred)}
         });
        }
        

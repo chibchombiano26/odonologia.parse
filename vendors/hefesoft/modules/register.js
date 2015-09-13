@@ -1,4 +1,5 @@
 angular.module('fixes', []);
+angular.module('hefesoft.parse', []);
 angular.module('auth', []);
 angular.module('azure', []);
 angular.module('directivas', ['Upload']);
@@ -15,6 +16,6 @@ angular.module('importIo', []);
 angular.module('Historia', []);
 angular.module('Hefesoft', []);
 angular.module('hefesoft.services', []);
-angular.module('hefesoft.google', []);
+angular.module('hefesoft.google', ['hefesoft.parse']);
 angular.module('esanum', []);
 angular.module('ng-currency', []);
