@@ -7,6 +7,27 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="google-signin-client_id" content="505952414500-c04fnrdu3njem1cl2ug9h5gbd6rs025k.apps.googleusercontent.com">
+        
+        
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="../images/touch/chrome-touch-icon-192x192.png">
+    
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-title" content="Push Messaging and Notifications Sample">
+    
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <link rel="apple-touch-icon-precomposed" href="../images/apple-touch-icon-precomposed.png">
+    
+        <!-- Tile icon for Win8 (144x144 + tile color) -->
+        <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+        <meta name="msapplication-TileColor" content="#3372DF">
+    
+        <!-- Include manifest file in the page -->
+        <link rel="manifest" href="manifest.json">
+        
+        
         <title>Hefesof Odontologia</title>
 
         <!-- Vendor CSS -->
@@ -20,6 +41,8 @@
         <link href="css/app.min.1.css" rel="stylesheet" id="app-level">
         <link href="css/app.min.2.css" rel="stylesheet">
         <link href="css/demo.css" rel="stylesheet">
+        
+        
 
     </head>
 
@@ -151,6 +174,11 @@
         <script src="https://apis.google.com/js/client.js?onload=onload"></script>
         <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://apis.google.com/js/platform.js?onload=onLoadPLatform" async defer></script>
+        
+        <!-- Push Notification chrome -->
+        <script src="vendors/hefesoft/chrome/config.js"></script>
+        <script src="vendors/hefesoft/chrome/main.js"></script>
+        <script src="vendors/hefesoft/chrome/services/push.js"></script>
 
 
     </body>

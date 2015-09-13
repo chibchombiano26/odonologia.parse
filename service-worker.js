@@ -1,18 +1,52 @@
 'use strict';
 
 self.addEventListener('push', function(event) {
-  console.log('Received a push message', event);
-
-  var title = 'Yay a message.';
-  var body = 'We have received a push message.';
+  console.log('Nuevo mensaje recibido', event);
+  
+  var title = 'Nuevo mensaje';
+  var body = 'Has recibido un mensaje';
   var icon = '/images/icon-192x192.png';
   var tag = 'simple-push-demo-notification-tag';
+  
+  var baseUrl = "https://gcm-node-chibchombiano26.c9.io/";
 
   event.waitUntil(
-    self.registration.showNotification(title, {
-      body: body,
-      icon: icon,
-      tag: tag
+    self.registration.pushManager.getSubscription().then(function(subscription) {
+      fetch(baseUrl + 'notifications', {
+        method: 'post',
+        body: JSON.stringify(subscription)
+      })
+      .then(function(response) {
+        if (response.type === 'opaque') {
+          console.log('Received a response, but it\'s opaque so can\'t examine it');
+          return;
+        }
+  
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +  response.status);
+          return;
+        }
+        else{
+          return response;
+        }
+      })
+      .then(function(data) {
+         data.text().then(function(responseText) {
+         var messageItem = JSON.parse(responseText);
+          self.registration.showNotification(title, {
+            body: messageItem.message,
+            icon: icon,
+            tag: tag
+          })  
+          
+        });
+
+        
+      })
+      .catch(function(err) {
+        console.log('err');
+        console.log(err);
+      });
     })
   );
 });
