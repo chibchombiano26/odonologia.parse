@@ -1,8 +1,9 @@
+/*Handle notification push from google chrome by jose douglas ramirez e 2015 september*/
+
+
 'use strict';
 
 self.addEventListener('push', function(event) {
-  console.log('Nuevo mensaje recibido', event);
-  
   var title = 'Nuevo mensaje';
   var body = 'Has recibido un mensaje';
   var icon = '/images/icon-192x192.png';

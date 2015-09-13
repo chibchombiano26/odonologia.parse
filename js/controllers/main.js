@@ -290,7 +290,6 @@ materialAdmin
         });
         
         function success(result){
-            debugger
             pushGcmService.push({
                 message: "Mensaje de prueba",
                 id: subscriptionId,

@@ -1,6 +1,6 @@
 angular.module('hefesoft.google')
 .service('authGoogleService', 
-	['$q', function ($q) {
+	['$q', '$timeout', 'parseService', function ($q, $timeout, parseService) {
 	
 	
 	var dataFactory = {};
@@ -68,6 +68,9 @@ angular.module('hefesoft.google')
            success: function(result) {
              console.log(result);
              deferred.resolve(result);
+           },
+           error : function(er) {
+               deferred.reject(er);
            }
          });
          return deferred.promise;
@@ -76,28 +79,36 @@ angular.module('hefesoft.google')
      dataFactory.signUp =  function(user, deferred){
          user.signUp(null, {
            success: function(user) {
-             console.log(user);
              deferred.resolve(user);
+             saveRegistrationId(user);
            },
-           error: function(user, error) {
-             // Show the error message somewhere and let the user try again.
-             deferred.reject();
-             alert("Error: " + error.code + " " + error.message);
-           }
+           error: parseService.error(er, deferred)
          });
        }
 
       dataFactory.login =  function(username, pass, deferred){
          Parse.User.logIn(username, pass, {
           success: function(user) {
-            console.log(user);
             deferred.resolve(user);
+            saveRegistrationId(user);
           },
-          error: function(user, error) {
-              deferred.reject();
-            alert("Error: " + error.code + " " + error.message);
-          }
+          error: parseService.error(er, deferred)
         });
+       }
+       
+       //Cuando el usuario se loguea i hay posibilidad de enviar push notification en chrome guardar el id de la registracion
+       function saveRegistrationId(user){
+           var timer = $timeout(function(){
+            if(subscriptionId){
+                
+                user.set("registrationId", subscriptionId);
+                user.save();
+                //Detiene el timer
+                $timeout.cancel(timer);
+            }   
+           },3000);
+           
+            
        }
 
 	return dataFactory;

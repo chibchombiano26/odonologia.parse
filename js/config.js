@@ -2,7 +2,7 @@ materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/home");
 
-        Parse.initialize("dYTgLQ0c874WYkUCn5oBIUejz5VDHtjSK7W80sxY", "1lmRylKsZkNhVAOaD1CtIByJeQidAtFr58UpwKjQ");
+        Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
 
         window.fbAsyncInit = function() {
           Parse.FacebookUtils.init({ // this line replaces FB.init({

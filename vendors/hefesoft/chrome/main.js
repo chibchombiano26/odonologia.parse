@@ -29,13 +29,10 @@ function endpointWorkaround(pushSubscription) {
 }
 
 function sendSubscriptionToServer(subscription) {
-  // TODO: Send the subscription.endpoint
-  // to your server and save it to send a
-  // push message at a later date
-  //
-  // For compatibly of Chrome 43, get the endpoint via
-  // endpointWorkaround(subscription)
-  console.log('TODO: Implement sendSubscriptionToServer()');
+  
+  if(hefesoftLogActivated){
+    console.log('Implement sendSubscriptionToServer()');
+  }
 
   var mergedEndpoint = endpointWorkaround(subscription);
 
@@ -62,7 +59,9 @@ function showCurlCommand(mergedEndpoint) {
     '" --header Content-Type:"application/json" ' + GCM_ENDPOINT +
     ' -d "{\\"registration_ids\\":[\\"' + subscriptionId + '\\"]}"';
 
-  console.log(curlCommand);
+  if(hefesoftLogActivated){  
+    console.log(curlCommand);
+  }
   //curlCommandDiv.textContent = curlCommand;
 }
 

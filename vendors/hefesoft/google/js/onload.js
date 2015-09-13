@@ -1,5 +1,7 @@
  function onload() {
- 	console.log("gapi cargado");
+   if(hefesoftLogActivated){
+  	 console.log("gapi cargado");
+   }
  }
 
  function renderButton(){
@@ -15,18 +17,23 @@
  }
 
   function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-    }
-    function onFailure(error) {
+   if(hefesoftLogActivated){
+    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+   }
+  }
+    
+  function onFailure(error) {
       console.log(error);
-    }
+  }
 
  function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Image URL: ' + profile.getImageUrl());
-  console.log('Email: ' + profile.getEmail());
+  if(hefesoftLogActivated){
+   var profile = googleUser.getBasicProfile();
+   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+   console.log('Name: ' + profile.getName());
+   console.log('Image URL: ' + profile.getImageUrl());
+   console.log('Email: ' + profile.getEmail());
+  }
 }
 
 function onLoadPLatform(platform){
