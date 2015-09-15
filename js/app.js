@@ -8,5 +8,6 @@ var materialAdmin = angular.module('materialAdmin', [
     'nouislider',
     'ngTable',
     'hefesoft.google',
-    'directive.g+signin'
+    'directive.g+signin',
+    "pubnub.angular.service"
 ])

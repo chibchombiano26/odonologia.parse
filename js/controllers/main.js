@@ -274,13 +274,24 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, PubNub, $rootScope){
 
         //Status
         this.login = 1;
         this.register = 0;
         this.forgot = 0;
+        
+        debugger
+        
+        var channelName = "Test";
 
+        PubNub.init(
+            {
+                publish_key:'pub-c-83d779e5-66a9-4062-ad3b-7545407dcc2f',
+                subscribe_key:'sub-c-db16133a-5b56-11e5-854b-02ee2ddab7fe',
+                //uuid:'an_optional_user_uuid',
+                ssl : (('https:' == document.location.protocol) ? true : false)
+            })
        
         $scope.$on('event:google-plus-signin-success', function (event,authResult) {
           authGoogleService.connectGoogle(authResult.client_id).then(success, error);
@@ -290,13 +301,35 @@ materialAdmin
         });
         
         function success(result){
+            /*
             pushGcmService.push({
                 message: "Mensaje de prueba",
                 id: subscriptionId,
                 rid : subscriptionId
             });
+            */
+            debugger
+            sendMessage(channelName, "mensaje de prueba");
+            subscribe(channelName);
             $state.go("home");
         }
+        
+        function sendMessage(channel, message){
+            PubNub.ngPublish({
+                channel: channel,
+                message: message
+            });
+        }
+        
+        function subscribe(channel){
+            PubNub.ngSubscribe({ channel: channel })
+        }
+        
+        $rootScope.$on(PubNub.ngMsgEv(channelName), function(event, payload) {
+            debugger
+            // payload contains message, channel, env...
+            console.log('got a message event:', payload);    
+        })
         
         function error(error){
             
