@@ -9,5 +9,6 @@ var materialAdmin = angular.module('materialAdmin', [
     'ngTable',
     'hefesoft.google',
     'directive.g+signin',
-    "pubnub.angular.service"
+    "pubnub.angular.service",
+    'hefesoft.pubnub'
 ])
