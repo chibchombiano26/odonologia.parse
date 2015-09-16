@@ -1,0 +1,74 @@
+   <div ng-controller="diagnosticoPacienteCtrl">
+       <section id="content">
+        <div class="container">
+            <div class="block-header">
+                <h2>Diagnosticos para {{paciente.nombre}}</h2>
+            </div>
+        
+            <div class="card">
+                <div class="listview lv-bordered lv-lg">
+                  <div class="card-header ch-alt m-b-20">
+                    <h2>Nombre paciente <small> Listado de diagnosticos en el sistema por paciente</small></h2>
+                
+                    
+                    <button ng-click="adicionar()" 
+                            class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
+                            <i class="md md-add"></i>
+                    </button>
+
+                </div>
+
+                    
+                    <div class="lv-body">                             
+                        
+                        <div ng-repeat="item in listado" class="lv-item media">
+                            
+                             <div class="pull-left">
+                                <img class="lv-img-sm" src="{{item.urlImagen}}" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">{{item.fecha | date:"dd/MM/yyyy h:mma"}}</div>
+                                <small class="lv-small">{{paciente.nombre}}</small>
+                                
+                                <ul class="lv-attrs">
+                                    
+                                    <li>
+                                        <button ng-click="navegarOdontograma(item)" class="btn btn-info btn-xs waves-effect waves-button waves-float">Odontograma</button>
+                                    </li>
+
+                                    <li>
+                                        <button ng-click="navegarPlanTratamiento(item)" class="btn btn-info btn-xs waves-effect waves-button waves-float">Plan de tratamiento</button>
+                                    </li>
+
+
+                                    <li>
+                                        <button ng-click="navegarPeriododntograma(item)" class="btn btn-info btn-xs waves-effect waves-button waves-float">Periodontograma</button>
+                                    </li>
+
+                                    <li>
+                                        <button ng-click="navegarAdjuntos(item)" class="btn btn-info btn-xs waves-effect waves-button waves-float">Adjuntos</button>
+                                    </li>
+                                </ul> 
+
+                                <div class="lv-actions actions dropdown">
+                                    <a href="" data-toggle="dropdown" aria-expanded="true">
+                                        <i class="md md-more-vert"></i>
+                                    </a>
+                        
+                                    <ul class="dropdown-menu dropdown-menu-right">                                        
+                                        <li>
+                                            <a ng-click="delete(item, $index)">Eliminar</a>
+                                        </li>
+                                    </ul>
+                                </div>                           
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>                       
+            </div>
+        </div>
+    </section>
+</div>

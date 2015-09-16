@@ -300,7 +300,9 @@ materialAdmin
             var username = Parse.User.current().get("username");
             pubNubService.initialise(username);
             subscribeMessage(username);
-            $state.go("home");
+            
+            //Activar luego
+            //$state.go("home");
         }
         
         function subscribeMessage(channelName){

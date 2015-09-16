@@ -1,0 +1,210 @@
+
+</br>
+</br>  
+
+
+<div class="card">
+    <wizard on-finish="finishedWizard()"> 
+
+        <!-- Primer paso -->        
+        <wz-step title="Inicio">
+            <h4>Simbolo diagnostico</h4>
+            <p>Seleccione el tipo de simbolo que desea para su diagnostico</p>
+
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Color <small>Selecciona un color que identifique tu diagnostico</small></h2>
+                        </div>
+
+                        <div class="card-body card-padding">
+
+                            <div class="form-group">
+                                <div class="fg-line">
+                                    <button 
+                                    wz-next value="Simbolo"
+                                    ng-click="mostrarSimbolo('Color')"
+                                    class="btn btn-primary btn-lg waves-effect waves-button waves-float">
+                                      &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Simbolo <small>Selecciona un simbolo que identifique tu diagnostico</small></h2>                         
+                        </div>
+
+                        <div class="card-body card-padding">                            
+
+                            <div class="form-group">
+                                <div class="fg-line">
+                                    <button 
+                                    wz-next value="Simbolo"
+                                    ng-click="mostrarSimbolo('Simbolo')"
+                                    class="btn btn-default btn-lg waves-effect waves-button waves-float">
+                                      &nbsp;&nbsp;A&nbsp;&nbsp;
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Imagen <small>Selecciona una imagen que identifique tu diagnostico</small></h2>                            
+                        </div>
+
+                        <div class="card-body card-padding">
+
+                            <div class="form-group">
+                                <div class="fg-line">
+                                    <button
+                                     wz-next value="Simbolo"
+                                     ng-click="mostrarSimbolo('Imagen')"
+                                     style=" background-image: url('assets/img/icon.png'); background-size: contain;" 
+                                     class="btn btn-default btn-lg waves-effect waves-button waves-float">
+                                      &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </button>
+                                </div>
+                            </div>
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </wz-step>
+
+        <!-- segundo paso -->
+        <wz-step title="Simbolo">
+            <h4>Simbolo</h4>
+            <p>Selecciona el elemento</p>           
+
+             <div ng-show="wizard.mostrarColor" class="form-group">
+                <div class="fg-line">
+                    <color-picker ng-model="wizard.color"/>
+                </div>
+            </div>
+
+            <div ng-show="wizard.mostrarSimbolo" class="form-group">
+
+                <div class="row">                    
+                    <div class="col-sm-4">
+                        <p>Fuente</p>
+                        <div class="select">
+                           <select 
+                                class="form-control" 
+                                ng-model="wizard.objectHefesoftFuente"
+                                ng-options="fuente.fuente for fuente in Fuentes"
+                                >
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <p>Simbolo</p>
+                        <div class="fg-line">
+                            <input type="text"
+                            ng-style="
+                            {
+                                'font-family': (wizard.objectHefesoftFuente.fuente)
+                            }"                             
+                            name="nombre" 
+                            class="form-control" 
+                            placeholder="" 
+                            ng-model="wizard.simbolo" 
+                            required>
+                        </div>
+                    </div>
+
+                     <div class="col-sm-4">
+                        <p></p>
+                        <div>
+                            <h3 type="text"
+                            ng-style="
+                            {
+                                'font-family': (wizard.objectHefesoftFuente.fuente)
+                            }"
+                            >
+                            {{wizard.simbolo}}
+                            </h3> 
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div ng-show="wizard.mostrarImagen" class="form-group">
+                        <div class="fg-line">
+                            <file-upload-image-widget 
+                            ng-model="wizard.pathImagen">
+                            </file-upload-image-widget>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div ng-show="wizard.mostrarImagen" class="form-group">
+                        <div class="fg-line">
+                            <img 
+                            style="max-width: 300px;" 
+                            ng-src="{{wizard.pathImagen}}"/>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <button
+                ng-click="previsualizar()" 
+                class="btn btn-default waves-effect waves-button waves-float"
+                wz-next value="Simbolo"
+            >
+                <i class="md md-arrow-forward"></i> Siguiente
+            </button>
+            
+            
+        </wz-step>
+
+
+
+        <wz-step title="Finalizar">
+            <p>Asi se ve tu diagnostico en una superficie del odontograma</p>
+            
+            <div style="max-width: 50px;">
+                <superficie
+                    ng-model="item"
+                    simbolo="wizard.simbolo"                
+                    fuente="wizard.objectHefesoftFuente.fuente"
+                    path-imagen="wizard.pathImagen" 
+                    color="wizard.color">
+                </superficie>
+            </div>
+
+            <button               
+                class="btn btn-default waves-effect waves-button waves-float"
+                wz-next value="Finalizar"
+            >
+                <i class="md md-arrow-forward"></i> Finalizar
+            </button>
+            
+        </wz-step>
+    </wizard>
+    </br>
+    </br>    
+</div>

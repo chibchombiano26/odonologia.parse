@@ -1,0 +1,54 @@
+<div class="card">
+        <div class="card-header">
+            <h2>Adicionar o modificar<small></small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+             <p class="c-black f-500">Crear o modificar una formula medica</p> 
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Medicamento" 
+                           ng-model="formulaMedica.medicamento">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Presentacion" 
+                           ng-model="formulaMedica.presentacion">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Descripcion" 
+                           ng-model="formulaMedica.descripcion">
+                </div>
+            </div>
+            
+
+            
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <button 
+                        ng-click="adicionar()" 
+                        class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                        Guardar
+                    </button>    
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+</div>
+
+    

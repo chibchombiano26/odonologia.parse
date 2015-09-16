@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-sm-4">
+        <listado-tratamientos
+            seleccionado-callback="tratamientoSeleccionadoCallBack(item)" 
+            ng-model="diagnosticoSeleccionado.arrayHefesoftTratamientos">
+        </listado-tratamientos>
+    </div>
+    
+    <div class="col-sm-8">
+       
+        <listado-procedimientos
+            ng-show="mostrarProcedimentos"
+            adicionado-callback="cambiado(item)"
+            eliminar-callback="cambiado(item)"
+	        dx-seleccionado="diagnosticoSeleccionado" 
+	        ng-model="tratamientoSeleccionado.arrayHefesoftProcedimientos">
+        </listado-procedimientos>
+        
+    </div>
+</div>
+
+<div class="btn-group pull-right m-r-5">
+    <button 
+        ng-click="close('close')"
+        type="button" 
+        class="btn btn-primary waves-effect waves-button waves-float">Guardar
+    </button>
+
+    <button 
+        ng-click="close('dismiss')"
+        type="button" 
+        class="btn btn-default waves-effect waves-button waves-float">Cancelar
+    </button>
+</div>
+
+</br>
+</br>

@@ -1,0 +1,157 @@
+
+
+<div class="card">
+     <div class="listview lv-bordered lv-lg">
+          <div class="card-header ch-alt m-b-20">
+            <h2>Procedimientos <small> Listado de procedimientos </small></h2>
+
+            
+            <ul class="actions">                
+                <li>
+                    <a ng-click="generarPdf()">
+                        <i class="md md-print"></i>
+                    </a>
+                </li>
+                
+                <!--
+                <li class="dropdown">
+                    <a href="" data-toggle="dropdown">
+                        <i class="md md-more-vert"></i>
+                    </a>
+                    
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a ng-click="generarPdf()">Imprimir</a>
+                        </li>                        
+                    </ul>
+                </li>
+                -->
+            </ul>
+                                        
+            
+            <button ng-click="openProcedimientos()"
+                    ng-hide="ocultarAddProcedimiento"
+                    class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
+                    <i class="md md-add"></i>
+            </button>
+          </div>
+     </div>            
+    <div class="card-body m-t-0">
+        <table class="table table-inner table-vmiddle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th ng-hide="editable" ng-hide="modoPagos"></th>
+                    <th>Nombre de procedimiento</th>
+                    <th ng-show="modoPagos">Numero pieza dental</th>
+                    <th ng-show="modoPagos">Superficie</th>
+                    <th>Especialidad</th>
+                    <th>Indice de Cups</th>
+                    <th>Valor</th>
+                    <th ng-show="modoPagos">Realizado</th>
+                    <th ng-show="modoPagos">Pagado</th>
+                    <th ng-show="modoPagos">Valor pagado</th>
+                    <th ng-show="modoPagos">Saldo</th>                        
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr ng-repeat="item in listado track by $index">
+                    <td>
+                         <md-button ng-click="eliminar(item, $index)" class="md-delete"></md-button>
+                    </td> 
+                    <td ng-hide="editable">
+                        <i 
+                            class="md md-keyboard-arrow-right" 
+                            ng-click="openProcedimientos('lg',item)">
+                            Editar
+                        </i>
+                    </td>                      
+                    <td>{{item.nombre}}</td>
+                    <td ng-show="modoPagos">{{item.numeroPiezaDental | piezaDentalNumero}}</td>
+                    <td ng-show="modoPagos">{{item.superficie}}</td>
+                    <td>{{item.objectHefesoftEspecialidad.nombre}}</td>
+                    <td>{{item.idiceCup}}</td>
+                    <td class="f-500 c-cyan">{{item.valor | currency}}</td>
+                    <td ng-show="modoPagos">
+                       <div class="toggle-switch" data-ts-color="green">
+                            <label 
+                                for="{{$index}}_procedimientoRealizado" 
+                                class="ts-label">                                
+                            </label>{{item.RowKey}}
+                            <input 
+                                id="{{$index}}_procedimientoRealizado" 
+                                type="checkbox" 
+                                ng-model="item.Realizado"
+                                ng-change="realizado(item)"
+                                hidden="hidden">
+                            <label 
+                                for="{{$index}}_procedimientoRealizado" 
+                                class="ts-helper">
+                            </label>
+                        </div>
+                    </td>
+                    <td ng-show="modoPagos">
+                        <div class="toggle-switch" data-ts-color="green">
+                            <label 
+                                for="{{$index}}_procedimientoPagado" 
+                                class="ts-label">                                
+                            </label>
+                            <input 
+                                id="{{$index}}_procedimientoPagado" 
+                                type="checkbox" 
+                                ng-model="item.Pagado" 
+                                ng-change="checkPagado(item)"
+                                hidden="hidden">
+                            <label 
+                                for="{{$index}}_procedimientoPagado" 
+                                class="ts-helper">
+                            </label>
+                        </div>                            
+                    </td>
+                    <td ng-show="modoPagos">
+                        <div class="form-group">
+                            <div class="fg-line">
+                                <input type="text"
+                                ng-change="cambioValorPagado(item)"
+                                class="form-control"
+                                placeholder="Valor"
+                                ng-model="item.valorPagado"
+                                ng-keyup="setModified(item)"
+                                ng-currency
+                                numeric-only>
+                            </div>
+                        </div>
+                    </td>
+                    <td ng-show="modoPagos">
+                        <div class="form-group">
+                            <div class="fg-line">
+                                {{item.saldo | currency}}
+                            </div>
+                        </div>
+                    </td>                        
+                </tr>
+
+
+                <!-- Footer -->
+                 <tr ng-show="modoPagos">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{footer.valor | currency}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{footer.saldo | currency}}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div>           
+</div> 

@@ -1,0 +1,133 @@
+<style type="text/css">
+    .wizarSimboloBoton{
+        display: -webkit-box;
+    }
+
+    .wizarSimboloPrev{
+        max-width: 20px;
+        margin-left: 20px;
+    }
+</style>
+
+
+<form name="addDiagnostico">
+<div class="card">
+        <div class="card-header">
+            <h2>Adicionar o modificar<small></small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+             <p class="c-black f-500">Crear o modificar un diagnostico</p> 
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                    name="nombre" 
+                    class="form-control" 
+                    placeholder="Nombre" 
+                    ng-model="Diagnostico.nombre" 
+                    required>
+                </div>
+            </div>
+            
+
+            <div class="checkbox m-b-15">
+                <label>
+                    <input type="checkbox"
+                    ng-model="Diagnostico.activo"
+                    ng-checked="Diagnostico.activo">
+                    <i class="input-helper"></i>
+                    Activo
+                </label>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <p>Tipo</p>
+                    <div class="select">
+                       <select 
+                            class="form-control" 
+                            ng-model="Diagnostico.objectHefesoftTipo"
+                            ng-options="tipo.nombre for tipo in Tipo">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+             <div class="row">
+                <div class="col-sm-6">
+                    <div class="cp-container">
+                       <p>Simbolo diagnostico</p>
+
+                   <div class="wizarSimboloBoton">
+                       <wizard-simbolo ng-model="Diagnostico.objectHefesoftDiagnostico"></wizard-simbolo>
+
+                        <superficie
+                            ng-model='item'
+                            class="wizarSimboloPrev"
+                            simbolo="Diagnostico.objectHefesoftDiagnostico.simbolo"
+                            fuente="Diagnostico.objectHefesoftDiagnostico.objectHefesoftFuente.fuente"
+                            path-imagen="Diagnostico.objectHefesoftDiagnostico.pathImagen" 
+                            color="Diagnostico.objectHefesoftDiagnostico.color">
+                        </superficie>
+                    </div>
+
+                    </div>
+                </div>
+                
+                <div class="col-sm-6">
+                    <div class="cp-container">
+                      <p>Simbolo evolución</p>
+                      
+                      <div class="wizarSimboloBoton">
+                          <wizard-simbolo 
+                            ng-model="Diagnostico.objectHefesoftEvolucion">
+                          </wizard-simbolo>
+
+                        <superficie
+                            ng-model='item'
+                            class="wizarSimboloPrev"
+                            simbolo="Diagnostico.objectHefesoftEvolucion.simbolo"
+                            fuente="Diagnostico.objectHefesoftEvolucion.objectHefesoftFuente.fuente"
+                            path-imagen="Diagnostico.objectHefesoftEvolucion.pathImagen" 
+                            color="Diagnostico.objectHefesoftEvolucion.color">
+                        </superficie>
+                    </div>
+
+
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+
+            <p class="c-black f-500">Indicar Cie</p> 
+
+            <div class="form-group">
+                <div class="fg-line">
+                     <input 
+                     name="cie"
+                     type="text" 
+                     ng-model="Diagnostico.idiceCie" 
+                     typeahead="cie.Descripcion for cie in listadoCie | filter:$viewValue | limitTo:8" 
+                     class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <button
+                    ng-disabled="addDiagnostico.nombre.$invalid || addDiagnostico.cie.$invalid" 
+                    ng-click="adicionar()" 
+                    class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                    Guardar
+                    </button>    
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+</div>
+</form>
+    

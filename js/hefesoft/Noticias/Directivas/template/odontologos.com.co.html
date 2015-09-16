@@ -1,0 +1,63 @@
+
+<div class="card" ng-repeat="item in data">
+    <div class="card-header">
+        <div class="media">
+            <div class="pull-left">
+                <img class="lv-img" src="img/profile-pics/3.jpg" alt="">
+            </div>
+            
+            <div class="media-body m-t-5">
+                <h2>{{item.titulo}} <small><a ng-href="{{item.link}}" hrefb>{{item.titulo}}</a></small></h2>
+            </div>
+            
+            
+            <div class="wall-img-preview lightbox clearfix">
+                <div class="wip-item" data-src="media/gallery/2.jpg" foo="{{item.imagen}}" style="background-image: url({{item.imagen}});">
+                    <img ng-src="{{item.imagen}}">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="card-body card-padding p-t-0">
+        <p>{{item.descripcion}}</p>
+        
+        <!-- Favorito 
+        <ul class="wall-attrs clearfix list-inline list-unstyled">
+            <li class="wa-stats">
+                <span><i class="zmdi zmdi-comments"></i> 0</span>
+                <span><i class="zmdi zmdi-favorite"></i> 0</span>
+            </li>
+            
+            <li class="wa-users">
+                <a href=""><img src="img/profile-pics/3.jpg" alt=""></a>
+            </li>
+        </ul>
+        -->
+    </div>
+    
+    <!-- Comments
+    <div class="wall-comment-list">
+        <div class="wcl-form">
+            <div class="wc-comment" data-ng-if="!mactrl.wallCommenting[2]" data-ng-click="mactrl.wallCommenting[2] = true">
+                <div class="wcc-inner">
+                    Write Something...
+                </div>
+            </div>
+            
+            <div class="wc-comment" data-ng-if="mactrl.wallCommenting[2]">
+                <div class="wcc-inner">
+                    <textarea class="wcci-text" data-auto-size placeholder="Write Something..."></textarea>
+                </div>
+                
+                <div class="m-t-15">
+                    <button class="btn btn-sm btn-primary">Post</button>
+                    <button class="btn btn-sm btn-link" data-ng-click="mactrl.wallCommenting[2] = false">Cancel</button>
+                </div>
+            </div>
+        </div>
+    -->
+    
+    </div>
+</div>

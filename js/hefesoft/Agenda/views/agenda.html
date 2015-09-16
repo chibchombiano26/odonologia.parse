@@ -1,0 +1,14 @@
+<button 
+ng-click="auth()"
+ng-show="mostrarBotonAutorizar"> 
+	Autenticar	
+</button>
+
+<full-calendar
+	ng-hide="mostrarBotonAutorizar"
+	contexto="contextoCalendar"
+	evento-adicionado="adicionado(item)"
+	evento-modificado="modificado(item)"
+	evento-eliminado="eliminado(item)" 
+	ng-model="listadoEventos">
+</full-calendar>

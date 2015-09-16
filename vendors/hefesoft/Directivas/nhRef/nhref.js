@@ -6,4 +6,15 @@ directive('hrefb', function() {
       elems.attr("target", "_blank");
     }
   };
-});
+})
+
+.directive('foo', function($document, $rootScope, $http, $resource) {
+ return {
+    restrict: 'A',
+    scope: true,
+    link: function(scope, elem, attrs){
+        elem[0].setAttribute("data-src", attrs.foo);
+    }
+  };
+})
+

@@ -1,0 +1,33 @@
+<div>
+
+<div class="row">
+		<div class="btn-group pull-right m-r-5">
+		    <button 
+		        ng-click="odontograma()"
+		        type="button" 
+		        class="btn btn-primary waves-effect waves-button waves-float">Odontograma
+	       </button>
+
+		    <button 
+		        ng-click="guardarCommand()"
+		        type="button" 
+		        class="btn btn-primary waves-effect waves-button waves-float">Guardar
+		    </button>		    
+		</div>
+</div>
+
+
+
+
+<div class="row">
+ <listado-procedimientos
+    ocultar-add-procedimiento="'true'"
+    modo-pagos="'true'"
+    editable="'true'"
+    procedimiento-realizado-callback="procedimientoRealizado(item)"
+    contexto="contextoProcedimientos"
+    ng-model="Listado">
+ </listado-procedimientos>
+</div>
+
+</div>

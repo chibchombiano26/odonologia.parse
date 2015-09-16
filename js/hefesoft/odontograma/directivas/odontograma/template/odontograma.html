@@ -1,0 +1,31 @@
+<div class="toggle-switch" data-ts-color="green">
+    <label 
+        for="ts2" 
+        class="ts-label">
+        {{piezasDentales.Permanente | textoDientePermanenteTemporal}}
+    </label>
+    <input 
+        id="ts2" 
+        type="checkbox" 
+        ng-model="piezasDentales.Permanente" hidden="hidden">
+    <label 
+        for="ts2" 
+        class="ts-helper">
+    </label>
+</div>
+
+</br>
+</br>
+</br>
+</br>
+
+<piezas-dentales
+        click-callback="clickPiezaDental(item)"
+        odontograma-base-cargado-callback="odontogramaCargado(item)"
+        numero-pieza-modificada="numeroPiezaModificada"
+    	permanente="piezasDentales.Permanente"
+        modificado="modificado(item)"
+    	ng-model="piezasDentales"
+        contexto="piezasDentalesScope"
+        >
+</piezas-dentales>

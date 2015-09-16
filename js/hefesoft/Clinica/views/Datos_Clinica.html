@@ -1,0 +1,176 @@
+<div class="card">
+    <div class="listview lv-bordered lv-lg">
+          <div class="card-header ch-alt m-b-20">
+            <h2>Datos clinica <small> Datos referentes al consultorio o clinica </small></h2>
+          </div>
+    </div>            
+    <div class="card-body m-t-0 m-10">
+        <div class="row">
+
+        <div class="col-sm-4">
+         
+          <div class="form-group" ng-hide="cambiarImagen">
+            <div  class="fg-line">
+              <img ng-src="{{clinica.pathImagen}}" style="max-width: 300px;">
+            </div>
+         </div>    
+
+          <div class="form-group" ng-show="cambiarImagen">
+            <div  class="fg-line">
+              <file-upload-image-widget 
+                 ng-model="clinica.pathImagen"
+                 file-upload="fileUpload(item)"
+                 >
+              </file-upload-image-widget>
+            </div>
+          </div>
+
+          <div class="form-group" ng-hide="cambiarImagen">
+                <div class="fg-line">
+                    <button 
+                        ng-click="cambiarImagenClick()" 
+                        class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                        Modificar imagen
+                    </button>    
+                </div>
+          </div>
+
+          <div class="form-group" ng-show="cambiarImagen">
+                <div class="fg-line">
+                    <button 
+                        ng-click="cancelarClick()" 
+                        class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                        Cancelar
+                    </button>    
+                </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-8">
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Nombre de la entidad" 
+                           ng-model="clinica.nombreEntidad">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Direccion" 
+                           ng-model="clinica.direccion">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Telefono" 
+                           ng-model="clinica.telefono">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Region" 
+                           ng-model="clinica.region">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Ciudad" 
+                           ng-model="clinica.ciudad">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Sitio web" 
+                           ng-model="clinica.sitioWeb">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Email" 
+                           ng-model="clinica.email">
+                </div>
+            </div>            
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Razon social" 
+                           ng-model="clinica.razonSocial">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Codigo del prestador" 
+                           ng-model="clinica.codigoPrestador">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Codigo de la entidad administradora" 
+                           ng-model="clinica.codigoEntidadAdministradora">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Numero de la entidad administradora" 
+                           ng-model="clinica.numeroEntidadAdministradora">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Rut" 
+                           ng-model="clinica.rut">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <button 
+                        ng-click="guardar()" 
+                        class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                        Guardar
+                    </button>    
+                </div>
+            </div>
+
+
+
+        </div>
+
+        </div>
+    </div>           
+</div> 

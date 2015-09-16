@@ -1,0 +1,66 @@
+<div class="card">
+        <div class="card-header">
+            <h2>Adicionar o modificar<small></small></h2>
+        </div>
+        
+        <div class="card-body card-padding">
+             <p class="c-black f-500">Crear o modificar un procedimiento</p> 
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Nombre" 
+                        ng-model="Procedimiento.nombre">
+                </div>
+            </div>
+            
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <p>Tipo</p>
+                    <div class="select">
+                       <select 
+                            class="form-control" 
+                            ng-model="Procedimiento.objectHefesoftEspecialidad"
+                            ng-options="especialidad.nombre for especialidad in Especialidades"                            
+                            >
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+             
+            <p class="c-black f-500">Indicar Cup</p> 
+
+            <div class="form-group">
+                <div class="fg-line">
+                     <input type="text" ng-model="Procedimiento.idiceCup" typeahead="cup.Descripcion for cup in listadoCup | filter:$viewValue | limitTo:8" class="form-control">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" 
+                    class="form-control"
+                    placeholder="Valor"
+                    ng-model="Procedimiento.valor"
+                    numeric-only>
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="fg-line">
+                    <button ng-click="adicionar()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>    
+                </div>
+            </div>
+
+
+            </div>
+        </div>
+</div>
+
+    

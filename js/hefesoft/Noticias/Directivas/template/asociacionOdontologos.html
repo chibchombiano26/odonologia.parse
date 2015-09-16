@@ -1,0 +1,26 @@
+<style type="text/css">
+    
+.image-fb-wall{
+    width: 100px;
+    height:100px;
+}
+
+</style>
+
+
+<div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="item in data">
+        <div class="card" style="height: 300px;">
+           <div class="card-header">
+                <h5><a ng-href="{{item.link}}" hrefb>
+                    <p ng-bind-html="(item.message | limitTo:'50')"></p>
+                </a></h5>                
+            </div>
+
+            <div class="card-body card-padding">
+                <img ng-src="{{item.picture}}" class="image-fb-wall" alt="Description" />
+                <p ng-bind-html="(item.message | limitTo:'100')"></p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -519,7 +519,17 @@ materialAdmin
                                     'vendors/bower_components/mediaelement/build/mediaelement-and-player.js',
                                     'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
                                 ]
+                            },
+                            {
+                                name: 'vendors',
+                                files: [
+                                    'js/hefesoft/Noticias/Controllers/odontologos.com.co.js',
+                                    'js/hefesoft/Noticias/Directivas/directive/odontologos.com.co.js',
+                                    'vendors/hefesoft/import.io/services/read.js',
+                                    'vendors/hefesoft/Directivas/nhRef/nhref.js'
+                                ]
                             }
+                            
                         ])
                     }
                 }

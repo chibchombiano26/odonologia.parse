@@ -1,0 +1,41 @@
+ <div class="card">
+    <div class="listview lv-bordered lv-lg">
+          <div class="card-header ch-alt m-b-20">
+            <h2>Tratamientos 
+            <small> Listado de tratamientos </small></h2>                    
+            
+            <button ng-click="openTratamiento()"
+                    ng-hide="ocultarAddTratamiento"
+                    class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
+                    <i class="md md-add"></i>
+            </button>
+          </div>
+    </div>
+    
+    <div class="card-body m-t-0">
+        <table class="table table-inner table-vmiddle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th ng-hide="editable"></th>
+                    <th>Nombre</th>
+                    <th ng-show="verSuperficies">Supericie</th>
+                    <th>Valor</th>                            
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in listado track by $index">
+                    <td>
+                         <md-button ng-click="eliminar(item, $index)" class="md-delete"></md-button>
+                    </td>
+                    <td ng-hide="editable">
+                        <i class="md md-keyboard-arrow-right" ng-click="selected(item)">Editar</i>                            
+                    </td>
+                    <td>{{item.nombre}}</td>
+                    <td ng-show="verSuperficies">{{item.superficie}}</td>
+                    <td class="f-500 c-cyan">{{item.valor}}</td>                            
+                </tr>                      
+            </tbody>
+        </table>
+    </div>           
+</div> 

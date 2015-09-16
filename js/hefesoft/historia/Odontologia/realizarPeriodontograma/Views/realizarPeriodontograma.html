@@ -1,0 +1,158 @@
+<div ng-controller="realizarPeriodontogramaCtrl as vm">
+	
+	<div class="row">
+		<div class="btn-group pull-right m-r-5">
+		    <button 
+		        ng-click="guardarCommand()"
+		        type="button" 
+		        class="btn btn-primary waves-effect waves-button waves-float">Guardar
+		    </button>		    
+		</div>
+	</div>
+
+	<div class="row">		
+		<div class="col-sm-7">
+		 	<piezas-dentales-periodontograma
+		 		click-pieza-dental="piezaDentalSeleccionada(item)"
+		 		contexto="contextoPiezaDental"
+		 		periodontograma-base-cargado-callback="periodontogramaBaseCargado(item)">
+			</piezas-dentales-periodontograma> 
+		</div>
+
+		<div class="col-sm-1">			
+			<periodontograma-pieza-dental
+				numero-pieza-dental="selecionado.numeroPiezaDental" 
+				width="40" 
+				height="120"				
+				item="selecionado">
+			</periodontograma-pieza-dental>			
+		</div>
+
+		<div class="col-sm-2">
+			<h5>Movilidad</h5>
+
+			<div class="form-group">
+                <div class="fg-line">
+                    <input 
+                    type="text"
+                    ng-model="selecionado.movilidad"
+                    class="form-control input-sm" 
+                    placeholder="Movilidad">
+                </div>
+            </div>				
+
+		    <div class="row">
+			  	<button 
+				  	class="btn btn-primary waves-effect waves-button waves-float" ng-click="implante()">
+				  	Implante
+			  	</button>
+
+			  	<button ng-show="mostrarFurca"
+			  		class="btn btn-primary waves-effect waves-button waves-float" 
+			  		ng-click="furca()">
+			  		Furca
+		  		</button>
+			</div>			
+	
+			<h5>Sangrado / Supuración</h5>
+			<div class="row card">
+				  <div 
+				  	  ng-click="sangradoSupurado('sangrado_supuracion_1')"
+					  class="col-sm-4 m-10"
+					  ng-style="{'background':selecionado.sangrado_supuracion_1}" 
+					  style="width:30px; height: 30px; border: black;">
+				  </div>
+
+				  <div 
+				  	ng-click="sangradoSupurado('sangrado_supuracion_2')"
+				  	class="col-sm-4 m-10"
+				  	ng-style="{'background':selecionado.sangrado_supuracion_2}" 
+				  	style="width:30px; height: 30px; border: black; margin-left: 1px;">
+				  </div>
+
+				  <div 
+				    ng-click="sangradoSupurado('sangrado_supuracion_3')"
+				  	class="col-sm-4 m-10" 
+				  	ng-style="{'background':selecionado.sangrado_supuracion_3}" 
+				  	style="width:30px; height: 30px; border: black; margin-left: 1px;">
+				  </div>				  
+			</div>
+
+			<h5>Placa</h5>	
+			<div class="row card">
+				  <div 
+				  	  ng-click="placa('placa_1')"
+					  class="col-sm-4 m-10" 
+					  ng-style="{'background':selecionado.placa_1}" 
+					  style="width:30px; height: 30px; border: black; margin-left: 1px; margin-top: 1px;">
+				  </div>
+
+				  <div 
+				    ng-click="placa('placa_2')"
+				  	class="col-sm-4 m-10" 
+				  	ng-style="{'background':selecionado.placa_2}" 
+				  	style="width:30px; height: 30px; border: black; margin-left: 1px; margin-top: 1px;">
+				  </div>
+
+				  <div 
+				    ng-click="placa('placa_3')"
+				  	class="col-sm-4 m-10" 
+				  	ng-style="{'background':selecionado.placa_3}" 
+				  	style="width:30px; height: 30px; border: black; margin-left: 1px; margin-top: 1px;">
+				  </div>				  
+			</div>
+		</div>
+
+		<div class="col-sm-2">
+			<!--Margenes-->		
+			<h5> Margen gingival </h5>
+
+			<div  
+			class="input-slider m-b-25 noUi-target noUi-ltr noUi-horizontal noUi-background" 
+			data-is-color="red">
+				<div slider ng-model="selecionado.margen1" start=0 end=100>
+				</div>
+			</div>
+
+			<div  
+			class="input-slider m-b-25 noUi-target noUi-ltr noUi-horizontal noUi-background" 
+			data-is-color="red">
+				<div slider ng-model="selecionado.margen2" start=0 end=100>
+				</div>
+			</div>
+
+			<div  
+			class="input-slider m-b-25 noUi-target noUi-ltr noUi-horizontal noUi-background" 
+			data-is-color="red">
+				<div slider ng-model="selecionado.margen3" start=0 end=100>
+				</div>
+			</div>
+
+			
+
+			<h5> Profundidad sondaje </h5>
+			
+			<div  
+			class="input-slider m-b-25 noUi-target noUi-ltr noUi-horizontal noUi-background" 
+			data-is-color="blue">
+				<div slider ng-model="selecionado.profundidad1" start=0 end=100>
+				</div>
+			</div>
+
+			<div  
+			class="input-slider m-b-25 noUi-target noUi-ltr noUi-horizontal noUi-background" 
+			data-is-color="blue">
+				<div slider ng-model="selecionado.profundidad2" start=0 end=100>
+				</div>
+			</div>
+
+			<div  
+			class="input-slider m-b-25 noUi-target noUi-ltr noUi-horizontal noUi-background" 
+			data-is-color="blue">
+				<div slider ng-model="selecionado.profundidad3" start=0 end=100>
+				</div>
+			</div>
+		</div>
+
+	</div>	
+</div>

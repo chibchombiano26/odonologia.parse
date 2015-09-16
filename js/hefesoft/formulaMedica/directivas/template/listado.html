@@ -1,0 +1,41 @@
+<div class="card">
+    <div class="listview lv-bordered lv-lg">
+          <div class="card-header ch-alt m-b-20">
+            <h2>Formula medica <small> ------- </small></h2>                    
+            
+            <button ng-click="open()" 
+                    class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
+                    <i class="md md-add"></i>
+            </button>
+          </div>
+    </div>            
+    <div class="card-body m-t-0">
+        <table class="table table-inner table-vmiddle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Medicamento</th>
+                    <th>Presentacion</th>
+                    <th>Descripcion</th>                        
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in listados">
+                    <td>
+                         <md-button 
+                            ng-click="eliminar(item, $index)" 
+                            class="md-delete"></md-button>
+                    </td> 
+                    <td>
+                        <i class="md md-keyboard-arrow-right" 
+                           ng-click="open('lg',item)">Editar</i>
+                    </td>                      
+                    <td>{{item.medicamento}}</td>
+                    <td>{{item.presentacion}}</td>
+                    <td>{{item.descripcion}}</td>
+                </tr>                      
+            </tbody>
+        </table>
+    </div>           
+</div> 

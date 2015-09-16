@@ -10,5 +10,8 @@ var materialAdmin = angular.module('materialAdmin', [
     'hefesoft.google',
     'directive.g+signin',
     "pubnub.angular.service",
-    'hefesoft.pubnub'
+    'hefesoft.pubnub',
+    'odontologiaApp',
+    'esanum',
+    'directivas'
 ])

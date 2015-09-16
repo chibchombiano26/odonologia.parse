@@ -20,3 +20,4 @@ angular.module('hefesoft.services', []);
 angular.module('hefesoft.google', ['hefesoft.parse']);
 angular.module('esanum', []);
 angular.module('ng-currency', []);
+angular.module('odontologiaApp', []);

@@ -1,0 +1,72 @@
+
+<style type="text/css">
+
+.contenedor-pieza-dental{
+	width: 6%;
+	margin-left: 1%;
+}
+
+.contenedor-fila-piezas-dentales{
+	display: -webkit-box;
+}
+
+.contenedor-fila-piezas-dentales-temporales{
+	display: -webkit-box;
+	margin-left: 20%;
+}
+
+.imagen-diente{
+    height: 70px;
+    margin-left: 20%;
+    margin-bottom: 10px;
+}
+</style>
+
+<div class="contenedor-fila-piezas-dentales">
+	<div ng-repeat="item in items | filter:'parte1'">
+
+		<periodontograma-pieza-dental 
+			ng-click="clickPiezaDental(item)"
+			numero-pieza-dental="item.numeroPiezaDental" 
+			zoom="zoom"					
+			item="item"
+			>
+		</periodontograma-pieza-dental>
+	</div>
+</div>
+
+<div class="contenedor-fila-piezas-dentales">
+	<div ng-repeat="item in items | filter:'parte2'">
+		<periodontograma-pieza-dental
+			ng-click="clickPiezaDental(item)"
+			numero-pieza-dental="item.numeroPiezaDental" 
+			zoom="zoom"					
+			item="item"
+			>
+		</periodontograma-pieza-dental>
+	</div>
+</div>
+
+<div class="contenedor-fila-piezas-dentales">
+	<div ng-repeat="item in items | filter:'parte3'">
+		<periodontograma-pieza-dental
+			ng-click="clickPiezaDental(item)"
+			numero-pieza-dental="item.numeroPiezaDental" 
+			zoom="zoom"					
+			item="item"
+			>
+		</periodontograma-pieza-dental>
+	</div>
+</div>
+
+<div class="contenedor-fila-piezas-dentales">
+	<div ng-repeat="item in items | filter:'parte4'">
+		<periodontograma-pieza-dental
+			ng-click="clickPiezaDental(item)" 
+			numero-pieza-dental="item.numeroPiezaDental" 
+			zoom="zoom"					
+			item="item"
+			>
+		</periodontograma-pieza-dental>
+	</div>
+</div>

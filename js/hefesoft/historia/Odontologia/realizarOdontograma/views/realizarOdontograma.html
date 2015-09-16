@@ -1,0 +1,63 @@
+<div ng-controller="realizarOdontogramaCtrl">
+	
+	<div class="row">
+		<div class="btn-group pull-right m-r-5">
+		    
+		    <button 
+		        ng-click="planTratamiento()"
+		        type="button" 
+		        class="btn btn-primary waves-effect waves-button waves-float">Plan de tratamiento
+		    </button>
+
+		    <button 
+		        ng-click="guardarCommand()"
+		        type="button" 
+		        class="btn btn-primary waves-effect waves-button waves-float">Guardar
+		    </button>		    
+		</div>
+	</div>
+
+	<div class="row">		
+		 <div class="col-sm-2">
+		 	<h3>Diagnosticos</h3>
+			<drill-down 
+				source="Diagnosticos" 
+				objeto-array="'arrayHefesoftTratamientos'" 
+				title="'nombre'">
+			</drill-down>
+		</div>
+
+		<div class="col-sm-8">			
+			<odontograma
+				click-callback="piezaDentalSeleccionada(item)"
+				numero-pieza-modificada="numeroPiezaModificada"
+				pieza-modificada="piezaModificada(item)"
+				diagnostico-seleccionado="diagnosticoSeleccionado"
+				tratamiento-seleccionado="tratamientoSeleccionado"
+				odontograma-base-cargado-callback="odontogramaBaseCargado(item)"
+				contexto="contextoOdontograma"
+				>				
+			</odontograma>
+		</div>
+
+	</div>
+
+	<div class="row m-t-10">
+		<div class="col-sm-2">
+		</div>
+
+		<div class="col-sm-10">
+		 <div style="overflow: auto;">
+			<listados-diagnosticos				
+				modo-lectura="'true'"
+				ver-superficie="'true'"
+				tratamientos-callback="openTratamiento(item)"
+				new-callback="open()"
+				edit-callback="open(item)"
+				eliminar-callback="eliminar(item, $index)"
+				source="listadoDiagnosticos">
+			</listados-diagnosticos>
+		 </div>
+		</div>		
+	</div>
+</div>

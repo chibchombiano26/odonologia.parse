@@ -4,7 +4,6 @@ angular.module('hefesoft.pubnub')
 	var dataFactory = {};
 
 	dataFactory.initialise = function(channel){
-	  debugger
       PubNub.init(
         {
             publish_key:'pub-c-83d779e5-66a9-4062-ad3b-7545407dcc2f',

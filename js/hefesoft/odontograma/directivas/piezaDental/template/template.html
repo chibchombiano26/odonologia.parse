@@ -1,0 +1,107 @@
+<style type="text/css">
+	
+.elemento-invisible{
+	width: 33%;
+	margin: 1px;	
+}
+
+.elemento{
+	width: 33%;
+	margin: 1px;
+	border-style: solid;
+    border-width: 1px;		
+}
+
+.elemento-centro{
+	width: 33%;
+	margin: 1px;
+	border-style: solid;
+    border-width: 1px;		
+}
+
+.elementos-container{
+	display: -webkit-box;
+}
+
+.numero-pieza-dental{
+	text-align: center;
+}
+
+
+</style>
+
+<!-- Se arma como un tres en raya para los diagnosticos -->
+<div>
+	<div class="numero-pieza-dental">
+		<p>{{item.numeroPiezaDental | piezaDentalNumero}}</p>
+	</div>
+
+
+	<div class="elementos-container">
+		<div class="elemento-invisible"><p></p></div>
+		<div ng-hide="esBoca" 
+		ng-click="clickSuperficie('arriba')" class="elemento">
+			<superficie
+				color="item.arriba_objectHefesoft.color"
+				simbolo="item.arriba_objectHefesoft.simbolo"
+                fuente="item.arriba_objectHefesoft.fuente"
+                path-imagen="item.arriba_objectHefesoft.pathImagen"
+				ng-model"item">
+			</superficie>
+		</div>
+		<div class="elemento-invisible"><p></p></div>	
+	</div>
+
+	<div class="elementos-container">
+		<div
+		ng-hide="esBoca" 
+		ng-click="clickSuperficie('izquierda')" class="elemento">
+			<superficie
+				color="item.izquierda_objectHefesoft.color"
+				simbolo="item.izquierda_objectHefesoft.simbolo"
+                fuente="item.izquierda_objectHefesoft.fuente"
+                path-imagen="item.izquierda_objectHefesoft.pathImagen"
+				ng-model"item">
+			</superficie>
+		</div>
+
+		<div 
+
+		ng-click="clickSuperficie('centro')" class="elemento-centro">
+			<superficie
+				color="item.centro_objectHefesoft.color"
+				simbolo="item.centro_objectHefesoft.simbolo"
+                fuente="item.centro_objectHefesoft.fuente"
+                path-imagen="item.centro_objectHefesoft.pathImagen">
+			</superficie>
+		</div>
+
+		<div 
+		ng-hide="esBoca"
+		ng-click="clickSuperficie('derecha')" class="elemento">
+			<superficie
+				color="item.derecha_objectHefesoft.color"
+				simbolo="item.derecha_objectHefesoft.simbolo"
+                fuente="item.derecha_objectHefesoft.fuente"
+                path-imagen="item.derecha_objectHefesoft.pathImagen" 
+				ng-model"item">
+			</superficie>
+		</div>
+	</div>
+
+	<div class="elementos-container">
+		<div class="elemento-invisible"><p></p></div>
+		<div 
+		ng-hide="esBoca"
+		ng-click="clickSuperficie('abajo')" class="elemento">
+			<superficie
+				color="item.abajo_objectHefesoft.color"
+				simbolo="item.abajo_objectHefesoft.simbolo"
+                fuente="item.abajo_objectHefesoft.fuente"
+                path-imagen="item.abajo_objectHefesoft.pathImagen"
+				ng-model"item">
+			</superficie>
+		</div>
+		<div class="elemento-invisible"><p></p></div>
+	</div>
+</div>
