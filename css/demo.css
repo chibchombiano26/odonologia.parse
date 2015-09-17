@@ -159,3 +159,15 @@
     margin-right: 25px;
     vertical-align: top;
 }
+
+
+div.login-content:before {
+    height: 50%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #00bcd4;
+    content: "";
+    z-index: 0;
+}

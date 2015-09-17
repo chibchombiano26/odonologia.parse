@@ -502,7 +502,7 @@ materialAdmin
             
             .state ('login', {
                 url: '/login',
-                templateUrl: 'views/login.html',
+                templateUrl: 'views/login1.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([

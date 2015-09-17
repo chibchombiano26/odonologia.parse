@@ -14,12 +14,13 @@
         <!-- CSS -->
         <link href="css/app.min.1.css" rel="stylesheet">
         <link href="css/app.min.2.css" rel="stylesheet">
+        <link rel="css/hefesoft.css" href="" type="stylesheet" />
     </head>
 
-    <body class="login-content" data-ng-controller="loginCtrl as lctrl">
+    <body class="login-content">
 
         <!-- Login -->
-        <div class="lc-block" id="l-login" data-ng-class="{ 'toggled': lctrl.login === 1 }" data-ng-if="lctrl.login === 1">
+        <div class="lc-block" id="l-login">
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                 <div class="fg-line">
@@ -163,6 +164,8 @@
             </div>
         <![endif]-->
 
+        <!-- Hefesoft -->
+        <script type="text/javascript" src="vendors/hefesoft/util/utilVars.js"></script>
 
         <!-- Core -->
         <script src="vendors/bower_components/jquery/dist/jquery.min.js"></script>
@@ -206,6 +209,11 @@
         <script src="js/templates.js"></script>
         <script src="js/controllers/ui-bootstrap.js"></script>
         <script src="js/controllers/table.js"></script>
+        
+        <!-- Parse -->
+        <script src="//www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+        <script src="vendors/hefesoft/parse/services/parse.js"></script>
+
 
         <!-- Auth -->
         <script src="vendors/hefesoft/google/directivas/signUp/directive/directive.js"></script>
@@ -222,7 +230,19 @@
         <script src="https://apis.google.com/js/client.js?onload=onload"></script>
         <script src="https://apis.google.com/js/api.js"></script>
         <script src="https://apis.google.com/js/platform.js?onload=onLoadPLatform" async defer></script>
-
+        
+        <!-- Push Notification chrome -->
+        <script src="vendors/hefesoft/chrome/config.js"></script>
+        <script src="vendors/hefesoft/chrome/main.js"></script>
+        <script src="vendors/hefesoft/chrome/services/push.js"></script>
+        
+        <!-- PubNub -->
+        <script src="//cdn.pubnub.com/pubnub.min.js"></script>
+        <script src="//pubnub.github.io/angular-js/scripts/pubnub-angular.js"></script>
+        <script src="vendors/hefesoft/pubnub/services/pubnub.js"></script>
+        
+        <!-- Angular Satanize -->
+        <script src="vendors/bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 
 
     </body>
