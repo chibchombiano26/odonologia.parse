@@ -1,11 +1,9 @@
 angular.module('odontologiaApp').
 service('fbGroupsService', ['$q', function ($q) {
 	
-  var url = "https://graph.facebook.com/351781574835113/feed?access_token=426977727468725|02f6z047IaTUyc8tLE4mkfVP61E";
-
   var dataFactory = {};
 
-  dataFactory.getWall = function(){
+  dataFactory.getWall = function(ur){
   	var deferred = $q.defer();
   	$.ajax({
 	  url: url,
@@ -18,7 +16,23 @@ service('fbGroupsService', ['$q', function ($q) {
 	  }
 	});
 
-	return deferred.promise; 
+		return deferred.promise; 
+  }
+  
+  dataFactory.getWallFbApi = function(query){
+  	var deferred = $q.defer();
+  	FB.api(query,
+	    {
+	        "access_token": "426977727468725|02f6z047IaTUyc8tLE4mkfVP61E"
+	    },
+	    function (response) {
+	    	
+	      if (response && !response.error) {
+	        deferred.resolve(response.data);
+	      }
+	    }
+		);
+		return deferred.promise;
   }
 
   return dataFactory;

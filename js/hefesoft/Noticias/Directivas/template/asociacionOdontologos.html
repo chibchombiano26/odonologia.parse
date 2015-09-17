@@ -1,26 +1,135 @@
-<style type="text/css">
-    
-.image-fb-wall{
-    width: 100px;
-    height:100px;
-}
-
-</style>
-
-
-<div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="item in data">
-        <div class="card" style="height: 300px;">
-           <div class="card-header">
-                <h5><a ng-href="{{item.link}}" hrefb>
-                    <p ng-bind-html="(item.message | limitTo:'50')"></p>
-                </a></h5>                
-            </div>
-
-            <div class="card-body card-padding">
-                <img ng-src="{{item.picture}}" class="image-fb-wall" alt="Description" />
-                <p ng-bind-html="(item.message | limitTo:'100')"></p>
+<div class="card" ng-repeat="item in data">
+   
+    <div ng-show="item.type == 'link'">
+        <div class="card-header">
+            <div class="media">
+                <div class="pull-left">
+                    <img class="lv-img" src="img/profile-pics/3.jpg" alt="">
+                </div>
+                
+                <div class="media-body m-t-5">
+                     <h2>
+                        <a ng-href="{{item.link}}" hrefb>
+                            <p>{{item.name}}</p>
+                        </a>
+                    </h2>   
+                </div>
+                
+                
+                <div class="wall-img-preview lightbox clearfix">
+                    <div class="wip-item" data-src="media/gallery/2.jpg" foo="{{item.picture}}" style="background-image: url({{item.picture}}); background-size: contain;">
+                        <img ng-src="{{item.picture}}">
+                    </div>
+                </div>
+                
             </div>
         </div>
-    </div>
+        
+        <div class="card-body card-padding p-t-0">
+            <p ng-bind-html="(item.message | limitTo:'5000')"></p>
+            
+            <!-- Favorito 
+            <ul class="wall-attrs clearfix list-inline list-unstyled">
+                <li class="wa-stats">
+                    <span><i class="zmdi zmdi-comments"></i> 0</span>
+                    <span><i class="zmdi zmdi-favorite"></i> 0</span>
+                </li>
+                
+                <li class="wa-users">
+                    <a href=""><img src="img/profile-pics/3.jpg" alt=""></a>
+                </li>
+            </ul>
+            -->
+        </div>
+        
+        <!-- Comments
+        <div class="wall-comment-list">
+            <div class="wcl-form">
+                <div class="wc-comment" data-ng-if="!mactrl.wallCommenting[2]" data-ng-click="mactrl.wallCommenting[2] = true">
+                    <div class="wcc-inner">
+                        Write Something...
+                    </div>
+                </div>
+                
+                <div class="wc-comment" data-ng-if="mactrl.wallCommenting[2]">
+                    <div class="wcc-inner">
+                        <textarea class="wcci-text" data-auto-size placeholder="Write Something..."></textarea>
+                    </div>
+                    
+                    <div class="m-t-15">
+                        <button class="btn btn-sm btn-primary">Post</button>
+                        <button class="btn btn-sm btn-link" data-ng-click="mactrl.wallCommenting[2] = false">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        -->
+        </div>
+        
+        
+    <div ng-show="item.type == 'photo'">
+        
+        <div class="card-header">
+            <div class="media">
+                <div class="pull-left">
+                    <img class="lv-img" src="img/profile-pics/3.jpg" alt="">
+                </div>
+                
+                <div class="media-body m-t-5">
+                     <h2>
+                        <a ng-href="{{item.link}}" hrefb>
+                            <p ng-bind-html="(item.message | limitTo:'50')"></p>
+                        </a>
+                    </h2>   
+                </div>
+                
+                
+                <div class="wall-img-preview lightbox clearfix">
+                    <div class="wip-item" data-src="media/gallery/2.jpg" foo="http://graph.facebook.com/{{item.object_id}}/picture?height=480&width=480" style="background-image: url(http://graph.facebook.com/{{item.object_id}}/picture?height=480&width=480)">
+                        <img ng-src="http://graph.facebook.com/{{item.object_id}}/picture?height=480&width=480">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="card-body card-padding p-t-0">
+            <p ng-bind-html="(item.message | limitTo:'5000')"></p>
+            
+            <!-- Favorito 
+            <ul class="wall-attrs clearfix list-inline list-unstyled">
+                <li class="wa-stats">
+                    <span><i class="zmdi zmdi-comments"></i> 0</span>
+                    <span><i class="zmdi zmdi-favorite"></i> 0</span>
+                </li>
+                
+                <li class="wa-users">
+                    <a href=""><img src="img/profile-pics/3.jpg" alt=""></a>
+                </li>
+            </ul>
+            -->
+        </div>
+        
+        <!-- Comments
+        <div class="wall-comment-list">
+            <div class="wcl-form">
+                <div class="wc-comment" data-ng-if="!mactrl.wallCommenting[2]" data-ng-click="mactrl.wallCommenting[2] = true">
+                    <div class="wcc-inner">
+                        Write Something...
+                    </div>
+                </div>
+                
+                <div class="wc-comment" data-ng-if="mactrl.wallCommenting[2]">
+                    <div class="wcc-inner">
+                        <textarea class="wcci-text" data-auto-size placeholder="Write Something..."></textarea>
+                    </div>
+                    
+                    <div class="m-t-15">
+                        <button class="btn btn-sm btn-primary">Post</button>
+                        <button class="btn btn-sm btn-link" data-ng-click="mactrl.wallCommenting[2] = false">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        -->
+        </div>
+        
 </div>

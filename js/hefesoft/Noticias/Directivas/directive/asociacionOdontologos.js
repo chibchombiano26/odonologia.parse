@@ -5,14 +5,15 @@ directive('asociacionOdontologos', function(){
    directiva.restrict = 'E';
 
    directiva.link = function(scope, element, attrs) {
-      
+      scope.inicializar(scope.url);
    };   
   
 
    directiva.controller = 'asociacionOdontologosCtrl';
-   directiva.templateUrl = 'app/scripts/controllers/Noticias/Directivas/template/asociacionOdontologos.html';
+   directiva.templateUrl = 'js/hefesoft/Noticias/Directivas/template/asociacionOdontologos.html';
    directiva.scope = {
-   	contexto : '='
+   	contexto : '=',
+   	url : '='
    }
 
    return directiva;

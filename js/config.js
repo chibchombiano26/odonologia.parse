@@ -19,7 +19,8 @@ materialAdmin
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {return;}
           js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js";
+          //js.src = "//connect.facebook.net/en_US/sdk.js";
+          js.src = "//connect.facebook.net/en_US/sdk/debug.js";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         
@@ -523,10 +524,22 @@ materialAdmin
                             {
                                 name: 'vendors',
                                 files: [
+                                    /* Odontologos.com.co */
                                     'js/hefesoft/Noticias/Controllers/odontologos.com.co.js',
                                     'js/hefesoft/Noticias/Directivas/directive/odontologos.com.co.js',
+                                    
+                                    /* Fb page */
+                                    'js/hefesoft/Noticias/Controllers/asociacionOdontologos.js',
+                                    'js/hefesoft/Noticias/Directivas/directive/asociacionOdontologos.js',
+                                    'vendors/hefesoft/fb/services/asociasionOdontologos.js',
+                                    
+                                    /* Import.io */
                                     'vendors/hefesoft/import.io/services/read.js',
-                                    'vendors/hefesoft/Directivas/nhRef/nhref.js'
+                                    'vendors/hefesoft/Directivas/nhRef/nhref.js',
+                                    
+                                    /* lodash */
+                                    'vendors/bower_components/lodash/lodash.min.js',
+                                    
                                 ]
                             }
                             

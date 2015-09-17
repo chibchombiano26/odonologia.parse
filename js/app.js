@@ -13,5 +13,6 @@ var materialAdmin = angular.module('materialAdmin', [
     'hefesoft.pubnub',
     'odontologiaApp',
     'esanum',
-    'directivas'
+    'directivas',
+    'ngSanitize'
 ])
