@@ -2,12 +2,11 @@
     <div class="profile-menu">
         <a href="" toggle-submenu>
             <div class="profile-pic">
-                <img src="img/profile-pics/1.jpg" alt="">
+                <img ng-src="{{urlPicture}}" alt="">
             </div>
 
             <div class="profile-info">
-                Malinda Hollaway
-
+                {{name}}
                 <i class="zmdi zmdi-caret-down"></i>
             </div>
         </a>
@@ -23,13 +22,16 @@
                 <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
             </li>
             <li>
-                <a href=""><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                <a ng-click="logOut()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
             </li>
         </ul>
         
+        <!--
          <button class="js-push-button" disabled>
           Enable Push Messages
         </button>
+        -->
+        
     </div>
 
     <ul class="main-menu">

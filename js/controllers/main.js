@@ -219,62 +219,13 @@ materialAdmin
     })
 
 
-    //=================================================
-    // Profile
-    //=================================================
-
-    .controller('profileCtrl', function(growlService){
-
-        //Get Profile Information from profileService Service
-
-        //User
-        this.profileSummary = "Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.";
-
-        this.fullName = "Mallinda Hollaway";
-        this.gender = "female";
-        this.birthDay = "23/06/1988";
-        this.martialStatus = "Single";
-        this.mobileNumber = "00971123456789";
-        this.emailAddress = "malinda.h@gmail.com";
-        this.twitter = "@malinda";
-        this.twitterUrl = "twitter.com/malinda";
-        this.skype = "malinda.hollaway";
-        this.addressSuite = "10098 ABC Towers";
-        this.addressCity = "Dubai Silicon Oasis, Dubai";
-        this.addressCountry = "United Arab Emirates";
-
-
-        //Edit
-        this.editSummary = 0;
-        this.editInfo = 0;
-        this.editContact = 0;
-
-
-        this.submit = function(item, message) {
-            if(item === 'profileSummary') {
-                this.editSummary = 0;
-            }
-
-            if(item === 'profileInfo') {
-                this.editInfo = 0;
-            }
-
-            if(item === 'profileContact') {
-                this.editContact = 0;
-            }
-
-            growlService.growl(message+' has updated Successfully!', 'inverse');
-        }
-
-    })
-
-
+    
 
     //=================================================
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService){
 
         //Status
         this.login = 1;
@@ -282,10 +233,11 @@ materialAdmin
         this.forgot = 0;
         
        
-        $scope.$on('event:google-plus-signin-success', function (event,authResult) {
-          authGoogleService.connectGoogle(authResult.client_id).then(success, error);
+        $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+          authGoogleService.token = authResult.client_id;
+          authGoogleService.connectGoogle(authResult.client_id).then(success, parseService.errorHandler);
         });
-        $scope.$on('event:google-plus-signin-failure', function (event,authResult) {
+        $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
           // Auth failure or signout detected
         });
         
@@ -297,12 +249,14 @@ materialAdmin
                 rid : subscriptionId
             });
             */
+            
             var username = Parse.User.current().get("username");
             pubNubService.initialise(username);
             subscribeMessage(username);
             
-            //Activar luego
-            //$state.go("home");
+            $rootScope.$broadcast('onLogin');
+            //Va la pagina de noticias
+            $state.go("pages.wall");
         }
         
         function subscribeMessage(channelName){
@@ -310,11 +264,6 @@ materialAdmin
                 // payload contains message, channel, env...
                 console.log('got a message event:', payload);    
             })
-        }
-        
-        
-        function error(error){
-            
         }
     })
 
@@ -475,6 +424,27 @@ materialAdmin
             this.photoColumnSize = size;
         }
 
+    })
+    
+    .controller('leftSideBarCtrl', function($scope, $state, $q, authGoogleService){
+        
+        if(Parse.User.current() !== null){
+            $scope.urlPicture = Parse.User.current().get("pictureUrl");
+            $scope.name = Parse.User.current().get("name");
+            $scope.email = Parse.User.current().get("email");
+        }
+       
+        //Must be actived the pop up's to change de user 
+        $scope.logOut = function(){
+          var auth2 = gapi.auth2.getAuthInstance();
+          $q.all([Parse.User.logOut(), auth2.signOut(), authGoogleService.disconnectUser(authGoogleService.token)]).then(function(result){
+           authGoogleService.logOutGoogle();
+            $state.go("login"); 
+          });
+        }
+        
+        
+        
     })
 
 

@@ -1,12 +1,12 @@
 materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/login");
 
         Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
 
         window.fbAsyncInit = function() {
           Parse.FacebookUtils.init({ // this line replaces FB.init({
-            appId      : '{facebook-app-id}', // Facebook App ID
+            appId      : '1482696718726490', // Facebook App ID
             status     : false,  // check Facebook Login status
             cookie     : true,  // enable cookies to allow Parse to access the session
             xfbml      : true,  // initialize Facebook social plugins on the page
@@ -52,6 +52,19 @@ materialAdmin
                                     'vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js',
                                     'vendors/bower_components/simpleWeather/jquery.simpleWeather.min.js'
                                 ]
+                            },
+                            {
+                                name: 'vendors',
+                                files: dependenciasNews()
+                            },
+                            {
+                                name: 'vendors',
+                                insertBefore: '#app-level',
+                                files: dependenciasGalleryAppLevel()
+                            },
+                            {
+                                name: 'vendors',
+                                files: dependenciasGallery()
                             }
                         ])
                     }
@@ -403,7 +416,8 @@ materialAdmin
 
             .state ('pages', {
                 url: '/pages',
-                templateUrl: 'views/common.html'
+                templateUrl: 'views/common.html',
+                controller : "commonCtrl"
             })
 
 
@@ -411,7 +425,8 @@ materialAdmin
 
             .state ('pages.profile', {
                 url: '/profile',
-                templateUrl: 'views/profile.html'
+                templateUrl: 'views/profile.html',
+                controller: 'profileCtrl'
             })
 
             .state ('pages.profile.profile-about', {
@@ -502,7 +517,7 @@ materialAdmin
             
             .state ('login', {
                 url: '/login',
-                templateUrl: 'views/login1.html',
+                templateUrl: 'views/login.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
@@ -523,24 +538,7 @@ materialAdmin
                             },
                             {
                                 name: 'vendors',
-                                files: [
-                                    /* Odontologos.com.co */
-                                    'js/hefesoft/Noticias/Controllers/odontologos.com.co.js',
-                                    'js/hefesoft/Noticias/Directivas/directive/odontologos.com.co.js',
-                                    
-                                    /* Fb page */
-                                    'js/hefesoft/Noticias/Controllers/asociacionOdontologos.js',
-                                    'js/hefesoft/Noticias/Directivas/directive/asociacionOdontologos.js',
-                                    'vendors/hefesoft/fb/services/asociasionOdontologos.js',
-                                    
-                                    /* Import.io */
-                                    'vendors/hefesoft/import.io/services/read.js',
-                                    'vendors/hefesoft/Directivas/nhRef/nhref.js',
-                                    
-                                    /* lodash */
-                                    'vendors/bower_components/lodash/lodash.min.js',
-                                    
-                                ]
+                                files: dependenciasNews()
                             }
                             
                         ])
@@ -550,24 +548,22 @@ materialAdmin
 
             .state ('pages.wall', {
                 url: '/wall',
-                templateUrl: 'views/wall.html',
+                templateUrl: 'views/feed.html',
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
                             {
                                 name: 'vendors',
                                 insertBefore: '#app-level',
-                                files: [
-                                    'vendors/bower_components/autosize/dist/autosize.min.js',
-                                    'vendors/bower_components/lightgallery/light-gallery/css/lightGallery.css'
-                                ]
+                                files: dependenciasGalleryAppLevel()
                             },
                             {
                                 name: 'vendors',
-                                files: [
-                                    'vendors/bower_components/mediaelement/build/mediaelement-and-player.js',
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
-                                ]
+                                files: dependenciasGallery()
+                            },
+                            {
+                                name: 'vendors',
+                                files: dependenciasNews()
                             }
                         ])
                     }

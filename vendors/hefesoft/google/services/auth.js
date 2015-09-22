@@ -13,7 +13,12 @@ angular.module('hefesoft.google')
          ];
 
 	
+	
+	
 	dataFactory.connectGoogle = function(token) {
+	    
+	    Parse.User.logOut();
+	    
 	    var deferred = $q.defer();
           gapi.auth.authorize({
             client_id: token,
@@ -105,9 +110,42 @@ angular.module('hefesoft.google')
                 $timeout.cancel(timer);
             }   
            },3000);
-           
-            
        }
+       
+      dataFactory.disconnectUser =  function(access_token) {
+          var deferred = $q.defer();
+          var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' +
+              access_token;
+        
+          // Realiza una solicitud GET asíncrona.
+          $.ajax({
+            type: 'GET',
+            url: revokeUrl,
+            async: false,
+            contentType: "application/json",
+            dataType: 'jsonp',
+            success: function(nullResponse) {
+              deferred.resolve("200");
+              // Lleva a cabo una acción ahora que el usuario está desconectado
+              // La respuesta siempre está indefinida.
+            },
+            error: function(e) {
+              deferred.reject("500");
+              // Gestiona el error
+              // console.log(e);
+              // Puedes indicar a los usuarios que se desconecten de forma manual si se produce un error
+              // https://plus.google.com/apps
+            }
+          });
+          
+          return deferred.promise;
+          
+        }
+        
+        dataFactory.logOutGoogle = function(){
+            var win = window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
+            setTimeout("win.close();", 4000);
+        }
 
 	return dataFactory;
 

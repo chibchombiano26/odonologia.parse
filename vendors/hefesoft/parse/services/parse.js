@@ -14,6 +14,16 @@ angular.module('hefesoft.parse')
        
        promise.reject(er);
     }
+    
+    
+    dataFactory.errorHandler = function error(error){
+        debugger
+        if (error.code === Parse.Error.OBJECT_NOT_FOUND) {
+          alert("Uh oh, we couldn't find the object!");
+        } else if (error.code === Parse.Error.CONNECTION_FAILED) {
+          alert("Uh oh, we couldn't even connect to the Parse Cloud!");
+        }
+    }
 	
 	 
 	return dataFactory;
