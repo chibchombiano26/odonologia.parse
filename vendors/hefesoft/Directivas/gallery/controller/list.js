@@ -21,7 +21,7 @@ controller('listGalleryCtrl',
   }
 
   function inicializar(){
-  	dataTableStorageFactory.getTableByPartition('TmArchivosAdjuntos', $rootScope.currentUser.id) 
+  	dataTableStorageFactory.getTableByPartition('TmArchivosAdjuntos', Parse.User.current().get("email")) 
 		.success(success)
         .error(error);
   }

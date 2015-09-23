@@ -24,6 +24,15 @@ angular.module('hefesoft.parse')
           alert("Uh oh, we couldn't even connect to the Parse Cloud!");
         }
     }
+    
+    dataFactory.validateUndefined = function(item){
+      if(item === undefined){
+        return null;
+      }
+      else{
+        return item;
+      }
+    }
 	
 	 
 	return dataFactory;

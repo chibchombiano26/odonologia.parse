@@ -60,7 +60,7 @@ angular.module('Message')
 	  else if (Notification.permission === "granted") {
 	    // If it's okay let's create a notification
 	    var notification = new Notification('Odontologia', {
-			    icon: 'assets/img/icon.png',
+			    icon: 'img/icon.png',
 			    body: message,
 			  });
 	  }
@@ -71,7 +71,7 @@ angular.module('Message')
 	      // If the user is okay, let's create a notification
 	      if (permission === "granted") {
 	        var notification = new Notification('Odontologia', {
-			    icon: 'assets/img/icon.png',
+			    icon: 'img/icon.png',
 			    body: message,
 			  });
 	      }

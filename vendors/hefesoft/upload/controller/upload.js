@@ -9,8 +9,8 @@ angular.module('Upload')
         $scope.fileName = "";
         $scope.mostrarUploadButton = true;
 
-        var urlUploadFiles = "http://hefesoft.blob.core.windows.net/files/files?sv=2014-02-14&sr=c&sig=RqRcu1vwp56UdXTdRpZfEEWzv7rYrDT87B5iZafAOS4%3D&st=2015-05-15T05%3A00%3A00Z&se=2030-12-02T05%3A00%3A00Z&sp=rwl";       
-        var path = "http://hefesoft.blob.core.windows.net/files/files/";
+        var urlUploadFiles = "//hefesoft.blob.core.windows.net/files/files?sv=2014-02-14&sr=c&sig=RqRcu1vwp56UdXTdRpZfEEWzv7rYrDT87B5iZafAOS4%3D&st=2015-05-15T05%3A00%3A00Z&se=2030-12-02T05%3A00%3A00Z&sp=rwl";       
+        var path = "//hefesoft.blob.core.windows.net/files/files/";
 
         $scope.files = [];         
     
@@ -36,7 +36,7 @@ angular.module('Upload')
             //Se debe garantizar que para un mismo usuario y paciente no se sobrescribar archivos
             //Por eso se le agrega el nombre del paciente y el usuario logueado
             for (var i = $scope.files.length - 1; i >= 0; i--) {
-                $scope.files[i]["blobname"] = $rootScope.currentUser.id + "_" + pacienteId.RowKey + "_"+ $scope.files[i].name;
+                $scope.files[i]["blobname"] = Parse.User.current().get("email") + "_" + pacienteId.RowKey + "_"+ $scope.files[i].name;
             };
 
 
@@ -93,7 +93,7 @@ angular.module('Upload')
 
         var imagen = {};
         imagen.nombreTabla = 'TmArchivosAdjuntos';        
-        imagen.PartitionKey = $rootScope.currentUser.id + "paciente" + pacienteId.RowKey;
+        imagen.PartitionKey = Parse.User.current().get("email") + "paciente" + pacienteId.RowKey;
         imagen.generarIdentificador = true;
         imagen.path = path + data.blobname;
         imagen['name'] = data.name;

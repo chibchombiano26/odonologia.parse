@@ -5,7 +5,7 @@ angular.module('hefesoft.services')
 	var dataFactory = {};
 
 	dataFactory.validarDatosClinica = function(){
-		dataTableStorageFactory.getTableByPartitionAndRowKey('TmDatosClinica', $rootScope.currentUser.id, "1")
+		dataTableStorageFactory.getTableByPartitionAndRowKey('TmDatosClinica', Parse.User.current().get("email"), "1")
       .success(function(data){
         if(data == null){
            $state.go("app.datosclinica");

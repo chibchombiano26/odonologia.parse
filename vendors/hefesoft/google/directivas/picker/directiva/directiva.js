@@ -8,7 +8,7 @@ angular.module('hefesoft.google')
 			
 	}
 
-	directiva.templateUrl = "app/lib/hefesoft.standard/google/directivas/picker/template/picker.html";
+	directiva.templateUrl = "vendors/hefesoft/google/directivas/picker/template/picker.html";
 	directiva.controller = "googlePickerCtrl";
 
 	return directiva;	

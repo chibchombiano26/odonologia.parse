@@ -1,0 +1,55 @@
+   <div>
+       <section id="content">
+        <div class="container">
+            <div class="block-header">
+                <h2>Mis pacientes</h2>
+            </div>
+        
+            <div class="card">
+                <div class="listview lv-bordered lv-lg">
+                  <div class="card-header ch-alt m-b-20">
+                    <h2>Pacientes <small> Listado de los pacientes en el sistema</small></h2>
+                  
+                    <button ng-click="nuevo()" class="btn bgm-cyan btn-float btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus zmdi-hc-5x"></i></button>
+
+                </div>
+
+                    
+                    <div class="lv-body">                             
+                        
+                        <div ng-repeat="item in pacientes" class="lv-item media">
+                            
+                             <div class="pull-left">
+                                <img class="lv-img-sm" src="{{getPicture(item)}}" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">{{item.nombre}}</div>
+                                <small class="lv-small">{{item.cedula}}</small>
+                                
+                                <ul class="lv-attrs">
+                                    
+                                    <li>
+                                        <button ng-click="editar(item)" class="btn btn-info waves-effect">Editar</button>
+                                    </li>
+                                    
+                                    <li>
+                                        <button class="btn btn-warning waves-effect" ng-click="eliminar(item, $index)">Eliminar</button>
+                                    </li>
+                                    
+                                    <li>
+                                        <button ng-click="irDiagnosticos(item)" class="btn btn-default waves-effect">Ver diagnosticos</button>
+                                    </li>
+                                   
+                                    <li>
+                                        <button ng-click="navegarAdjuntos(item)" class="btn btn-default waves-effect">Adjuntos</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>                       
+            </div>
+        </div>
+    </section>
+</div>

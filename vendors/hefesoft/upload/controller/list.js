@@ -9,7 +9,7 @@ angular.module('Upload')
 	 function load(){
         var paciente = varsFactoryService.pacienteSeleccionado();
 
-	 	var partition = $rootScope.currentUser.id + "paciente" + paciente.RowKey;
+	 	var partition = Parse.User.current().get("email") + "paciente" + paciente.RowKey;
         dataTableStorageFactory.getTableByPartition('TmArchivosAdjuntos', partition)
         .success(success)
         .error(error);	 	

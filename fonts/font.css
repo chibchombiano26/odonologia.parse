@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Ionicons';
+  src: url(data:application/x-font-woff;charset=utf-8;base64,***) format('woff'),
+  url(data:application/x-font-ttf;charset=utf-8;base64,***) format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face{ 
+font-family: 'Glyphyx';
+src: url('fonts/Glyphyx/Glyphyx.eot');
+src: url('fonts/Glyphyx/Glyphyx.eot?#iefix') format('embedded-opentype'),
+     url('fonts/Glyphyx/Glyphyx.woff') format('woff'),
+     url('fonts/Glyphyx/Glyphyx.ttf') format('truetype');         
+}
+
+@font-face{ 
+font-family: 'signify';
+src: url('fonts/signify/signifylite-webfont.eot');
+src: url('fonts/signify/signifylite-webfont.eot?#iefix') format('embedded-opentype'),
+     url('fonts/signify/signifylite-webfont.woff') format('woff'),
+     url('fonts/signify/signifylite-webfont.ttf') format('truetype'),
+     url('fonts/signify/signifylite-webfont.svg#webfont') format('svg');
+}
+
+ @font-face{ 
+font-family: 'raphael';
+src: url('fonts/raphael/raphaelicons-webfont.eot');
+src: url('fonts/raphael/raphaelicons-webfont.eot?#iefix') format('embedded-opentype'),
+     url('fonts/raphael/raphaelicons-webfont.woff') format('woff'),
+     url('fonts/raphael/raphaelicons-webfont.ttf') format('truetype'),
+     url('fonts/raphael/raphaelicons-webfont.svg#webfont') format('svg');
+}
+
+@font-face{ 
+font-family: 'odontologia';
+src: url('fonts/Odontologia/font3933.eot');
+src: url('fonts/Odontologia/font3933.eot?#iefix') format('embedded-opentype'),
+     url('fonts/Odontologia/font3933.woff') format('woff'),
+     url('fonts/raphael/raphaelicons-webfont.ttf') format('truetype'),
+     url('fonts/Odontologia/font3933.svg#webfont') format('svg');
+}

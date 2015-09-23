@@ -11,7 +11,7 @@ directive('colorPicker', ['$parse', '$timeout', function ($parse, $timeout) {
 		scope: {
 			
 		},
-		templateUrl : 'app/lib/hefesoft.standard/Directivas/colorPicker/templates/colorPicker.html',
+		templateUrl : 'vendors/hefesoft/Directivas/colorPicker/templates/colorPicker.html',
 		link: function (scope, element, attr, ngModelCtrl) {			
 		  		  
 		  var text = $(element[0]).find('.cp-value');
