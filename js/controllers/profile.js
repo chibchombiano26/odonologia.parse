@@ -133,7 +133,6 @@ materialAdmin
     function getData(elementoActualizar){
         var Profile = Parse.Object.extend("Profile");
         var query = new Parse.Query(Profile);
-        var query = new Parse.Query(Profile);
         query.equalTo("username", Parse.User.current().get("email"));
         query.first({
           success: function(object) {

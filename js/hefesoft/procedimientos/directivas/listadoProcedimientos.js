@@ -42,7 +42,7 @@ angular.module('odontologiaApp')
 		  }
 		},
 		controller: 'listadoProcedimientosCtrl',
-		templateUrl : 'app/scripts/controllers/procedimientos/views/listado.html',
+		templateUrl : 'js/hefesoft/procedimientos/views/listado.html',
 		scope:{
 			dxSeleccionado : '=',
 			ocultarAddProcedimiento : '=',

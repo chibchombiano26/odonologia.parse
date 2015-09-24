@@ -124,8 +124,9 @@ function dependenciasDiagnosticos(){
             "js/hefesoft/Diagnosticos/directivas/directivas/list.js",
             "vendors/farbtastic/farbtastic.css",
             "vendors/farbtastic/farbtastic.min.js",
-            "vendors/hefesoft/Directivas/colorPicker/directiva/colorPicker.js",            
-            "js/hefesoft/tratamientos/directivas/wizardSimbolo/services/pasoVariables.js"
+            'vendors/bower_components/angular-farbtastic/angular-farbtastic.js',
+            "js/hefesoft/tratamientos/directivas/wizardSimbolo/services/pasoVariables.js",
+            'js/hefesoft/Diagnosticos/services/diagnosticos.js'
         ]
  	}
 
@@ -284,6 +285,37 @@ function dependenciasCieCups(){
     return dependencias;
 }
 
+
+function dependenciasDiagnosticosPacientes(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        serie: true,
+        files: 
+        [            
+            "js/hefesoft/historia/Odontologia/diagnosticosPaciente/controler/diagnosticosPaciente.js"
+        ]
+    }
+
+    return dependencias;
+}
+
+function dependenciasHistoria(){
+    var dependencias = 
+    {
+        name : "Historia",
+        cache: true,        
+        files: 
+        [
+            "js/hefesoft/historia/Odontologia/realizarOdontograma/controllers/realizarOdontograma.js"            
+        ]
+    }
+
+    return dependencias;
+}
+
+
 function dependenciasFont(){
     var dependencias = 
     {
@@ -298,6 +330,21 @@ function dependenciasFont(){
     return dependencias;
 }
 
+
+function dependenciasDrillDown(){
+    var dependencias = 
+    {
+        name : "directivas",
+        cache: true,        
+        files: 
+        [
+            "vendors/hefesoft/Directivas/drillDown/controller/drillDownCtrl.js",
+            "vendors/hefesoft/Directivas/drillDown/directive/directive.js"            
+        ]
+    }
+
+    return dependencias;
+}
 
 
 
@@ -345,5 +392,38 @@ function cargarPacientes($ocLazyLoad){
          /* Para pruebas
          authDependencies()
         */
+      ]);
+   }
+   
+   function cargarDiagnosticosPacientes($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+          dependenciasImagenes(),
+          dependenciasClinicas(),
+          dependenciasDiagnosticos(),
+          dependenciasOdontograma(),
+          dependenciasAzure(),
+          dependenciasDrillDown(),
+          dependenciasProcedimientos(),
+          dependenciasHistoria(),
+          dependenciasTratamientos(),
+          dependenciasCieCups(),
+          dependenciasDiagnosticosPacientes(),
+      ]);
+   }
+   
+   function cargarOdontograma($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+          dependenciasImagenes(),
+          dependenciasClinicas(),
+          dependenciasDiagnosticos(),
+          dependenciasOdontograma(),
+          dependenciasAzure(),
+          dependenciasDrillDown(),
+          dependenciasProcedimientos(),
+          dependenciasHistoria(),
+          dependenciasTratamientos(),
+          dependenciasCieCups(),
       ]);
    }

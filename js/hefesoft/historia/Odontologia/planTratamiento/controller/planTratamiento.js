@@ -4,7 +4,7 @@ controller('planTratamientoCtrl',
 	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService) {
 
 
-	var idOdontograma = "usuario" + $rootScope.currentUser.id + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
+	var idOdontograma = "usuario" + Parse.User.current().get("email") + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
 	var piezaDentalSeleccionada;
 
 	$scope.Listado = [];

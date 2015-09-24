@@ -1,7 +1,7 @@
   angular.module('odontologiaApp')
   .controller('AddDxCtrl', 
-    ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', 'messageService', 'dxSeleccionado', '$modalInstance', '$rootScope',
-    function ($scope, CieCupsServices, $modal, dataTableStorageFactory, messageService, dxSeleccionado, $modalInstance, $rootScope) {
+    ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', 'messageService', 'dxSeleccionado', '$modalInstance', '$rootScope', '$q',
+    function ($scope, CieCupsServices, $modal, dataTableStorageFactory, messageService, dxSeleccionado, $modalInstance, $rootScope, $q) {
 
     var esNuevo = true; 
     $scope.Diagnostico = {};
@@ -22,25 +22,34 @@
   	}
 
     $scope.adicionar = function(){
-      var data = $scope.Diagnostico;      
-      data.PartitionKey = $rootScope.currentUser.id;
-
-      //Cuando es un nuevo paciente el otro caso es cuando se edita un registro
-      if(angular.isUndefined(data.RowKey)){
-        data.generarIdentificador = true;
-      }
-
-      data.nombreTabla= 'TmDiagnosticos';       
-
-      dataTableStorageFactory.saveStorage(data).then(function(data){        
-        messageService.showMessage("Diagnostico guardado");
-        if(esNuevo){
-          $modalInstance.dismiss(data);
-        }
-        else{
-          $modalInstance.close(); 
-        }
-      });      
+      var data = $scope.Diagnostico;
+      
+      var DiagnosticoDfd = $q.defer();
+      var Diagnostico = Parse.Object.extend("Diagnostico");
+      var diagnostico = new Diagnostico();
+      diagnostico.set("nombre", data.nombre);
+      diagnostico.set("idiceCie", data.idiceCie);
+      diagnostico.set("tipo", data.objectHefesoftTipo);
+      diagnostico.set("diagnostico", data.objectHefesoftDiagnostico);
+      diagnostico.set("evolucion", data.objectHefesoftEvolucion);
+      diagnostico.set("username", Parse.User.current().get("email"));
+      
+      diagnostico.save().then(
+        function(diagnostico){
+          DiagnosticoDfd.resolve(diagnostico);
+      },
+        function(diagnostico, error){
+          console.log(error);
+          DiagnosticoDfd.reject(error);
+      });
+      
+      DiagnosticoDfd.promise.then(function(result){
+        $modalInstance.dismiss(result);
+      })
+      .catch(function(error){
+        $modalInstance.dismiss();
+        console.log(error);
+      })
    }
 
     function cie(data){

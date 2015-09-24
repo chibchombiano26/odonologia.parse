@@ -72,7 +72,7 @@
                                     <button
                                      wz-next value="Simbolo"
                                      ng-click="mostrarSimbolo('Imagen')"
-                                     style=" background-image: url('assets/img/icon.png'); background-size: contain;" 
+                                     style=" background-image: url('img/icon.png'); background-size: contain;" 
                                      class="btn btn-default btn-lg waves-effect waves-button waves-float">
                                       &nbsp;&nbsp;&nbsp;&nbsp;
                                     </button>
@@ -92,7 +92,26 @@
 
              <div ng-show="wizard.mostrarColor" class="form-group">
                 <div class="fg-line">
-                    <color-picker ng-model="wizard.color"/>
+                    
+                <div class="col-sm-6">
+                    <div class="cp-container">
+                        <div class="input-group form-group">
+                            <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                            <div class="fg-line dropdown" dropdown>
+                                <input type="text" class="form-control cp-value" ng-model="wizard.color" dropdown-toggle>
+    
+                                <div class="dropdown-menu">
+                                    <ng-farbtastic ng-model="wizard.color"></ng-farbtastic>
+                                </div>
+    
+                                <i class="cp-value" style="background-color: {{ wizard.color }}"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                    
+                    
                 </div>
             </div>
 

@@ -7,7 +7,7 @@
             <button ng-click="openTratamiento()"
                     ng-hide="ocultarAddTratamiento"
                     class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
-                    <i class="md md-add"></i>
+                    <i class="zmdi zmdi-plus"></i>
             </button>
           </div>
     </div>
@@ -26,7 +26,7 @@
             <tbody>
                 <tr ng-repeat="item in listado track by $index">
                     <td>
-                         <md-button ng-click="eliminar(item, $index)" class="md-delete"></md-button>
+                        <button class="btn btn-default waves-effect" ng-click="eliminar(item, $index)"><i class="zmdi zmdi-delete"></i></button>
                     </td>
                     <td ng-hide="editable">
                         <i class="md md-keyboard-arrow-right" ng-click="selected(item)">Editar</i>                            

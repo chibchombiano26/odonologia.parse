@@ -37,7 +37,7 @@ directive('piezasDentales', function($parse){
       contexto : '='
    };
    
-   directiva.templateUrl = 'app/scripts/controllers/odontograma/directivas/piezasDentales/template/piezasDentales.html'
+   directiva.templateUrl = 'js/hefesoft/odontograma/directivas/piezasDentales/template/piezasDentales.html'
    directiva.controller = 'piezasDentalesCtrl';
 
    function ngModel(ngModelCtrl, scope){      

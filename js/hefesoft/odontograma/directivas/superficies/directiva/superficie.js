@@ -33,6 +33,6 @@ directive('superficie', function(){
 
    directiva.controller = 'SuperficieCtrl';   
 
-   directiva.templateUrl = 'app/scripts/controllers/odontograma/directivas/superficies/template/superficie.html';
+   directiva.templateUrl = 'js/hefesoft/odontograma/directivas/superficies/template/superficie.html';
    return directiva;
 });

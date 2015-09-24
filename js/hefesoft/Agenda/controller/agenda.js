@@ -102,7 +102,7 @@ angular.module('odontologiaApp')
 			}
 		}
 
-		dataTableStorageFactory.postTableArray(array, 'TmCalendarsUsuario',  $rootScope.currentUser.id, 'row');
+		dataTableStorageFactory.postTableArray(array, 'TmCalendarsUsuario',  Parse.User.current().get("email"), 'row');
 	}
     
 	inicializar();

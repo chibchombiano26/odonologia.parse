@@ -3,7 +3,7 @@ angular.module('directivas')
 
 	var directiva = {};
 	directiva.restrict = 'E';
-	directiva.templateUrl = "app/scripts/controllers/tratamientos/directivas/wizardSimbolo/template/simbolo.html";
+	directiva.templateUrl = "js/hefesoft/tratamientos/directivas/wizardSimbolo/template/simbolo.html";
 	directiva.controller = "SimboloCtrl";
 
 	directiva.link = function (scope, iElement, iAttrs) {			

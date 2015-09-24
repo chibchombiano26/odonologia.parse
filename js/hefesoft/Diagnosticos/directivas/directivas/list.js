@@ -5,7 +5,7 @@ angular.module('odontologiaApp')
 	var directiva = {};
 	
 	directiva.restrict = "E";
-	directiva.templateUrl = "app/scripts/controllers/Diagnosticos/directivas/template/Diagnosticos.html";
+	directiva.templateUrl = "js/hefesoft/Diagnosticos/directivas/template/Diagnosticos.html";
 	
 	directiva.scope = {
 		modoLectura : "=",
@@ -33,6 +33,7 @@ angular.module('odontologiaApp')
           scope.fnEdit = $parse(attrs['editCallback']);
        }
 
+      
        existClick = attrs['eliminarCallback'];
        if(angular.isDefined(existClick)){
           scope.fnEliminar = $parse(attrs['eliminarCallback']);
@@ -78,7 +79,7 @@ angular.module('odontologiaApp')
 	}
 
 	$scope.eliminar = function(item, $index){
-
+    
     $scope.source.splice($index, 1);
     
 		if(angular.isDefined($scope.fnEliminar) && angular.isFunction($scope.fnEliminar)){
@@ -91,7 +92,7 @@ angular.module('odontologiaApp')
       $scope.diagnosticoSeleccionado = seleccionado;
       modalInstance = $modal.open({
       animation: true,
-      templateUrl: 'app/scripts/controllers/tratamientos/views/listadoTratamientosProcedimientos.html',
+      templateUrl: 'js/hefesoft/tratamientos/views/listadoTratamientosProcedimientos.html',
       controller : 'listadoProcedimientosTratamientosCtrl',
       size: 'lg',
       backdrop : 'static',
@@ -120,7 +121,7 @@ angular.module('odontologiaApp')
 $scope.openEdit = function (seleccionado) {
  var modalInstance = $modal.open({
     animation: true,
-    templateUrl: 'app/scripts/controllers/Diagnosticos/views/addDiagnostico.html',
+    templateUrl: 'js/hefesoft/Diagnosticos/views/addDiagnostico.html',
     controller: 'AddDxCtrl',
     size: 'lg',
     resolve: {

@@ -6,6 +6,6 @@ angular.module('odontologiaApp')
 		   
 		},
 		controller: 'listadoFormulaMedicaCtrl',
-		templateUrl : 'app/scripts/controllers/formulaMedica/directivas/template/listado.html'		
+		templateUrl : 'js/hefesoft/formulaMedica/directivas/template/listado.html'		
 	};
 }])

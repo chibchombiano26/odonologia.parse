@@ -3,6 +3,14 @@
     <div class="card">
         <div class="card-header">
             <h2>Diagnosticos <small>Diagnosticos disponibles</small></h2>
+            
+             <button  
+                    ng-hide="modoLectura" 
+                    ng-click="new()" 
+                    class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
+                    <i class="zmdi zmdi-plus"></i>
+            </button>
+            
         </div>
 
         <div class="card-body table-responsive">
@@ -37,29 +45,29 @@
                                 <i class="input-helper"></i>                                                                
                             </td>
                             <td class="col-sm-1">
-                                {{item.objectHefesoftTipo.nombre}}
+                                {{item.tipo.nombre}}
                             </td>
                             <td class="col-sm-1">                                
                               <div style="width:20px;">
                                   <superficie
-                                    ng-model='item.objectHefesoftDiagnostico'
+                                    ng-model='item.diagnostico'
                                     class="wizarSimboloPrev"
-                                    simbolo="item.objectHefesoftDiagnostico.simbolo"
-                                    fuente="item.objectHefesoftDiagnostico.fuente"
-                                    path-imagen="item.objectHefesoftDiagnostico.pathImagen"
-                                    color="item.objectHefesoftDiagnostico.color">
+                                    simbolo="item.diagnostico.simbolo"
+                                    fuente="item.diagnostico.objectHefesoftFuente.fuente"
+                                    path-imagen="item.diagnostico.pathImagen"
+                                    color="item.diagnostico.color">
                                   </superficie>
                               </div>
                             </td>
                             <td class="col-sm-1">
                             <div style="width:20px;">
                                 <superficie
-                                    ng-model='item.objectHefesoftEvolucion'
+                                    ng-model='item.evolucion'
                                     class="wizarSimboloPrev"
-                                    simbolo="item.objectHefesoftEvolucion.simbolo"
-                                    fuente="item.objectHefesoftEvolucion.fuente"
-                                    path-imagen="item.objectHefesoftEvolucion.pathImagen"
-                                    color="item.objectHefesoftEvolucion.color">
+                                    simbolo="item.evolucion.simbolo"
+                                    fuente="item.evolucion.objectHefesoftFuente.fuente"
+                                    path-imagen="item.evolucion.pathImagen"
+                                    color="item.evolucion.color">
                                   </superficie>
                               </div>
                             </td>
@@ -94,15 +102,5 @@
             </div>
         </div>
     </div>
-
-    <div class="card-body card-padding"> 
-        <button
-            ng-hide="modoLectura" 
-            ng-click="new()" 
-            class="btn btn-info btn-sm waves-effect waves-button waves-float">
-            Nuevo
-        </button>    
-    </div>
-
 </div>
 

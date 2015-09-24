@@ -9,7 +9,7 @@ angular.module('odontologiaApp')
 	  $scope.open = function (size, seleccionado) {
 	     var modalInstance = $modal.open({
 	        animation: true,
-	        templateUrl: 'app/scripts/controllers/formulaMedica/views/addFormulaMedica.html',
+	        templateUrl: 'js/hefesoft/formulaMedica/views/addFormulaMedica.html',
 	        controller: 'AddFormulaMedicaCtrl',
 	        size: size,
 	        resolve: {	          
@@ -36,7 +36,7 @@ angular.module('odontologiaApp')
 
       function inicializarElementos(){          
           //El ultimo parametro es el tratamiento seleccionado
-	  	dataTableStorageFactory.getTableByPartition('TmFormulaMedica', $rootScope.currentUser.id)
+	  	dataTableStorageFactory.getTableByPartition('TmFormulaMedica', Parse.User.current().get("email"))
       	.success(function(data){
           $scope.listados = data;        
         }).error(function(error){

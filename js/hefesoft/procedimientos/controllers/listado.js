@@ -11,7 +11,7 @@ angular.module('odontologiaApp')
   $scope.openProcedimientos = function (size, seleccionado) {
      var modalInstance = $modal.open({
         animation: true,
-        templateUrl: 'app/scripts/controllers/procedimientos/views/addProcedimiento.html',
+        templateUrl: 'js/hefesoft/procedimientos/views/addProcedimiento.html',
         controller: 'AddProcedimientoCtrl',
         size: size,
         resolve: {

@@ -6,7 +6,7 @@ angular.module('azure')
     var dataFactory = {};    
 
     dataFactory.getJsonData = function (nombre) {
-        return $http.get('app/scripts/json/data/' + nombre);
+        return $http.get('js/hefesoft/json/' + nombre);
     };
 
     dataFactory.getJsonDataPromise = function (nombre) {

@@ -28,21 +28,21 @@ angular.module('odontologiaApp')
 		}
 
 		if($scope.item.parte == "parte1" || $scope.item.parte == "parte2"){
-			$scope.item.rutaPiezaDental = "assets/img/Periodontograma/periodontograma-dientes-arriba-" +  $scope.item.numeroPiezaDental + ".png";		
+			$scope.item.rutaPiezaDental = "img/Periodontograma/periodontograma-dientes-arriba-" +  $scope.item.numeroPiezaDental + ".png";		
 		}
 		else if($scope.item.parte == "parte3" || $scope.item.parte == "parte4"){
-			$scope.item.rutaPiezaDental = "assets/img/Periodontograma/periodontograma-dientes-abajo-" +  $scope.item.numeroPiezaDental + ".png";		
+			$scope.item.rutaPiezaDental = "img/Periodontograma/periodontograma-dientes-abajo-" +  $scope.item.numeroPiezaDental + ".png";		
 		}
 
 		if($scope.item.lado  == "b"){
-			$scope.item.fondo = "assets/img/Periodontograma/fondo-grafico-inf.png";
+			$scope.item.fondo = "img/Periodontograma/fondo-grafico-inf.png";
 		}
 		else{
-			$scope.item.fondo = "assets/img/Periodontograma/fondo-grafico.png";
+			$scope.item.fondo = "img/Periodontograma/fondo-grafico.png";
 		}
 
 		if(!angular.isUndefined($scope.item.mostrarFurca) && $scope.item.mostrarFurca === true){
-			$scope.item.furca = "assets/img/Periodontograma/" + $scope.item.tipoFurca + ".png";
+			$scope.item.furca = "img/Periodontograma/" + $scope.item.tipoFurca + ".png";
 		}
 	}
 

@@ -75,10 +75,10 @@ materialAdmin
 
     .controller('DropdownDemoCtrl', function ($scope) {
         $scope.items = [
-            { name: 'The first choice!', icon: 'home' },
-            { name: 'And another choice', icon: 'account' },
+            { name: 'Pacientes', icon: 'home', ref : "#/pages/listadopacientes" },
+            /*{ name: 'And another choice', icon: 'account' },
             { name: 'But wait! A third!', icon: 'email' },
-            { name: 'And fourth on here', icon: 'pin' }
+            { name: 'And fourth on here', icon: 'pin' }*/
         ];
     })
 

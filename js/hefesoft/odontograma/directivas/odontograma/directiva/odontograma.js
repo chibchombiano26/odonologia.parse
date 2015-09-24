@@ -36,7 +36,7 @@ directive('odontograma', ['$parse',
 		contexto : '='
 	};
 
-	directiva.templateUrl = "app/scripts/controllers/odontograma/directivas/odontograma/template/odontograma.html";
+	directiva.templateUrl = "js/hefesoft/odontograma/directivas/odontograma/template/odontograma.html";
 	directiva.controller = "odontogramaCtrl";
 
 	return directiva;

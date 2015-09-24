@@ -42,6 +42,6 @@ directive('piezaDental', function($parse){
       source : '='
    };   
 
-   directiva.templateUrl = 'app/scripts/controllers/odontograma/directivas/piezaDental/template/template.html';
+   directiva.templateUrl = 'js/hefesoft/odontograma/directivas/piezaDental/template/template.html';
    return directiva;
 });

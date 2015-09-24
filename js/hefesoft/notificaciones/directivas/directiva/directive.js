@@ -3,7 +3,7 @@ angular.module('directivas')
 	
 	var directiva = {};
 	directiva.restrict  = "E";
-	directiva.templateUrl = "app/scripts/controllers/notificaciones/directivas/template/notificaciones.html";
+	directiva.templateUrl = "js/hefesoft/notificaciones/directivas/template/notificaciones.html";
 	directiva.controller = "listadoNotificacionesCtrl";
 	directiva.replace= true;
 

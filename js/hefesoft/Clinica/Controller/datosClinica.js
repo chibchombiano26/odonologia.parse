@@ -18,7 +18,7 @@ angular.module('odontologiaApp')
 	$scope.guardar = function(){
 		
 		$scope.clinica['nombreTabla'] = 'TmDatosClinica';
-		$scope.clinica['PartitionKey'] = $rootScope.currentUser.id;
+		$scope.clinica['PartitionKey'] = Parse.User.current().get("email");
 		$scope.clinica['RowKey'] = "1";
 		
 		dataTableStorageFactory.saveStorage($scope.clinica);
@@ -30,7 +30,7 @@ angular.module('odontologiaApp')
 	}
 
 	function inicializarElementos(){
-	dataTableStorageFactory.getTableByPartitionAndRowKey('TmDatosClinica', $rootScope.currentUser.id, "1")
+	dataTableStorageFactory.getTableByPartitionAndRowKey('TmDatosClinica', Parse.User.current().get("email"), "1")
       .success(function(data){
       	if(!data == null){
       	   $scope.clinica = data;

@@ -14,5 +14,29 @@ var materialAdmin = angular.module('materialAdmin', [
     'odontologiaApp',
     'esanum',
     'directivas',
-    'ngSanitize'
+    'ngSanitize',
+    'Global',
+    'fixes',
+    'azure',
+    'Util',
+    'providers',
+    'Historia',
+    'Hefesoft',
+    'hefesoft.services',
+    'Shared'
 ])
+
+
+/*
+angular.module('auth', []);
+angular.module('azure', []);
+angular.module('Message', []);
+angular.module('Shared', []);
+angular.module('SignalR', []);
+angular.module('Stripe', []);
+angular.module('W8', []);
+angular.module('Upload', []);
+angular.module('importIo', []);
+angular.module('esanum', []);
+angular.module('ng-currency', []);
+*/

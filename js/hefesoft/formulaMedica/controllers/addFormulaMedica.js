@@ -13,7 +13,7 @@
         
    $scope.adicionar = function(){
    	  var data = $scope.formulaMedica;
-      data.PartitionKey = $rootScope.currentUser.id;
+      data.PartitionKey = Parse.User.current().get("email");
       
       //Cuando es un nuevo paciente el otro caso es cuando se edita un registro
       if(angular.isUndefined(data.RowKey)){

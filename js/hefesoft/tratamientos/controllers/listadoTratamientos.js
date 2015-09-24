@@ -17,7 +17,7 @@
 	   $scope.openTratamiento = function (size, seleccionado) {
 	     var modalInstance = $modal.open({
 	        animation: true,
-	        templateUrl: 'app/scripts/controllers/tratamientos/views/addTratamiento.html',
+	        templateUrl: 'js/hefesoft/tratamientos/views/addTratamiento.html',
 	        controller: 'AddTratamientoCtrl',
 	        size: size,
 	        resolve: {

@@ -1,22 +1,36 @@
 angular.module('Historia')
-.controller('diagnosticoPacienteCtrl', ['$scope', '$rootScope', 'dataTableStorageFactory', '$state',
-	function ($scope, $rootScope, dataTableStorageFactory, $state) {
+.controller('diagnosticoPacienteCtrl', ['$scope', '$rootScope', 'dataTableStorageFactory', '$state', '$q',
+	function ($scope, $rootScope, dataTableStorageFactory, $state, $q) {
 
 
-	var idPaciente = "usuario" + $rootScope.currentUser.id + "paciente" + $rootScope.currentPacient.RowKey;
+	debugger
+	var idPaciente = Parse.User.current().get("email");
 	var diagnosticoPaciente = {};
 	$scope.listado = [];
 	$scope.paciente = $rootScope.currentPacient;
 
 	$scope.adicionar = function(){
-		diagnosticoPaciente['nombreTabla'] = 'TmDiagnosticosPacientes';
-		diagnosticoPaciente['PartitionKey'] = idPaciente;
-		diagnosticoPaciente.generarIdentificador = true;
-		diagnosticoPaciente['fecha'] = new Date();
-
-		dataTableStorageFactory.saveStorage(diagnosticoPaciente).
-		then(function(result){
+		
+		debugger
+		
+		var DiagnosticoPacienteDfd = $q.defer();
+		var DiagnosticoPaciente = Parse.Object.extend("Diagnostico_Paciente");
+		var diagnosticoPaciente = new DiagnosticoPaciente();
+		
+		
+		diagnosticoPaciente.set("paciente", idPaciente);
+		diagnosticoPaciente.set("fecha", new Date());
+		diagnosticoPaciente.save().then(function(diagnosticoPaciente){
+			DiagnosticoPacienteDfd.resolve(diagnosticoPaciente);
+		},
+		function(diagnosticoPaciente, error){
+			DiagnosticoPacienteDfd.reject(error);
+		});
+		
+		DiagnosticoPacienteDfd.promise.then(function(result){
 			$scope.listado.push(result);
+		}).catch(function(error){
+			console.log(error);
 		})
 	}
 
@@ -42,14 +56,29 @@ angular.module('Historia')
 	} 
 
 	function inicializar(){
-	 dataTableStorageFactory.getTableByPartition('TmDiagnosticosPacientes', idPaciente)
-      .success(function(data){
-      	if(angular.isDefined(data) && data.length > 0 ){
-      		$scope.listado = data;
-      	}
-   	  }).error(function(error){
-      	console.log(error);          
-      })
+		debugger
+		var DiagnosticoPacienteDfd = $q.defer();
+		var DiagnosticoPaciente = Parse.Object.extend("Diagnostico_Paciente");
+		var query = new Parse.Query(DiagnosticoPaciente);
+		query.equalTo("paciente", idPaciente);
+		
+		
+		
+		query.find().then(function(entidad){
+			DiagnosticoPacienteDfd.resolve(entidad);
+		},
+		function(entidad, error){
+			DiagnosticoPacienteDfd.reject(error);
+		});
+		
+		DiagnosticoPacienteDfd.promise.then(function(result){
+			for (var i = 0; i < result.length; i++) {
+				$scope.listado.push(result[i].toJSON());
+			}
+		})
+		.catch(function(error){
+			console.log(error);	
+		})
 	}
 
 	inicializar();

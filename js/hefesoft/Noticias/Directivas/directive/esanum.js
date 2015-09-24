@@ -10,6 +10,6 @@ directive('esanum', function(){
   
 
    directiva.controller = 'esanumCtrl';
-   directiva.templateUrl = 'app/scripts/controllers/Noticias/Directivas/template/esanum.html';
+   directiva.templateUrl = 'js/hefesoft/Noticias/Directivas/template/esanum.html';
    return directiva;
 });

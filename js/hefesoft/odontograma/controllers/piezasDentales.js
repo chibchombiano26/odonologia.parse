@@ -196,7 +196,7 @@ angular.module('odontologiaApp')
 	function mostrarModalSeleccionado(item, diagnostico, tratamiento){
 		var modalInstance = $modal.open({
 	        animation: true,
-	        templateUrl: 'app/scripts/controllers/odontograma/directivas/piezaDental/template/seleccionada.html',
+	        templateUrl: 'js/hefesoft/odontograma/directivas/piezaDental/template/seleccionada.html',
 	        controller: 'piezaDentalSeleccionadaCtrl',
 	        size: 'sm',
 	        resolve: {

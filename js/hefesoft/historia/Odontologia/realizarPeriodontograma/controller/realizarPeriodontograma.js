@@ -10,7 +10,7 @@ controller('realizarPeriodontogramaCtrl',
 	$scope.seleccionado = false;
     $scope.zoom = 0.9;
 
-    var idPeriodontograma = "usuario" + $rootScope.currentUser.id + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
+    var idPeriodontograma = "usuario" + Parse.User.current().get("email") + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
 
     $scope.$on('$locationChangeStart', function(event) {      
         var Listado = piezasDentalesServices.getModifiedPiezas();
@@ -102,19 +102,19 @@ controller('realizarPeriodontogramaCtrl',
             $scope.selecionado.tipoFurca = "mediolleno";
         }
         //Medio lleno
-        else if($scope.selecionado.tipoFurca == "assets/img/Periodontograma/mediolleno.png"){
+        else if($scope.selecionado.tipoFurca == "img/Periodontograma/mediolleno.png"){
             $scope.selecionado.tipoFurca = "lleno";
         }
         //Lleno
-        else if($scope.selecionado.tipoFurca == "assets/img/Periodontograma/lleno.png"){
+        else if($scope.selecionado.tipoFurca == "img/Periodontograma/lleno.png"){
             $scope.selecionado.tipoFurca = "cuadrado";   
         }
         //
-        else if($scope.selecionado.tipoFurca == "assets/img/Periodontograma/cuadrado.png"){
+        else if($scope.selecionado.tipoFurca == "img/Periodontograma/cuadrado.png"){
             $scope.selecionado.tipoFurca = "circulo_vacio";   
         }
         //Circulo vacio
-        else if($scope.selecionado.tipoFurca == "assets/img/Periodontograma/vacio.png"){
+        else if($scope.selecionado.tipoFurca == "img/Periodontograma/vacio.png"){
             $scope.selecionado.tipoFurca = "vacio";
         }       
     }

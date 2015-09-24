@@ -5,7 +5,7 @@
     $scope.openWizard = function (size, seleccionado) {
 	     var modalInstance = $modal.open({
 	        animation: true,
-	        templateUrl: 'app/scripts/controllers/tratamientos/directivas/wizardSimbolo/views/wizardSimbolo.html',
+	        templateUrl: 'js/hefesoft/tratamientos/directivas/wizardSimbolo/views/wizardSimbolo.html',
 	        controller : 'modalCtrl',	        
 	        size: size,
 	        resolve: {

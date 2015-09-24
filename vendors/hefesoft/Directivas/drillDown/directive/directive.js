@@ -9,7 +9,7 @@ angular.module('directivas')
 	}
 
 	directiva.controller = "drillDownCtrl";
-	directiva.templateUrl = "app/lib/hefesoft.standard/Directivas/drillDown/template/drillDown.html";
+	directiva.templateUrl = "vendors/hefesoft/Directivas/drillDown/template/drillDown.html";
 	directiva.scope = {
 		source : "=",
 		objetoArray : "=",

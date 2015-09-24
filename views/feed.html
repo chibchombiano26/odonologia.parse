@@ -49,6 +49,8 @@
         </div>
         
         <div class="col-md-4 hidden-sm">
+            
+            
             <div class="card">
                 <div class="card-header">
                     <h2>Bienvenido</h2>
@@ -64,6 +66,24 @@
                     
                 </div>
             </div>
+            
+            <div class="card" ng-controller="DropdownDemoCtrl">
+                <div class="card-header">
+                    <h2>Vinculos rapidos</h2>
+                </div>
+                
+                <div class="card-body card-padding">
+                    
+                    <div class="dropdown-basic-demo clearfix">
+                        <ul class="dropdown-menu dm-icon" role="menu" style="-webkit-box-shadow: none;	-moz-box-shadow: none;	box-shadow: none;" >
+                            <li data-ng-repeat="w in items"><a  ng-href="{{w.ref}}"><i class="zmdi zmdi-{{ w.icon }}"></i> {{ w.name }}</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
             
             
             <!--

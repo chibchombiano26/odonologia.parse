@@ -24,7 +24,7 @@
        }         			
   		},
   		controller : 'listadoTratamientosCtrl',
-  		templateUrl : 'app/scripts/controllers/tratamientos/views/listado.html',
+  		templateUrl : 'js/hefesoft/tratamientos/views/listado.html',
       scope:{
         ocultarAddTratamiento : '=',
         editable : '=',

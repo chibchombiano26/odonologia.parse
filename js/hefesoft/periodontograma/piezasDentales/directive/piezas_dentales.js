@@ -24,7 +24,7 @@ angular.module('odontologiaApp')
        }
 	};
 
-	directive.templateUrl = "app/scripts/controllers/periodontograma/piezasDentales/views/periodontograma.html";
+	directive.templateUrl = "js/hefesoft/periodontograma/piezasDentales/views/periodontograma.html";
 	directive.controller = "piezasDentalesPeriodontogramaCtrl";
 
 	directive.scope = {

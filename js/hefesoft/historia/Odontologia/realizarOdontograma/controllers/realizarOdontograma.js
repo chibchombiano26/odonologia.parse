@@ -1,7 +1,8 @@
 angular.module('Historia')
 .controller('realizarOdontogramaCtrl', 
-	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService',
-	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService) {
+	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval',
+	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval) {
+	
 	var Hefesoft  = window.Hefesot;
 
 	$scope.Diagnosticos = [];
@@ -15,48 +16,87 @@ angular.module('Historia')
 	$scope.listadoDiagnosticos = [];
 	$scope.numeroPiezaModificada = {};
 	$scope.contextoOdontograma = {};
-
-	var idOdontograma = "usuario" + $rootScope.currentUser.id + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
+	
+	var Odontograma;
+	var idPaciente = 0;
+	
+	if($stateParams.pacienteId.length > 0){
+		idPaciente = $stateParams.pacienteId;
+		inicializarDatos();
+	}
 
 	
 	function inicializarDatos(){
-	  //Carga de diagnosticos
-	  dataTableStorageFactory.getTableByPartition('TmDiagnosticos', $rootScope.currentUser.id)
-      .success(function(data){          
-      	$scope.Diagnosticos = data;
-   	  }).error(function(error){
-      	console.log(error);          
-      })
-
-      //Carga de Odontograma
-      dataTableStorageFactory.getTableByPartition('TmOdontograma', idOdontograma)
-      .success(function(data){
-
-      	if(angular.isDefined(data) && data.length > 0){
-	      	//Ordenarlos deacuerdo al codigo como en la nube se guardan en string no los ordena bien
-	        data = _.sortBy(data, function(item) {
-	           return parseFloat(item.id);
-	        });
-
-	        tratamientoServices.extraerTodosTratamientos(data);
-	      	
-	      	//se ponen aca xq aca ya tienen valor
-	      	var item = $scope.contextoOdontograma();
-	 		var piezaDental = item.piezasDentalesScope();
-	 		piezaDental.listado = data;
-	 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
- 		}
- 		else{
- 			//se ponen aca xq aca ya tienen valor
- 			var item = $scope.contextoOdontograma();
-	 		var piezaDental = item.piezasDentalesScope();
- 			piezaDental.leerOdontogramaBase();
- 		}
-
-   	  }).error(function(error){
-      	console.log(error);          
-      })
+	  	
+	  diagnosticosService.cargarDiagnosticos(Parse.User.current().get("email")).then(function(result){
+	  	 for (var i = 0; i < result.length; i++) {
+		    $scope.Diagnosticos.push(result[i].toJSON());
+		  }
+	  })
+	 
+	
+	  cargarOdontograma("Kb1CqPZmlr").then(function(data){
+	  	
+	  	Odontograma = data.toJSON();
+	  	
+	  	if(Odontograma.listado.length >0){
+	  		Odontograma.listado = _.sortBy(Odontograma.listado, function(item){
+	  			return parseFloat(item.id);
+	  		})
+	  		
+	  		tratamientoServices.extraerTodosTratamientos(Odontograma.listado);
+	  		
+	  		
+	  		var promise = $interval(function(){
+	  			
+	  			if(angular.isFunction($scope.contextoOdontograma)){
+	  		
+	  				var item = $scope.contextoOdontograma();
+	  				if(angular.isFunction(item.piezasDentalesScope)){
+				 		var piezaDental = item.piezasDentalesScope();
+				 		piezaDental.listado = Odontograma.listado;
+				 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
+		  				$interval.cancel(promise);
+	  				}
+	  			}
+	  			
+	  		}, 1000);
+	  		
+	  		
+	  	}
+	  	else{
+	  		
+	  		var promise = $timeout(function(){
+	  			
+	  			//se ponen aca xq aca ya tienen valor
+	 			var item = $scope.contextoOdontograma();
+		 		var piezaDental = item.piezasDentalesScope();
+	 			piezaDental.leerOdontogramaBase();
+	 			$timeout.cancel(promise);
+	  			
+	  		}, 8000);
+	  	}
+	  	
+	  })
+	 }
+	  
+	function cargarOdontograma(id){
+		var deferred = $q.defer();
+		var Odontograma = Parse.Object.extend("Odontograma");
+		var query = new Parse.Query(Odontograma);
+		query.get(id)
+		.then(function(result){
+			deferred.resolve(result);
+		},
+		function(entidad, error){
+			deferred.reject(error);
+			console.log(error);
+		}
+	  )
+		
+		return deferred.promise;
 	}
+	 
 
 	$scope.odontogramaBaseCargado = function(item){
 		var listadoGuardar = item;
@@ -90,6 +130,7 @@ angular.module('Historia')
 
 	//click sobre el drill down de diagnosticos
 	$scope.clickMenu = function(i, item){
+		debugger
 		fijarDiagnosticoSeleccionado(item);
 		fijarTratamientoSeleccionado(item)
  	}
@@ -137,6 +178,14 @@ angular.module('Historia')
       	var item = $scope.contextoOdontograma();
  		var piezaDental = item.piezasDentalesScope();
  		
+ 		
+ 		saveOdontograma(listadoGuardar, idPaciente).then(function(result){
+ 			
+ 		});
+ 		
+ 		
+ 		
+ 		/*
  		if(listadoGuardar.length >0)
  		{
 	 		//Datos, Nombre tabla, partition key, y campo que servira como row key
@@ -153,22 +202,43 @@ angular.module('Historia')
     	else{
     		$timeout(function(){ deferred.resolve("Nada que salvar"); }, 3000);
     	}
+    	*/
+ 	}
+ 	
+ 	function saveOdontograma(listadoGuardar, id){
+ 		var deferred = $q.defer();
+ 		
+ 		var Odontograma = Parse.Object.extend("Odontograma");
+ 		var odontograma = new Odontograma();
+ 		
+ 		odontograma.id = "Kb1CqPZmlr";
+ 		odontograma.set("idOdontograma", id);
+ 		odontograma.set("listado", listadoGuardar);
+ 		odontograma.save()
+ 		.then(function(entidad){
+ 			deferred.resolve(entidad);
+ 		},
+ 		function(entidad, error){
+ 			deferred.reject(error);
+ 		 	console.log(error);	
+ 		}
+ 		)
+ 		
+ 		return deferred.promise;
  	}
 
  	function fijarDiagnosticoSeleccionado(item){
- 		//Fijar el diagnostio seleccionado
-		if(!angular.isUndefined(item.nombreTabla) && item.nombreTabla == "TmDiagnosticos"){
+ 		//Se define que se esta seleccionado si un diagnostico o un procedimiento
+		if(!angular.isUndefined(item.objectId)){
 			$scope.diagnosticoSeleccionado = item;
 		}
  	}
 
  	function fijarTratamientoSeleccionado(item){
  		//Fijar el procedimiento seleccionado
-		if(angular.isUndefined(item.nombreTabla)){
+		if(angular.isUndefined(item.objectId)){
 			$scope.tratamientoSeleccionado = item;
 		}
  	}
-
-	inicializarDatos();
-	
+ 	
 }])

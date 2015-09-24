@@ -179,6 +179,7 @@ materialAdmin
                                 files: [
                                     'vendors/bower_components/nouislider/jquery.nouislider.css',
                                     'vendors/farbtastic/farbtastic.css',
+                                    'vendors/bower_components/angular-farbtastic/angular-farbtastic.js',
                                     'vendors/bower_components/summernote/dist/summernote.css',
                                     'vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css',
                                     'vendors/bower_components/chosen/chosen.min.css'
@@ -569,6 +570,120 @@ materialAdmin
                     }
                 }
             })
+            
+          .state('pages.listadopacientes', {
+            url: "/listadopacientes",
+            cache: false,
+            templateUrl: 'js/hefesoft/pacientes/views/listado.html',
+            controller : 'listadoPacientesCtrl',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarPacientes($ocLazyLoad)
+               }
+            }
+          })
+          
+         .state('pages.paciente', {
+            url: "/paciente/:pacienteId",
+            cache: false,
+            templateUrl: 'js/hefesoft/pacientes/views/paciente.html',
+            controller : 'pacientesController',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarPacientes($ocLazyLoad)
+               }
+            }
+          })
+          
+          .state('pages.picker', {
+            url: "/picker/:pacienteId",
+            cache: false,
+            templateUrl: 'vendors/hefesoft/google/directivas/picker/views/picker.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return pickerDependencias($ocLazyLoad)
+               }
+            }
+          })
+          
+          .state('pages.listadoDiagnosticos', {
+            url: "/listadoDiagnosticos",
+            controller: "DxListadoCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/Diagnosticos/views/Diagnosticos.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarDiagnosticos($ocLazyLoad)
+               }
+            }
+          })
+          
+          .state('pages.diagnosticoPaciente', {
+            url: "/diagnosticosPacientes/:pacienteId",
+            controller: "diagnosticoPacienteCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/historia/Odontologia/diagnosticosPaciente/views/diagnosticosPaciente.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarDiagnosticosPacientes($ocLazyLoad)
+               }
+            }
+          })
+          
+          .state('pages.odontograma', {
+            url: "/odontograma/:pacienteId",
+            controller: "realizarOdontogramaCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/historia/Odontologia/realizarOdontograma/views/realizarOdontograma.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarOdontograma($ocLazyLoad)
+               }
+            }
+          })
+          
+          /*
+          
+          .state('app.odontograma', {
+        url: "/odontograma",
+        cache: false,
+        data: {
+          requireLogin: true,
+          requirePacient : true,
+          requirePacientDiagnostic : true
+        },
+        views: {
+            'menuContent': {
+                templateUrl: "app/scripts/controllers/historia/Odontologia/realizarOdontograma/views/realizarOdontograma.html",                
+                resolve :{
+                   controller : function($ocLazyLoad){
+                     return cargarOdontograma($ocLazyLoad)
+                   }
+                }                               
+            }       
+          }
+      })
+          
+          
+          */
 
             //------------------------------
             // BREADCRUMB DEMO
