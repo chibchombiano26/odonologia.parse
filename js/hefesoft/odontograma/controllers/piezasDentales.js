@@ -97,7 +97,7 @@ angular.module('odontologiaApp')
 	}
 
 	$scope.actualizarPiezas = function(elementosActualizar){
-
+		
 		for (var i = elementosActualizar.length - 1; i >= 0; i--) {
 			var pieza = elementosActualizar[i];
 

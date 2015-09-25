@@ -8,7 +8,7 @@ angular.module('Historia')
 	$scope.Diagnosticos = [];
 	$scope.diagnosticoSeleccionado = {};
 	$scope.tratamientoSeleccionado = {};
-	
+
 
 	$scope.PiezaSeleccionada;
 	$scope.listadoTratamientosPorPiezaDental = [];
@@ -97,6 +97,9 @@ angular.module('Historia')
 		return deferred.promise;
 	}
 	 
+	$scope.dxSeleccionado = function(item){
+		console.log(item);
+	}
 
 	$scope.odontogramaBaseCargado = function(item){
 		var listadoGuardar = item;
@@ -130,7 +133,6 @@ angular.module('Historia')
 
 	//click sobre el drill down de diagnosticos
 	$scope.clickMenu = function(i, item){
-		debugger
 		fijarDiagnosticoSeleccionado(item);
 		fijarTratamientoSeleccionado(item)
  	}

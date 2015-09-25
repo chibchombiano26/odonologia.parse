@@ -242,7 +242,8 @@ function dependenciasOdontograma(){
             "js/hefesoft/odontograma/directivas/superficies/filter/colorSuperficie.js",
             "js/hefesoft/odontograma/directivas/superficies/controller/superficie.js",
             "js/hefesoft/odontograma/directivas/odontograma/directiva/odontograma.js",
-            "js/hefesoft/odontograma/controllers/piezaDentalSeleccionada.js"
+            "js/hefesoft/odontograma/controllers/piezaDentalSeleccionada.js",
+            "js/hefesoft/Diagnosticos/directivas/directivas/buscadorDiagnosticos.js"
 
         ]
  	}

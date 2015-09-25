@@ -17,7 +17,6 @@ angular.module('hefesoft.parse')
     
     
     dataFactory.errorHandler = function error(error){
-        debugger
         if (error.code === Parse.Error.OBJECT_NOT_FOUND) {
           alert("Uh oh, we couldn't find the object!");
         } else if (error.code === Parse.Error.CONNECTION_FAILED) {

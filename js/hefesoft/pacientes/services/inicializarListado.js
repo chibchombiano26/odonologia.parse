@@ -3,9 +3,7 @@ angular.module('odontologiaApp')
     ['dataTableStorageFactory', 'users','$ionicLoading', '$rootScope',
 	function (dataTableStorageFactory, users, $ionicLoading, $rootScope) {
 
-    debugger
-
- 	var usuario = users.getCurrentUser();
+    var usuario = users.getCurrentUser();
 	var dataFactory = {};
 
 	dataFactory.inicializar = function(){

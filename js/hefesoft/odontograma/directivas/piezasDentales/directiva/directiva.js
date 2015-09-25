@@ -43,7 +43,7 @@ directive('piezasDentales', function($parse){
    function ngModel(ngModelCtrl, scope){      
       ngModelCtrl[0].$render = function(){
         if (!ngModelCtrl[0].$isEmpty(ngModelCtrl[0].$viewValue)) {
-         var valor = ngModelCtrl[0].$viewValue;
+            var valor = ngModelCtrl[0].$viewValue;
          }
       }
    }

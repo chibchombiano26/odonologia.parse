@@ -3,15 +3,12 @@ angular.module('Historia')
 	function ($scope, $rootScope, dataTableStorageFactory, $state, $q) {
 
 
-	debugger
 	var idPaciente = Parse.User.current().get("email");
 	var diagnosticoPaciente = {};
 	$scope.listado = [];
 	$scope.paciente = $rootScope.currentPacient;
 
 	$scope.adicionar = function(){
-		
-		debugger
 		
 		var DiagnosticoPacienteDfd = $q.defer();
 		var DiagnosticoPaciente = Parse.Object.extend("Diagnostico_Paciente");

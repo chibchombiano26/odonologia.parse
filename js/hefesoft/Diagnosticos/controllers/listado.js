@@ -23,16 +23,19 @@
     }
 
     $scope.modificado = function(data){
-      var Diagnostico = new Parse.Object.extend("Diagnostico");
-      var diagnostico = new Diagnostico();
-      diagnostico.id = data.objectId;
-      diagnostico.set("nombre", data.nombre);
-      diagnostico.set("idiceCie", data.idiceCie);
-      diagnostico.set("tipo", data.objectHefesoftTipo);
-      diagnostico.set("diagnostico", data.objectHefesoftDiagnostico);
-      diagnostico.set("evolucion", data.objectHefesoftEvolucion);
-      diagnostico.set("arrayHefesoftTratamientos", data.arrayHefesoftTratamientos);
-      diagnostico.save();
+      //Solo cuando sea una modificacion cuando se haga una insercion no se ejecute
+      if(angular.isDefined(data.objectId)){
+        var Diagnostico = new Parse.Object.extend("Diagnostico");
+        var diagnostico = new Diagnostico();
+        diagnostico.id = data.objectId;
+        diagnostico.set("nombre", data.nombre);
+        diagnostico.set("idiceCie", data.idiceCie);
+        diagnostico.set("tipo", data.objectHefesoftTipo);
+        diagnostico.set("diagnostico", data.objectHefesoftDiagnostico);
+        diagnostico.set("evolucion", data.objectHefesoftEvolucion);
+        diagnostico.set("arrayHefesoftTratamientos", data.arrayHefesoftTratamientos);
+        diagnostico.save();
+      }
     }
    
     

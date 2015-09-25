@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Buscar un diagnostico<small></small></h2>
+    </div>
+    
+    <div class="card-body card-padding">
+
+        <div class="form-group">
+            <div class="fg-line">
+                 <input 
+                 name="buscadorDiagnosticos"
+                 type="text" 
+                 ng-model="seleccionado" 
+                 typeahead="item.nombre for item in datos | filter:$viewValue | limitTo:8" 
+                 class="form-control">
+            </div>
+        </div>
+    </div>
+</div>
