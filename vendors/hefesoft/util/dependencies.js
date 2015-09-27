@@ -122,6 +122,7 @@ function dependenciasDiagnosticos(){
             "js/hefesoft/Diagnosticos/controllers/listado.js",
             "js/hefesoft/Diagnosticos/controllers/addDiagnostico.js",
             "js/hefesoft/Diagnosticos/directivas/directivas/list.js",
+            "js/hefesoft/Diagnosticos/directivas/directivas/listNoHeader.js",
             "vendors/farbtastic/farbtastic.css",
             "vendors/farbtastic/farbtastic.min.js",
             'vendors/bower_components/angular-farbtastic/angular-farbtastic.js',
@@ -426,5 +427,6 @@ function cargarPacientes($ocLazyLoad){
           dependenciasHistoria(),
           dependenciasTratamientos(),
           dependenciasCieCups(),
+          dependenciasFont()
       ]);
    }

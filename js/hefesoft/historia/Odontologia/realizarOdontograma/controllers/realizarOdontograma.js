@@ -4,10 +4,11 @@ angular.module('Historia')
 	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval) {
 	
 	var Hefesoft  = window.Hefesot;
-
+	
 	$scope.Diagnosticos = [];
 	$scope.diagnosticoSeleccionado = {};
 	$scope.tratamientoSeleccionado = {};
+	$rootScope.modo = "evolucion";
 
 
 	$scope.PiezaSeleccionada;
@@ -98,7 +99,7 @@ angular.module('Historia')
 	}
 	 
 	$scope.dxSeleccionado = function(item){
-		console.log(item);
+		$rootScope.diagnosticoSeleccionado = item;
 	}
 
 	$scope.odontogramaBaseCargado = function(item){
@@ -139,15 +140,17 @@ angular.module('Historia')
 
  	//Ocurre cuando se hace click sobre  una pieza dental
  	$scope.piezaDentalSeleccionada = function(item){
+ 		
  		$scope.PiezaSeleccionada = item;
  		$scope.listadoDiagnosticos = tratamientoServices.extraerDiagnosticos(item);
  		var listadoTratamientos = tratamientoServices.extraerTratamientosDeDiagnosticos($scope.listadoDiagnosticos);
- 		
  		$scope.listadoTratamientosPorPiezaDental = listadoTratamientos;
 
  		//Limpia el listado de los procedimientos
  		$scope.listadoProcedimientosPorPiezaDental = [];
  		piezasDentalesServices.setModified(item.codigo);
+ 		
+ 		
  	}
 
  	$scope.eliminar = function(item, index){

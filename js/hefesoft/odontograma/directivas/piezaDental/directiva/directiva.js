@@ -10,6 +10,7 @@ directive('piezaDental', function($parse){
 
    directiva.link = function(scope, element, attrs, ngModelCtrl) {
 
+    scope.modo = "diagnostico";
     
     var existClick = attrs['clickSuperficie'];
     if(angular.isDefined(existClick)){
@@ -29,6 +30,20 @@ directive('piezaDental', function($parse){
      }
 
     scope.clickSuperficie = function(e){
+        
+     var dxSeleccionado = scope.$root.$root.diagnosticoSeleccionado.diagnostico;
+     scope.modo = scope.$root.$root.modo;
+     scope.item[e + "_objectHefesoft"] = dxSeleccionado;
+     
+ 	 var arrayNombre = e + "Diagnosticos_arrayHefesoft";
+
+ 	 if(angular.isUndefined(scope.item[arrayNombre])){
+ 		scope.item[arrayNombre] = [];
+ 	 }
+     
+     scope.item[arrayNombre].push(scope.$root.$root.diagnosticoSeleccionado);
+     
+        
       var funcion = fn;
       if(angular.isDefined(funcion)){
         fn(scope.$parent,{'superficie' :e});
@@ -39,7 +54,7 @@ directive('piezaDental', function($parse){
 
       
    directiva.scope = {
-      source : '='
+      source : '=',
    };   
 
    directiva.templateUrl = 'js/hefesoft/odontograma/directivas/piezaDental/template/template.html';

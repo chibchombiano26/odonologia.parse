@@ -15,5 +15,39 @@
                  class="form-control">
             </div>
         </div>
+        
+        <div class="form-group" ng-show="show">
+            <div class="fg-line">
+        
+                Diagnostico
+                
+                <superficie
+                    ng-model='item'
+                    class="wizarSimboloPrev"
+                    simbolo="seleccionado.diagnostico.simbolo"
+                    fuente="seleccionado.diagnostico.objectHefesoftFuente.fuente"
+                    path-imagen="seleccionado.diagnostico.pathImagen" 
+                    color="seleccionado.diagnostico.color">
+                </superficie>
+                
+            </div>
+        </div>
+        
+        <div class="form-group" ng-show="show">
+            <div class="fg-line">
+        
+                Evolucion
+        
+                <superficie
+                    ng-model='item'
+                    class="wizarSimboloPrev"
+                    simbolo="seleccionado.evolucion.simbolo"
+                    fuente="seleccionado.evolucion.objectHefesoftFuente.fuente"
+                    path-imagen="seleccionado.evolucion.pathImagen" 
+                    color="seleccionado.evolucion.color">
+                </superficie>
+                
+            </div>
+        </div>
     </div>
 </div>

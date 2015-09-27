@@ -27,12 +27,16 @@ angular.module("odontologiaApp")
 .controller('buscadorDiagnosticosCtrl', function($scope, diagnosticosService){
     
     $scope.datos = [];
+    $scope.seleccionado;
+    $scope.show = false;
     
     $scope.$watch('seleccionado', function(e) {
         if(e){
             var result = _.find($scope.datos, 'nombre', e);
             if(result){
                 if(angular.isDefined($scope.fnDiagnosticoSeleccionado) && angular.isFunction($scope.fnDiagnosticoSeleccionado)){
+                    $scope.seleccionado = result;
+                    $scope.show = true;
         			$scope.fnDiagnosticoSeleccionado($scope, { 'item' : result });
         		}
                 
