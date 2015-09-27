@@ -11,6 +11,7 @@ directive('piezaDental', function($parse){
    directiva.link = function(scope, element, attrs, ngModelCtrl) {
 
     scope.modo = "diagnostico";
+   
     
     var existClick = attrs['clickSuperficie'];
     if(angular.isDefined(existClick)){
@@ -28,12 +29,45 @@ directive('piezaDental', function($parse){
 
       }
      }
+     
+     scope.fijarElemento = function(superficie,tipo, item){
+         if(item && item.hasOwnProperty(superficie + "Diagnosticos_arrayHefesoft")){
+             
+             var elementoRetornar = item[superficie + "Diagnosticos_arrayHefesoft"];
+             elementoRetornar = elementoRetornar[elementoRetornar.length -1];
+             
+             if(elementoRetornar && elementoRetornar.hasOwnProperty("tratado")){
+                 //Aca saldra si se toma diagnostico o evolucion
+                 elementoRetornar = elementoRetornar[elementoRetornar.tratado];
+                 
+                 if(tipo === "color"){
+                    return elementoRetornar.color;
+                 }
+                 else if(tipo === "simbolo"){
+                    return elementoRetornar.simbolo;
+                 }
+                 else if(tipo === "fuente"){
+                    return elementoRetornar.objectHefesoftFuente.fuente;
+                 }
+                 else if(tipo === "imagen"){
+                    return elementoRetornar.pathImagen;
+                 }
+             }
+             else{
+                 return "";
+             }
+            
+         }
+         else{
+             return "";
+         }
+     }
 
     scope.clickSuperficie = function(e){
         
-     var dxSeleccionado = scope.$root.$root.diagnosticoSeleccionado.diagnostico;
+     var dxSeleccionado = angular.copy(scope.$root.$root.diagnosticoSeleccionado);
      scope.modo = scope.$root.$root.modo;
-     scope.item[e + "_objectHefesoft"] = dxSeleccionado;
+     dxSeleccionado["tratado"] = "diagnostico";
      
  	 var arrayNombre = e + "Diagnosticos_arrayHefesoft";
 
@@ -41,7 +75,7 @@ directive('piezaDental', function($parse){
  		scope.item[arrayNombre] = [];
  	 }
      
-     scope.item[arrayNombre].push(scope.$root.$root.diagnosticoSeleccionado);
+     scope.item[arrayNombre].push(dxSeleccionado);
      
         
       var funcion = fn;

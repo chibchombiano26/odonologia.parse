@@ -1,11 +1,11 @@
 angular.module('odontologiaApp')
-.directive('listadosDiagnosticosNoHeader', ['$parse', 
+.directive('listadosDiagnosticos', ['$parse', 
 	function ($parse) {
 
 	var directiva = {};
 	
 	directiva.restrict = "E";
-	directiva.templateUrl = "js/hefesoft/Diagnosticos/directivas/template/DiagnosticosNoHeader.html";
+	directiva.templateUrl = "js/hefesoft/Diagnosticos/directivas/template/Diagnosticos.html";
 	
 	directiva.scope = {
 		modoLectura : "=",

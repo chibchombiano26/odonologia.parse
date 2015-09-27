@@ -9,6 +9,8 @@ angular.module('odontologiaApp')
 	    que se encuentran dentro del bjeto diagnostico 
 	 */
 
+
+	/*
 	 $scope.clickSuperficie = function(superficie){
 	 	var uuid = chance.string({length: 40});
  	 	var diagnosticoAdicionar = angular.copy(diagnostico);
@@ -23,11 +25,14 @@ angular.module('odontologiaApp')
 			$scope.piezaDental = diagnosticoServices.extraerDesdeDiagnostico($scope.piezaDental);
 		}
 	 }
+	 */
 
 	 /*
 		Se agrega el elemento diagnostico a la superficies para cuando se persista
 		quede guarado el diagnostico que se realizo
 	 */
+	 
+	 /*
 	 function agregarElementoDiagnosticoASuperficie(superficie, diagnosticoAdicionar, numeroPiezaDental, uuid, codigo){
 	 	var arrayNombre = superficie + "Diagnosticos_arrayHefesoft";
 
@@ -64,4 +69,5 @@ angular.module('odontologiaApp')
 	 		Tratamiento.arrayHefesoftProcedimientos[i]['codigo'] = codigo;
 	 	};
 	 }
+	 */
 }])

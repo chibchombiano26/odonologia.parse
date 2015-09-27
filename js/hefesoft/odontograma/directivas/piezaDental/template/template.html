@@ -42,10 +42,10 @@
 		<div ng-hide="esBoca" 
 		ng-click="clickSuperficie('arriba')" class="elemento">
 			<superficie
-				color="item.arribaDiagnosticos_arrayHefesoft[0][modo].color"
-				simbolo="item.arribaDiagnosticos_arrayHefesoft[0][modo].simbolo"
-                fuente="item.arribaDiagnosticos_arrayHefesoft[0][modo].objectHefesoftFuente.fuente"
-                path-imagen="item.arribaDiagnosticos_arrayHefesoft[0][modo].pathImagen"
+				color="fijarElemento('arriba','color',item)"
+				simbolo="fijarElemento('arriba','simbolo',item)"
+                fuente="fijarElemento('arriba','fuente',item)"
+                path-imagen="fijarElemento('arriba','imagen',item)"
                 ng-model"item">
 			</superficie>
 		</div>
@@ -57,22 +57,21 @@
 		ng-hide="esBoca" 
 		ng-click="clickSuperficie('izquierda')" class="elemento">
 			<superficie
-				color="item.izquierdaDiagnosticos_arrayHefesoft[0][modo].color"
-				simbolo="item.izquierdaDiagnosticos_arrayHefesoft[0][modo].simbolo"
-                fuente="item.izquierdaDiagnosticos_arrayHefesoft[0][modo].objectHefesoftFuente.fuente"
-                path-imagen="item.izquierdaDiagnosticos_arrayHefesoft[0][modo].pathImagen"
+				color="fijarElemento('izquierda','color',item)"
+				simbolo="fijarElemento('izquierda','simbolo',item)"
+                fuente="fijarElemento('izquierda','fuente',item)"
+                path-imagen="fijarElemento('izquierda','imagen',item)"
                 ng-model"item">
 			</superficie>
 		</div>
 
 		<div 
-
 		ng-click="clickSuperficie('centro')" class="elemento-centro">
 			<superficie
-				color="item.centroDiagnosticos_arrayHefesoft[0][modo].color"
-				simbolo="item.centroDiagnosticos_arrayHefesoft[0][modo].simbolo"
-                fuente="item.centroDiagnosticos_arrayHefesoft[0][modo].objectHefesoftFuente.fuente"
-                path-imagen="item.centroDiagnosticos_arrayHefesoft[0][modo].pathImagen"
+				color="fijarElemento('centro','color',item)"
+				simbolo="fijarElemento('centro','simbolo',item)"
+                fuente="fijarElemento('centro','fuente',item)"
+                path-imagen="fijarElemento('centro','imagen',item)"
                 ng-model"item">
 			</superficie>
 		</div>
@@ -81,10 +80,10 @@
 		ng-hide="esBoca"
 		ng-click="clickSuperficie('derecha')" class="elemento">
 			<superficie
-				color="item.derechaDiagnosticos_arrayHefesoft[0][modo].color"
-				simbolo="item.derechaDiagnosticos_arrayHefesoft[0][modo].simbolo"
-                fuente="item.derechaDiagnosticos_arrayHefesoft[0][modo].objectHefesoftFuente.fuente"
-                path-imagen="item.derechaDiagnosticos_arrayHefesoft[0][modo].pathImagen"
+				color="fijarElemento('derecha','color',item)"
+				simbolo="fijarElemento('derecha','simbolo',item)"
+                fuente="fijarElemento('derecha','fuente',item)"
+                path-imagen="fijarElemento('derecha','imagen',item)"
                 ng-model"item">
 			</superficie>
 		</div>
@@ -96,10 +95,10 @@
 		ng-hide="esBoca"
 		ng-click="clickSuperficie('abajo')" class="elemento">
 			<superficie
-				color="item.abajoDiagnosticos_arrayHefesoft[0][modo].color"
-				simbolo="item.abajoDiagnosticos_arrayHefesoft[0][modo].simbolo"
-                fuente="item.abajoDiagnosticos_arrayHefesoft[0][modo].objectHefesoftFuente.fuente"
-                path-imagen="item.abajoDiagnosticos_arrayHefesoft[0][modo].pathImagen"
+				color="fijarElemento('abajo','color',item)"
+				simbolo="fijarElemento('abajo','simbolo',item)"
+                fuente="fijarElemento('abajo','fuente',item)"
+                path-imagen="fijarElemento('abajo','imagen',item)"
                 ng-model"item">
 			</superficie>
 		</div>

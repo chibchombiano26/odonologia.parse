@@ -1,23 +1,35 @@
 angular.module('odontologiaApp')
-.directive('listadosDiagnosticos', ['$parse', 
+.directive('listadosDiagnosticosNoHeader', ['$parse', 
 	function ($parse) {
 
 	var directiva = {};
 	
 	directiva.restrict = "E";
-	directiva.templateUrl = "js/hefesoft/Diagnosticos/directivas/template/Diagnosticos.html";
+	directiva.templateUrl = "js/hefesoft/Diagnosticos/directivas/template/DiagnosticosNoHeader.html";
 	
 	directiva.scope = {
 		modoLectura : "=",
 		source : "=",
+		source1 : "=",
+		source2 : "=",
+		source3 : "=",
+		source4 : "=",
+		
+		sourceLabel : "=",
+		source1Label : "=",
+		source2Label : "=",
+		source3Label : "=",
+		source4Label : "=",
+		
     verSuperficie : '=',
-    ocultarEliminar : "="
+    ocultarEliminar : "=",
+    tituloTabla : "="
 	};
 
 	directiva.controller = "listadosDiagnosticosCtrl";
 
 	directiva.link = function (scope, iElement, attrs) {
-
+    
 	   var existClick = attrs['tratamientosCallback'];
        if(angular.isDefined(existClick)){
           scope.fnTratamientos = $parse(attrs['tratamientosCallback']);
@@ -53,6 +65,10 @@ angular.module('odontologiaApp')
 	function ($scope, $modal) {
 	
 	$scope.diagnosticoSeleccionado;
+	
+	$scope.test = function(item){
+	  debugger
+	}
 
 	$scope.openTratamiento = function(item){
 		if(angular.isDefined($scope.fnTratamientos) && angular.isFunction($scope.fnTratamientos)){
@@ -78,9 +94,9 @@ angular.module('odontologiaApp')
 		$scope.openEdit();
 	}
 
-	$scope.eliminar = function(item, $index){
+	$scope.eliminar = function(source, item, $index){
     
-    $scope.source.splice($index, 1);
+    source.splice($index, 1);
     
 		if(angular.isDefined($scope.fnEliminar) && angular.isFunction($scope.fnEliminar)){
 			$scope.fnEliminar($scope.$parent, { 'item' : item, '$index' : $index });

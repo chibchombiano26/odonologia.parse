@@ -46,73 +46,30 @@
 
 		<div class="col-sm-10">
 		 <div style="overflow: auto;">
-		 	
-		 	 <table class="table">
-                <thead>
-                    <tr>
-                        <th class="col-sm-1">Nombre</th>
-                        <th class="col-sm-1"ng-show="verSuperficie">
-                            Superficie
-                        </th>
-                        
-                        <th class="col-sm-1">Tipo</th>
-                        <th class="col-sm-1">Simbolo diagnostico</th>
-                        <th class="col-sm-1">Simbolo evolucion</th>
-                        <th class="col-sm-1">Desc Cie</th>
-                    </tr>
-                </thead>
-              
-            </table>
 			
-			<listados-diagnosticos-no-header				
+			<listados-diagnosticos-no-header
+				titulo-tabla="true"
 				modo-lectura="'true'"
-				ver-superficie="'true'"
+				ver-superficie="true"
 				tratamientos-callback="openTratamiento(item)"
 				new-callback="open()"
 				edit-callback="open(item)"
 				eliminar-callback="eliminar(item, $index)"
-				source="PiezaSeleccionada.centroDiagnosticos_arrayHefesoft">
+				source="PiezaSeleccionada.centroDiagnosticos_arrayHefesoft"
+				source1="PiezaSeleccionada.izquierdaDiagnosticos_arrayHefesoft"
+				source2="PiezaSeleccionada.derechaDiagnosticos_arrayHefesoft"
+				source3="PiezaSeleccionada.arribaDiagnosticos_arrayHefesoft"
+				source4="PiezaSeleccionada.abajoDiagnosticos_arrayHefesoft"
+				
+				source-label="'Centro'"
+				source1-label="'Izquierda'"
+				source2-label="'Derecha'"
+				source3-label="'Arriba'"
+				source4-label="'Abajo'"
+				
+				>
 			</listados-diagnosticos-no-header>
 			
-			<listados-diagnosticos-no-header				
-				modo-lectura="'true'"
-				ver-superficie="'true'"
-				tratamientos-callback="openTratamiento(item)"
-				new-callback="open()"
-				edit-callback="open(item)"
-				eliminar-callback="eliminar(item, $index)"
-				source="PiezaSeleccionada.izquierdaDiagnosticos_arrayHefesoft">
-			</listados-diagnosticos-no-header>
-			
-			<listados-diagnosticos-no-header				
-				modo-lectura="'true'"
-				ver-superficie="'true'"
-				tratamientos-callback="openTratamiento(item)"
-				new-callback="open()"
-				edit-callback="open(item)"
-				eliminar-callback="eliminar(item, $index)"
-				source="PiezaSeleccionada.derechaDiagnosticos_arrayHefesoft">
-			</listados-diagnosticos-no-header>
-			
-			<listados-diagnosticos-no-header				
-				modo-lectura="'true'"
-				ver-superficie="'true'"
-				tratamientos-callback="openTratamiento(item)"
-				new-callback="open()"
-				edit-callback="open(item)"
-				eliminar-callback="eliminar(item, $index)"
-				source="PiezaSeleccionada.arribaDiagnosticos_arrayHefesoft">
-			</listados-diagnosticos-no-header>
-			
-			<listados-diagnosticos-no-header				
-				modo-lectura="'true'"
-				ver-superficie="'true'"
-				tratamientos-callback="openTratamiento(item)"
-				new-callback="open()"
-				edit-callback="open(item)"
-				eliminar-callback="eliminar(item, $index)"
-				source="PiezaSeleccionada.abajoDiagnosticos_arrayHefesoft">
-			</listados-diagnosticos-no-header>
 			
 		 </div>
 		</div>		

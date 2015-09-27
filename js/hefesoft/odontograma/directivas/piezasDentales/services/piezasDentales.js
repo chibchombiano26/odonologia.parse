@@ -12,12 +12,8 @@ service('piezasDentalesServices', [function () {
 		PiezasDentales = data;
 	}
 
-	dataFactory.getModifiedPiezas = function(fijarModificado){		
-		var array = _.where(PiezasDentales, { 'Modificado': true });
-		if(fijarModificado){
-			fijarModificadoFalso();
-		}
-		return array;
+	dataFactory.getModifiedPiezas = function(fijarModificado){
+		return PiezasDentales;
 	}
 
 	dataFactory.setModified = function(number){

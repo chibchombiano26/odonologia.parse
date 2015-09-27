@@ -42,26 +42,23 @@ angular.module('Historia')
 	  	
 	  	if(Odontograma.listado.length >0){
 	  		Odontograma.listado = _.sortBy(Odontograma.listado, function(item){
-	  			return parseFloat(item.id);
-	  		})
+	  		 return parseFloat(item.id);
+  		  })
 	  		
-	  		tratamientoServices.extraerTodosTratamientos(Odontograma.listado);
-	  		
-	  		
-	  		var promise = $interval(function(){
-	  			
-	  			if(angular.isFunction($scope.contextoOdontograma)){
-	  		
-	  				var item = $scope.contextoOdontograma();
-	  				if(angular.isFunction(item.piezasDentalesScope)){
-				 		var piezaDental = item.piezasDentalesScope();
-				 		piezaDental.listado = Odontograma.listado;
-				 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
-		  				$interval.cancel(promise);
-	  				}
-	  			}
-	  			
-	  		}, 1000);
+  		var promise = $interval(function(){
+  			
+  			if(angular.isFunction($scope.contextoOdontograma)){
+  		
+  				var item = $scope.contextoOdontograma();
+  				if(angular.isFunction(item.piezasDentalesScope)){
+			 		var piezaDental = item.piezasDentalesScope();
+			 		piezaDental.listado = Odontograma.listado;
+			 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
+	  				$interval.cancel(promise);
+  				}
+  			}
+  			
+  		}, 1000);
 	  		
 	  		
 	  	}
@@ -149,8 +146,6 @@ angular.module('Historia')
  		//Limpia el listado de los procedimientos
  		$scope.listadoProcedimientosPorPiezaDental = [];
  		piezasDentalesServices.setModified(item.codigo);
- 		
- 		
  	}
 
  	$scope.eliminar = function(item, index){
@@ -187,27 +182,6 @@ angular.module('Historia')
  		saveOdontograma(listadoGuardar, idPaciente).then(function(result){
  			
  		});
- 		
- 		
- 		
- 		/*
- 		if(listadoGuardar.length >0)
- 		{
-	 		//Datos, Nombre tabla, partition key, y campo que servira como row key
-	        dataTableStorageFactory.postTableArray(listadoGuardar, 'TmOdontograma',  idOdontograma, 'codigo')
-	        .success(function (data) {           
-				piezaDental.actualizarPiezas(data);
-				deferred.resolve(data); 
-	        })
-	        .error(function (error) {           
-	            console.log(error);
-	            deferred.reject(data); 
-	        });
-    	}
-    	else{
-    		$timeout(function(){ deferred.resolve("Nada que salvar"); }, 3000);
-    	}
-    	*/
  	}
  	
  	function saveOdontograma(listadoGuardar, id){
@@ -215,6 +189,11 @@ angular.module('Historia')
  		
  		var Odontograma = Parse.Object.extend("Odontograma");
  		var odontograma = new Odontograma();
+ 		
+ 		//Se le quitan primero los caracteres especialesw como $ y puntos
+ 		//Y luevo se vuelve a convertir a json
+ 		listadoGuardar = angular.toJson(listadoGuardar, true);
+ 		listadoGuardar = JSON.parse(listadoGuardar);
  		
  		odontograma.id = "Kb1CqPZmlr";
  		odontograma.set("idOdontograma", id);
