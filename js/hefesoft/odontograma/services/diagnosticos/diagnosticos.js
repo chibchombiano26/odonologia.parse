@@ -25,7 +25,11 @@ angular.module('odontologiaApp')
 		            	elementoDevolver[nombreObjetoCrear] = {};
 		        	}
 
-		            elementoDevolver[nombreObjetoCrear].color = diagnostico.objectHefesoftDiagnostico.color;
+					if(elementoDevolver[nombreObjetoCrear].color)
+					{
+		            	elementoDevolver[nombreObjetoCrear].color = diagnostico.objectHefesoftDiagnostico.color;
+					}
+					
 		            elementoDevolver[nombreObjetoCrear].simbolo = diagnostico.objectHefesoftDiagnostico.simbolo;
 		            elementoDevolver[nombreObjetoCrear].fuente = diagnostico.objectHefesoftDiagnostico.fuente;
 		            elementoDevolver[nombreObjetoCrear].pathImagen = diagnostico.objectHefesoftDiagnostico.pathImagen;

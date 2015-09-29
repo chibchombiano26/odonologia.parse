@@ -1,75 +1,54 @@
 angular.module('Historia').
 controller('planTratamientoCtrl', 
-	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService',
-	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService) {
+	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams',
+	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams) {
 
 
-	var idOdontograma = "usuario" + Parse.User.current().get("email") + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
+	var idOdontograma = "Kb1CqPZmlr";
 	var piezaDentalSeleccionada;
 
 	$scope.Listado = [];
 	$scope.Source = [];
 	$scope.contextoProcedimientos = {};
+	
+	var idPaciente = 0;
+	
+	if($stateParams.pacienteId.length > 0){
+		idPaciente = $stateParams.pacienteId;
+		inicializarDatos();
+	}
 
 	$scope.odontograma = function(){
-
-		var listadoGuardar = piezasDentalesServices.getModifiedPiezas(); 
-
-		if(listadoGuardar.length == 0){
-			$state.go("app.odontograma");
-		}
-		else{
-			messageService.notify('Hay elementos sin guardar', 'danger');
-		}
+		$state.go("pages.odontograma", { pacienteId : idPaciente});
 	}
 
 	function inicializarDatos(){
-      //Carga de Odontograma
-      dataTableStorageFactory.getTableByPartition('TmOdontograma', idOdontograma)
-      .success(function(data){
-
-      	$scope.Source = data;
+      
+  	  odontogramService.cargarOdontograma("Kb1CqPZmlr").then(function(data){
+  	  	datos = data;
+	  	var result = data.toJSON().listado;
+	  	
+	  	$scope.Source = result;
       	piezasDentalesServices.fijarPiezasDentales($scope.Source);
 
-      	if(angular.isDefined(data) && data.length > 0){	
+      	if(angular.isDefined(result) && result.length > 0){	
 	        $scope.Listado = tratamientoServices.extraerTodosProcedimientos($scope.Source);
  		}
-
-   	  }).error(function(error){
-      	console.log(error);          
-      })
+	  	
+  	  });
+      
 	}
 
 	//Como los elementos se estan pasando por referencia se puede guardar el mismo objeto que se cargo inicialmente
 	$scope.guardarCommand = function(){
-		
-		var deferred = $q.defer();
-		//Se obtienen las piezas dentales que han cambiado
-		//Esto con el fin de no hacer llamados inecesarios al back end
-		var listadoGuardar = piezasDentalesServices.getModifiedPiezas(true);
-
-		if(listadoGuardar.length > 0){
-			
-			//Datos, Nombre tabla, partition key, y campo que servira como row key
-	        dataTableStorageFactory.postTableArray(listadoGuardar, 'TmOdontograma',  idOdontograma, 'codigo')
-	        .success(function (data) {
-	         	deferred.resolve(data); 
-	        })
-	        .error(function (error) {           
-	            deferred.reject(error);
-	        });
-    	}
-    	else{
-    		$timeout(function(){ deferred.resolve("Nada que salvar"); }, 3000);
-    	}
-
-        return deferred.promise;
+		var dataToSave = angular.toJson($scope.Source, true);
+		odontogramService.saveOdontograma(JSON.parse(dataToSave), "Kb1CqPZmlr");
 	}	
 
 	//Se toma el procedimiento que se ha indicado como realizado
 	//Luego se busca dentro de las piezas dentales
 	$scope.procedimientoRealizado = function(item){
-
+		
    		var diagnostico = buscarDiagnostico(item);
 
    		//Si se encuentra el diagostico se prosigue a buscar el tratamiento a que corresponde el procedimiento
@@ -81,23 +60,15 @@ controller('planTratamientoCtrl',
 	   		if(realizado){			   
 			   var resultTratamientos = validarTratamientosRealizados(diagnostico);
 			   if(resultTratamientos){
-			   	  diagnostico['realizado'] = true;
-			   	  cambiarColorEvolucion(diagnostico);			   	  
+			   	  diagnostico.tratado = "evolucion";
 			   }
 			   else{
-			   	  diagnostico['realizado'] = false;			   	  
+			   	  diagnostico.tratado = "diagnostico";
 			   }
    	   		}
    		}	   
 	}
 
-	// Cambia el color de la superficie a evolucion
-	function cambiarColorEvolucion(diagnostico){
-		piezaDentalSeleccionada[diagnostico.superficie + '_objectHefesoft'].color = diagnostico.objectHefesoftEvolucion.color;
-		piezaDentalSeleccionada[diagnostico.superficie + '_objectHefesoft'].simbolo = diagnostico.objectHefesoftEvolucion.simbolo;
-		piezaDentalSeleccionada[diagnostico.superficie + '_objectHefesoft'].fuente = diagnostico.objectHefesoftEvolucion.fuente;
-		piezaDentalSeleccionada[diagnostico.superficie + '_objectHefesoft'].pathImagen = diagnostico.objectHefesoftEvolucion.pathImagen;		
-	}
 
 	//Dado el procedimiento se saca la pieza dental a la que corresponde
 	function buscarDiagnostico(procedimiento){
@@ -180,7 +151,4 @@ controller('planTratamientoCtrl',
 
 		return todosRealizados;
 	}
-
-	inicializarDatos();
-
 }])

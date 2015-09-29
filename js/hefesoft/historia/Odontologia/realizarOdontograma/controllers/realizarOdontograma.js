@@ -1,7 +1,7 @@
 angular.module('Historia')
 .controller('realizarOdontogramaCtrl', 
-	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval',
-	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval) {
+	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval', 'odontogramService',
+	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval, odontogramService) {
 	
 	var Hefesoft  = window.Hefesot;
 	
@@ -36,7 +36,7 @@ angular.module('Historia')
 	  })
 	 
 	
-	  cargarOdontograma("Kb1CqPZmlr").then(function(data){
+	  odontogramService.cargarOdontograma("Kb1CqPZmlr").then(function(data){
 	  	
 	  	Odontograma = data.toJSON();
 	  	
@@ -78,22 +78,7 @@ angular.module('Historia')
 	  })
 	 }
 	  
-	function cargarOdontograma(id){
-		var deferred = $q.defer();
-		var Odontograma = Parse.Object.extend("Odontograma");
-		var query = new Parse.Query(Odontograma);
-		query.get(id)
-		.then(function(result){
-			deferred.resolve(result);
-		},
-		function(entidad, error){
-			deferred.reject(error);
-			console.log(error);
-		}
-	  )
-		
-		return deferred.promise;
-	}
+
 	 
 	$scope.dxSeleccionado = function(item){
 		$rootScope.diagnosticoSeleccionado = item;
@@ -108,14 +93,7 @@ angular.module('Historia')
 	}
 
 	$scope.planTratamiento = function(){
-		var listadoGuardar = piezasDentalesServices.getModifiedPiezas(); 
-
-		if(listadoGuardar.length == 0){
-			$state.go("app.planTratamiento");
-		}
-		else{
-			messageService.notify('Hay elementos sin guardar', 'danger');
-		}
+		$state.go("pages.planTratamiento", { pacienteId : idPaciente});
 	}
 
 	$scope.procedimientoEliminado = function(item){
@@ -179,37 +157,12 @@ angular.module('Historia')
  		var piezaDental = item.piezasDentalesScope();
  		
  		
- 		saveOdontograma(listadoGuardar, idPaciente).then(function(result){
+ 		odontogramService.saveOdontograma(listadoGuardar, idPaciente).then(function(result){
  			
  		});
  	}
  	
- 	function saveOdontograma(listadoGuardar, id){
- 		var deferred = $q.defer();
- 		
- 		var Odontograma = Parse.Object.extend("Odontograma");
- 		var odontograma = new Odontograma();
- 		
- 		//Se le quitan primero los caracteres especialesw como $ y puntos
- 		//Y luevo se vuelve a convertir a json
- 		listadoGuardar = angular.toJson(listadoGuardar, true);
- 		listadoGuardar = JSON.parse(listadoGuardar);
- 		
- 		odontograma.id = "Kb1CqPZmlr";
- 		odontograma.set("idOdontograma", id);
- 		odontograma.set("listado", listadoGuardar);
- 		odontograma.save()
- 		.then(function(entidad){
- 			deferred.resolve(entidad);
- 		},
- 		function(entidad, error){
- 			deferred.reject(error);
- 		 	console.log(error);	
- 		}
- 		)
- 		
- 		return deferred.promise;
- 	}
+ 	
 
  	function fijarDiagnosticoSeleccionado(item){
  		//Se define que se esta seleccionado si un diagnostico o un procedimiento

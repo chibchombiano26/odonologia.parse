@@ -1,7 +1,7 @@
 angular.module('odontologiaApp').
 controller('realizarPeriodontogramaCtrl', 
-    ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService',
-    function ($scope, dataTableStorageFactory, $rootScope, piezasDentalesServices, messageService) {
+    ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService', '$stateParams', 'periodontogramaServiceParse', '$interval', '$timeout',
+    function ($scope, dataTableStorageFactory, $rootScope, piezasDentalesServices, messageService, $stateParams, periodontogramaServiceParse, $interval, $timeout) {
 	
 	$scope.selecionado = {numeroPiezaDental: 18, mostrarFurca : false, tipoFurca: 'vacio', "movilidad" : "", parte: 'parte1'};
 	$scope.mostrarFurca = false;
@@ -10,42 +10,64 @@ controller('realizarPeriodontogramaCtrl',
 	$scope.seleccionado = false;
     $scope.zoom = 0.9;
 
-    var idPeriodontograma = "usuario" + Parse.User.current().get("email") + "paciente" + $rootScope.currentPacient.RowKey + "diagnosticoPaciente" + $rootScope.currentDiagnostico;
-
-    $scope.$on('$locationChangeStart', function(event) {      
-        var Listado = piezasDentalesServices.getModifiedPiezas();
-
-        if(Listado.length > 0){
-            event.preventDefault();
-            messageService.notify('Hay elementos sin guardar', 'danger');
-        }              
-    });
+    var idPeriodontograma = 0;
+    
+    var idPaciente = 0;
+    var periodontograma;
+	
+	if($stateParams.pacienteId.length > 0){
+		idPaciente = $stateParams.pacienteId;
+		inicializarDatos();
+	}
+   
 
     function inicializarDatos(){
-      //Carga de Odontograma
-      dataTableStorageFactory.getTableByPartition('TmPeriodontograma', idPeriodontograma)
-      .success(function(data){
-        
-        if(angular.isDefined(data) && data.length > 0){
-            //Ordenarlos deacuerdo al codigo como en la nube se guardan en string no los ordena bien
-            data = _.sortBy(data, function(item) {
+    
+      periodontogramaServiceParse.cargarPeriodontograma("AemNcskkZ0").then(function(data){
+	  
+	  	if(data){
+	  	    var result = data.toJSON();
+	  	    var Periodontograma = result.listado;
+	  	    
+	  	    //Ordenarlos deacuerdo al codigo como en la nube se guardan en string no los ordena bien
+            data = _.sortBy(Periodontograma, function(item) {
                return parseFloat(item.id);
             });
-            
-            var contextoPiezas = $scope.contextoPiezaDental();
-            contextoPiezas.items = data; 
+	  		
+      		var promise = $interval(function(){
+      		
+               
+      			if(angular.isFunction($scope.contextoPiezaDental)){
+      		
+      		         var contextoPiezas = $scope.contextoPiezaDental();
+                     contextoPiezas.items = data; 
+        
+                     if(contextoPiezas.items.length > 0){
+                        piezasDentalesServices.fijarPiezasDentales(contextoPiezas.items);
+                     }
+                     
+                     $interval.cancel(promise);
+      			}
+      			
+      		}, 1000);
+	  	}
+	  	else{
+	  		
+	  		var promise = $timeout(function(){
+	  			
+	  			//se ponen aca xq aca ya tienen valor
+	 		    var contextoPiezas = $scope.contextoPiezaDental();
+                contextoPiezas.obtenerPeriodontogramaBase();
+	 			$timeout.cancel(promise);
+	  			
+	  		}, 8000);
+	  	}
+	  	
+	  })
+    
 
-            if(contextoPiezas.items.length > 0){
-                piezasDentalesServices.fijarPiezasDentales(contextoPiezas.items);
-            }
-        }
-        else{
-             var contextoPiezas = $scope.contextoPiezaDental();
-             contextoPiezas.obtenerPeriodontogramaBase();
-        }
-      }).error(function(error){
-        console.log(error);          
-      })
+
+
     }
 
 	$scope.piezaDentalSeleccionada = function(item){
@@ -120,22 +142,15 @@ controller('realizarPeriodontogramaCtrl',
     }
 
 	$scope.guardarCommand = function(){
-        //var Listado = contextoPiezas.items;
-        var Listado = piezasDentalesServices.getModifiedPiezas(true);
+	    var contextoPiezas = $scope.contextoPiezaDental();
+        var Listado = contextoPiezas.items;
         guardar(Listado);
         
 	}
 
     function guardar(Listado){
         var contextoPiezas = $scope.contextoPiezaDental();
-        //Datos, Nombre tabla, partition key, y campo que servira como row key
-        dataTableStorageFactory.postTableArray(Listado, 'TmPeriodontograma',  idPeriodontograma, 'codigo')
-        .success(function (data) {           
-            contextoPiezas.actualizarPiezas(data);
-        })
-        .error(function (error) {           
-            console.log(error);                    
-        });
+        periodontogramaServiceParse.savePeriodontograma(Listado, "AemNcskkZ0");
     }
 
     //Periodontograma base cargado
@@ -143,6 +158,5 @@ controller('realizarPeriodontogramaCtrl',
         var listadoGuardar = item;
         guardar(listadoGuardar);
     }
-
-    inicializarDatos()
+    
 }])

@@ -30,7 +30,7 @@ angular.module('odontologiaApp')
 				var itemsEnSupericie = item[arrayNombre];
 
 				if(itemsEnSupericie.length > 0){					
-					array.concatByReference(itemsEnSupericie);
+					array.concatByReferenceNumeroPiezaDentalYSuperficie(itemsEnSupericie, item.numeroPiezaDental, partes[i]);
 				}
 			}
 		};
@@ -58,8 +58,10 @@ angular.module('odontologiaApp')
 		var array = [];
 
 		for (var i = listado.length - 1; i >= 0; i--) {
-			var items = dataFactory.extraerDiagnosticos(listado[i]);			
-			array.concatByReference(items);
+			var items = dataFactory.extraerDiagnosticos(listado[i]);
+			if(items.length > 0){
+				array.concatByReference(items);
+			}
 		};
 
 		return array;
@@ -71,7 +73,7 @@ angular.module('odontologiaApp')
 		var arrayTratamientos = [];
 
 		for (var i = arrayDiagnosticos.length - 1; i >= 0; i--) {			
-			arrayTratamientos.concatByReference(arrayDiagnosticos[i].arrayHefesoftTratamientos);
+			arrayTratamientos.concatByReferenceNumeroPiezaDentalYSuperficie(arrayDiagnosticos[i].arrayHefesoftTratamientos, arrayDiagnosticos[i].numeroPiezaDental, arrayDiagnosticos[i].superficie);
 		};
 
 		return arrayTratamientos;
@@ -83,7 +85,7 @@ angular.module('odontologiaApp')
 		var arrayProcedimientos = [];
 
 		for (var i = arrayTratamientos.length - 1; i >= 0; i--) {			
-			arrayProcedimientos.concatByReference(arrayTratamientos[i].arrayHefesoftProcedimientos);
+			arrayProcedimientos.concatByReferenceNumeroPiezaDentalYSuperficie(arrayTratamientos[i].arrayHefesoftProcedimientos, arrayTratamientos[i].numeroPiezaDental, arrayTratamientos[i].superficie);
 		};
 
 		return arrayProcedimientos;

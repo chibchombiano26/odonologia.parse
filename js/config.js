@@ -660,10 +660,38 @@ materialAdmin
             }
           })
           
+          .state('pages.planTratamiento', {
+            url: "/planTratamiento/:pacienteId",
+            cache: false,
+            templateUrl: 'js/hefesoft/historia/Odontologia/planTratamiento/views/planTratamiento.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarPlanTratamiento($ocLazyLoad)
+               }
+            }
+          })
+          
+          .state('pages.periodontograma', {
+            url: "/periodontograma/:pacienteId",
+            cache: false,
+            templateUrl: 'js/hefesoft/historia/Odontologia/realizarPeriodontograma/Views/realizarPeriodontograma.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarPeriodontograma($ocLazyLoad)
+               }
+            }
+          })
+          
           /*
           
-          .state('app.odontograma', {
-        url: "/odontograma",
+          .state('app.periodontograma', {
+        url: "/periodontograma",
         cache: false,
         data: {
           requireLogin: true,
@@ -672,15 +700,15 @@ materialAdmin
         },
         views: {
             'menuContent': {
-                templateUrl: "app/scripts/controllers/historia/Odontologia/realizarOdontograma/views/realizarOdontograma.html",                
+                templateUrl: "app/scripts/controllers/historia/Odontologia/realizarPeriodontograma/Views/realizarPeriodontograma.html",
                 resolve :{
                    controller : function($ocLazyLoad){
-                     return cargarOdontograma($ocLazyLoad)
+                     return cargarPeriodontograma($ocLazyLoad)
                    }
                 }                               
             }       
           }
-      })
+      });
           
           
           */

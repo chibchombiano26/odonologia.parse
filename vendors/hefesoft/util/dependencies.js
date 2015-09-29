@@ -244,8 +244,8 @@ function dependenciasOdontograma(){
             "js/hefesoft/odontograma/directivas/superficies/controller/superficie.js",
             "js/hefesoft/odontograma/directivas/odontograma/directiva/odontograma.js",
             "js/hefesoft/odontograma/controllers/piezaDentalSeleccionada.js",
-            "js/hefesoft/Diagnosticos/directivas/directivas/buscadorDiagnosticos.js"
-
+            "js/hefesoft/Diagnosticos/directivas/directivas/buscadorDiagnosticos.js",
+            "js/hefesoft/odontograma/services/odontograma.js"
         ]
  	}
 
@@ -348,6 +348,93 @@ function dependenciasDrillDown(){
     return dependencias;
 }
 
+function dependenciasStringFormat(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        serie: true,
+        files: 
+        [            
+            "vendors/bower_components/ng-currency/dist/ng-currency.min.js"
+        ]
+    }
+
+    return dependencias;
+}
+
+function dependenciasPlanTratamiento(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        files: 
+        [
+            "js/hefesoft/historia/Odontologia/planTratamiento/controller/planTratamiento.js",
+            "js/hefesoft/historia/Odontologia/planTratamiento/directivas/directiva.js",
+            "js/hefesoft/odontograma/directivas/piezasDentales/services/piezasDentales.js"
+        ]
+    }
+
+    return dependencias;
+}
+
+function dependenciasPdf(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        serie: true,
+        files: 
+        [
+            "vendors/bower_components/jspdf/dist/jspdf.debug.js",
+            "vendors/bower_components/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+        ]
+    }
+
+    return dependencias;
+}
+
+function dependenciasPeriodontograma(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,        
+        files: 
+        [
+            "js/hefesoft/historia/Odontologia/realizarPeriodontograma/controller/realizarPeriodontograma.js",
+            "js/hefesoft/periodontograma/piezaDental/controller/periodontogramaPiezaDentalCtrl.js",
+            "js/hefesoft/odontograma/directivas/piezasDentales/services/piezasDentales.js",
+            "js/hefesoft/periodontograma/piezaDental/directive/piezaDental.js",
+            "js/hefesoft/periodontograma/piezasDentales/controller/piezasDentales.js",
+            "js/hefesoft/periodontograma/piezasDentales/directive/piezas_dentales.js",
+            "js/hefesoft/periodontograma/piezasDentales/filters/implante.js",
+            "js/hefesoft/periodontograma/piezaDental/directive/ngpoint.js",
+            "js/hefesoft/periodontograma/piezasDentales/services/piezaDentalService.js",
+            "js/hefesoft/periodontograma/services/periodontogramaParse.js"
+        ]
+    }
+
+    return dependencias;
+}
+
+
+function dependenciasNoUiSlider(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        serie: true,        
+        files: 
+        [   
+            "vendors/bower_components/nouislider/jquery.nouislider.css",
+            "vendors/bower_components/nouislider/jquery.nouislider.min.js",
+            "vendors/bower_components/angular-nouislider/src/nouislider.min.js", 
+        ]
+    }
+
+    return dependencias;
+}
 
 
 function cargarPacientes($ocLazyLoad){
@@ -428,5 +515,34 @@ function cargarPacientes($ocLazyLoad){
           dependenciasTratamientos(),
           dependenciasCieCups(),
           dependenciasFont()
+      ]);
+   }
+   
+   function cargarPlanTratamiento($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+          dependenciasImagenes(),
+          dependenciasClinicas(),
+          dependenciasDiagnosticos(),
+          dependenciasOdontograma(),
+          dependenciasAzure(),
+          dependenciasProcedimientos(),
+          dependenciasHistoria(),
+          dependenciasTratamientos(),
+          dependenciasCieCups(),
+          dependenciasStringFormat(),
+          dependenciasPlanTratamiento(),
+          dependenciasPdf(),
+      ]);
+   }
+   
+   function cargarPeriodontograma($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([ 
+          dependenciasNoUiSlider(),
+          dependenciasImagenes(),
+          dependenciasClinicas(),         
+          dependenciasAzure(),
+          dependenciasPeriodontograma(),
       ]);
    }
