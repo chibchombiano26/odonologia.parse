@@ -21,7 +21,7 @@ angular.module('odontologiaApp')
 
 	dataService.procesarDatos = function (data){
 		for (var i = data.length - 1; i >= 0; i--) {
-			data[i] = procesarDato(data[i]);
+			data[i] = dataService.procesarDato(data[i]);
 		};
 	}
 

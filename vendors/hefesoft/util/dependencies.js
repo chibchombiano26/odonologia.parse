@@ -436,6 +436,60 @@ function dependenciasNoUiSlider(){
     return dependencias;
 }
 
+function dependenciasDate(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        serie: true,
+        files: 
+        [            
+            "vendors/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+            "vendors/hefesoft/Directivas/Date-Picker/Directiva/datePicker.js",
+            "vendors/hefesoft/Directivas/Time-Picker/directiva/timePicker.js",
+            'vendors/input-mask/input-mask.min.js',
+            "js/modules/form.js"
+        ]
+    }
+
+    return dependencias;
+   }
+   
+   function dependenciasCalendar(){
+    var dependencias = 
+    {
+        name : "hefesoft.google",
+        cache: true,
+        serie: true,
+        files: 
+        [   
+            "vendors/bower_components/fullcalendar/dist/fullcalendar.min.css",
+            "vendors/bower_components/fullcalendar/dist/fullcalendar.min.js",
+            "vendors/bower_components/fullcalendar/dist/lang-all.js",
+            "vendors/bower_components/fullcalendar/dist/gcal.js",
+            "vendors/hefesoft/google/services/calendar.js",
+            "vendors/hefesoft/Directivas/fullCalendar/directiva/calendar.js"
+        ]
+    }
+
+    return dependencias;
+   }
+   
+   function dependenciasAgenda(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,        
+        files: 
+        [            
+            "js/hefesoft/Agenda/controller/agenda.js",
+            "js/hefesoft/Agenda/services/agenta.helpers.js"
+        ]
+    }
+
+    return dependencias;
+   }
+
 
 function cargarPacientes($ocLazyLoad){
       return $ocLazyLoad.load
@@ -546,3 +600,17 @@ function cargarPacientes($ocLazyLoad){
           dependenciasPeriodontograma(),
       ]);
    }
+   
+   function cargarAgenda($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([        
+        dependenciasDate(),
+        dependenciasAzure(),
+        dependenciasClinicas(),
+        dependenciasImagenes(),
+        dependenciasCalendar(),
+        dependenciasAgenda(),
+      ]);
+   }
+   
+   

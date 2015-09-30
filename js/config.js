@@ -688,22 +688,36 @@ materialAdmin
             }
           })
           
+          .state('pages.agenda', {
+            url: "/agenda",
+            controller: "AgendaCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/Agenda/views/agenda.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarAgenda($ocLazyLoad)
+               }
+            }
+          })
+          
           /*
           
-          .state('app.periodontograma', {
-        url: "/periodontograma",
+          .state('app.agenda', {
+        url: "/agenda",
         cache: false,
         data: {
-          requireLogin: true,
-          requirePacient : true,
-          requirePacientDiagnostic : true
+          requireLogin: true
         },
         views: {
             'menuContent': {
-                templateUrl: "app/scripts/controllers/historia/Odontologia/realizarPeriodontograma/Views/realizarPeriodontograma.html",
+                templateUrl: "app/scripts/controllers/Agenda/Views/agenda.html",
+                controller: "AgendaCtrl",
                 resolve :{
                    controller : function($ocLazyLoad){
-                     return cargarPeriodontograma($ocLazyLoad)
+                     return cargarAgenda($ocLazyLoad)
                    }
                 }                               
             }       

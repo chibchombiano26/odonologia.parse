@@ -51,7 +51,7 @@ directive('fullCalendar',
         contexto : "="
     };
 
-	directiva.templateUrl = "app/lib/hefesoft.standard/Directivas/fullCalendar/template/calendar.html";
+	directiva.templateUrl = "vendors/hefesoft/Directivas/fullCalendar/template/calendar.html";
 
 	function inicializarControl(element){
 

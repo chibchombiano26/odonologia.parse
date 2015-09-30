@@ -16,55 +16,8 @@ materialAdmin
                         center: 'prev, title, next',
                         left: ''
                     },
-                    defaultDate: '2014-06-12',
-                    editable: true,
-                    events: [
-                        {
-                            title: 'All Day',
-                            start: '2014-06-01',
-                            className: 'bgm-cyan'
-                        },
-                        {
-                            title: 'Long Event',
-                            start: '2014-06-07',
-                            end: '2014-06-10',
-                            className: 'bgm-orange'
-                        },
-                        {
-                            id: 999,
-                            title: 'Repeat',
-                            start: '2014-06-09',
-                            className: 'bgm-lightgreen'
-                        },
-                        {
-                            id: 999,
-                            title: 'Repeat',
-                            start: '2014-06-16',
-                            className: 'bgm-blue'
-                        },
-                        {
-                            title: 'Meet',
-                            start: '2014-06-12',
-                            end: '2014-06-12',
-                            className: 'bgm-teal'
-                        },
-                        {
-                            title: 'Lunch',
-                            start: '2014-06-12',
-                            className: 'bgm-gray'
-                        },
-                        {
-                            title: 'Birthday',
-                            start: '2014-06-13',
-                            className: 'bgm-pink'
-                        },
-                        {
-                            title: 'Google',
-                            url: 'http://google.com/',
-                            start: '2014-06-28',
-                            className: 'bgm-bluegray'
-                        }
-                    ]
+                    defaultDate: new Date(),
+                    editable: true
                 });
             }
         }
@@ -75,19 +28,34 @@ materialAdmin
     // MAIN CALENDAR
     // =========================================================================
 
-    .directive('calendar', function($compile){
+    .directive('calendar', function($compile, $window){
+        
+        var elementGlobal;
+        
         return {
             restrict: 'A',
+            require : ['ngModel'],
             scope: {
                 select: '&',
                 actionLinks: '=',
+                lang: '=',
+                defaultView : '='
             },
-            link: function(scope, element, attrs) {
+            link: function(scope, element, attrs, ngModelCtrl) {
                 
                 var date = new Date();
                 var d = date.getDate();
                 var m = date.getMonth();
                 var y = date.getFullYear();
+                
+                elementGlobal = element;
+                
+                ngModelCtrl[0].$render = function(){
+                  if (!ngModelCtrl[0].$isEmpty(ngModelCtrl[0].$viewValue)) {
+            		var source = ngModelCtrl[0].$viewValue;
+            		element.fullCalendar( 'addEventSource', source);
+                  }
+                }
 
                 //Generate the Calendar
                 element.fullCalendar({
@@ -96,93 +64,13 @@ materialAdmin
                         center: 'prev, title, next',
                         left: ''
                     },
-
+                    lang: scope.lang,
                     theme: true, //Do not remove this as it ruin the design
                     selectable: true,
                     selectHelper: true,
                     editable: true,
-
-                    //Add Events
-                    events: [
-                        {
-                            title: 'Hangout with friends',
-                            start: new Date(y, m, 1),
-                            allDay: true,
-                            className: 'bgm-cyan'
-                        },
-                        {
-                            title: 'Meeting with client',
-                            start: new Date(y, m, 10),
-                            allDay: true,
-                            className: 'bgm-red'
-                        },
-                        {
-                            title: 'Repeat Event',
-                            start: new Date(y, m, 18),
-                            allDay: true,
-                            className: 'bgm-blue'
-                        },
-                        {
-                            title: 'Semester Exam',
-                            start: new Date(y, m, 20),
-                            allDay: true,
-                            className: 'bgm-green'
-                        },
-                        {
-                            title: 'Soccor match',
-                            start: new Date(y, m, 5),
-                            allDay: true,
-                            className: 'bgm-purple'
-                        },
-                        {
-                            title: 'Coffee time',
-                            start: new Date(y, m, 21),
-                            allDay: true,
-                            className: 'bgm-orange'
-                        },
-                        {
-                            title: 'Job Interview',
-                            start: new Date(y, m, 5),
-                            allDay: true,
-                            className: 'bgm-dark'
-                        },
-                        {
-                            title: 'IT Meeting',
-                            start: new Date(y, m, 5),
-                            allDay: true,
-                            className: 'bgm-cyan'
-                        },
-                        {
-                            title: 'Brunch at Beach',
-                            start: new Date(y, m, 1),
-                            allDay: true,
-                            className: 'bgm-purple'
-                        },
-                        {
-                            title: 'Live TV Show',
-                            start: new Date(y, m, 15),
-                            allDay: true,
-                            className: 'bgm-orange'
-                        },
-                        {
-                            title: 'Software Conference',
-                            start: new Date(y, m, 25),
-                            allDay: true,
-                            className: 'bgm-blue'
-                        },
-                        {
-                            title: 'Coffee time',
-                            start: new Date(y, m, 30),
-                            allDay: true,
-                            className: 'bgm-orange'
-                        },
-                        {
-                            title: 'Job Interview',
-                            start: new Date(y, m, 30),
-                            allDay: true,
-                            className: 'bgm-dark'
-                        },
-                    ],
+                    defaultView : scope.defaultView,
+                    
 
                     //On Day Select
                     select: function(start, end, allDay) {
@@ -190,6 +78,11 @@ materialAdmin
                             start: start, 
                             end: end
                         });
+                    },
+                    
+                    //Event click
+                    eventClick: function(calEvent, jsEvent, view) {
+                       $window.open(calEvent.htmlLink, '_blank');
                     }
                 });
                 

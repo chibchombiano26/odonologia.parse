@@ -7,36 +7,7 @@ angular.module('odontologiaApp')
 	$scope.listadoEventos = [];
 	$scope.contextoCalendar = {};
 	$scope.calendarId = 'primary';
-
 	var listadoGoogleCalendar = [];
-
-	var event = {
-	  'summary': 'Google I/O 2015',
-	  'location': '800 Howard St., San Francisco, CA 94103',
-	  'description': 'A chance to hear more about Google\'s developer products.',
-	  'start': {
-	    'dateTime': '2015-05-28T09:00:00-07:00',
-	    'timeZone': 'America/Los_Angeles'
-	  },
-	  'end': {
-	    'dateTime': '2015-05-28T17:00:00-07:00',
-	    'timeZone': 'America/Los_Angeles'
-	  },
-	  'recurrence': [
-	    'RRULE:FREQ=DAILY;COUNT=2'
-	  ],
-	  'attendees': [
-	    {'email': 'lpage@example.com'},
-	    {'email': 'sbrin@example.com'}
-	  ],
-	  'reminders': {
-	    'useDefault': false,
-	    'overrides': [
-	      {'method': 'email', 'minutes': 24 * 60},
-	      {'method': 'sms', 'minutes': 10}
-	    ]
-	  }
-	};
 
 	$scope.auth = function(){
 		calendarGetData.auth().then(autorizado, noAutorizado);
@@ -108,3 +79,137 @@ angular.module('odontologiaApp')
 	inicializar();
 
 }])
+
+    //=================================================
+    // CALENDAR
+    //=================================================
+
+    .controller('calendarAgendaCtrl', function($modal){
+
+        //Create and add Action button with dropdown in Calendar header.
+        this.month = 'month';
+       
+        this.actionMenu = '<ul class="actions actions-alt" id="fc-actions">' +
+                            '<li class="dropdown" dropdown>' +
+                                '<a href="" dropdown-toggle><i class="zmdi zmdi-more-vert"></i></a>' +
+                                '<ul class="dropdown-menu dropdown-menu-right">' +
+                                    '<li>' +
+                                        '<a data-calendar-view="month" href="">Vista mensual</a>' +
+                                    '</li>' +
+                                    '<li class="active">' +
+                                        '<a data-calendar-view="basicWeek" href="">Vista semanal</a>' +
+                                    '</li>' +
+                                    '<li>' +
+                                        '<a data-calendar-view="agendaWeek" href="">Agenda semanal</a>' +
+                                    '</li>' +
+                                    '<li>' +
+                                        '<a data-calendar-view="basicDay" href="">Vista diaria</a>' +
+                                    '</li>' +
+                                    '<li>' +
+                                        '<a data-calendar-view="agendaDay" href="">Agenda diaria</a>' +
+                                    '</li>' +
+                                '</ul>' +
+                            '</div>' +
+                        '</li>';
+
+
+        //Open new event modal on selecting a day
+        this.onSelect = function(argStart, argEnd) {
+            var modalInstance  = $modal.open({
+                templateUrl: 'addEvent.html',
+                controller: 'addeventAgendaCtrl',
+                backdrop: 'static',
+                keyboard: false,
+                resolve: {
+                    calendarData: function() {
+                        var x = [argStart, argEnd];
+                        return x;
+                    }
+                }
+            });
+        }
+    })
+
+    //Add event Controller (Modal Instance)
+    .controller('addeventAgendaCtrl', function($scope, $modalInstance, calendarData){
+
+        //Calendar Event Data
+        $scope.calendarData = {
+            eventStartDate: calendarData[0],
+            eventEndDate:  calendarData[1]
+        };
+
+        //Tags
+        $scope.tags = [
+            'bgm-teal',
+            'bgm-red',
+            'bgm-pink',
+            'bgm-blue',
+            'bgm-lime',
+            'bgm-green',
+            'bgm-cyan',
+            'bgm-orange',
+            'bgm-purple',
+            'bgm-gray',
+            'bgm-black',
+        ]
+
+        //Select Tag
+        $scope.currentTag = '';
+
+        $scope.onTagClick = function(tag, $index) {
+            $scope.activeState = $index;
+            $scope.activeTagColor = tag;
+        }
+
+        //Add new event
+        $scope.addEvent = function() {
+            if ($scope.calendarData.eventName) {
+
+				var fecha = moment(calendarData[0]);
+				var y = moment(fecha).get('year');
+				var m = moment(fecha).get('month');
+				var d = moment(fecha).get('date');
+				
+				
+				var start = new moment($scope.getStart, 'HH:mm');
+				var end = new moment($scope.getEnd, 'HH:mm');
+				
+				start.set({'year': y, 'month': m, 'date' : d});
+				end.set({'year': y, 'month': m, 'date' : d});
+
+
+				 $('#calendar').fullCalendar('renderEvent',{
+                    title: $scope.calendarData.eventName,
+                    start: $.fullCalendar.moment(start),
+                    end:  $.fullCalendar.moment(end),
+                    allDay: false,
+                    editable: true,
+                    className: $scope.activeTagColor
+
+                },true ); //Stick the event
+
+
+				/* validar para el drag an drop
+                //Render Event
+                $('#calendar').fullCalendar('renderEvent',{
+                    title: $scope.calendarData.eventName,
+                    start: $scope.calendarData.eventStartDate,
+                    end:  $scope.calendarData.eventEndDate,
+                    allDay: true,
+                    className: $scope.activeTagColor
+
+                },true ); //Stick the event
+                */
+
+                $scope.activeState = -1;
+                $scope.calendarData.eventName = '';
+                $modalInstance.close();
+            }
+        }
+
+        //Dismiss
+        $scope.eventDismiss = function() {
+            $modalInstance.dismiss();
+        }
+    })

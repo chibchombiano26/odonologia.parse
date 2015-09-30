@@ -4,6 +4,7 @@ ng-show="mostrarBotonAutorizar">
 	Autenticar	
 </button>
 
+<!--
 <full-calendar
 	ng-hide="mostrarBotonAutorizar"
 	contexto="contextoCalendar"
@@ -12,3 +13,56 @@ ng-show="mostrarBotonAutorizar">
 	evento-eliminado="eliminado(item)" 
 	ng-model="listadoEventos">
 </full-calendar>
+-->
+
+
+<section id="content" data-ng-controller="calendarAgendaCtrl as clctrl">
+    <div class="container" data-ng-controller="ModalDemoCtrl">
+        <div class="block-header">
+            <h2>Agenda <small>Agenda odontologica</small></h2>
+        </div>
+
+        <div id="calendar" ng-model="listadoEventos" default-view="'basicWeek'" data-lang="'es'" data-calendar data-action-links="clctrl.actionMenu" data-select="clctrl.onSelect(start, end)"></div>
+        
+        <!-- Add event -->
+        <script type="text/ng-template" id="addEvent.html">
+            <div class="modal-header">
+                <h4 class="modal-title">Add an Event</h4>
+            </div>
+            <div class="modal-body">
+                <form class="addEvent" role="form">
+                    <div class="form-group" data-ng-class="{ 'has-error': calendarData.eventName === '' }">
+                        <label for="eventName">Nombre</label>
+                        <div class="fg-line">
+                            <input type="text" class="input-sm form-control" data-ng-model="calendarData.eventName" placeholder="ej: Juan perez">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventName">Color cita</label>
+                        <div class="event-tag" data-ng-class="{ 'active': activeState }">
+                            <span data-ng-repeat="w in tags" data-tag="{{ w }}" class="{{ w }}" data-ng-class="{ 'selected': activeState === $index }" data-ng-click="onTagClick(w, $index)"></span>
+                        </div>
+                    </div>
+
+
+					<div class="form-group fg-line">
+                        <label>Time</label>
+                        <input type="text" class="form-control" data-input-mask="{mask: '00:00'}" placeholder="ej: 14:20" data-ng-model="getStart">
+                    </div>
+                    
+                    <div class="form-group fg-line">
+                        <label>Time</label>
+                        <input type="text" class="form-control" data-input-mask="{mask: '00:00'}" placeholder="ej: 14:40" data-ng-model="getEnd">
+                    </div>
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-ng-click="addEvent()">Adicionar</button>
+                <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">Cerrar</button>
+            </div>
+        </script>
+    </div>
+</section>

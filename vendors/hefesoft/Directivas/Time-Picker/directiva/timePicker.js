@@ -12,7 +12,7 @@ directive('timePicker', ['$parse', '$timeout', function ($parse, $timeout) {
 			format : '=',
 			titulo : "="
 		},
-		templateUrl : 'app/lib/hefesoft.standard/Directivas/Time-Picker/template/time.html',
+		templateUrl : 'vendors/hefesoft/Directivas/Time-Picker/template/time.html',
 		link: function (scope, element, attr, ngModelCtrl) {			
 		  var datePicker = $(element).find('.time-picker').datetimepicker({
 		      format: 'LT'
