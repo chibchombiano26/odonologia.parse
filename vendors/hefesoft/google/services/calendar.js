@@ -10,10 +10,10 @@ angular.module('hefesoft.google')
         var deferred = $q.defer();
         var request = gapi.client.calendar.events.list({
           'calendarId': calendarId,
-          'timeMin': (new Date()).toISOString(),
+          'timeMin': (moment().add(-10, 'days')).toISOString(),
           'showDeleted': false,
           'singleEvents': true,
-          'maxResults': 10,
+          'maxResults': 500,
           'orderBy': 'startTime'
         });
 

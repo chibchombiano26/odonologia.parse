@@ -22,12 +22,12 @@ ng-show="mostrarBotonAutorizar">
             <h2>Agenda <small>Agenda odontologica</small></h2>
         </div>
 
-        <div id="calendar" ng-model="listadoEventos" default-view="'basicWeek'" data-lang="'es'" data-calendar data-action-links="clctrl.actionMenu" data-select="clctrl.onSelect(start, end)"></div>
+        <div id="calendar" ng-model="listadoEventos" default-view="'basicWeek'" data-lang="'es'" data-calendar data-action-links="clctrl.actionMenu" data-event-click="clctrl.onEventSelected(calEvent, jsEvent, view)" data-select="clctrl.onSelect(start, end)"></div>
         
         <!-- Add event -->
         <script type="text/ng-template" id="addEvent.html">
             <div class="modal-header">
-                <h4 class="modal-title">Add an Event</h4>
+                <h4 class="modal-title">Nueva cita</h4>
             </div>
             <div class="modal-body">
                 <form class="addEvent" role="form">
@@ -37,10 +37,20 @@ ng-show="mostrarBotonAutorizar">
                             <input type="text" class="input-sm form-control" data-ng-model="calendarData.eventName" placeholder="ej: Juan perez">
                         </div>
                     </div>
+                    
                     <div class="form-group">
                         <label for="eventName">Color cita</label>
                         <div class="event-tag" data-ng-class="{ 'active': activeState }">
                             <span data-ng-repeat="w in tags" data-tag="{{ w }}" class="{{ w }}" data-ng-class="{ 'selected': activeState === $index }" data-ng-click="onTagClick(w, $index)"></span>
+                        </div>
+                    </div>
+                    
+                    <div ng-show="mostrarEliminar" class="form-group">
+                        <label for="eventName">Ver en google</label>
+                        <div class="fg-line">
+                            <a ng-href="{{link}}" hrefb>
+                                <p>{{calendarData.eventName}}</p>
+                            </a>
                         </div>
                     </div>
 
@@ -60,7 +70,10 @@ ng-show="mostrarBotonAutorizar">
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-link" data-ng-click="addEvent()">Adicionar</button>
+                <button type="button" class="btn btn-link" data-ng-click="addEvent()">{{action}}</button>
+                
+                <button ng-show="mostrarEliminar" type="button" class="btn btn-link" data-ng-click="eliminar()">eliminar</button>
+                
                 <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">Cerrar</button>
             </div>
         </script>

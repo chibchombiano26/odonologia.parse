@@ -17,25 +17,30 @@ angular.module('odontologiaApp')
 		var elementoProcesado = agendaHelperService.procesarAdicionado(item);
 		calendarGetData.insert(elementoProcesado, $scope.calendarId).then(
 		 function(insertado){
-		 	var contexto = $scope.contextoCalendar();
 		 	insertado = agendaHelperService.procesarDato(insertado);
-		 	contexto.adicionarEvento(insertado);
 		 	listadoGoogleCalendar.push(insertado);
+		 	$('#calendar').fullCalendar('renderEvent', insertado, true );
 		 });
 	}
 
-	$scope.modificado = function(item){
+	$scope.modificado = function(item, eventoOriginal){
 		var index = _.findIndex(listadoGoogleCalendar, { 'id': item.id});
 		var elementoActualizar = listadoGoogleCalendar[index];
 
-		elementoActualizar = agendaHelperService.procesarDato.actualizar(elementoActualizar, item);		
+		elementoActualizar = agendaHelperService.actualizar(elementoActualizar, item);		
 		calendarGetData.update($scope.calendarId, elementoActualizar.id, elementoActualizar);
+		
+		
+		eventoOriginal.start = item.start;
+		eventoOriginal.end = item.end;
+		$('#calendar').fullCalendar('updateEvent', eventoOriginal);
 	}
 
 	$scope.eliminado = function(item){
 		var index = _.findIndex(listadoGoogleCalendar, { 'id': item.id});
 		var elementoEliminar = listadoGoogleCalendar[index];
 		calendarGetData.deleteEvent($scope.calendarId, elementoEliminar.id);
+		$('#calendar').fullCalendar('removeEvents', elementoEliminar.id);
 	}	
 
 	function inicializar(){
@@ -48,7 +53,7 @@ angular.module('odontologiaApp')
 	
 	function autorizado(data){		
 		calendarGetData.loadEventApi().then(eventApiCargada);
-		mostrarBotonAutorizar = false;
+		$scope.mostrarBotonAutorizar = false;
 	}
 
 	function eventApiCargada(){		
@@ -57,7 +62,7 @@ angular.module('odontologiaApp')
 	}
 
 	function eventosCargados(data){
-		mostrarBotonAutorizar = false;
+		$scope.mostrarBotonAutorizar = false;
 		listadoGoogleCalendar = data;
 		agendaHelperService.procesarDatos(data);
 		$scope.listadoEventos = data;
@@ -72,9 +77,23 @@ angular.module('odontologiaApp')
 				array.push({id : items[i].id, row: i });
 			}
 		}
-
-		dataTableStorageFactory.postTableArray(array, 'TmCalendarsUsuario',  Parse.User.current().get("email"), 'row');
+        
+		//dataTableStorageFactory.postTableArray(array, 'TmCalendarsUsuario',  Parse.User.current().get("email"), 'row');
 	}
+	
+	
+	$scope.$on('nuevoEvento', function(event, args) {
+        $scope.adicionado(args.evento);
+    });
+    
+    $scope.$on('editarEvento', function(event, args){
+        $scope.modificado(args.evento, args.eventoOriginal);
+    })
+    
+    $scope.$on('eliminarEvento', function(event, args){
+        $scope.eliminado(args.evento);
+    })
+    
     
 	inicializar();
 
@@ -99,15 +118,6 @@ angular.module('odontologiaApp')
                                     '<li class="active">' +
                                         '<a data-calendar-view="basicWeek" href="">Vista semanal</a>' +
                                     '</li>' +
-                                    '<li>' +
-                                        '<a data-calendar-view="agendaWeek" href="">Agenda semanal</a>' +
-                                    '</li>' +
-                                    '<li>' +
-                                        '<a data-calendar-view="basicDay" href="">Vista diaria</a>' +
-                                    '</li>' +
-                                    '<li>' +
-                                        '<a data-calendar-view="agendaDay" href="">Agenda diaria</a>' +
-                                    '</li>' +
                                 '</ul>' +
                             '</div>' +
                         '</li>';
@@ -122,7 +132,22 @@ angular.module('odontologiaApp')
                 keyboard: false,
                 resolve: {
                     calendarData: function() {
-                        var x = [argStart, argEnd];
+                        var x = [{modo: "insertar"}, argStart, argEnd];
+                        return x;
+                    }
+                }
+            });
+        }
+        
+        this.onEventSelected = function(calEvent, jsEvent, view){
+            var modalInstance  = $modal.open({
+                templateUrl: 'addEvent.html',
+                controller: 'addeventAgendaCtrl',
+                backdrop: 'static',
+                keyboard: false,
+                resolve: {
+                    calendarData: function() {
+                        var x = [{modo: "editar"}, calEvent];
                         return x;
                     }
                 }
@@ -131,13 +156,28 @@ angular.module('odontologiaApp')
     })
 
     //Add event Controller (Modal Instance)
-    .controller('addeventAgendaCtrl', function($scope, $modalInstance, calendarData){
+    .controller('addeventAgendaCtrl', function($scope, $modalInstance, calendarData, $rootScope){
+
+        var tipo =calendarData[0];
 
         //Calendar Event Data
         $scope.calendarData = {
-            eventStartDate: calendarData[0],
-            eventEndDate:  calendarData[1]
+            eventStartDate: calendarData[1],
+            eventEndDate:  calendarData[2]
         };
+        
+        if(tipo.modo === "editar"){
+            var event = calendarData[1];
+            $scope.calendarData.eventName = event.title;
+            $scope.getStart = new moment(event.start).format("HH:mm");
+            $scope.getEnd = new moment(event.end).format("HH:mm");;
+            $scope.link = event.htmlLink;
+            $scope.mostrarEliminar = true;
+            $scope.action = "Editar";
+        }
+        else{
+            $scope.action = "Adicionar";
+        }
 
         //Tags
         $scope.tags = [
@@ -166,7 +206,7 @@ angular.module('odontologiaApp')
         $scope.addEvent = function() {
             if ($scope.calendarData.eventName) {
 
-				var fecha = moment(calendarData[0]);
+				var fecha = moment(calendarData[1]);
 				var y = moment(fecha).get('year');
 				var m = moment(fecha).get('month');
 				var d = moment(fecha).get('date');
@@ -177,17 +217,25 @@ angular.module('odontologiaApp')
 				
 				start.set({'year': y, 'month': m, 'date' : d});
 				end.set({'year': y, 'month': m, 'date' : d});
-
-
-				 $('#calendar').fullCalendar('renderEvent',{
+				
+				var evento ={
                     title: $scope.calendarData.eventName,
                     start: $.fullCalendar.moment(start),
                     end:  $.fullCalendar.moment(end),
                     allDay: false,
                     editable: true,
                     className: $scope.activeTagColor
+                }
 
-                },true ); //Stick the event
+                
+
+                 if(tipo.modo === "insertar"){
+                    $rootScope.$broadcast('nuevoEvento', {evento: evento});
+                 }
+                 else{
+                     evento['id'] = calendarData[1].id;
+                     $rootScope.$broadcast('editarEvento', {evento: evento, eventoOriginal : calendarData[1]});
+                 }
 
 
 				/* validar para el drag an drop
@@ -206,6 +254,14 @@ angular.module('odontologiaApp')
                 $scope.calendarData.eventName = '';
                 $modalInstance.close();
             }
+        }
+        
+        //Delete event
+        $scope.eliminar = function(){
+            $rootScope.$broadcast('eliminarEvento', {evento: calendarData[1]});
+            $scope.activeState = -1;
+            $scope.calendarData.eventName = '';
+            $modalInstance.close();
         }
 
         //Dismiss

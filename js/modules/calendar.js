@@ -37,6 +37,7 @@ materialAdmin
             require : ['ngModel'],
             scope: {
                 select: '&',
+                eventClick: '&',
                 actionLinks: '=',
                 lang: '=',
                 defaultView : '='
@@ -68,9 +69,9 @@ materialAdmin
                     theme: true, //Do not remove this as it ruin the design
                     selectable: true,
                     selectHelper: true,
-                    editable: true,
+                    editable: false,
                     defaultView : scope.defaultView,
-                    
+                    droppable: false,
 
                     //On Day Select
                     select: function(start, end, allDay) {
@@ -82,7 +83,12 @@ materialAdmin
                     
                     //Event click
                     eventClick: function(calEvent, jsEvent, view) {
-                       $window.open(calEvent.htmlLink, '_blank');
+                       //$window.open(calEvent.htmlLink, '_blank');
+                       scope.eventClick({
+                           calEvent : calEvent,
+                           jsEvent : jsEvent,
+                           view : view
+                       });
                     }
                 });
                 

@@ -468,7 +468,8 @@ function dependenciasDate(){
             "vendors/bower_components/fullcalendar/dist/lang-all.js",
             "vendors/bower_components/fullcalendar/dist/gcal.js",
             "vendors/hefesoft/google/services/calendar.js",
-            "vendors/hefesoft/Directivas/fullCalendar/directiva/calendar.js"
+            "vendors/hefesoft/Directivas/fullCalendar/directiva/calendar.js",
+            "vendors/hefesoft/Directivas/nhRef/nhref.js"
         ]
     }
 
