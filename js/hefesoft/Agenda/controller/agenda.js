@@ -59,6 +59,9 @@ angular.module('odontologiaApp')
 	function eventApiCargada(){		
 		calendarGetData.getCalendar($scope.calendarId).then(eventosCargados);		
 		calendarGetData.listCalendars().then(listCalendarsSuccess);
+		
+		//Hace el calendario publico
+		calendarGetData.updateAcl($scope.calendarId, "freeBusyReader");
 	}
 
 	function eventosCargados(data){
