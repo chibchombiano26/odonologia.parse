@@ -54,7 +54,7 @@ angular.module('hefesoft.google')
           user.set("password", data.id);
           user.set("email", data.email);
           user.set("pictureUrl", data.picture);
-
+          
           dataFactory.existUser(data.email).then(function(result){
             if(result.length == 0){
               dataFactory.signUp(user, deferred);
@@ -103,9 +103,11 @@ angular.module('hefesoft.google')
        function saveRegistrationId(user){
            var timer = $timeout(function(){
             if(subscriptionId){
-                
                 user.set("registrationId", subscriptionId);
-                user.save();
+                user.set("esMedico", true);
+                user.save().then(function(result){
+                    console.log(result);
+                })
                 //Detiene el timer
                 $timeout.cancel(timer);
             }   

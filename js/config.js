@@ -703,6 +703,21 @@ materialAdmin
             }
           })
           
+          .state('pages.citas', {
+            url: "/citas",
+            controller: "citasCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/citas/views/citas.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarCitas($ocLazyLoad)
+               }
+            }
+          })
+          
           /*
           
           .state('app.agenda', {

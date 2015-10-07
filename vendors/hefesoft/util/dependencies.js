@@ -490,6 +490,21 @@ function dependenciasDate(){
 
     return dependencias;
    }
+   
+   function dependenciasCita(){
+       var dependencias =
+       {
+          name: 'odontologiaApp',
+          cache: true,
+          files:
+          [
+              "js/hefesoft/citas/Controller/citas.js",
+              //"js/hefesoft/citas/services/citas.js" //Esta puesta en el index
+          ]
+       }
+       
+       return dependencias;
+   }
 
 
 function cargarPacientes($ocLazyLoad){
@@ -614,4 +629,17 @@ function cargarPacientes($ocLazyLoad){
       ]);
    }
    
+   function cargarCitas($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+        dependenciasCita(),
+        dependenciasDate(),
+        dependenciasAzure(),
+        dependenciasClinicas(),
+        dependenciasImagenes(),
+        dependenciasCalendar(),
+        dependenciasAgenda(),
+      ]);
+   }
    
+ 

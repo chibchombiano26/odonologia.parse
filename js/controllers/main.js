@@ -4,10 +4,7 @@ materialAdmin
     // =========================================================================
 
     .controller('materialadminCtrl', function($timeout, $state, growlService){
-        //Welcome Message
-        growlService.growl('Welcome back Mallinda!', 'inverse')
-
-
+        
         // Detact Mobile Browser
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
            angular.element('html').addClass('ismobile');
@@ -54,7 +51,37 @@ materialAdmin
     // =========================================================================
     // Header
     // =========================================================================
-    .controller('headerCtrl', function($timeout, messageService){
+    .controller('headerCtrl', function($timeout, messageService, $scope, PubNub, $rootScope, $state, citasService, $interval){
+
+        var channelName = Parse.User.current().get("username");
+        var notificationNumber = 0;
+        var messageResult;
+        
+        this.irCitas = function(){
+            $state.go('pages.citas')
+        }
+        
+
+        function inicializar(){
+          citasService.obtenerCitas().then(function(result){
+            for (var i = 0; i < result.length; i++) {
+                var data = result[i].toJSON();
+                messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.objectId});
+            }
+            
+             notificationNumber = result.length;
+             $('#notificationNumber').html(notificationNumber);
+          })
+        }
+        
+        
+        $rootScope.$on(PubNub.ngMsgEv(channelName), function(event, payload) {
+            notificationNumber = notificationNumber +1;
+            $('#notificationNumber').html(notificationNumber);
+             
+             var data = JSON.parse(payload.message);
+             messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.id});
+        })
 
          // Top Search
         this.openSearch = function(){
@@ -72,7 +99,7 @@ materialAdmin
         this.user = messageService.text;
 
         this.messageResult = messageService.getMessage(this.img, this.user, this.text);
-
+        messageResult = this.messageResult;
 
         //Clear Notification
         this.clearNotification = function($event) {
@@ -154,6 +181,15 @@ materialAdmin
                 launchIntoFullscreen(document.documentElement);
             }
         }
+        
+        // se debe inicializar cuando la lista ya este llena
+        var promise = $interval(function(){
+                if(angular.isDefined(messageResult.list)){
+                   inicializar()
+                   $interval.cancel(promise);
+                }
+            }
+        ,1000);
 
     })
 
@@ -225,7 +261,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService){
 
         //Status
         this.login = 1;
@@ -263,6 +299,7 @@ materialAdmin
             $rootScope.$on(PubNub.ngMsgEv(channelName), function(event, payload) {
                 // payload contains message, channel, env...
                 console.log('got a message event:', payload);    
+                growlService.growl((JSON.parse(payload.message)).message, 'inverse')
             })
         }
     })

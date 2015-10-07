@@ -52,11 +52,11 @@
                 </div>
             </li>
             <li class="dropdown" dropdown>
-                <a dropdown-toggle class="tm-notification" href=""><i class="tmn-counts">9</i></a>
+                <a dropdown-toggle class="tm-notification" href=""><i id="notificationNumber" class="tmn-counts">0</i></a>
                 <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
                     <div class="listview" id="notifications">
                         <div class="lv-header">
-                            Notification
+                            Notificaciones
 
                             <ul class="actions">
                                 <li>
@@ -70,7 +70,7 @@
                             <a class="lv-item" ng-href="" ng-repeat="w in hctrl.messageResult.list">
                                 <div class="media">
                                     <div class="pull-left">
-                                        <img class="lv-img-sm" ng-src="img/profile-pics/{{ w.img }}" alt="">
+                                        <img class="lv-img-sm" ng-src="{{ w.img }}" alt="">
                                     </div>
                                     <div class="media-body">
                                         <div class="lv-title">{{ w.user }}</div>
@@ -82,7 +82,7 @@
                         
                         <div class="clearfix"></div>
 
-                        <a class="lv-footer" href="">View Previous</a>
+                        <a class="lv-footer" ng-click="hctrl.irCitas()">Ir a citas</a>
                     </div>
 
                 </div>
