@@ -1,0 +1,9 @@
+{
+  "name": "twix",
+  "version": "0.7.2",
+  "dependencies": {
+    "moment": "*"
+  },
+  "main": "dist/twix.js",
+  "description": "A date range plugin for moment.js"
+}

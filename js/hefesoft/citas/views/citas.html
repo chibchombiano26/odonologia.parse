@@ -1,0 +1,47 @@
+   <div>
+       <section id="content">
+        <div class="container">
+            <div class="block-header">
+                <button ng-click="agenda()" class="btn btn-info waves-effect">Ver agenda</button>
+            </div>
+        
+            <div class="card">
+                <div class="listview lv-bordered lv-lg">
+                  <div class="card-header ch-alt m-b-20">
+                    <h2>Citas <small> Listado de citas por aprobar/denegar</small></h2>
+                </div>
+                    
+                    <div class="lv-body">                             
+                        
+                        <div ng-repeat="item in data" class="lv-item media">
+                            
+                             <div class="pull-left">
+                                <img class="lv-img-sm" ng-src="{{item.pictureUrl}}" alt="">
+                            </div>
+                            <div class="media-body">
+                                <div class="lv-title">{{item.name}}</div>
+                                <small class="lv-small">{{item.email}}</small>
+                                
+                                <div class="lv-title">Estado: {{item.estado}}</div>
+                                <small class="lv-small">{{item.message}}</small>
+                                
+                                <ul class="lv-attrs">
+                                    
+                                    <li>
+                                        <button ng-click="aprobacion(item, 'aprobado')" class="btn btn-info waves-effect">aprobar</button>
+                                    </li>
+                                    
+                                    <li>
+                                        <button ng-click="aprobacion(item, 'denegado')" class="btn btn-warning waves-effect">denegar</button>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>                       
+            </div>
+        </div>
+    </section>
+</div>
