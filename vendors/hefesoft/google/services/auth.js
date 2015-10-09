@@ -9,7 +9,9 @@ angular.module('hefesoft.google')
           'https://www.googleapis.com/auth/photos',
           'https://www.googleapis.com/auth/drive',
           "https://www.googleapis.com/auth/photos.upload",
-          "https://www.googleapis.com/auth/plus.login"
+          "https://www.googleapis.com/auth/plus.login",
+          "https://www.googleapis.com/auth/calendar",
+          "https://www.googleapis.com/auth/tasks"
          ];
 
 	
@@ -38,14 +40,26 @@ angular.module('hefesoft.google')
      };
 
     dataFactory.connectGoogleSuccess = function(result, deferred){
-           // Carga las bibliotecas oauth2 para habilitar los métodos userinfo.
-          gapi.client.load('oauth2', 'v2', function() {
-            var request = gapi.client.oauth2.userinfo.get();
-            request.execute(function(data){
-               dataFactory.saveGoogleUserParse(data, deferred);
-            });
-          });
-       }
+       // Carga las bibliotecas oauth2 para habilitar los métodos userinfo.
+      gapi.client.load('oauth2', 'v2', function() {
+        var request = gapi.client.oauth2.userinfo.get();
+        request.execute(function(data){
+           dataFactory.saveGoogleUserParse(data, deferred);
+        });
+      });
+    }
+    
+    dataFactory.getUserInfo = function(){
+      var deferred = $q.defer();
+      gapi.client.load('oauth2', 'v2', function() {
+        var request = gapi.client.oauth2.userinfo.get();
+        request.execute(function(data){
+           dataFactory.saveGoogleUserParse(data, deferred);
+        });
+      });
+      
+      return deferred.promise;
+    }
 
     dataFactory.saveGoogleUserParse =  function(data, deferred){
           var user = new Parse.User();

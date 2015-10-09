@@ -749,4 +749,18 @@ materialAdmin
                 url: '/breadcrumb-demo',
                 templateUrl: 'views/breadcrumb-demo.html'
             })
-    });
+    })
+    
+    
+  //Valida que la pagina a la que se le va a hacer render tenga los parametros que necesita para funcionar
+  .run(function ($rootScope, $state) {
+  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, from) {
+     
+     if(angular.isDefined(toState.data) && angular.isUndefined(window.window.hefesoftGoogleToken)){
+        var requireLogin = toState.data.requireLogin;
+        event.preventDefault();
+        $state.go('login');
+     }
+    
+  })
+});

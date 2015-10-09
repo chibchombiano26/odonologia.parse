@@ -1,5 +1,5 @@
 angular.module('odontologiaApp')
-.controller('citasCtrl', function($scope, $q, calendarGetData, agendaHelperService, $state, citasService, $rootScope, PubNub){
+.controller('citasCtrl', function($scope, $q, calendarGetData, agendaHelperService, $state, citasService, $rootScope, PubNub, growlService){
     
     $scope.data = [];
     $scope.calendarId = 'primary';
@@ -10,13 +10,6 @@ angular.module('odontologiaApp')
     })
     
     
-	function noAutorizado(data){
-		
-	}
-	
-	function autorizado(data){		
-		calendarGetData.loadEventApi().then(eventApiCargada);
-	}
 
 	function eventApiCargada(){		
 		
@@ -26,7 +19,7 @@ angular.module('odontologiaApp')
         $scope.data = [];
         
         //Acceso al calendario de google
-        calendarGetData.auth().then(autorizado, noAutorizado);
+        calendarGetData.loadEventApi().then(eventApiCargada);
         
         citasService.obtenerCitas().then(function(result){
             for (var i = 0; i < result.length; i++) {
@@ -51,6 +44,16 @@ angular.module('odontologiaApp')
             adicionarGoogleCalendar(item);
         }
     }
+    
+    $scope.eliminar = function(item, $index){
+        $scope.data.splice($index, 1);
+        
+        var obj = new Parse.Object("Citas"); 
+        obj.id = item.objectId;
+        obj.destroy();
+        
+        growlService.growl('la cita ha sido eliminada si ha sido agendada tambien debe eliminarse de la agenda', 'inverse');
+    }
    
     
     function adicionarGoogleCalendar(item){
@@ -60,6 +63,8 @@ angular.module('odontologiaApp')
 		 	console.log(insertado);
 		 });
     }
+    
+    
     
     inicializar();
     

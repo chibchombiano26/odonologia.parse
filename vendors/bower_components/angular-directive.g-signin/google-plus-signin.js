@@ -20,13 +20,16 @@ angular.module('directive.g+signin', []).
 
         attrs.$set('data-clientid', attrs.clientid);
         attrs.$set('theme', attrs.theme);
+        
+        var SCOPES =  'https://www.googleapis.com/auth/photos https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/photos.upload https://www.googleapis.com/auth/plus.login  https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email';
+
 
         // Some default values, based on prior versions of this directive
         var defaults = {
           callback: 'signinCallback',
           cookiepolicy: 'single_host_origin',
           requestvisibleactions: 'http://schemas.google.com/AddActivity',
-          scope: 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+          scope: SCOPES,
           height: 'standard',
           width: 'wide',
           state: ''

@@ -9,9 +9,6 @@ angular.module('odontologiaApp')
 	$scope.calendarId = 'primary';
 	var listadoGoogleCalendar = [];
 
-	$scope.auth = function(){
-		calendarGetData.auth().then(autorizado, noAutorizado);
-	}
 
 	$scope.adicionado = function(item){
 		var elementoProcesado = agendaHelperService.procesarAdicionado(item);
@@ -44,16 +41,7 @@ angular.module('odontologiaApp')
 	}	
 
 	function inicializar(){
-		calendarGetData.getAuth().then(autorizado, noAutorizado);
-	}
-
-	function noAutorizado(data){
-		$scope.mostrarBotonAutorizar = true;
-	}
-	
-	function autorizado(data){		
 		calendarGetData.loadEventApi().then(eventApiCargada);
-		$scope.mostrarBotonAutorizar = false;
 	}
 
 	function eventApiCargada(){		

@@ -270,11 +270,12 @@ materialAdmin
         
        
         $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+          window.hefesoftGoogleToken = authResult.client_id;    
           authGoogleService.token = authResult.client_id;
-          authGoogleService.connectGoogle(authResult.client_id).then(success, parseService.errorHandler);
+          authGoogleService.getUserInfo().then(success, parseService.errorHandler);
         });
         $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
-          // Auth failure or signout detected
+           console.log(event, authResult);
         });
         
         function success(result){
