@@ -1,21 +1,55 @@
-body.login-content:before {
-    height: 50%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: #00bcd4;
-    content: "";
-    z-index: 0;
+/*Modal mas largo*/
+.my-dialog .modal-dialog {
+    width: 90%;
+    top: 40%;
+    left: 1%;
 }
 
-.lc-login {
-    background: #fff;
-    box-shadow: 0 1px 11px rgba(0,0,0,0.27);
-    border-radius: 2px;
-    width: 500px;
-    display: inline-block;
-    margin-top: 42px;
-    vertical-align: middle;
-    position: relative;
+/* Posicion de las superficies */
+.elemento-margin{
+	margin-left: 30%;
+}	
+
+.elemento-invisible{
+	width: 33%;
+	margin: 1px;	
+}
+
+.elemento{
+	width: 33%;
+	margin: 1px;
+	border-style: solid;
+    border-width: 1px;		
+}
+
+.elemento-centro{
+	width: 33%;
+	margin: 1px;
+	border-style: solid;
+    border-width: 1px;		
+}
+
+.elemento-pieza-completa{
+	width: 100%;
+	margin: 1px;
+	border-style: solid;
+    border-width: 1px;		
+}
+
+.elementos-container{
+	display: -webkit-box;
+}
+
+.numero-pieza-dental{
+	text-align: center;
+}
+
+/* Supercie*/
+.elemento-superficie{
+	width: 100%;
+	height: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	text-align: center;
 }

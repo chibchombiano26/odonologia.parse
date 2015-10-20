@@ -1,3 +1,4 @@
+/*global angular, Parse*/  
 angular.module('odontologiaApp')
 .directive('listadosDiagnosticos', ['$parse', 
 	function ($parse) {
@@ -78,9 +79,9 @@ angular.module('odontologiaApp')
 		$scope.openEdit();
 	}
 
-	$scope.eliminar = function(item, $index){
+	$scope.eliminar = function(source ,item, $index){
     
-    $scope.source.splice($index, 1);
+    source.splice($index, 1);
     
 		if(angular.isDefined($scope.fnEliminar) && angular.isFunction($scope.fnEliminar)){
 			$scope.fnEliminar($scope.$parent, { 'item' : item, '$index' : $index });

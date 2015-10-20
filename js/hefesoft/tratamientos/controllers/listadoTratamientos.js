@@ -1,3 +1,5 @@
+  
+  /*global angular, Parse*/
   angular.module('odontologiaApp')
   .controller('listadoTratamientosCtrl', ['$scope', '$modal', 'dataTableStorageFactory', 'messageService', 
     function ($scope, $modal, dataTableStorageFactory, messageService) {

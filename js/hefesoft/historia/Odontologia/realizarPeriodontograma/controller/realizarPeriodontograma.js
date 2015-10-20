@@ -1,3 +1,4 @@
+/*global angular, Parse, _*/
 angular.module('odontologiaApp').
 controller('realizarPeriodontogramaCtrl', 
     ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService', '$stateParams', 'periodontogramaServiceParse', '$interval', '$timeout',
@@ -15,8 +16,8 @@ controller('realizarPeriodontogramaCtrl',
     var idPaciente = 0;
     var periodontograma;
 	
-	if($stateParams.pacienteId.length > 0){
-		idPaciente = $stateParams.pacienteId;
+	if($stateParams.diagnosticoPacienteId.length > 0){
+		idPaciente = $stateParams.diagnosticoPacienteId;
 		inicializarDatos();
 	}
    

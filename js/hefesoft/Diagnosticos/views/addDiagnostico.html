@@ -17,7 +17,7 @@
         </div>
         
         <div class="card-body card-padding">
-             <p class="c-black f-500">Crear o modificar un diagnostico</p> 
+           <p class="c-black f-500">Crear o modificar un diagnostico</p> 
 
             <div class="form-group">
                 <div class="fg-line">
@@ -43,12 +43,13 @@
 
             <div class="form-group">
                 <div class="fg-line">
-                    <p>Tipo</p>
+                    <p>Tipo <mark>{{Diagnostico.tipo.nombre}}</mark></p>
                     <div class="select">
                        <select 
                             class="form-control" 
-                            ng-model="Diagnostico.objectHefesoftTipo"
-                            ng-options="tipo.nombre for tipo in Tipo">
+                            ng-model="Diagnostico.tipo"
+                            ng-options="tipo.nombre for tipo in Tipo"
+                            >
                         </select>
                     </div>
                 </div>
@@ -60,15 +61,15 @@
                        <p>Simbolo diagnostico</p>
 
                    <div class="wizarSimboloBoton">
-                       <wizard-simbolo ng-model="Diagnostico.objectHefesoftDiagnostico"></wizard-simbolo>
+                       <wizard-simbolo ng-model="Diagnostico.diagnostico"></wizard-simbolo>
 
                         <superficie
                             ng-model='item'
                             class="wizarSimboloPrev"
-                            simbolo="Diagnostico.objectHefesoftDiagnostico.simbolo"
-                            fuente="Diagnostico.objectHefesoftDiagnostico.objectHefesoftFuente.fuente"
-                            path-imagen="Diagnostico.objectHefesoftDiagnostico.pathImagen" 
-                            color="Diagnostico.objectHefesoftDiagnostico.color">
+                            simbolo="Diagnostico.diagnostico.simbolo"
+                            fuente="Diagnostico.diagnostico.objectHefesoftFuente.fuente"
+                            path-imagen="Diagnostico.diagnostico.pathImagen" 
+                            color="Diagnostico.diagnostico.color">
                         </superficie>
                     </div>
 
@@ -81,16 +82,16 @@
                       
                       <div class="wizarSimboloBoton">
                           <wizard-simbolo 
-                            ng-model="Diagnostico.objectHefesoftEvolucion">
+                            ng-model="Diagnostico.evolucion">
                           </wizard-simbolo>
 
                         <superficie
                             ng-model='item'
                             class="wizarSimboloPrev"
-                            simbolo="Diagnostico.objectHefesoftEvolucion.simbolo"
-                            fuente="Diagnostico.objectHefesoftEvolucion.objectHefesoftFuente.fuente"
-                            path-imagen="Diagnostico.objectHefesoftEvolucion.pathImagen" 
-                            color="Diagnostico.objectHefesoftEvolucion.color">
+                            simbolo="Diagnostico.evolucion.simbolo"
+                            fuente="Diagnostico.evolucion.objectHefesoftFuente.fuente"
+                            path-imagen="Diagnostico.evolucion.pathImagen" 
+                            color="Diagnostico.evolucion.color">
                         </superficie>
                     </div>
 
@@ -120,7 +121,7 @@
                     ng-disabled="addDiagnostico.nombre.$invalid || addDiagnostico.cie.$invalid" 
                     ng-click="adicionar()" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Guardar
+                    {{modo}}
                     </button>    
                 </div>
             </div>

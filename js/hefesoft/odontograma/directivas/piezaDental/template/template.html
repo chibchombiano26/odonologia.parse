@@ -1,35 +1,3 @@
-<style type="text/css">
-	
-.elemento-invisible{
-	width: 33%;
-	margin: 1px;	
-}
-
-.elemento{
-	width: 33%;
-	margin: 1px;
-	border-style: solid;
-    border-width: 1px;		
-}
-
-.elemento-centro{
-	width: 33%;
-	margin: 1px;
-	border-style: solid;
-    border-width: 1px;		
-}
-
-.elementos-container{
-	display: -webkit-box;
-}
-
-.numero-pieza-dental{
-	text-align: center;
-}
-
-
-</style>
-
 <!-- Se arma como un tres en raya para los diagnosticos -->
 <div>
 	<div class="numero-pieza-dental">
@@ -37,6 +5,8 @@
 	</div>
 
 
+
+	<!-- Arriba -->
 	<div class="elementos-container">
 		<div class="elemento-invisible"><p></p></div>
 		<div ng-hide="esBoca" 
@@ -104,4 +74,20 @@
 		</div>
 		<div class="elemento-invisible"><p></p></div>
 	</div>
+	
+	<!-- Pieza completa -->
+	<div class="elementos-container">
+		<div ng-hide="esBoca" 
+		class="elemento-pieza-completa"
+		ng-click="clickSuperficie('piezaCompleta')" class="elemento">
+				<superficie
+					color="fijarElemento('piezaCompleta','color',item)"
+					simbolo="fijarElemento('piezaCompleta','simbolo',item)"
+	                fuente="fijarElemento('piezaCompleta','fuente',item)"
+	                path-imagen="fijarElemento('piezaCompleta','imagen',item)"
+	                ng-model"item">
+				</superficie>
+		</div>
+	</div>
+	
 </div>

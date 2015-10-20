@@ -378,17 +378,19 @@
     }
 
     function unpack(color) {
-        if (color.length === 7) {
-            function x(i) {
-                return parseInt(color.substring(i, i + 2), 16) / 255;
+        if(color){
+            if (color.length === 7) {
+                function x(i) {
+                    return parseInt(color.substring(i, i + 2), 16) / 255;
+                }
+                return [x(1), x(3), x(5)];
             }
-            return [x(1), x(3), x(5)];
-        }
-        else if (color.length === 4) {
-            function x(i) {
-                return parseInt(color.substring(i, i + 1), 16) / 15;
+            else if (color.length === 4) {
+                function x(i) {
+                    return parseInt(color.substring(i, i + 1), 16) / 15;
+                }
+                return [x(1), x(2), x(3)];
             }
-            return [x(1), x(2), x(3)];
         }
     }
 

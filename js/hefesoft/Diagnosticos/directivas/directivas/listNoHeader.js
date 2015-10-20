@@ -1,3 +1,4 @@
+/*global angular, Parse, _*/
 angular.module('odontologiaApp')
 .directive('listadosDiagnosticosNoHeader', ['$parse', 
 	function ($parse) {
@@ -14,12 +15,14 @@ angular.module('odontologiaApp')
 		source2 : "=",
 		source3 : "=",
 		source4 : "=",
+		source5 : "=",
 		
 		sourceLabel : "=",
 		source1Label : "=",
 		source2Label : "=",
 		source3Label : "=",
 		source4Label : "=",
+		source5Label : "=",
 		
     verSuperficie : '=',
     ocultarEliminar : "=",
@@ -111,6 +114,7 @@ angular.module('odontologiaApp')
       templateUrl: 'js/hefesoft/tratamientos/views/listadoTratamientosProcedimientos.html',
       controller : 'listadoProcedimientosTratamientosCtrl',
       size: 'lg',
+      windowClass: 'my-dialog',
       backdrop : 'static',
       resolve: {
         dxSeleccionado : function () {
@@ -118,14 +122,13 @@ angular.module('odontologiaApp')
         }
       }
   });
-
     modalInstance.result.then(closed);   
   };
 
   function closed(data){
     if(angular.isDefined($scope.fnFinModificado) && angular.isFunction($scope.fnFinModificado)){
-		$scope.fnFinModificado($scope.$parent, { 'item' : $scope.diagnosticoSeleccionado });
-	}
+		  $scope.fnFinModificado($scope.$parent, { 'item' : $scope.diagnosticoSeleccionado });
+	  }
   }
 
   $scope.toggleAnimation = function () {
@@ -151,17 +154,16 @@ modalInstance.result.then(function (selectedItem) {
     $scope.selected = selectedItem;
   }, 
   function (data) {
-    console.log('Modal dismissed at: ' + new Date());
-
     if(data !==  "backdrop click" && !angular.isUndefined(data)){
-      $scope.source.push(data);
+      
+      if(data.modo === "Insercion"){
+        $scope.source.push(data);
+      }
 
       if(angular.isDefined($scope.fnFinModificado) && angular.isFunction($scope.fnFinModificado)){
-		$scope.fnFinModificado($scope.$parent, { 'item' : $scope.diagnosticoSeleccionado });
-	  }          
+		    $scope.fnFinModificado($scope.$parent, { 'item' : $scope.diagnosticoSeleccionado });
+	    }          
     }
   });
 };
-
-
 }])

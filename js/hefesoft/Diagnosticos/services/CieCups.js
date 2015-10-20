@@ -1,3 +1,4 @@
+  /*global angular, Parse, _*/  
   angular.module('odontologiaApp')
   .service('CieCupsServices', ['sharedSignatureHttpHelper', '$q', 
   	function (sharedSignatureHttpHelper, $q) {

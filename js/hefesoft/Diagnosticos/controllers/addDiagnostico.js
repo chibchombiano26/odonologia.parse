@@ -1,21 +1,19 @@
+  /*global angular, Parse, hefesoft*/  
   angular.module('odontologiaApp')
   .controller('AddDxCtrl', 
     ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', 'messageService', 'dxSeleccionado', '$modalInstance', '$rootScope', '$q',
     function ($scope, CieCupsServices, $modal, dataTableStorageFactory, messageService, dxSeleccionado, $modalInstance, $rootScope, $q) {
 
-    var esNuevo = true; 
     $scope.Diagnostico = {};
-    $scope.listadoCie = [];  	
-
+    $scope.listadoCie = []; 
+    $scope.modo = "Guardar";
     $scope.Tipo = [{nombre: 'Pieza', codigo : 1}, {nombre: 'Superficie', codigo : 2}, {nombre: 'General', codigo : 3}];
-
-   
-    /* Modo edicion */
-    if(!angular.isUndefined(dxSeleccionado))
-    {
-      $scope.Diagnostico = dxSeleccionado;      
-      esNuevo = false;
+    
+    if(!hefesoft.isEmpty(dxSeleccionado)){
+      $scope.modo = "Editar";
+      $scope.Diagnostico = dxSeleccionado;
     }
+
 
   	function inicializar(){  	
       CieCupsServices.listadoCie().then(cie, error);
@@ -23,16 +21,21 @@
 
     $scope.adicionar = function(){
       var data = $scope.Diagnostico;
-      
       var DiagnosticoDfd = $q.defer();
       var Diagnostico = Parse.Object.extend("Diagnostico");
       var diagnostico = new Diagnostico();
+      
+      diagnostico.set("activo", data.activo);
       diagnostico.set("nombre", data.nombre);
       diagnostico.set("idiceCie", data.idiceCie);
-      diagnostico.set("tipo", data.objectHefesoftTipo);
-      diagnostico.set("diagnostico", data.objectHefesoftDiagnostico);
-      diagnostico.set("evolucion", data.objectHefesoftEvolucion);
+      diagnostico.set("tipo", data.tipo);
+      diagnostico.set("diagnostico", data.diagnostico);
+      diagnostico.set("evolucion", data.evolucion);
       diagnostico.set("username", Parse.User.current().get("email"));
+      
+      if($scope.modo == "Editar"){
+        diagnostico.set("id", dxSeleccionado.objectId);
+      }
       
       diagnostico.save().then(
         function(diagnostico){
@@ -44,7 +47,18 @@
       });
       
       DiagnosticoDfd.promise.then(function(result){
-        $modalInstance.dismiss(result);
+        
+        var returnData = result.toJSON();
+        
+        //Cuando se edita no se debe adicionar al listado
+        if($scope.modo === "Editar"){
+          returnData["modo"] = "Edicion";
+        }
+        else{
+          returnData["modo"] = "Insercion";
+        }
+        
+        $modalInstance.dismiss(returnData);
       })
       .catch(function(error){
         $modalInstance.dismiss();

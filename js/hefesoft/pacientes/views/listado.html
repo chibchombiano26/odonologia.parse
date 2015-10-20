@@ -20,7 +20,7 @@
                         <div ng-repeat="item in pacientes" class="lv-item media">
                             
                              <div class="pull-left">
-                                <img class="lv-img-sm" src="{{getPicture(item)}}" alt="">
+                                <img class="lv-img-sm" src="{{item.pictureUrl}}" alt="">
                             </div>
                             <div class="media-body">
                                 <div class="lv-title">{{item.nombre}}</div>

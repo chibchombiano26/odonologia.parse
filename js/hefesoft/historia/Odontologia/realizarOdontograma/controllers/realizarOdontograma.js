@@ -1,3 +1,5 @@
+/*global angular, Parse, _,hefesoft*/
+
 angular.module('Historia')
 .controller('realizarOdontogramaCtrl', 
 	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval', 'odontogramService',
@@ -19,10 +21,12 @@ angular.module('Historia')
 	$scope.contextoOdontograma = {};
 	
 	var Odontograma;
-	var idPaciente = 0;
+	var OdontogramaCargadoId;
+	var diagnosticoPacienteId = 0;
 	
-	if($stateParams.pacienteId.length > 0){
-		idPaciente = $stateParams.pacienteId;
+	
+	if($stateParams.diagnosticoPacienteId && $stateParams.diagnosticoPacienteId.length > 0){
+		diagnosticoPacienteId = $stateParams.diagnosticoPacienteId;
 		inicializarDatos();
 	}
 
@@ -34,51 +38,51 @@ angular.module('Historia')
 		    $scope.Diagnosticos.push(result[i].toJSON());
 		  }
 	  })
-	 
 	
-	  odontogramService.cargarOdontograma("Kb1CqPZmlr").then(function(data){
-	  	
-	  	Odontograma = data.toJSON();
-	  	
-	  	if(Odontograma.listado.length >0){
+	  odontogramService.cargarOdontograma(diagnosticoPacienteId).then(function(data){
+	  	inicializarOdontograma(data);
+	  })
+	 }
+	  
+	function inicializarOdontograma(data){
+	  	//Cargar el guardado
+	  	if	(!hefesoft.isEmpty(data)){
+	  		
+	  		Odontograma = data.toJSON();
+	  		OdontogramaCargadoId = Odontograma.objectId;
+	  		
 	  		Odontograma.listado = _.sortBy(Odontograma.listado, function(item){
 	  		 return parseFloat(item.id);
-  		  })
+  		  	})
 	  		
-  		var promise = $interval(function(){
+  			var promise = $interval(function(){
   			
-  			if(angular.isFunction($scope.contextoOdontograma)){
-  		
-  				var item = $scope.contextoOdontograma();
-  				if(angular.isFunction(item.piezasDentalesScope)){
-			 		var piezaDental = item.piezasDentalesScope();
-			 		piezaDental.listado = Odontograma.listado;
-			 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
-	  				$interval.cancel(promise);
-  				}
-  			}
+	  			if(angular.isFunction($scope.contextoOdontograma)){
+	  				var item = $scope.contextoOdontograma();
+	  				if(angular.isFunction(item.piezasDentalesScope)){
+				 		var piezaDental = item.piezasDentalesScope();
+				 		piezaDental.listado = Odontograma.listado;
+				 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
+		  				$interval.cancel(promise);
+	  				}
+	  			}
   			
-  		}, 1000);
-	  		
+  			}, 1000);
 	  		
 	  	}
+	  	
+	  	//Crear uno nuevo
 	  	else{
 	  		
 	  		var promise = $timeout(function(){
-	  			
 	  			//se ponen aca xq aca ya tienen valor
 	 			var item = $scope.contextoOdontograma();
 		 		var piezaDental = item.piezasDentalesScope();
 	 			piezaDental.leerOdontogramaBase();
 	 			$timeout.cancel(promise);
-	  			
 	  		}, 8000);
 	  	}
-	  	
-	  })
-	 }
-	  
-
+	}
 	 
 	$scope.dxSeleccionado = function(item){
 		$rootScope.diagnosticoSeleccionado = item;
@@ -93,7 +97,7 @@ angular.module('Historia')
 	}
 
 	$scope.planTratamiento = function(){
-		$state.go("pages.planTratamiento", { pacienteId : idPaciente});
+		$state.go("pages.planTratamiento", { diagnosticoPacienteId : diagnosticoPacienteId});
 	}
 
 	$scope.procedimientoEliminado = function(item){
@@ -115,7 +119,6 @@ angular.module('Historia')
 
  	//Ocurre cuando se hace click sobre  una pieza dental
  	$scope.piezaDentalSeleccionada = function(item){
- 		
  		$scope.PiezaSeleccionada = item;
  		$scope.listadoDiagnosticos = tratamientoServices.extraerDiagnosticos(item);
  		var listadoTratamientos = tratamientoServices.extraerTratamientosDeDiagnosticos($scope.listadoDiagnosticos);
@@ -157,8 +160,9 @@ angular.module('Historia')
  		var piezaDental = item.piezasDentalesScope();
  		
  		
- 		odontogramService.saveOdontograma(listadoGuardar, idPaciente).then(function(result){
- 			
+ 		odontogramService.saveOdontograma(listadoGuardar, diagnosticoPacienteId, OdontogramaCargadoId).then(function(result){
+ 			var item = result.toJSON();
+ 			OdontogramaCargadoId = item.objectId;
  		});
  	}
  	

@@ -23,7 +23,8 @@ var materialAdmin = angular.module('materialAdmin', [
     'Historia',
     'Hefesoft',
     'hefesoft.services',
-    'Shared'
+    'Shared',
+    'readMore'
 ])
 
 

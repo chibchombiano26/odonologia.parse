@@ -1,5 +1,6 @@
+/*global angular, Parse*/
 angular.module('directivas').
-directive('piezaDental', function($parse){
+directive('piezaDental', function($parse, growlService){
 
    var directiva = {};
    var fn;
@@ -65,23 +66,29 @@ directive('piezaDental', function($parse){
 
     scope.clickSuperficie = function(e){
         
-     var dxSeleccionado = angular.copy(scope.$root.$root.diagnosticoSeleccionado);
-     scope.modo = scope.$root.$root.modo;
-     dxSeleccionado["tratado"] = "diagnostico";
+      var dxSeleccionado = angular.copy(scope.$root.$root.diagnosticoSeleccionado);
      
- 	 var arrayNombre = e + "Diagnosticos_arrayHefesoft";
-
- 	 if(angular.isUndefined(scope.item[arrayNombre])){
- 		scope.item[arrayNombre] = [];
- 	 }
-     
-     scope.item[arrayNombre].push(dxSeleccionado);
+      if(dxSeleccionado){
+         scope.modo = scope.$root.$root.modo;
+         dxSeleccionado["tratado"] = "diagnostico";
+         
+     	 var arrayNombre = e + "Diagnosticos_arrayHefesoft";
+    
+     	 if(angular.isUndefined(scope.item[arrayNombre])){
+     		scope.item[arrayNombre] = [];
+     	 }
+         
+         scope.item[arrayNombre].push(dxSeleccionado);
      
         
-      var funcion = fn;
-      if(angular.isDefined(funcion)){
-        fn(scope.$parent,{'superficie' :e});
-      }
+        var funcion = fn;
+        if(angular.isDefined(funcion)){
+            fn(scope.$parent,{'superficie' :e});
+        }
+     }
+     else{
+         growlService.growl('Seleccione un diagnostico', 'inverse');
+     }
     }
 
    }; // Fin de la directiva

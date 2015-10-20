@@ -1,3 +1,5 @@
+/*global angular, Hefesoft, hefesoft, Parse*/
+
 angular.module('odontologiaApp')
 .controller('listadoProcedimientosCtrl', 
   ['$scope', 'dataTableStorageFactory', '$modal', '$rootScope', 'piezasDentalesServices',

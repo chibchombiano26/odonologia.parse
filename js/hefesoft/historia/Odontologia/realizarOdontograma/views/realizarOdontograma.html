@@ -1,19 +1,19 @@
 <div>
 	
 	<div class="row">
-		<div class="btn-group pull-right m-r-5">
-		    
-		    <button 
-		        ng-click="planTratamiento()"
-		        type="button" 
-		        class="btn btn-primary waves-effect waves-button waves-float">Plan de tratamiento
-		    </button>
-
-		    <button 
-		        ng-click="guardarCommand()"
-		        type="button" 
-		        class="btn btn-primary waves-effect waves-button waves-float">Guardar
-		    </button>		    
+		<div class="col-sm-2">
+		</div>
+		
+		<div class="col-sm-8">
+			<div class="pull-right p-r-25">
+				<div class="btn-group btn-group-xs" role="group">
+					<button ng-click="planTratamiento()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Plan de tratamiento</button>
+				    <button ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-2">
 		</div>
 	</div>
 
@@ -60,12 +60,14 @@
 				source2="PiezaSeleccionada.derechaDiagnosticos_arrayHefesoft"
 				source3="PiezaSeleccionada.arribaDiagnosticos_arrayHefesoft"
 				source4="PiezaSeleccionada.abajoDiagnosticos_arrayHefesoft"
+				source5="PiezaSeleccionada.piezaCompletaDiagnosticos_arrayHefesoft"
 				
 				source-label="'Centro'"
 				source1-label="'Izquierda'"
 				source2-label="'Derecha'"
 				source3-label="'Arriba'"
 				source4-label="'Abajo'"
+				source5-label="'Pieza completa'"
 				
 				>
 			</listados-diagnosticos-no-header>

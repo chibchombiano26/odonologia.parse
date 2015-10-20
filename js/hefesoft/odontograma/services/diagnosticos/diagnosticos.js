@@ -1,3 +1,4 @@
+/*global angular, Parse, hefesoft*/
 angular.module('odontologiaApp')
 .service('diagnosticoServices', [function () {
 
@@ -75,10 +76,24 @@ angular.module('odontologiaApp')
 	            	elementoDevolver[nombreObjetoCrear] = {};
 	        	}
 
-	            elementoDevolver[nombreObjetoCrear].color = diagnostico.objectHefesoftDiagnostico.color;
-	            elementoDevolver[nombreObjetoCrear].simbolo = diagnostico.objectHefesoftDiagnostico.simbolo;
-	            elementoDevolver[nombreObjetoCrear].fuente = diagnostico.objectHefesoftDiagnostico.fuente;
-	            elementoDevolver[nombreObjetoCrear].pathImagen = diagnostico.objectHefesoftDiagnostico.pathImagen;
+				var dx = diagnostico.objectHefesoftDiagnostico;
+				
+				if(dx && dx.hasOwnProperty("color")){
+	            	elementoDevolver[nombreObjetoCrear].color = diagnostico.objectHefesoftDiagnostico.color;
+				}
+				
+				if(dx && dx.hasOwnProperty("simbolo")){
+	            	elementoDevolver[nombreObjetoCrear].simbolo = diagnostico.objectHefesoftDiagnostico.simbolo;
+				}
+				
+				if(dx && dx.hasOwnProperty("fuente")){
+	            	elementoDevolver[nombreObjetoCrear].fuente = diagnostico.objectHefesoftDiagnostico.fuente;
+				}
+				
+				if(dx && dx.hasOwnProperty("pathImagen")){
+	            	elementoDevolver[nombreObjetoCrear].pathImagen = diagnostico.objectHefesoftDiagnostico.pathImagen;
+				}
+				
 	        }
 	        else{
 	        	elementoDevolver[nombreObjetoCrear].color = undefined;

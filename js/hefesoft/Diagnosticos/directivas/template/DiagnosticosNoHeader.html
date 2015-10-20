@@ -20,7 +20,7 @@
        <tr ng-repeat="item in source">
             <td class="col-sm-1">{{item.nombre}}</td>
             <td class="col-sm-1" ng-show="verSuperficie">
-                {{sourceLabel}}
+                {{sourceLabel | nombreSuperficie}}
             </td>
             <td ng-hide="modoLectura">orden</td>
             <td
@@ -59,7 +59,9 @@
                   </superficie>
               </div>
             </td>
-            <td class="col-sm-1">{{item.idiceCie}}</td>
+            <td class="col-sm-1">
+                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+            </td>
 
             <td class="col-sm-1">
                 <button 
@@ -89,7 +91,7 @@
        <tr ng-repeat="item in source1">
             <td class="col-sm-1">{{item.nombre}}</td>
             <td class="col-sm-1" ng-show="verSuperficie">
-                {{source1Label}}
+                {{source1Label | nombreSuperficie}}
             </td>
             <td ng-hide="modoLectura">orden</td>
             <td
@@ -128,7 +130,9 @@
                   </superficie>
               </div>
             </td>
-            <td class="col-sm-1">{{item.idiceCie}}</td>
+            <td class="col-sm-1">
+                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+            </td>
 
             <td class="col-sm-1">
                 <button 
@@ -158,7 +162,7 @@
        <tr ng-repeat="item in source2">
             <td class="col-sm-1">{{item.nombre}}</td>
             <td class="col-sm-1" ng-show="verSuperficie">
-                {{source2Label}}
+                {{source2Label | nombreSuperficie}}
             </td>
             <td ng-hide="modoLectura">orden</td>
             <td
@@ -197,7 +201,9 @@
                   </superficie>
               </div>
             </td>
-            <td class="col-sm-1">{{item.idiceCie}}</td>
+            <td class="col-sm-1">
+                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+            </td>
 
             <td class="col-sm-1">
                 <button 
@@ -227,7 +233,7 @@
        <tr ng-repeat="item in source3">
             <td class="col-sm-1">{{item.nombre}}</td>
             <td class="col-sm-1" ng-show="verSuperficie">
-                {{source3Label}}
+                {{source3Label | nombreSuperficie}}
             </td>
             <td ng-hide="modoLectura">orden</td>
             <td
@@ -266,7 +272,9 @@
                   </superficie>
               </div>
             </td>
-            <td class="col-sm-1">{{item.idiceCie}}</td>
+            <td class="col-sm-1">
+                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+            </td>
 
             <td class="col-sm-1">
                 <button 
@@ -296,7 +304,7 @@
        <tr ng-repeat="item in source4">
             <td class="col-sm-1">{{item.nombre}}</td>
             <td class="col-sm-1" ng-show="verSuperficie">
-                {{source4Label}}
+                {{source4Label | nombreSuperficie}}
             </td>
             <td ng-hide="modoLectura">orden</td>
             <td
@@ -335,7 +343,9 @@
                   </superficie>
               </div>
             </td>
-            <td class="col-sm-1">{{item.idiceCie}}</td>
+            <td class="col-sm-1">
+                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+            </td>
 
             <td class="col-sm-1">
                 <button 
@@ -356,6 +366,77 @@
             <td ng-hide="ocultarEliminar">
                 <button 
                     ng-click="eliminar(source4, item, $index)" 
+                    class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                    Eliminar
+                </button>    
+            </td>
+        </tr>
+        
+       <tr ng-repeat="item in source5">
+            <td class="col-sm-1">{{item.nombre}}</td>
+            <td class="col-sm-1" ng-show="verSuperficie">
+                {{source5Label | nombreSuperficie}}
+            </td>
+            <td ng-hide="modoLectura">orden</td>
+            <td
+                class="checkbox">                                 
+                <input 
+                type="checkbox" 
+                ng-model="item.tratado"
+                ng-false-value="'diagnostico'" ng-true-value="'evolucion'"
+                />
+                <i class="input-helper"></i>                                                                
+            </td>
+            <td class="col-sm-1">
+                {{item.tipo.nombre}}
+            </td>
+            <td class="col-sm-1">                                
+              <div style="width:20px;">
+                  <superficie
+                    ng-model='item.diagnostico'
+                    class="wizarSimboloPrev"
+                    simbolo="item.diagnostico.simbolo"
+                    fuente="item.diagnostico.objectHefesoftFuente.fuente"
+                    path-imagen="item.diagnostico.pathImagen"
+                    color="item.diagnostico.color">
+                  </superficie>
+              </div>
+            </td>
+            <td class="col-sm-1">
+            <div style="width:20px;">
+                <superficie
+                    ng-model='item.evolucion'
+                    class="wizarSimboloPrev"
+                    simbolo="item.evolucion.simbolo"
+                    fuente="item.evolucion.objectHefesoftFuente.fuente"
+                    path-imagen="item.evolucion.pathImagen"
+                    color="item.evolucion.color">
+                  </superficie>
+              </div>
+            </td>
+            <td class="col-sm-1">
+                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+            </td>
+
+            <td class="col-sm-1">
+                <button 
+                    ng-click="openTratamiento(item)" 
+                    class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                    Tratamientos
+                </button>
+            </td>
+            
+            <td ng-hide="modoLectura">
+                <button 
+                    ng-click="open(item)" 
+                    class="btn btn-info btn-sm waves-effect waves-button waves-float">
+                    Editar
+                </button>    
+            </td>
+
+            <td ng-hide="ocultarEliminar">
+                <button 
+                    ng-click="eliminar(source5, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
                     Eliminar
                 </button>    

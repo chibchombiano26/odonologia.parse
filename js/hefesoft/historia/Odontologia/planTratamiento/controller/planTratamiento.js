@@ -1,32 +1,35 @@
+/*global angular, Parse, _, Hefesot, hefesoft*/
 angular.module('Historia').
 controller('planTratamientoCtrl', 
 	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams',
 	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams) {
 
 
-	var idOdontograma = "Kb1CqPZmlr";
+	var idOdontograma;
+	var diagnosticoPacienteId;
 	var piezaDentalSeleccionada;
 
 	$scope.Listado = [];
 	$scope.Source = [];
 	$scope.contextoProcedimientos = {};
 	
-	var idPaciente = 0;
 	
-	if($stateParams.pacienteId.length > 0){
-		idPaciente = $stateParams.pacienteId;
+	if($stateParams.diagnosticoPacienteId.length > 0){
+		diagnosticoPacienteId = $stateParams.diagnosticoPacienteId;
 		inicializarDatos();
 	}
 
 	$scope.odontograma = function(){
-		$state.go("pages.odontograma", { pacienteId : idPaciente});
+		$state.go("pages.odontograma", { diagnosticoPacienteId : diagnosticoPacienteId});
 	}
 
 	function inicializarDatos(){
       
-  	  odontogramService.cargarOdontograma("Kb1CqPZmlr").then(function(data){
-  	  	datos = data;
+  	  odontogramService.cargarOdontograma(diagnosticoPacienteId).then(function(data){
+  	  	var datos = data;
 	  	var result = data.toJSON().listado;
+	  	
+	  	idOdontograma = data.toJSON().objectId;
 	  	
 	  	$scope.Source = result;
       	piezasDentalesServices.fijarPiezasDentales($scope.Source);
@@ -42,7 +45,10 @@ controller('planTratamientoCtrl',
 	//Como los elementos se estan pasando por referencia se puede guardar el mismo objeto que se cargo inicialmente
 	$scope.guardarCommand = function(){
 		var dataToSave = angular.toJson($scope.Source, true);
-		odontogramService.saveOdontograma(JSON.parse(dataToSave), "Kb1CqPZmlr");
+		odontogramService.saveOdontograma(JSON.parse(dataToSave), diagnosticoPacienteId, idOdontograma).then(function(data){
+			var item = data.toJSON();
+			idOdontograma = item.objectId;
+		})
 	}	
 
 	//Se toma el procedimiento que se ha indicado como realizado

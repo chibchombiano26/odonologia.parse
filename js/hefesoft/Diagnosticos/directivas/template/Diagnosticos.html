@@ -71,7 +71,9 @@
                                   </superficie>
                               </div>
                             </td>
-                            <td class="col-sm-1">{{item.idiceCie}}</td>
+                            <td class="col-sm-1">
+                                <p tooltip="{{item.idiceCie}}" read-more ng-model="item.idiceCie" words="false" length="10"></p>
+                            </td>
 
                             <td class="col-sm-1">
                                 <button 
@@ -91,7 +93,7 @@
 
                             <td ng-hide="ocultarEliminar">
                                 <button 
-                                    ng-click="eliminar(item, $index)" 
+                                    ng-click="eliminar(source, item, $index)" 
                                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
                                     Eliminar
                                 </button>    

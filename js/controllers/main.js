@@ -1,3 +1,5 @@
+/* global hefesoft, materialAdmin, Parse, angular */
+
 materialAdmin
     // =========================================================================
     // Base controller for common functions
@@ -261,7 +263,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService){
 
         //Status
         this.login = 1;
@@ -292,8 +294,23 @@ materialAdmin
             subscribeMessage(username);
             
             $rootScope.$broadcast('onLogin');
-            //Va la pagina de noticias
-            $state.go("pages.wall");
+            var ultimaPagina = hefesoft.getStorageObject("ultimaPagina");
+            
+            if(!hefesoft.isEmpty(ultimaPagina)){
+                //Va a la ultima pagina que se intento navegar 
+                $state.go(ultimaPagina.name);
+            }
+            else{
+                //Va la pagina de noticias
+                $state.go("pages.wall");
+            }
+            
+            hefesoft.saveStorageObject("ultimaPagina", {});
+            
+            if(hefesoft.experimental){
+                //Reconociminto de voz
+                speechService.inicializar();
+            }
         }
         
         function subscribeMessage(channelName){

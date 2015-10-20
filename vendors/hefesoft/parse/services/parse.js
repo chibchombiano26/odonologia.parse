@@ -1,3 +1,5 @@
+/*global angular, Parse*/
+
 angular.module('hefesoft.parse')
 .service('parseService', 
 	['$q', '$timeout', function ($q, $timeout) {

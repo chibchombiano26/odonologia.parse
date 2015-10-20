@@ -1,3 +1,5 @@
+/*global angular, Parse, gapi*/
+
 angular.module('hefesoft.google')
 .service('authGoogleService', 
 	['$q', '$timeout', 'parseService', function ($q, $timeout, parseService) {
@@ -13,12 +15,8 @@ angular.module('hefesoft.google')
           "https://www.googleapis.com/auth/calendar",
           "https://www.googleapis.com/auth/tasks"
          ];
-
-	
-	
 	
 	dataFactory.connectGoogle = function(token) {
-	    
 	    Parse.User.logOut();
 	    
 	    var deferred = $q.defer();
@@ -29,7 +27,7 @@ angular.module('hefesoft.google')
             cookie_policy: 'single_host_origin'
           }, function(response) {
             if (response.status.signed_in) {
-              dataFactory.connectGoogleSuccess(response, deferred);
+              dataFactory.connectGoogleSuccess(response);
             }
             else{
                 deferred.reject();
@@ -44,7 +42,7 @@ angular.module('hefesoft.google')
       gapi.client.load('oauth2', 'v2', function() {
         var request = gapi.client.oauth2.userinfo.get();
         request.execute(function(data){
-           dataFactory.saveGoogleUserParse(data, deferred);
+           dataFactory.saveGoogleUserParse(data);
         });
       });
     }
@@ -54,14 +52,17 @@ angular.module('hefesoft.google')
       gapi.client.load('oauth2', 'v2', function() {
         var request = gapi.client.oauth2.userinfo.get();
         request.execute(function(data){
-           dataFactory.saveGoogleUserParse(data, deferred);
+           dataFactory.saveGoogleUserParse(data).then(function(data){
+               deferred.resolve(data);
+           })
         });
       });
       
       return deferred.promise;
     }
 
-    dataFactory.saveGoogleUserParse =  function(data, deferred){
+    dataFactory.saveGoogleUserParse =  function(data){
+          var deferred = $q.defer();
           var user = new Parse.User();
           user.set("username", data.email);
           user.set("name", data.name);
@@ -71,12 +72,18 @@ angular.module('hefesoft.google')
           
           dataFactory.existUser(data.email).then(function(result){
             if(result.length == 0){
-              dataFactory.signUp(user, deferred);
+              dataFactory.signUp(user).then(function(data){
+                deferred.resolve(data);  
+              })
             }
             else{
-              dataFactory.login(data.email, data.id, deferred);
+              dataFactory.login(data.email, data.id).then(function(data){
+                deferred.resolve(data);    
+              })
             }
           });
+          
+          return deferred.promise;
        }
 
      dataFactory.existUser =  function (user){
@@ -85,33 +92,44 @@ angular.module('hefesoft.google')
          query.equalTo("username", user);
          query.find({
            success: function(result) {
-             console.log(result);
              deferred.resolve(result);
            },
-           error : function(e){ parseService.error(e, deferred)}
+           error : function(e){ 
+             deferred.reject(e);
+           }
          });
          return deferred.promise;
        }
 
-     dataFactory.signUp =  function(user, deferred){
+     dataFactory.signUp =  function(user){
+         var deferred = $q.defer();
          user.signUp(null, {
            success: function(user) {
              deferred.resolve(user);
              saveRegistrationId(user);
            },
-           error: function(e){ parseService.error(e, deferred)}
+           error: function(e){ 
+             deferred.reject(e);
+           }
          });
+         
+         return deferred.promise;
        }
 
-      dataFactory.login =  function(username, pass, deferred){
+      dataFactory.login =  function(username, pass){
+         var deferred = $q.defer();
          Parse.User.logIn(username, pass, {
           success: function(user) {
             deferred.resolve(user);
             saveRegistrationId(user);
           },
-          error: function(e){ parseService.error(e, deferred)}
+          error: function(e){ 
+            deferred.resolve(e);
+          }
         });
-       }
+       
+        return deferred.promise;
+      }
        
        //Cuando el usuario se loguea i hay posibilidad de enviar push notification en chrome guardar el id de la registracion
        function saveRegistrationId(user){

@@ -76,6 +76,7 @@ materialAdmin
     .controller('DropdownDemoCtrl', function ($scope) {
         $scope.items = [
             { name: 'Pacientes', icon: 'home', ref : "#/pages/listadopacientes" },
+            { name: 'Parametrizar diagnosticos', icon: 'plus', ref : "#/pages/listadoDiagnosticos" },
             /*{ name: 'And another choice', icon: 'account' },
             { name: 'But wait! A third!', icon: 'email' },
             { name: 'And fourth on here', icon: 'pin' }*/

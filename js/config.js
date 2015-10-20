@@ -1,8 +1,12 @@
+/* global hefesoft, materialAdmin, Parse, angular, moment*/
+
+
 materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/login");
 
         Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
+        moment.locale("es");
 
         window.fbAsyncInit = function() {
           Parse.FacebookUtils.init({ // this line replaces FB.init({
@@ -423,7 +427,6 @@ materialAdmin
 
 
             //Profile
-
             .state ('pages.profile', {
                 url: '/profile',
                 templateUrl: 'views/profile.html',
@@ -541,7 +544,6 @@ materialAdmin
                                 name: 'vendors',
                                 files: dependenciasNews()
                             }
-                            
                         ])
                     }
                 }
@@ -550,6 +552,9 @@ materialAdmin
             .state ('pages.wall', {
                 url: '/wall',
                 templateUrl: 'views/feed.html',
+                data: {
+                  requireLogin: true
+                },
                 resolve: {
                     loadPlugin: function($ocLazyLoad) {
                         return $ocLazyLoad.load ([
@@ -636,7 +641,8 @@ materialAdmin
             cache: false,
             templateUrl: 'js/hefesoft/historia/Odontologia/diagnosticosPaciente/views/diagnosticosPaciente.html',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true,
             },
             resolve :{
                controller : function($ocLazyLoad){
@@ -646,12 +652,13 @@ materialAdmin
           })
           
           .state('pages.odontograma', {
-            url: "/odontograma/:pacienteId",
+            url: "/odontograma/:diagnosticoPacienteId",
             controller: "realizarOdontogramaCtrl",
             cache: false,
             templateUrl: 'js/hefesoft/historia/Odontologia/realizarOdontograma/views/realizarOdontograma.html',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true
             },
             resolve :{
                controller : function($ocLazyLoad){
@@ -661,11 +668,12 @@ materialAdmin
           })
           
           .state('pages.planTratamiento', {
-            url: "/planTratamiento/:pacienteId",
+            url: "/planTratamiento/:diagnosticoPacienteId",
             cache: false,
             templateUrl: 'js/hefesoft/historia/Odontologia/planTratamiento/views/planTratamiento.html',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true
             },
             resolve :{
                controller : function($ocLazyLoad){
@@ -675,11 +683,12 @@ materialAdmin
           })
           
           .state('pages.periodontograma', {
-            url: "/periodontograma/:pacienteId",
+            url: "/periodontograma/:diagnosticoPacienteId",
             cache: false,
             templateUrl: 'js/hefesoft/historia/Odontologia/realizarPeriodontograma/Views/realizarPeriodontograma.html',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true
             },
             resolve :{
                controller : function($ocLazyLoad){
@@ -757,7 +766,21 @@ materialAdmin
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, from) {
      
      if(angular.isDefined(toState.data) && angular.isUndefined(window.window.hefesoftGoogleToken)){
-        var requireLogin = toState.data.requireLogin;
+        var item = toState.data;
+        var requireLogin = item.requireLogin;
+     
+        //Ciertas paginas requieren primero seleccionar un paciente
+        if(item.hasOwnProperty("requirePacient") && item.requirePacient)
+        {
+            var element = toState;
+            element["name"] = "pages.listadopacientes";
+            hefesoft.saveStorageObject("ultimaPagina", element);
+        }
+        else
+        {
+          hefesoft.saveStorageObject("ultimaPagina", toState);
+        }
+        
         event.preventDefault();
         $state.go('login');
      }

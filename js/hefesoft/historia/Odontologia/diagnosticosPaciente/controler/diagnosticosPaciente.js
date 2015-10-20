@@ -1,83 +1,53 @@
+/*global Parse, angular, moment, hefesoft*/
 angular.module('Historia')
-.controller('diagnosticoPacienteCtrl', ['$scope', '$rootScope', 'dataTableStorageFactory', '$state', '$q',
-	function ($scope, $rootScope, dataTableStorageFactory, $state, $q) {
+.controller('diagnosticoPacienteCtrl', function ($scope, $rootScope, dataTableStorageFactory, $state, $q, diagnosticoPacienteService, $stateParams) {
 
-
-	var idPaciente = Parse.User.current().get("email");
+	var idPaciente = "";
 	var diagnosticoPaciente = {};
 	$scope.listado = [];
 	$scope.paciente = $rootScope.currentPacient;
+	
+	if($stateParams.pacienteId.length > 0){
+		idPaciente = $stateParams.pacienteId;
+		inicializar();
+	}
+
+	function inicializar(){
+		diagnosticoPacienteService.load(idPaciente).then(function(result){
+			for (var i = 0; i < result.length; i++) {
+				var item = result[i].toJSON();
+				item['fechaFormat'] = moment(item.fecha).format("dddd, MMMM Do YYYY, h:mm:ss a");
+				$scope.listado.push(item);
+			}
+		})
+	}
 
 	$scope.adicionar = function(){
 		
-		var DiagnosticoPacienteDfd = $q.defer();
-		var DiagnosticoPaciente = Parse.Object.extend("Diagnostico_Paciente");
-		var diagnosticoPaciente = new DiagnosticoPaciente();
+		var item = {
+			idPaciente : idPaciente, 
+			paciente: hefesoft.angularObjectToParse($rootScope.currentPacient)
+		};
 		
-		
-		diagnosticoPaciente.set("paciente", idPaciente);
-		diagnosticoPaciente.set("fecha", new Date());
-		diagnosticoPaciente.save().then(function(diagnosticoPaciente){
-			DiagnosticoPacienteDfd.resolve(diagnosticoPaciente);
-		},
-		function(diagnosticoPaciente, error){
-			DiagnosticoPacienteDfd.reject(error);
-		});
-		
-		DiagnosticoPacienteDfd.promise.then(function(result){
-			$scope.listado.push(result);
-		}).catch(function(error){
-			console.log(error);
+		diagnosticoPacienteService.add(item).then(function(data){
+			$scope.listado.push(data.toJSON());
 		})
 	}
-
-	$scope.navegarPlanTratamiento = function(item){
-		$rootScope.currentDiagnostico = item.RowKey;
-		$state.go("app.planTratamiento");		
-	}
-
-	$scope.navegarOdontograma = function(item){
-		$rootScope.currentDiagnostico = item.RowKey;
-		$state.go("app.odontograma");
-	}
-
-	$scope.navegarPeriododntograma = function(item){
-		$rootScope.currentDiagnostico = item.RowKey;		
-		$state.go("app.periodontograma", { "pacienteId": item.RowKey});
-	}
-
+	
 	$scope.delete = function(data, $index){
-		data.Estado_Entidad = "2";		
-		dataTableStorageFactory.saveStorage(data);
+		diagnosticoPacienteService.destroy(data.objectId);
 		$scope.listado.splice($index, 1);
 	} 
 
-	function inicializar(){
-		debugger
-		var DiagnosticoPacienteDfd = $q.defer();
-		var DiagnosticoPaciente = Parse.Object.extend("Diagnostico_Paciente");
-		var query = new Parse.Query(DiagnosticoPaciente);
-		query.equalTo("paciente", idPaciente);
-		
-		
-		
-		query.find().then(function(entidad){
-			DiagnosticoPacienteDfd.resolve(entidad);
-		},
-		function(entidad, error){
-			DiagnosticoPacienteDfd.reject(error);
-		});
-		
-		DiagnosticoPacienteDfd.promise.then(function(result){
-			for (var i = 0; i < result.length; i++) {
-				$scope.listado.push(result[i].toJSON());
-			}
-		})
-		.catch(function(error){
-			console.log(error);	
-		})
+	$scope.navegarPlanTratamiento = function(item){
+		$state.go("pages.planTratamiento", {"diagnosticoPacienteId": item.objectId});		
 	}
 
-	inicializar();
-	
-}])
+	$scope.navegarOdontograma = function(item){
+		$state.go("pages.odontograma", {"diagnosticoPacienteId": item.objectId});
+	}
+
+	$scope.navegarPeriododntograma = function(item){
+		$state.go("pages.periodontograma", {"diagnosticoPacienteId": item.objectId});
+	}
+})

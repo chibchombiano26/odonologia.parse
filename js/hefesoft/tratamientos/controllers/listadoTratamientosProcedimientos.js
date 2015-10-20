@@ -1,3 +1,5 @@
+/*global angular, Parse, hefesoft*/
+
 angular.module('odontologiaApp')
 .controller('listadoProcedimientosTratamientosCtrl', ['$scope', 'dxSeleccionado','$modalInstance', 
 	function ($scope, dxSeleccionado, $modalInstance) {
@@ -26,6 +28,13 @@ angular.module('odontologiaApp')
 
 		$scope.close = function(tipo){
 			if(tipo == "close"){
+				
+				var elementoActualizar = JSON.parse(angular.toJson(angular.copy($scope.diagnosticoSeleccionado)));
+				
+				if(!hefesoft.isEmpty(elementoActualizar.arrayHefesoftTratamientos)){
+					addTratamiento(elementoActualizar.objectId, elementoActualizar.arrayHefesoftTratamientos);
+				}
+				
 				$modalInstance.close($scope.diagnosticoSeleccionado);
 			}
 			else if(tipo == "dismiss"){
@@ -46,5 +55,16 @@ angular.module('odontologiaApp')
 	  	}
 
 	      data.valor = valor;
+	   }
+	   
+	   function addTratamiento(id, tratamientos){
+	   	
+	   	var Tratamiento = Parse.Object.extend("Diagnostico");
+	   	var tratamiento = new Tratamiento();
+	   	
+	   	tratamiento.set("id", id);
+	   	tratamiento.set("arrayHefesoftTratamientos", tratamientos);
+	   	tratamiento.save();
+	   	
 	   }
 }])

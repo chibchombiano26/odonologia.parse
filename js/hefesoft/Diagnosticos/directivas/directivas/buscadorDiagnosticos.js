@@ -1,3 +1,4 @@
+/*global angular, Parse, _*/  
 angular.module("odontologiaApp")
 .directive("buscadorDiagnosticos", function($parse){
     

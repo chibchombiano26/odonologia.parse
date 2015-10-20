@@ -60,6 +60,7 @@ function dependenciasPacientes(){
         [   
             "js/hefesoft/pacientes/services/inicializarListado.js",            
             "js/hefesoft/pacientes/controllers/listado.js",
+            "js/hefesoft/pacientes/services/pacientes.js",
             "vendors/hefesoft/Fixes/fixes.js"     
         ]
     }
@@ -123,6 +124,8 @@ function dependenciasDiagnosticos(){
             "js/hefesoft/Diagnosticos/controllers/addDiagnostico.js",
             "js/hefesoft/Diagnosticos/directivas/directivas/list.js",
             "js/hefesoft/Diagnosticos/directivas/directivas/listNoHeader.js",
+            "js/hefesoft/odontograma/directivas/superficies/filter/simbolo.js",
+            "js/hefesoft/odontograma/directivas/superficies/filter/colorSuperficie.js",
             "vendors/farbtastic/farbtastic.css",
             "vendors/farbtastic/farbtastic.min.js",
             'vendors/bower_components/angular-farbtastic/angular-farbtastic.js',
@@ -239,8 +242,6 @@ function dependenciasOdontograma(){
             "js/hefesoft/odontograma/controllers/odontograma.js",
             "js/hefesoft/odontograma/filter/textoDientePermanenteTemporal.js",
             "js/hefesoft/odontograma/directivas/superficies/directiva/superficie.js",
-            "js/hefesoft/odontograma/directivas/superficies/filter/simbolo.js",
-            "js/hefesoft/odontograma/directivas/superficies/filter/colorSuperficie.js",
             "js/hefesoft/odontograma/directivas/superficies/controller/superficie.js",
             "js/hefesoft/odontograma/directivas/odontograma/directiva/odontograma.js",
             "js/hefesoft/odontograma/controllers/piezaDentalSeleccionada.js",
@@ -296,7 +297,8 @@ function dependenciasDiagnosticosPacientes(){
         serie: true,
         files: 
         [            
-            "js/hefesoft/historia/Odontologia/diagnosticosPaciente/controler/diagnosticosPaciente.js"
+            "js/hefesoft/historia/Odontologia/diagnosticosPaciente/controler/diagnosticosPaciente.js",
+            "js/hefesoft/historia/Odontologia/diagnosticosPaciente/services/diagnosticosPacientes.js"
         ]
     }
 

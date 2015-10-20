@@ -29,11 +29,13 @@
                         <button class="btn btn-default waves-effect" ng-click="eliminar(item, $index)"><i class="zmdi zmdi-delete"></i></button>
                     </td>
                     <td ng-hide="editable">
-                        <i class="md md-keyboard-arrow-right" ng-click="selected(item)">Editar</i>                            
+                        <i class="md md-keyboard-arrow-right" ng-click="selected(item)">Procedimientos</i>                            
                     </td>
-                    <td>{{item.nombre}}</td>
+                    <td>
+                        <p tooltip="{{item.nombre}}" read-more ng-model="item.nombre" words="false" length="10"></p>
+                    </td>
                     <td ng-show="verSuperficies">{{item.superficie}}</td>
-                    <td class="f-500 c-cyan">{{item.valor}}</td>                            
+                    <td class="f-500 c-cyan">{{item.valor | currency}}</td>                            
                 </tr>                      
             </tbody>
         </table>

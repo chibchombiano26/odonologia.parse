@@ -5,9 +5,11 @@
     var esNuevo = true;
     $scope.Procedimiento = {};
     $scope.listadoCup = [];
+    $scope.modo = "Guardar";
 
     if(!angular.isUndefined(seleccionado)){
        $scope.Procedimiento = seleccionado;
+       $scope.modo = "Editar";
        esNuevo = false;
     }
 
@@ -15,8 +17,14 @@
   
 
    $scope.adicionar = function(){
-   	 var data = $scope.Procedimiento;     
-     listado.push(data);     
+   	 var data = $scope.Procedimiento;
+   	 if(esNuevo){
+        listado.push(data);
+   	 }
+   	 else{
+   	    seleccionado = data;     
+   	 }
+   	 
      $modalInstance.close();
    }
     

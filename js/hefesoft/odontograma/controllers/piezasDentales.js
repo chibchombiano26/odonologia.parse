@@ -1,3 +1,4 @@
+/*global angular, Parse, _.,_*/
 angular.module('odontologiaApp')
 .controller('piezasDentalesCtrl', ['$scope', 'odontogramaJsonServices', '$modal', 'diagnosticoServices', 'piezasDentalesServices',
 	function ($scope, odontogramaJsonServices, $modal, diagnosticoServices, piezasDentalesServices) {

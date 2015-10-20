@@ -1,3 +1,4 @@
+/*global angular, messageService, Parse*/
 angular.module('odontologiaApp')
 .service('inicializarTratamientosServices', 
     ['dataTableStorageFactory', 'users','$ionicLoading', '$rootScope',

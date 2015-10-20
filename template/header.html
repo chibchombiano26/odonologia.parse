@@ -21,9 +21,13 @@
                 </div>
             </li>
 
+            <!-- Buscador
             <li id="top-search">
                 <a class="tm-search" href="" data-ng-click="hctrl.openSearch()"></a>
             </li>
+            -->
+            
+            <!-- Messages
             <li class="dropdown" dropdown>
                 <a dropdown-toggle class="tm-message" href=""><i class="tmn-counts">6</i></a>
                 <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
@@ -51,6 +55,8 @@
                     </div>
                 </div>
             </li>
+            -->
+            
             <li class="dropdown" dropdown>
                 <a dropdown-toggle class="tm-notification" href=""><i id="notificationNumber" class="tmn-counts">0</i></a>
                 <div class="dropdown-menu dropdown-menu-lg stop-propagate pull-right">
@@ -87,6 +93,9 @@
 
                 </div>
             </li>
+            
+            
+            <!-- Tasks
             <li class="dropdown hidden-xs" dropdown>
                 <a dropdown-toggle class="tm-task" href=""><i class="tmn-counts">2</i></a>
                 <div class="dropdown-menu pull-right dropdown-menu-lg">
@@ -148,12 +157,16 @@
                     </div>
                 </div>
             </li>
+            -->
+            
             <li class="dropdown" dropdown>
                 <a dropdown-toggle class="tm-settings" href=""></a>
                 <ul class="dropdown-menu dm-icon pull-right">
                     <li class="hidden-xs">
-                        <a data-ng-click="hctrl.fullScreen()" href=""><i class="zmdi zmdi-fullscreen"></i> Toggle Fullscreen</a>
+                        <a data-ng-click="hctrl.fullScreen()" href=""><i class="zmdi zmdi-fullscreen"></i> Pantalla completa</a>
                     </li>
+                    
+                    <!--
                     <li>
                         <a data-ng-click="hctrl.clearLocalStorage()" href=""><i class="zmdi zmdi-delete"></i> Clear Local Storage</a>
                     </li>
@@ -163,6 +176,7 @@
                     <li>
                         <a href=""><i class="zmdi zmdi-settings"></i> Other Settings</a>
                     </li>
+                    -->
                 </ul>
             </li>
             <li class="hidden-xs" data-target="chat" data-toggle-sidebar data-model-right="mactrl.sidebarToggle.right" data-ng-class="{ 'open': mactrl.sidebarToggle.right === true }">
@@ -173,7 +187,9 @@
 </ul>
 
 <!-- Top Search Content -->
+<!-- Buscador
 <div id="top-search-wrap">
     <input type="text">
     <i id="top-search-close" data-ng-click="hctrl.closeSearch()">&times;</i>
 </div>
+-->

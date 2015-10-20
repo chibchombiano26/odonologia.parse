@@ -1,3 +1,4 @@
+/*global angular, Parse, _*/
 angular.module('odontologiaApp')
 .service('diagnosticosService', function($q){
     

@@ -4,7 +4,7 @@ angular.module('odontologiaApp')
 	var dataFactory = {};
 
 	dataFactory.extraerTratamientos = function(item){
-		var partes = ['centro','izquierda','derecha','abajo','arriba','inferior','superior'];
+		var partes = ['centro','izquierda','derecha','abajo','arriba','inferior','superior', 'piezaCompleta'];
 		var array = [];
 		
 		for (var i = partes.length - 1; i >= 0; i--) {
@@ -20,7 +20,7 @@ angular.module('odontologiaApp')
 	}
 
 	dataFactory.extraerDiagnosticos = function(item){
-		var partes = ['centro','izquierda','derecha','abajo','arriba','inferior','superior'];
+		var partes = ['centro','izquierda','derecha','abajo','arriba','inferior','superior', 'piezaCompleta'];
 		var array = [];
 		
 		for (var i = partes.length - 1; i >= 0; i--) {
