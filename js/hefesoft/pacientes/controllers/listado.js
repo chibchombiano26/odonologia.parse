@@ -6,8 +6,10 @@
 	
 	$scope.Paciente;
 	var idPaciente = "";
+	var modo = "nuevo";
 	
 	if($stateParams.pacienteId.length > 0){
+		modo = "modificar";
 		idPaciente = $stateParams.pacienteId;
 		cargarPaciente(idPaciente);
 	}
@@ -22,7 +24,11 @@
 	$scope.save = function(){
 		pacienteService.save(idPaciente,$scope.Paciente).then(function(paciente){
 			idPaciente = paciente.id;
-			$rootScope.$broadcast('pacienteModificado', {paciente: paciente, modo: "Modificado"});
+			
+			if(modo === "nuevo"){
+				$rootScope.$broadcast('pacienteModificado', {paciente: paciente, modo: "Modificado"});
+			}
+			
 			$state.go("pages.listadopacientes");
 		})
 	}
@@ -61,6 +67,10 @@
 	$scope.nuevo = function(){
 		$scope.Paciente = {};
 		$state.go("pages.paciente");		
+	}
+	
+	$scope.enviarCorreo = function(item){
+		$state.go("pages.email", {recipient: item.email})
 	}
 	
 	$rootScope.$on("pacienteModificado", function(event, payload) {

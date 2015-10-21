@@ -1,17 +1,24 @@
 <div ng-controller="realizarPeriodontogramaCtrl as vm">
 	
 	<div class="row">
-		<div class="btn-group pull-right m-r-5">
-		    <button 
-		        ng-click="guardarCommand()"
-		        type="button" 
-		        class="btn btn-primary waves-effect waves-button waves-float">Guardar
-		    </button>		    
+		<div class="col-sm-2">
+		</div>
+		
+		<div class="col-sm-8">
+			<div class="pull-right p-r-25">
+				<div class="btn-group btn-group-xs" role="group">
+				    <button ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-sm-2">
 		</div>
 	</div>
 
-	<div class="row">		
-		<div class="col-sm-7">
+	<div class="row">
+	 		
+		<div class="col-sm-6 col-xs-offset-1">
 		 	<piezas-dentales-periodontograma
 		 		click-pieza-dental="piezaDentalSeleccionada(item)"
 		 		contexto="contextoPiezaDental"
@@ -19,16 +26,26 @@
 			</piezas-dentales-periodontograma> 
 		</div>
 
-		<div class="col-sm-1">			
-			<periodontograma-pieza-dental
-				numero-pieza-dental="selecionado.numeroPiezaDental" 
-				width="40" 
-				height="120"				
-				item="selecionado">
-			</periodontograma-pieza-dental>			
+		<div class="col-xs-1">
+				
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-xs-2">
+			
+			<div class="rpw col-sm-9 col-xs-offset-3">
+				<h5>{{selecionado.numeroPiezaDental}}</h5>
+				<periodontograma-pieza-dental
+					numero-pieza-dental="selecionado.numeroPiezaDental" 
+					ocultar-numero-pieza-dental="'true'"
+					width="40" 
+					height="120"
+					zoom="'0.7'"
+					item="selecionado">
+				</periodontograma-pieza-dental>
+			</div>
+			
+			</br>
+			
 			<h5>Movilidad</h5>
 
 			<div class="form-group">
@@ -103,7 +120,7 @@
 			</div>
 		</div>
 
-		<div class="col-sm-2">
+		<div class="col-xs-2">
 			<!--Margenes-->		
 			<h5> Margen gingival </h5>
 

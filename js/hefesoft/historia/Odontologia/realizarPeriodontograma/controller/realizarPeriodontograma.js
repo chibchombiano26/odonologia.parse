@@ -9,25 +9,25 @@ controller('realizarPeriodontogramaCtrl',
 	$scope.contextoPiezaDental = {};
 	var cambioDetectado = false; 
 	$scope.seleccionado = false;
-    $scope.zoom = 0.9;
+    $scope.zoom = 0.8;
 
     var idPeriodontograma = 0;
-    
-    var idPaciente = 0;
+    var diagnosticoPacienteId = 0;
     var periodontograma;
 	
 	if($stateParams.diagnosticoPacienteId.length > 0){
-		idPaciente = $stateParams.diagnosticoPacienteId;
+		diagnosticoPacienteId = $stateParams.diagnosticoPacienteId;
 		inicializarDatos();
 	}
    
 
     function inicializarDatos(){
     
-      periodontogramaServiceParse.cargarPeriodontograma("AemNcskkZ0").then(function(data){
+      periodontogramaServiceParse.cargarPeriodontograma(diagnosticoPacienteId).then(function(data){
 	  
 	  	if(data){
 	  	    var result = data.toJSON();
+	  	    idPeriodontograma = result.objectId;
 	  	    var Periodontograma = result.listado;
 	  	    
 	  	    //Ordenarlos deacuerdo al codigo como en la nube se guardan en string no los ordena bien
@@ -36,8 +36,6 @@ controller('realizarPeriodontogramaCtrl',
             });
 	  		
       		var promise = $interval(function(){
-      		
-               
       			if(angular.isFunction($scope.contextoPiezaDental)){
       		
       		         var contextoPiezas = $scope.contextoPiezaDental();
@@ -65,9 +63,6 @@ controller('realizarPeriodontogramaCtrl',
 	  	}
 	  	
 	  })
-    
-
-
 
     }
 
@@ -151,7 +146,10 @@ controller('realizarPeriodontogramaCtrl',
 
     function guardar(Listado){
         var contextoPiezas = $scope.contextoPiezaDental();
-        periodontogramaServiceParse.savePeriodontograma(Listado, "AemNcskkZ0");
+        periodontogramaServiceParse.savePeriodontograma(Listado, diagnosticoPacienteId, idPeriodontograma).then(function(result){
+            var item = result.toJSON();
+            idPeriodontograma = item.objectId;
+        })
     }
 
     //Periodontograma base cargado

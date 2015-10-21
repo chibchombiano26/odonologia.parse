@@ -69,6 +69,26 @@ hefesoft = function () {
 			return "img/icon.png";
 		}
   }
+  
+  function nombreToSuperficie(item){
+    switch (item.toLocaleLowerCase()) {
+     case 'centro':
+      return "Oclusal";
+     case 'izquierda':
+      return "Distal";
+     case 'derecha':
+      return "Mesial";
+     case 'arriba':
+      return "Vestibular";
+     case 'abajo':
+      return "Lingual o Palatino";
+     case 'piezacompleta':
+      return 'Pieza Completa';
+     
+     default:
+      return item;
+  }
+  }
 
 
   return {
@@ -78,7 +98,8 @@ hefesoft = function () {
     "angularObjectToParse": angularObjectToParse,
     "generoPic": generoPic,
     "debug" : true,
-    "experimental": false
+    "experimental": false,
+    "nombreToSuperficie" : nombreToSuperficie
   }
 
 }();

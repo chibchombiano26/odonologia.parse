@@ -12,17 +12,20 @@
         </a>
 
         <ul class="main-menu">
+            <!--
             <li>
                 <a data-ui-sref="pages.profile.profile-about" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-account"></i> View Profile</a>
             </li>
+            
             <li>
                 <a href=""><i class="zmdi zmdi-input-antenna"></i> Privacy Settings</a>
             </li>
             <li>
                 <a href=""><i class="zmdi zmdi-settings"></i> Settings</a>
             </li>
+            -->
             <li>
-                <a ng-click="logOut()"><i class="zmdi zmdi-time-restore"></i> Logout</a>
+                <a ng-click="logOut()"><i class="zmdi zmdi-time-restore"></i> Salir</a>
             </li>
         </ul>
         
@@ -36,40 +39,43 @@
 
     <ul class="main-menu">
         <li data-ui-sref-active="active">
-            <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-home"></i> Home</a>
+            <a data-ui-sref="pages.wall" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-home"></i> Inicio</a>
         </li>
+        
+        <!--
         <li data-ui-sref-active="active">
             <a data-ui-sref="typography" data-ng-click="mactrl.sidebarStat($event)"><i class="zmdi zmdi-format-underlined"></i> Typography</a>
         </li>
+        -->
+        
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('widgets') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-widgets"></i> Widgets</a>
+            <a href="" toggle-submenu><i class="zmdi zmdi-widgets"></i> Citas</a>
 
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widget-templates" data-ng-click="mactrl.sidebarStat($event)">Templates</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="widgets.widgets" data-ng-click="mactrl.sidebarStat($event)">Widgets</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="pages.agenda" data-ng-click="mactrl.sidebarStat($event)">Agenda</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="pages.citas" data-ng-click="mactrl.sidebarStat($event)">Aprobar/Denegar Citas</a></li>
             </ul>
         </li>
+        
         
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('tables') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi zmdi-view-list"></i> Tables</a>
+            <a href="" toggle-submenu><i class="zmdi zmdi zmdi-view-list"></i> Parametrizar</a>
 
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="tables.tables" data-ng-click="mactrl.sidebarStat($event)">Tables</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="tables.data-table" data-ng-click="mactrl.sidebarStat($event)">Data Tables</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="pages.listadoDiagnosticos" data-ng-click="mactrl.sidebarStat($event)">Diagnosticos</a></li>
             </ul>
         </li>
         
+        
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('form') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-collection-text"></i> Forms</a>
+            <a href="" toggle-submenu><i class="zmdi zmdi-collection-text"></i> Pacientes</a>
 
             <ul>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.basic-form-elements" data-ng-click="mactrl.sidebarStat($event)">Basic Form Elements</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.form-components" data-ng-click="mactrl.sidebarStat($event)">Form Components</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.form-examples" data-ng-click="mactrl.sidebarStat($event)">Form Examples</a></li>
-                <li><a data-ui-sref-active="active" data-ui-sref="form.form-validations" data-ng-click="mactrl.sidebarStat($event)">Form Validation</a></li>
+                <li><a data-ui-sref-active="active" data-ui-sref="pages.listadopacientes" data-ng-click="mactrl.sidebarStat($event)">Ver pacientes</a></li>
             </ul>
         </li>
 
+        <!--
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('user-interface') }">
             <a href="" toggle-submenu><i class="zmdi zmdi-swap-alt"></i>User Interface</a>
             <ul>
@@ -125,5 +131,6 @@
                 <li><a href="404.html">Error 404</a></li>
             </ul>
         </li>
+        -->
     </ul>
 </div>

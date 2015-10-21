@@ -429,9 +429,11 @@ function dependenciasNoUiSlider(){
         serie: true,        
         files: 
         [   
-            "vendors/bower_components/nouislider/jquery.nouislider.css",
-            "vendors/bower_components/nouislider/jquery.nouislider.min.js",
-            "vendors/bower_components/angular-nouislider/src/nouislider.min.js", 
+            'vendors/bower_components/nouislider/jquery.nouislider.css',
+            'vendors/bower_components/chosen/chosen.min.css',
+            'vendors/bower_components/nouislider/jquery.nouislider.min.js',
+            'vendors/bower_components/chosen/chosen.jquery.js',
+            'vendors/bower_components/angular-chosen-localytics/chosen.js'
         ]
     }
 
@@ -507,6 +509,23 @@ function dependenciasDate(){
        
        return dependencias;
    }
+   
+   function dependenciasEmail(){
+       var dependencias =
+       {
+          name: 'odontologiaApp',
+          cache: true,
+          files:
+          [
+              "js/hefesoft/email/controller.js",
+              "vendors/hefesoft/google/appscripts/services/email.js"
+          ]
+       }
+       
+       return dependencias;
+   }
+
+
 
 
 function cargarPacientes($ocLazyLoad){
@@ -641,7 +660,17 @@ function cargarPacientes($ocLazyLoad){
         dependenciasImagenes(),
         dependenciasCalendar(),
         dependenciasAgenda(),
+        dependenciasEmail()
       ]);
    }
+   
+   function cargarEmail($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+        dependenciasEmail()
+      ]);
+   }
+   
+   
    
  

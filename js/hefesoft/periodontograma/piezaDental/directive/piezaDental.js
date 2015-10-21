@@ -1,10 +1,12 @@
+/*global angular*/
 angular.module('odontologiaApp')
 .directive('periodontogramaPiezaDental', [function () {
 	return {
 		restrict: 'E',
 		scope:{			
 			zoom : '=',			
-			item: '='
+			item: '=',
+			ocultarNumeroPiezaDental : '='
 		},
 		templateUrl : 'js/hefesoft/periodontograma/piezaDental/views/piezaDental.html',
 		controller : 'periodontogramaPiezaDentalCtrl',

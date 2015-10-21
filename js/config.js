@@ -727,6 +727,23 @@ materialAdmin
             }
           })
           
+          .state('pages.email', {
+            url: "/email/:recipient",
+            controller: "appScriptEmailCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/email/view.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarEmail($ocLazyLoad)
+               }
+            }
+          })
+          
+          
+          
           /*
           
           .state('app.agenda', {

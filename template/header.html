@@ -81,6 +81,12 @@
                                     <div class="media-body">
                                         <div class="lv-title">{{ w.user }}</div>
                                         <small class="lv-small">{{ w.text }}</small>
+                                        
+                                        <div class="btn-group btn-group-xs" role="group">
+                                            <button type="button" ng-click="hctrl.adicionarComoPaciente(w)" class="btn btn-info waves-effect">Adicionar como paciente</button>
+                                            <button type="button" ng-click="hctrl.irCitas()" class="btn btn-default waves-effect">Ir a citas</button>
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </a>

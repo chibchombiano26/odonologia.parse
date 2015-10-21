@@ -1,3 +1,4 @@
+/*global angular, Parse*/
 angular.module('directivas')
 .controller('listadoNotificacionesCtrl', 
 	['$scope', 'dataTableStorageFactory', '$rootScope', 

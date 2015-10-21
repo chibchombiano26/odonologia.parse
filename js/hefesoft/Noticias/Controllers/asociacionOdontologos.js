@@ -1,3 +1,4 @@
+/*global angular, _*/
 angular.module('odontologiaApp')
 .controller('asociacionOdontologosCtrl', ['$scope', 'fbGroupsService',
 	function ($scope, fbGroupsService) {
@@ -13,6 +14,8 @@ angular.module('odontologiaApp')
 		var listado = _.uniq( ( [] ).concat(
         _.where( data, { 'type': "photo" } ),
         _.where( data, { 'type': "link" } ) ) );
+        
+        listado = _.sortBy(listado, function(o) { return new Date(o.created_time); })
 		$scope.data = filtrarDatos(listado);
 	}
 

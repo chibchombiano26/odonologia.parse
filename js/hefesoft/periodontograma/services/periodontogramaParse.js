@@ -1,3 +1,4 @@
+/*global angular, Parse*/
 angular.module("odontologiaApp")
 .service("periodontogramaServiceParse", function($q){
     
@@ -5,9 +6,10 @@ angular.module("odontologiaApp")
     
      dataFactory.cargarPeriodontograma = function (id){
 		var deferred = $q.defer();
-		var Odontograma = Parse.Object.extend("Periodontograma");
-		var query = new Parse.Query(Odontograma);
-		query.get(id)
+		var Periodontograma = Parse.Object.extend("Periodontograma");
+		var query = new Parse.Query(Periodontograma);
+		query.equalTo('idPeriodontograma', id);
+		query.first()
 		.then(function(result){
 			deferred.resolve(result);
 		},
@@ -26,25 +28,25 @@ angular.module("odontologiaApp")
 		return deferred.promise;
 	}
 	
-	dataFactory.savePeriodontograma = function(listadoGuardar, id){
+	dataFactory.savePeriodontograma = function(listadoGuardar, id, periodontogramaId){
 	    
  		var deferred = $q.defer();
  		
- 		var Odontograma = Parse.Object.extend("Periodontograma");
- 		var odontograma = new Odontograma();
+ 		var Periodontograma = Parse.Object.extend("Periodontograma");
+ 		var periodontograma = new Periodontograma();
  		
  		//Se le quitan primero los caracteres especialesw como $ y puntos
  		//Y luevo se vuelve a convertir a json
  		listadoGuardar = angular.toJson(listadoGuardar, true);
  		listadoGuardar = JSON.parse(listadoGuardar);
  		
- 		if(id){
- 		    odontograma.id = id;
- 		    odontograma.set("idPeriodontograma", id);
+ 		if(periodontogramaId){
+ 		    periodontograma.set("id", periodontogramaId);
  		}
  		
- 		odontograma.set("listado", listadoGuardar);
- 		odontograma.save()
+ 		periodontograma.set("idPeriodontograma", id);
+ 		periodontograma.set("listado", listadoGuardar);
+ 		periodontograma.save()
  		.then(function(entidad){
  			deferred.resolve(entidad);
  		},

@@ -8,6 +8,7 @@
 		<div class="pull-right p-r-25">
 			<div class="btn-group btn-group-xs" role="group">
 				<button ng-click="odontograma()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Odontograma</button>
+				<button ng-click="generarCotizacion()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Generar cotizacion</button>
 			    <button ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
 			</div>
 		</div>
@@ -17,16 +18,27 @@
 	</div>
 </div>
 
+</br>
 
 <div class="row">
- <listado-procedimientos
-    ocultar-add-procedimiento="'true'"
-    modo-pagos="'true'"
-    editable="'true'"
-    procedimiento-realizado-callback="procedimientoRealizado(item)"
-    contexto="contextoProcedimientos"
-    ng-model="Listado">
- </listado-procedimientos>
+	
+	<div class="col-sm-1">
+	</div>
+	
+	<div class="col-sm-10">
+		<listado-procedimientos
+	    ocultar-add-procedimiento="'true'"
+	    modo-pagos="'true'"
+	    editable="'true'"
+	    procedimiento-realizado-callback="procedimientoRealizado(item)"
+	    contexto="contextoProcedimientos"
+	    ng-model="Listado">
+	 </listado-procedimientos>
+	</div>
+	
+	<div class="col-sm-1">
+	</div>
+ 
 </div>
 
 </div>

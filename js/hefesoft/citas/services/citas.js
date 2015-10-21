@@ -1,3 +1,4 @@
+/*global Parse, angular*/
 angular.module('odontologiaApp')
 .service('citasService', function($q){
     
@@ -8,6 +9,7 @@ angular.module('odontologiaApp')
         var Citas = Parse.Object.extend('Citas');
         var query = new Parse.Query(Citas);
         query.equalTo("medico", Parse.User.current().get('email'));
+        query.equalTo('estado', "solicitada");
         query.find().then(function(result){
             deferred.resolve(result);
         })
@@ -21,6 +23,7 @@ angular.module('odontologiaApp')
         citas.set('estado', aprobado);
         citas.save();
     }
+    
     
     return datafactory;
     

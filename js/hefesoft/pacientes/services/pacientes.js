@@ -36,6 +36,38 @@ angular.module('odontologiaApp')
 	  return PacienteDfd.promise;
     }
     
+    dataFactory.validarExistePacienteFacebook = function(id){
+	  var PacienteDfd = $q.defer();
+	  var Paciente = Parse.Object.extend('Paciente');
+	  var queryPaciente = new Parse.Query(Paciente);
+	  queryPaciente.equalTo("idFacebook", id);
+	  queryPaciente.first().then(function (data) {
+	  	PacienteDfd.resolve(data);
+	  }, function (error) {
+	  	PacienteDfd.reject(error);
+	  });
+		  
+	  return PacienteDfd.promise;
+    }
+    
+    dataFactory.saveFromFacebook = function(w){
+    	var deferred = $q.defer();
+		var Paciente  = Parse.Object.extend("Paciente");
+		var paciente = new Paciente();
+		
+		paciente.set("nombre", w.user);
+		paciente.set("email", w.text);
+		paciente.set("pictureUrl", w.img);
+		paciente.set("username", Parse.User.current().get("email"));
+		paciente.set("idFacebook", w.id);
+		
+		paciente.save().then(function(result){
+		    deferred.resolve(result);
+		});
+		
+		return deferred.promise;
+    }
+    
     dataFactory.save = function(idPaciente, item){
 		var deferred = $q.defer();
 		var Paciente  = Parse.Object.extend("Paciente");
@@ -63,8 +95,10 @@ angular.module('odontologiaApp')
 		paciente.set("medicoParticular", parseService.validateUndefined(item.medicoparticular));
 		paciente.set("genero", parseService.validateUndefined(item.genero));
 		
+		if(hefesoft.isEmpty(item.pictureUrl)){
+			paciente.set("pictureUrl", hefesoft.generoPic(item, "genero"));
+		}
 		
-		paciente.set("pictureUrl", hefesoft.generoPic(item, "genero"));
 		paciente.set("username", Parse.User.current().get("email"));
 		
 		paciente.save(null,{

@@ -1,9 +1,10 @@
+/*global angular, FB*/
 angular.module('odontologiaApp').
 service('fbGroupsService', ['$q', function ($q) {
 	
   var dataFactory = {};
 
-  dataFactory.getWall = function(ur){
+  dataFactory.getWall = function(url){
   	var deferred = $q.defer();
   	$.ajax({
 	  url: url,

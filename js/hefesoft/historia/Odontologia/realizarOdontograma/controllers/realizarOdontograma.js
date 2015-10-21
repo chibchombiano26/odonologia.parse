@@ -142,6 +142,8 @@ angular.module('Historia')
  	$scope.piezaModificada = function(item){
  		$scope.piezaDentalSeleccionada(item); 		
  	}
+ 	
+ 	
 
  	$scope.guardarCommand = function(){
  		var deferred = $q.defer();

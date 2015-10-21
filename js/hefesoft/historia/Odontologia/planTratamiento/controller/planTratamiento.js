@@ -1,8 +1,8 @@
-/*global angular, Parse, _, Hefesot, hefesoft*/
+/*global angular, Parse, _, Hefesot, hefesoft, numeral*/
 angular.module('Historia').
 controller('planTratamientoCtrl', 
-	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams',
-	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams) {
+	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams', 'appScriptTemplateServices',
+	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams, appScriptTemplateServices) {
 
 
 	var idOdontograma;
@@ -74,6 +74,42 @@ controller('planTratamientoCtrl',
    	   		}
    		}	   
 	}
+	
+	$scope.generarCotizacion = function(){
+ 	   
+ 	   var parameters = {
+            name : $rootScope.currentPacient.nombre, 
+            fileName : "cotizacion "  + $rootScope.currentPacient.nombre, 
+            rowsData: [], 
+            to: $rootScope.currentPacient.email, 
+            subject: "Cotizacion",
+            message : "Cotizacion",
+            clinica: "Nombre medico : "  + Parse.User.current().get("name"),
+            direccion : "Direccion clinica :",
+            telefono: "Telefono clinica :",
+            email: "Email : " + Parse.User.current().get("email")
+        };
+        
+        var titulos = ['Pieza dental', 'Procedimiento', 'Superficie', 'Valor'];
+        var lista = angular.copy($scope.Listado);
+        var sumaValor = 0;
+        
+        parameters.rowsData.push(titulos);
+        
+        for (var i = 0; i < lista.length; i++) {
+        	var item = [lista[i].numeroPiezaDental, lista[i].nombre, hefesoft.nombreToSuperficie(lista[i].superficie), numeral(lista[i].valor).format('$0,0.00')];
+        	parameters.rowsData.push(item);
+        }
+        
+        sumaValor = _.sum(lista, function(object) {
+		  return object.valor;
+		});
+        
+        sumaValor = numeral(sumaValor).format('$0,0.00');
+        var footer = ['Total', '', '', sumaValor];
+        parameters.rowsData.push(footer);
+        appScriptTemplateServices.templateWindow(parameters);
+ 	}
 
 
 	//Dado el procedimiento se saca la pieza dental a la que corresponde

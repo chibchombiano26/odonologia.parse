@@ -53,7 +53,7 @@ materialAdmin
     // =========================================================================
     // Header
     // =========================================================================
-    .controller('headerCtrl', function($timeout, messageService, $scope, PubNub, $rootScope, $state, citasService, $interval){
+    .controller('headerCtrl', function($timeout, messageService, $scope, PubNub, $rootScope, $state, citasService, $interval, $q, pacienteService, growlService){
 
         var channelName = Parse.User.current().get("username");
         var notificationNumber = 0;
@@ -63,15 +63,37 @@ materialAdmin
             $state.go('pages.citas')
         }
         
+        this.adicionarComoPaciente = function(w){
+            
+            pacienteService.validarExistePacienteFacebook(w.id).then(function(result){
+                if(!result){
+                    pacienteService.saveFromFacebook(w).then(function(paciente){
+                        $rootScope.$broadcast('pacienteModificado', {paciente: paciente, modo: "Modificado"});
+                    })
+                }
+                else{
+                    growlService.growl('Ya lo has adicionado como paciente', 'inverse');
+                }
+            })
+        }
 
         function inicializar(){
           citasService.obtenerCitas().then(function(result){
             for (var i = 0; i < result.length; i++) {
                 var data = result[i].toJSON();
-                messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.objectId});
+                messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.objectId, idUsuario : data.idUsuario});
             }
             
              notificationNumber = result.length;
+             
+             
+             if(notificationNumber === 0){
+                $('#notificationNumber').hide();    
+             }
+             else{
+                 $('#notificationNumber').show();
+             }
+             
              $('#notificationNumber').html(notificationNumber);
           })
         }
@@ -79,11 +101,13 @@ materialAdmin
         
         $rootScope.$on(PubNub.ngMsgEv(channelName), function(event, payload) {
             notificationNumber = notificationNumber +1;
+            
+            $('#notificationNumber').show();
             $('#notificationNumber').html(notificationNumber);
-             
-             var data = JSON.parse(payload.message);
-             messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.id});
+            var data = JSON.parse(payload.message);
+            messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.id});
         })
+       
 
          // Top Search
         this.openSearch = function(){
@@ -295,6 +319,7 @@ materialAdmin
             
             $rootScope.$broadcast('onLogin');
             var ultimaPagina = hefesoft.getStorageObject("ultimaPagina");
+            
             
             if(!hefesoft.isEmpty(ultimaPagina)){
                 //Va a la ultima pagina que se intento navegar 

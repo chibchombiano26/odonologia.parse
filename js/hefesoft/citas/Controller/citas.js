@@ -1,5 +1,6 @@
+/*global angular, Parse, _, moment*/
 angular.module('odontologiaApp')
-.controller('citasCtrl', function($scope, $q, calendarGetData, agendaHelperService, $state, citasService, $rootScope, PubNub, growlService){
+.controller('citasCtrl', function($scope, $q, calendarGetData, agendaHelperService, $state, citasService, $rootScope, PubNub, growlService, appScriptEmailServices){
     
     $scope.data = [];
     $scope.calendarId = 'primary';
@@ -8,7 +9,6 @@ angular.module('odontologiaApp')
     $rootScope.$on(PubNub.ngMsgEv(channelName), function(event, payload) {
         inicializar();
     })
-    
     
 
 	function eventApiCargada(){		
@@ -33,9 +33,21 @@ angular.module('odontologiaApp')
     }
     
     $scope.aprobacion = function(item, aprobado){
+        
         item.estado = aprobado;
         item['title'] = "Nueva cita medica con : " + item.name;
         
+        var mensaje = "";
+        var asunto = "Aprobacion cita medica";
+        
+        if(item.estado == "aprobado"){
+            mensaje = "Su cita ha sido aprobada"; 
+        }
+        else{
+            mensaje = "Su cita ha sido denegada"; 
+        }
+        
+        appScriptEmailServices.sendEmailWindow(item.email, asunto, mensaje);
         citasService.actualizarCita(item.objectId, aprobado);
         
         if(aprobado === "aprobado"){
