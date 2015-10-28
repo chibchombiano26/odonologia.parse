@@ -1,3 +1,4 @@
+/*global angular, gapi, google*/
 angular.module('hefesoft.google')
 .service('driveApi', 
 	['$q', function ($q) {

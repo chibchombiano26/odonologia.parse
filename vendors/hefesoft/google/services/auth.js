@@ -177,8 +177,10 @@ angular.module('hefesoft.google')
         }
         
         dataFactory.logOutGoogle = function(){
-            var win = window.open("http://accounts.google.com/logout", "something", "width=550,height=570");
-            setTimeout("win.close();", 4000);
+             var win = window.open("http://accounts.google.com/logout", "something", "width=550,height=570", "_blank");
+             $timeout(function(){
+                  win.close();
+             },8000);
         }
 
 	return dataFactory;

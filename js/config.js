@@ -611,7 +611,8 @@ materialAdmin
             cache: false,
             templateUrl: 'vendors/hefesoft/google/directivas/picker/views/picker.html',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true
             },
             resolve :{
                controller : function($ocLazyLoad){
@@ -781,6 +782,8 @@ materialAdmin
   //Valida que la pagina a la que se le va a hacer render tenga los parametros que necesita para funcionar
   .run(function ($rootScope, $state) {
   $rootScope.$on('$stateChangeStart', function (event, toState, toParams, from) {
+     
+     hefesoft.global['currentState'] = toState;
      
      if(angular.isDefined(toState.data) && angular.isUndefined(window.window.hefesoftGoogleToken)){
         var item = toState.data;

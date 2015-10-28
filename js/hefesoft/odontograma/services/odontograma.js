@@ -29,7 +29,7 @@ angular.module('odontologiaApp')
 		return deferred.promise;
 	}
 	
-	dataFactory.saveOdontograma = function(listadoGuardar, id, odontogramaId){
+	dataFactory.saveOdontograma = function(listadoGuardar, id, odontogramaId, item){
  		var deferred = $q.defer();
  		
  		var Odontograma = Parse.Object.extend("Odontograma");
@@ -42,6 +42,12 @@ angular.module('odontologiaApp')
  		
  		odontograma.set("idOdontograma", id);
  		odontograma.set("listado", listadoGuardar);
+ 		
+ 		
+ 		odontograma.set("numeroPiezasDentales", item.numeroPiezasDentales);
+ 		odontograma.set("indiceCie", item.indiceCie);
+ 		odontograma.set("indiceCup", item.indiceCup);
+ 		
  		
  		if(odontogramaId){
  			odontograma.set("id", odontogramaId);

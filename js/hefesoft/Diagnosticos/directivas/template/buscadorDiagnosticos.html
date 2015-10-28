@@ -1,4 +1,11 @@
 <div class="card">
+    
+    <div class="fg-line">
+        <div class="pull-right p-relative p-r-25 p-t-25">
+            <button tooltip="crear un diagnostico (Cuidado te iras de esta pagina)" ui-sref="pages.listadoDiagnosticos" class="btn btn-default waves-effect"><i class="zmdi zmdi-plus"></i></button>
+        </div>
+    </div>
+    
     <div class="card-header">
         <h2>Buscar un diagnostico<small></small></h2>
     </div>
@@ -6,7 +13,7 @@
     <div class="card-body card-padding">
 
         <div class="form-group">
-            <div class="fg-line">
+            <div class="fg-line" tooltip="Escribe el nombre del diagnostico ej: caries saldra un menu desplegable y da click sobre el diagnostico">
                  <input 
                  name="buscadorDiagnosticos"
                  type="text" 
@@ -26,6 +33,7 @@
                     class="wizarSimboloPrev"
                     simbolo="seleccionado.diagnostico.simbolo"
                     fuente="seleccionado.diagnostico.objectHefesoftFuente.fuente"
+                    fuente-color="seleccionado.diagnostico.objectHefesoftFuente.fuenteColor"
                     path-imagen="seleccionado.diagnostico.pathImagen" 
                     color="seleccionado.diagnostico.color">
                 </superficie>
@@ -43,6 +51,7 @@
                     class="wizarSimboloPrev"
                     simbolo="seleccionado.evolucion.simbolo"
                     fuente="seleccionado.evolucion.objectHefesoftFuente.fuente"
+                    fuente-color="seleccionado.evolucion.objectHefesoftFuente.fuenteColor"
                     path-imagen="seleccionado.evolucion.pathImagen" 
                     color="seleccionado.evolucion.color">
                 </superficie>

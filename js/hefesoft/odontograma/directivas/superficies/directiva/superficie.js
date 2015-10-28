@@ -28,6 +28,7 @@ directive('superficie', function(){
       color : '=',
       simbolo : '=',
       fuente : '=',
+      fuenteColor: '=',
       pathImagen : '=' /* recordar que en el html debe ponerse asi path-imagen */
    };
 

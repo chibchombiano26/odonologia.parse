@@ -31,7 +31,7 @@ readMore.directive('readMore', function() {
                 $scope.isExpanded = false; // initialise extended status
                 $scope.countingWords = $attrs.words !== undefined ? ($attrs.words === 'true') : true; //if this attr is not defined the we are counting words not characters
 
-                if (!$scope.countingWords && $scope.text.length > $attrs.length) {
+                if ($attrs && $scope && $scope.text && !$scope.countingWords && $scope.text.length > $attrs.length) {
                     $scope.showLinks = true;
                 } else if ($scope.countingWords && $scope.text.split(" ").length > $attrs.length) {
                     $scope.showLinks = true;
@@ -49,9 +49,13 @@ readMore.directive('readMore', function() {
 readMore.filter('readMoreFilter', function() {
     return function(str, args) {
         var strToReturn = str,
-            length = str.length,
             foundWords = [],
             countingWords = (!!args[1]);
+            var length = 0;
+            
+            if(str){
+                length = str.length;
+            }
 
         if (!str || str === null) {
             // If no string is defined return the entire string and warn user of error

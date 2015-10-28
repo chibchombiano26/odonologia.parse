@@ -4,22 +4,22 @@ ng-show="mostrarBotonAutorizar">
 	Autenticar	
 </button>
 
-<!--
-<full-calendar
-	ng-hide="mostrarBotonAutorizar"
-	contexto="contextoCalendar"
-	evento-adicionado="adicionado(item)"
-	evento-modificado="modificado(item)"
-	evento-eliminado="eliminado(item)" 
-	ng-model="listadoEventos">
-</full-calendar>
--->
 
 
 <section id="content" data-ng-controller="calendarAgendaCtrl as clctrl">
     <div class="container" data-ng-controller="ModalDemoCtrl">
         <div class="block-header">
             <h2>Agenda <small>Agenda odontologica</small></h2>
+            
+            <button 
+	            tooltip="Necesitas ayuda este video puede ayudarte"
+	            ng-controller="helpCtrl" 
+	            ng-click="open('lg', 'js/hefesoft/help/agenda.html')" 
+	            class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
+	            <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>
+        	</button>
+        	</br>
+            
         </div>
 
         <div id="calendar" ng-model="listadoEventos" default-view="'basicWeek'" data-lang="'es'" data-calendar data-action-links="clctrl.actionMenu" data-event-click="clctrl.onEventSelected(calEvent, jsEvent, view)" data-select="clctrl.onSelect(start, end)"></div>

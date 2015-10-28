@@ -71,7 +71,7 @@ hefesoft = function () {
   }
   
   function nombreToSuperficie(item){
-    switch (item.toLocaleLowerCase()) {
+    switch (item && item.toLocaleLowerCase()) {
      case 'centro':
       return "Oclusal";
      case 'izquierda':
@@ -99,7 +99,9 @@ hefesoft = function () {
     "generoPic": generoPic,
     "debug" : true,
     "experimental": false,
-    "nombreToSuperficie" : nombreToSuperficie
+    "nombreToSuperficie" : nombreToSuperficie,
+    "googleAuth" : {},
+    "global" : {}
   }
 
 }();

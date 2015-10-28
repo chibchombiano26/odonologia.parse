@@ -1,3 +1,4 @@
+/*global angular*/
   angular.module('odontologiaApp')
   .controller('AddTratamientoCtrl', ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', 'messageService',  '$modalInstance', 'listado',
     function ($scope, CieCupsServices, $modal, dataTableStorageFactory, messageService,  $modalInstance, listado) {

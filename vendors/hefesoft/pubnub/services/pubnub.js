@@ -1,3 +1,4 @@
+/*global angular*/
 angular.module('hefesoft.pubnub')
 .service('pubNubService', ['PubNub', '$q', function (PubNub, $q) {
 

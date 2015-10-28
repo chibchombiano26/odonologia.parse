@@ -14,10 +14,17 @@ angular.module('Historia')
 
 	function inicializar(){
 		diagnosticoPacienteService.load(idPaciente).then(function(result){
-			for (var i = 0; i < result.length; i++) {
-				var item = result[i].toJSON();
-				item['fechaFormat'] = moment(item.fecha).format("dddd, MMMM Do YYYY, h:mm:ss a");
-				$scope.listado.push(item);
+			
+			if(hefesoft.isEmpty(result)){
+				$scope.adicionar();
+			}
+			else
+			{
+				for (var i = 0; i < result.length; i++) {
+					var item = result[i].toJSON();
+					item['fechaFormat'] = moment(item.fecha).format("dddd, MMMM Do YYYY, h:mm:ss a");
+					$scope.listado.push(item);
+				}
 			}
 		})
 	}

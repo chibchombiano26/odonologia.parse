@@ -54,7 +54,6 @@ angular.module('directivas')
         $localstorage.setObject('authorizationData', response);
         $localstorage.setObject('user', response);
         tokenService.setTokenDocument(response.access_token);
-        debugger
         inicializarServicios.inicializar(user.email);       
         clinicaNavigation.validarDatosClinica();
     }

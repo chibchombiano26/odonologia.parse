@@ -81,7 +81,6 @@ angular.module('odontologiaApp')
 	}
 
 	$scope.implante = function(){
-		debugger
 		$scope.piezaSeleccionada.numeroPiezaDental = eliminarTextosNumeros($scope.piezaSeleccionada.numeroPiezaDental);
 		$scope.piezaSeleccionada.numeroPiezaDental = "tornillo-" + $scope.piezaSeleccionada.numeroPiezaDental;	
 	}

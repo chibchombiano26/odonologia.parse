@@ -59,7 +59,7 @@ angular.module('odontologiaApp')
 		paciente.set("email", w.text);
 		paciente.set("pictureUrl", w.img);
 		paciente.set("username", Parse.User.current().get("email"));
-		paciente.set("idFacebook", w.id);
+		paciente.set("idFacebook", w.idUsuario);
 		
 		paciente.save().then(function(result){
 		    deferred.resolve(result);

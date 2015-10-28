@@ -8,18 +8,22 @@
     </li>
 
     <li class="logo hidden-xs">
-        <a data-ui-sref="home" data-ng-click="mactrl.sidebarStat($event)">Hefesoft Odontolgia {{ layoutSS }}</a>
+        <a data-ui-sref="pages.wall" data-ng-click="mactrl.sidebarStat($event)"> dentilab {{ layoutSS }}</a>
     </li>
+    
+   
 
     <li class="pull-right">
         <ul class="top-menu">
-
+            
             <li id="toggle-width">
                 <div class="toggle-switch">
                     <input id="tw-switch" type="checkbox" hidden="hidden" data-change-layout="mactrl.layoutType">
                     <label for="tw-switch" class="ts-helper"></label>
                 </div>
             </li>
+            
+            
 
             <!-- Buscador
             <li id="top-search">
@@ -56,6 +60,9 @@
                 </div>
             </li>
             -->
+            
+            
+        
             
             <li class="dropdown" dropdown>
                 <a dropdown-toggle class="tm-notification" href=""><i id="notificationNumber" class="tmn-counts">0</i></a>

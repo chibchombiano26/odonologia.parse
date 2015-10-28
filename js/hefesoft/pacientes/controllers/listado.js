@@ -41,8 +41,7 @@
 	$scope.navegarAdjuntos = function(item){
 		$rootScope.currentPacient = item;
 		$scope.Paciente = item;
-		varsFactoryService.fijarPaciente(item.RowKey, { pacienteId: item.objectId});
-		$state.go("pages.picker");		
+		$state.go("pages.picker", { pacienteId: item.objectId}, {reload: true});		
 	}
 	
 	$scope.irDiagnosticos = function(item){
@@ -66,7 +65,7 @@
 	
 	$scope.nuevo = function(){
 		$scope.Paciente = {};
-		$state.go("pages.paciente");		
+		$state.go("pages.paciente", { pacienteId: ""});		
 	}
 	
 	$scope.enviarCorreo = function(item){

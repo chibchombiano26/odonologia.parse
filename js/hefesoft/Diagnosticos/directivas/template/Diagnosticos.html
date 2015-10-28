@@ -1,6 +1,9 @@
 
 <div class="container">
     <div class="card">
+        
+        
+        
         <div class="card-header">
             <h2>Diagnosticos <small>Diagnosticos disponibles</small></h2>
             
@@ -9,6 +12,16 @@
                     ng-click="new()" 
                     class="btn bgm-cyan btn-float waves-effect waves-button waves-float">
                     <i class="zmdi zmdi-plus"></i>
+            </button>
+            
+            </br>
+            
+            <button 
+                tooltip="Necesitas ayuda este video puede ayudarte"
+                ng-controller="helpCtrl" 
+                ng-click="open('lg', 'js/hefesoft/help/diagnostico.html')" 
+                class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
+                <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>
             </button>
             
         </div>
@@ -54,6 +67,7 @@
                                     class="wizarSimboloPrev"
                                     simbolo="item.diagnostico.simbolo"
                                     fuente="item.diagnostico.objectHefesoftFuente.fuente"
+                                    fuente-color="item.diagnostico.objectHefesoftFuente.fuenteColor"
                                     path-imagen="item.diagnostico.pathImagen"
                                     color="item.diagnostico.color">
                                   </superficie>
@@ -66,6 +80,7 @@
                                     class="wizarSimboloPrev"
                                     simbolo="item.evolucion.simbolo"
                                     fuente="item.evolucion.objectHefesoftFuente.fuente"
+                                    fuente-color="item.evolucion.objectHefesoftFuente.fuenteColor"
                                     path-imagen="item.evolucion.pathImagen"
                                     color="item.evolucion.color">
                                   </superficie>

@@ -50,6 +50,9 @@ directive('piezaDental', function($parse, growlService){
                  else if(tipo === "fuente"){
                     return elementoRetornar.objectHefesoftFuente.fuente;
                  }
+                 else if(tipo === "fuenteColor"){
+                    return elementoRetornar.objectHefesoftFuente.fuenteColor;
+                 }
                  else if(tipo === "imagen"){
                     return elementoRetornar.pathImagen;
                  }

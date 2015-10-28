@@ -1,29 +1,15 @@
+/*global angular, Parse, google, gapi, hefesoft*/
 angular.module('hefesoft.google')
 .controller('googlePickerCtrl', 
 	['$scope', 'googlePickerService', 'driveApi', '$q', '$rootScope', function ($scope, googlePickerService, driveApi, $q, $rootScope) {
 
-	$scope.mostrarBotonAutorizar = false;
-	var developerKey = 'AIzaSyDqLLd0jtzOSqJzZcXVeB70-72PmoBwjRE';
 	var pickerApiLoaded;
-	var oauthToken;
-	var carpeta = "odontologia_" + $rootScope.currentPacient.nombre;
+	var developerKey = 'AIzaSyDqLLd0jtzOSqJzZcXVeB70-72PmoBwjRE';
+	var carpeta = "odontologia_" + $rootScope.currentPacient.objectId + "_" + $rootScope.currentPacient.nombre;
 	var idFolder;
 	var picker;
 
 	function inicializar(){
-		googlePickerService.getAuth().then(autorizado, noAutorizado);
-	}
-
-	$scope.auth = function(){
-		googlePickerService.auth().then(autorizado, noAutorizado);
-	}
-
-	function noAutorizado(data){
-		$scope.mostrarBotonAutorizar = true;
-	}
-	
-	function autorizado(data){
-		oauthToken = data.access_token;
 		googlePickerService.load(callback);
 		driveApi.loadApi().then(function(result){
 			console.log(result);
@@ -60,7 +46,7 @@ angular.module('hefesoft.google')
 
 
     function createPicker() {
-       if (pickerApiLoaded && oauthToken) {
+       if (pickerApiLoaded) {
        	 var uploadView = new google.picker.DocsUploadView().setParent(idFolder);
        	 var docsView = new google.picker.DocsView().setParent(idFolder).setMode(google.picker.DocsViewMode.GRID);       	 
        	 var webCamView = new google.picker.WebCamView().setParent(idFolder);
@@ -71,7 +57,7 @@ angular.module('hefesoft.google')
              addView(uploadView).
              addView(webCamView).             
              setLocale('es').
-             setOAuthToken(oauthToken).
+             setOAuthToken(hefesoft.googleAuth.access_token).
              setDeveloperKey(developerKey).
              setCallback(pickerCallback).
              setTitle("Carga de adjuntos").
@@ -93,7 +79,7 @@ angular.module('hefesoft.google')
      }
 
      function createFolder(nombreFolder) {
-	   var access_token = oauthToken;
+	   var access_token = hefesoft.googleAuth.access_token;
 
 	   var deferred = $q.defer();
 	   var request = gapi.client.request({
@@ -118,7 +104,7 @@ angular.module('hefesoft.google')
   	}
 
   	function getFolder(nombreFolder) {
-	   var access_token = oauthToken;
+	   var access_token = hefesoft.googleAuth.access_token;
 	   var query = "/drive/v2/files?maxResults=5&q=mimeType%3D'application%2Fvnd.google-apps.folder'and(title%3D+'" + nombreFolder+"')andtrashed+%3D+false&fields=items(alternateLink%2Cid%2CwebViewLink%2Ctitle)";
 	   var deferred = $q.defer();
 	   var request = gapi.client.request({

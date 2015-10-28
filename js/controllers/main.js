@@ -1,4 +1,4 @@
-/* global hefesoft, materialAdmin, Parse, angular */
+/* global hefesoft, materialAdmin, Parse, angular, gapi */
 
 materialAdmin
     // =========================================================================
@@ -65,11 +65,13 @@ materialAdmin
         
         this.adicionarComoPaciente = function(w){
             
-            pacienteService.validarExistePacienteFacebook(w.id).then(function(result){
+            pacienteService.validarExistePacienteFacebook(w.idUsuario).then(function(result){
                 if(!result){
+                    
                     pacienteService.saveFromFacebook(w).then(function(paciente){
                         $rootScope.$broadcast('pacienteModificado', {paciente: paciente, modo: "Modificado"});
                     })
+
                 }
                 else{
                     growlService.growl('Ya lo has adicionado como paciente', 'inverse');
@@ -287,7 +289,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService){
 
         //Status
         this.login = 1;
@@ -296,6 +298,7 @@ materialAdmin
         
        
         $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+          hefesoft.googleAuth = authResult;
           window.hefesoftGoogleToken = authResult.client_id;    
           authGoogleService.token = authResult.client_id;
           authGoogleService.getUserInfo().then(success, parseService.errorHandler);
@@ -331,11 +334,24 @@ materialAdmin
             }
             
             hefesoft.saveStorageObject("ultimaPagina", {});
+            validarHorariosCitas();
+            
+            //Para cargar los diagnosticos de ejemplo si no se han cargado ya
+            diagnosticosService.cargarDiagnosticos('');
             
             if(hefesoft.experimental){
                 //Reconociminto de voz
                 speechService.inicializar();
             }
+        }
+        
+        /*Valida que existan horarios para este usuario en los que atendera las citas*/
+        function validarHorariosCitas(){
+            citasService.getCitasInvervalo().then(function(data){
+                if(hefesoft.isEmpty(data)){
+                    citasService.saveCitasIntervalos({horaInicio: "9", numeroHorasTrabajo: "8", intervaloCitas : "30"});
+                }
+            })
         }
         
         function subscribeMessage(channelName){

@@ -59,12 +59,17 @@ angular.module('odontologiaApp')
 	   
 	   function addTratamiento(id, tratamientos){
 	   	
-	   	var Tratamiento = Parse.Object.extend("Diagnostico");
-	   	var tratamiento = new Tratamiento();
-	   	
-	   	tratamiento.set("id", id);
-	   	tratamiento.set("arrayHefesoftTratamientos", tratamientos);
-	   	tratamiento.save();
+		   	//Solo se debe persistir en parametrizacion cuando se esta parametrizando no desde el odontograma
+		   	//En el odontograma se guarda en el objeto diagnostico copiado
+		   	if(hefesoft.global.currentState.name === "pages.listadoDiagnosticos")
+		   	{
+			   	var Tratamiento = Parse.Object.extend("Diagnostico");
+			   	var tratamiento = new Tratamiento();
+			   	
+			   	tratamiento.set("id", id);
+			   	tratamiento.set("arrayHefesoftTratamientos", tratamientos);
+			   	tratamiento.save();
+		   	}
 	   	
 	   }
 }])

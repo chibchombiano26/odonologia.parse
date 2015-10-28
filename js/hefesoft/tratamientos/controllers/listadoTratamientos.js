@@ -1,5 +1,5 @@
   
-  /*global angular, Parse*/
+  /*global angular, Parse, Hefesoft*/
   angular.module('odontologiaApp')
   .controller('listadoTratamientosCtrl', ['$scope', '$modal', 'dataTableStorageFactory', 'messageService', 
     function ($scope, $modal, dataTableStorageFactory, messageService) {

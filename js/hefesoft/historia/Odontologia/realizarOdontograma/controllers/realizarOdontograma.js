@@ -19,6 +19,9 @@ angular.module('Historia')
 	$scope.listadoDiagnosticos = [];
 	$scope.numeroPiezaModificada = {};
 	$scope.contextoOdontograma = {};
+	$scope.numeroPiezasDentales = 0;
+	$scope.indiceCie = 0;
+	$scope.indiceCup = 0;
 	
 	var Odontograma;
 	var OdontogramaCargadoId;
@@ -49,6 +52,11 @@ angular.module('Historia')
 	  	if	(!hefesoft.isEmpty(data)){
 	  		
 	  		Odontograma = data.toJSON();
+	  		
+	  		$scope.numeroPiezasDentales = Odontograma.numeroPiezasDentales;
+	  		$scope.indiceCie = Odontograma.indiceCie;
+	  		$scope.indiceCup = Odontograma.indiceCup;
+	  		
 	  		OdontogramaCargadoId = Odontograma.objectId;
 	  		
 	  		Odontograma.listado = _.sortBy(Odontograma.listado, function(item){
@@ -162,7 +170,7 @@ angular.module('Historia')
  		var piezaDental = item.piezasDentalesScope();
  		
  		
- 		odontogramService.saveOdontograma(listadoGuardar, diagnosticoPacienteId, OdontogramaCargadoId).then(function(result){
+ 		odontogramService.saveOdontograma(listadoGuardar, diagnosticoPacienteId, OdontogramaCargadoId, $scope).then(function(result){
  			var item = result.toJSON();
  			OdontogramaCargadoId = item.objectId;
  		});

@@ -4,10 +4,61 @@
             <div class="block-header">
                 <button ng-click="agenda()" class="btn btn-info waves-effect">Ver agenda</button>
             </div>
+            
+            
+            <div class="card">
+                <div class="card-header ch-alt m-b-20">
+                    <h2>Horario <small> El horario en el que el laboratorio clinico estara funcionando</small></h2>
+                </div>
+                
+                 <div class="card-body card-padding">
+                    <div class="row">
+                       
+                        <div class="col-sm-4">
+                           <div class="form-group">
+                                <div class="fg-line">
+                                    <input tooltip="La hora a la que se dara la primera cita" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.horaInicio" class="input-sm form-control fg-input">
+                                </div>
+                                <label class="fg-label">Hora de inicio de trabajo</label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-4">
+                           <div class="form-group">
+                                <div class="fg-line">
+                                    <input tooltip="El numero de horas en las que estara abierta el consultorio" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.numeroHorasTrabajo" class="input-sm form-control fg-input">
+                                </div>
+                                <label class="fg-label">Numero de horas de trabajo</label>
+                            </div>
+                        </div>
+                        
+                        
+                        <div class="col-sm-4">
+                           <div class="form-group">
+                                <div class="fg-line">
+                                    <input tooltip="Los intervalos en los que se dara cada cita" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.intervaloCitas" class="input-sm form-control fg-input">
+                                </div>
+                                <label class="fg-label">Intervalo de citas</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                     <div class="form-group">
+                        <div class="fg-line">
+                            <div class="pull-right">
+                                <button ng-click="saveCitasIntervalos()" class="btn bgm-orange btn-icon waves-effect"><i class="zmdi zmdi-check zmdi-hc-fw"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
         
             <div class="card">
                 <div class="listview lv-bordered lv-lg">
-                  <div class="card-header ch-alt m-b-20">
+                <div class="card-header ch-alt m-b-20">
                     <h2>Citas <small> Listado de citas por aprobar/denegar</small></h2>
                 </div>
                     

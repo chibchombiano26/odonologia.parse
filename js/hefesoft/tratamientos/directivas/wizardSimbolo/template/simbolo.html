@@ -117,8 +117,9 @@
 
             <div ng-show="wizard.mostrarSimbolo" class="form-group">
 
-                <div class="row">                    
-                    <div class="col-sm-4">
+                <div class="row">   
+                
+                    <div class="col-sm-3">
                         <p>Fuente</p>
                         <div class="select">
                            <select 
@@ -129,14 +130,33 @@
                             </select>
                         </div>
                     </div>
+                    
+                    <div class="col-sm-3">
+                        <p>Color fuente</p>
+                        <div class="cp-container">
+                        <div class="input-group form-group">
+                            <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                            <div class="fg-line dropdown" dropdown>
+                                <input type="text" class="form-control cp-value" ng-model="wizard.objectHefesoftFuente.fuenteColor" dropdown-toggle>
+    
+                                <div class="dropdown-menu">
+                                    <ng-farbtastic ng-model="wizard.objectHefesoftFuente.fuenteColor"></ng-farbtastic>
+                                </div>
+    
+                                <i class="cp-value" style="background-color: {{ wizard.objectHefesoftFuente.fuenteColor }}"></i>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <p>Simbolo</p>
                         <div class="fg-line">
                             <input type="text"
                             ng-style="
                             {
                                 'font-family': (wizard.objectHefesoftFuente.fuente)
+                                'color' : (wizard.objectHefesoftFuente.fuenteColor)
                             }"                             
                             name="nombre" 
                             class="form-control" 
@@ -146,13 +166,14 @@
                         </div>
                     </div>
 
-                     <div class="col-sm-4">
+                     <div class="col-sm-3">
                         <p></p>
                         <div>
                             <h3 type="text"
                             ng-style="
                             {
-                                'font-family': (wizard.objectHefesoftFuente.fuente)
+                                'font-family': (wizard.objectHefesoftFuente.fuente),
+                                'color' : wizard.objectHefesoftFuente.fuenteColor
                             }"
                             >
                             {{wizard.simbolo}}
@@ -210,6 +231,7 @@
                     ng-model="item"
                     simbolo="wizard.simbolo"                
                     fuente="wizard.objectHefesoftFuente.fuente"
+                    fuente-color="wizard.objectHefesoftFuente.fuenteColor"
                     path-imagen="wizard.pathImagen" 
                     color="wizard.color">
                 </superficie>

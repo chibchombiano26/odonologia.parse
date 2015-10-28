@@ -1,20 +1,45 @@
-<button
-class="btn btn-info btn-sm waves-effect waves-button waves-float" 
-ng-click="auth()"
-ng-show="mostrarBotonAutorizar"> 
-	Autenticar	
-</button>
 
-<p>
 
-Da click en el boton "Ver archivos" y adjunta los archivos del paciente
+<div class="container">
+    <div class="block-header">
+        <h2>Adjuntos</h2>
+    </div>
 
-<p/>
 
-<button
-class="btn btn-info btn-sm waves-effect waves-button waves-float" 
-ng-click="mostrarPicker()"> 
-	Ver archivos
-</button>
+    
+    
+    <div class="card">
+    	<div class="card-header">
+            <h2>Adjuntos por paciente <small>Permite ver y adjuntar los archivos de un paciente</small></h2>
+        </div>
 
-<div id="result"></div>
+        <div class="card-body card-padding">
+            <div class="row">
+               
+               <div class="fg-line">
+	                <button
+						class="btn btn-info btn-sm waves-effect waves-button waves-float" 
+						ng-click="mostrarPicker()"> 
+							Ver archivos
+					</button>
+	            </div>
+               
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="card">
+        <div class="card-header">
+            <h2>Necesitas ayuda? <small>Este video podria ayudarte</small></h2>
+        </div>
+
+        <div class="card-body card-padding">
+            <div class="row">
+                <iframe width="640" height="360" src="https://www.youtube.com/embed/FlcW5WedLL0?hl=es&cc_lang_pref=escc_load_policy=1" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+</div>
+

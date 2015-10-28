@@ -1,14 +1,17 @@
-/*global angular, Parse, _, moment*/
+/*global angular, Parse, _, moment, hefesoft, pubNubService*/
 angular.module('odontologiaApp')
-.controller('citasCtrl', function($scope, $q, calendarGetData, agendaHelperService, $state, citasService, $rootScope, PubNub, growlService, appScriptEmailServices){
+.controller('citasCtrl', function($scope, $q, calendarGetData, agendaHelperService, $state, citasService, $rootScope, PubNub, growlService, appScriptEmailServices, pubNubService ){
     
     $scope.data = [];
     $scope.calendarId = 'primary';
+    $scope.Intervalos = {};
+    
     var channelName = Parse.User.current().get("username");
     
     $rootScope.$on(PubNub.ngMsgEv(channelName), function(event, payload) {
         inicializar();
     })
+    
     
 
 	function eventApiCargada(){		
@@ -26,6 +29,16 @@ angular.module('odontologiaApp')
                 $scope.data.push(result[i].toJSON());
             }
         })
+        
+        citasService.getCitasInvervalo().then(function(data){
+            if(!hefesoft.isEmpty(data)){
+                $scope.Intervalos = data[0].toJSON();
+            }
+        })
+    }
+    
+    $scope.saveCitasIntervalos = function(){
+        citasService.saveCitasIntervalos(hefesoft.angularObjectToParse($scope.Intervalos));
     }
     
     $scope.agenda = function(){
@@ -50,11 +63,19 @@ angular.module('odontologiaApp')
         appScriptEmailServices.sendEmailWindow(item.email, asunto, mensaje);
         citasService.actualizarCita(item.objectId, aprobado);
         
+        
+        cambioCitaPush(item.email);
+        
         if(aprobado === "aprobado"){
             item.start = moment(item.start);
             item.end = moment(item.end);
             adicionarGoogleCalendar(item);
         }
+    }
+    
+    function cambioCitaPush(email){
+        var item = { modo : "recargarCitas" }
+        pubNubService.sendMessage(email, item);
     }
     
     $scope.eliminar = function(item, $index){
