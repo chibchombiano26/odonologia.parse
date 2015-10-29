@@ -6,9 +6,9 @@
         </div>
         
         <div class="card-body card-padding">
-             <p class="c-black f-500">Por favor digite la informacion del paciente</p>       
+            <p class="c-black f-500">Por favor digite la informacion del paciente</p>       
         
-             <div class="form-group">
+            <div class="form-group">
                 <div class="fg-line">
                     <input type="text" class="form-control input-sm" placeholder="Nombres y apellidos" ng-model="Paciente.nombre">
                 </div>
@@ -121,6 +121,35 @@
         </div>
     </div>
     
+    <div class="card">
+     
+     <div class="card-header">
+      <h2>Datos de contacto <small>Datos de contacto del paciente</small></h2>
+    </div>
+     <div class="card-body card-padding">     
+             
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Telefono fijo" ng-model="Paciente.telefonoFijo">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Telefono celular" ng-model="Paciente.telefonoCelular">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Direccion" ng-model="Paciente.direccion">
+                </div>
+            </div>
+           
+    </div>
+    
+    </div>
+    
 
     <div class="card">
      
@@ -131,14 +160,14 @@
              
       <div class="form-group">
           <div class="fg-line">
-              <textarea class="form-control" rows="5" placeholder="Medico particular" ng-model="Paciente.medicoParticular"></textarea>
+              <textarea class="form-control" placeholder="Medico particular" ng-model="Paciente.medicoParticular"></textarea>
           </div>
       </div>
       
                   
       <div class="form-group">
           <div class="fg-line">
-              <textarea 
+              <textarea
               class="form-control auto-size" placeholder="Observaciones" 
               style="overflow: hidden; word-wrap: break-word; height: 32px;"
               ng-model="Paciente.observaciones"

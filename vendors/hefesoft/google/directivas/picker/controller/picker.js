@@ -62,7 +62,7 @@ angular.module('hefesoft.google')
              setCallback(pickerCallback).
              setTitle("Carga de adjuntos").
              build();
-         picker.setVisible(true);
+             //picker.setVisible(true);
        }
      }
 
@@ -71,7 +71,6 @@ angular.module('hefesoft.google')
         if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED && data.viewToken[0] == "all") {
           var doc = data[google.picker.Response.DOCUMENTS][0];
           url = doc[google.picker.Document.URL];
-
           window.open(url);
         }
         //var message = 'You picked: ' + url;

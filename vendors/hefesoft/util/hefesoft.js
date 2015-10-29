@@ -70,6 +70,16 @@ hefesoft = function () {
 		}
   }
   
+  function detectPopUp(){
+    var pop = window.open('https://www.google.com');
+    if (pop) {
+      pop.close();
+      return true;
+    } else {
+       return false;
+    }
+  }
+  
   function nombreToSuperficie(item){
     switch (item && item.toLocaleLowerCase()) {
      case 'centro':
@@ -97,6 +107,7 @@ hefesoft = function () {
     "isEmpty" : isEmpty,
     "angularObjectToParse": angularObjectToParse,
     "generoPic": generoPic,
+    "detectPopUp" : detectPopUp,
     "debug" : true,
     "experimental": false,
     "nombreToSuperficie" : nombreToSuperficie,

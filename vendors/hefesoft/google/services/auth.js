@@ -69,6 +69,8 @@ angular.module('hefesoft.google')
           user.set("password", data.id);
           user.set("email", data.email);
           user.set("pictureUrl", data.picture);
+          user.set("authAs", "Google");
+          user.set("esMedico", true);
           
           dataFactory.existUser(data.email).then(function(result){
             if(result.length == 0){
@@ -92,7 +94,13 @@ angular.module('hefesoft.google')
          query.equalTo("username", user);
          query.find({
            success: function(result) {
+             var item = result[0].toJSON();
+             if(item.authAs && item.authAs === "Facebook"){
+              deferred.reject("Este correo se encuentra vinculada a una cuenta de google ya existente , debes salir de tu cuenta actual de facebook e ingresar con otra" + item.email);
+             }
+             else{
              deferred.resolve(result);
+             }
            },
            error : function(e){ 
              deferred.reject(e);
@@ -137,6 +145,7 @@ angular.module('hefesoft.google')
             if(subscriptionId){
                 user.set("registrationId", subscriptionId);
                 user.set("esMedico", true);
+                user.set("authAs", "Google");
                 user.save().then(function(result){
                     console.log(result);
                 })

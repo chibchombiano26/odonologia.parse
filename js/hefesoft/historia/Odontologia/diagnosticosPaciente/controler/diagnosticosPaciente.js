@@ -57,4 +57,10 @@ angular.module('Historia')
 	$scope.navegarPeriododntograma = function(item){
 		$state.go("pages.periodontograma", {"diagnosticoPacienteId": item.objectId});
 	}
+	
+	$scope.navegarAdjuntos = function(item){
+		$rootScope.currentPacient = item;
+		$scope.Paciente = item;
+		$state.go("pages.picker", { pacienteId: item.objectId}, {reload: true});		
+	}
 })

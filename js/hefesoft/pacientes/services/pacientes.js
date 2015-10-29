@@ -40,7 +40,10 @@ angular.module('odontologiaApp')
 	  var PacienteDfd = $q.defer();
 	  var Paciente = Parse.Object.extend('Paciente');
 	  var queryPaciente = new Parse.Query(Paciente);
+	  
 	  queryPaciente.equalTo("idFacebook", id);
+	  queryPaciente.equalTo("username", Parse.User.current().get("email"));
+	  
 	  queryPaciente.first().then(function (data) {
 	  	PacienteDfd.resolve(data);
 	  }, function (error) {
@@ -60,6 +63,7 @@ angular.module('odontologiaApp')
 		paciente.set("pictureUrl", w.img);
 		paciente.set("username", Parse.User.current().get("email"));
 		paciente.set("idFacebook", w.text);
+		paciente.set("telefonoCelular", parseService.validateUndefined(w.numeroContacto).toString());
 		
 		paciente.save().then(function(result){
 		    deferred.resolve(result);
@@ -92,8 +96,13 @@ angular.module('odontologiaApp')
 		paciente.set("ars", parseService.validateUndefined(item.ars));
 		paciente.set("regimenEspecial", parseService.validateUndefined(item.regimenEspecial));
 		paciente.set("observaciones", parseService.validateUndefined(item.observaciones));
-		paciente.set("medicoParticular", parseService.validateUndefined(item.medicoparticular));
+		paciente.set("medicoParticular", parseService.validateUndefined(item.medicoParticular));
 		paciente.set("genero", parseService.validateUndefined(item.genero));
+		
+		
+		paciente.set("telefonoFijo", parseService.validateUndefined(item.telefonoFijo));
+		paciente.set("telefonoCelular", parseService.validateUndefined(item.telefonoCelular));
+		paciente.set("direccion", parseService.validateUndefined(item.direccion));
 		
 		if(hefesoft.isEmpty(item.pictureUrl)){
 			paciente.set("pictureUrl", hefesoft.generoPic(item, "genero"));

@@ -83,7 +83,7 @@ materialAdmin
           citasService.obtenerCitas().then(function(result){
             for (var i = 0; i < result.length; i++) {
                 var data = result[i].toJSON();
-                messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.objectId, idUsuario : data.idUsuario});
+                messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.objectId, idUsuario : data.idUsuario, numeroContacto : data.numeroContacto.toString()});
             }
             
              notificationNumber = result.length;
@@ -107,7 +107,7 @@ materialAdmin
             $('#notificationNumber').show();
             $('#notificationNumber').html(notificationNumber);
             var data = JSON.parse(payload.message);
-            messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.id});
+            messageResult.list.push({user: data.name, text: data.email, img: data.pictureUrl, id: data.id, numeroContacto : data.numeroContacto.toString()});
         })
        
 
@@ -303,6 +303,7 @@ materialAdmin
           authGoogleService.token = authResult.client_id;
           authGoogleService.getUserInfo().then(success, parseService.errorHandler);
         });
+        
         $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
            console.log(event, authResult);
         });

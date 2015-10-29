@@ -43,10 +43,17 @@ angular.module('odontologiaApp')
  		odontograma.set("idOdontograma", id);
  		odontograma.set("listado", listadoGuardar);
  		
+ 		if(item && item.numeroPiezasDentales){
+ 			odontograma.set("numeroPiezasDentales", item.numeroPiezasDentales.toString());
+ 		}
  		
- 		odontograma.set("numeroPiezasDentales", item.numeroPiezasDentales.toString());
- 		odontograma.set("indiceCie", item.indiceCie.toString());
- 		odontograma.set("indiceCup", item.indiceCup.toString());
+ 		if(item && item.indiceCie){
+ 			odontograma.set("indiceCie", item.indiceCie.toString());
+ 		}
+ 		
+ 		if(item && item.indiceCup){
+ 			odontograma.set("indiceCup", item.indiceCup.toString());
+ 		}
  		
  		
  		if(odontogramaId){

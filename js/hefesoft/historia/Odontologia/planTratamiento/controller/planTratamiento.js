@@ -1,8 +1,8 @@
 /*global angular, Parse, _, Hefesot, hefesoft, numeral*/
 angular.module('Historia').
 controller('planTratamientoCtrl', 
-	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams', 'appScriptTemplateServices',
-	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams, appScriptTemplateServices) {
+	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams', 'appScriptTemplateServices', 'growlService',
+	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams, appScriptTemplateServices, growlService) {
 
 
 	var idOdontograma;
@@ -76,8 +76,16 @@ controller('planTratamientoCtrl',
 	}
 	
 	$scope.generarCotizacion = function(){
- 	   
- 	   var parameters = {
+ 	   if(hefesoft.detectPopUp()){
+ 	   	mostrarCotizacion();
+ 	   }
+ 	   else{
+ 	   	 growlService.growl("Por favor habilite loas ventanas emergentes para ese sitio para disfrutar de esta funcionalidad (En la parte superior derecha versa una opcion para habilitar esta funcionalidad)", 'warning'); 
+ 	   }
+ 	}
+ 	
+ 	function mostrarCotizacion(){
+ 		var parameters = {
             name : $rootScope.currentPacient.nombre, 
             fileName : "cotizacion "  + $rootScope.currentPacient.nombre, 
             rowsData: [], 
@@ -90,23 +98,40 @@ controller('planTratamientoCtrl',
             email: "Email : " + Parse.User.current().get("email")
         };
         
-        var titulos = ['Pieza dental', 'Procedimiento', 'Superficie', 'Valor'];
+        var titulos = ['Pieza dental', 'Procedimiento', 'Superficie', 'Valor', 'Valor pagado','Saldo'];
         var lista = angular.copy($scope.Listado);
         var sumaValor = 0;
+        var saldoValor = 0;
+        var valorPagado = 0;
+        
+        
         
         parameters.rowsData.push(titulos);
         
         for (var i = 0; i < lista.length; i++) {
-        	var item = [lista[i].numeroPiezaDental, lista[i].nombre, hefesoft.nombreToSuperficie(lista[i].superficie), numeral(lista[i].valor).format('$0,0.00')];
+        	var item = [lista[i].numeroPiezaDental, lista[i].nombre, hefesoft.nombreToSuperficie(lista[i].superficie), numeral(lista[i].valor).format('$0,0.00'), numeral(lista[i].valorPagado).format('$0,0.00'), numeral(lista[i].saldo).format('$0,0.00')];
         	parameters.rowsData.push(item);
         }
+        
+        
         
         sumaValor = _.sum(lista, function(object) {
 		  return object.valor;
 		});
+		
+		saldoValor = _.sum(lista, function(object) {
+		  return object.saldo;
+		});
+		
+		valorPagado = _.sum(lista, function(object) {
+		  return object.valorPagado;
+		});
         
         sumaValor = numeral(sumaValor).format('$0,0.00');
-        var footer = ['Total', '', '', sumaValor];
+        saldoValor = numeral(saldoValor).format('$0,0.00');
+        valorPagado = numeral(valorPagado).format('$0,0.00');
+        
+        var footer = ['Total', '', '', sumaValor, valorPagado, saldoValor];
         parameters.rowsData.push(footer);
         appScriptTemplateServices.templateWindow(parameters);
  	}
