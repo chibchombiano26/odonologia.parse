@@ -728,6 +728,21 @@ materialAdmin
             }
           })
           
+          .state('pages.citashorarios', {
+            url: "/citashorarios",
+            controller: "citasCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/citas/views/horarios.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarCitas($ocLazyLoad)
+               }
+            }
+          })
+          
           .state('pages.email', {
             url: "/email/:recipient",
             controller: "appScriptEmailCtrl",

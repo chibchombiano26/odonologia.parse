@@ -2,8 +2,8 @@
 
 angular.module('Historia')
 .controller('realizarOdontogramaCtrl', 
-	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval', 'odontogramService',
-	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval, odontogramService) {
+	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval', 'odontogramService', 'cfpLoadingBar',
+	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval, odontogramService, cfpLoadingBar) {
 	
 	var Hefesoft  = window.Hefesot;
 	
@@ -41,13 +41,19 @@ angular.module('Historia')
 		    $scope.Diagnosticos.push(result[i].toJSON());
 		  }
 	  })
-	
+	  
+	  
 	  odontogramService.cargarOdontograma(diagnosticoPacienteId).then(function(data){
-	  	inicializarOdontograma(data);
+	  	inicializarOdontograma(data).then(function(data){
+	  		
+	  	})
 	  })
 	 }
 	  
 	function inicializarOdontograma(data){
+		var deferred = $q.defer();
+		
+		
 	  	//Cargar el guardado
 	  	if	(!hefesoft.isEmpty(data)){
 	  		
@@ -72,6 +78,7 @@ angular.module('Historia')
 				 		piezaDental.listado = Odontograma.listado;
 				 		piezasDentalesServices.fijarPiezasDentales(piezaDental.listado);
 		  				$interval.cancel(promise);
+		  				deferred.resolve("ok");
 	  				}
 	  			}
   			
@@ -81,15 +88,19 @@ angular.module('Historia')
 	  	
 	  	//Crear uno nuevo
 	  	else{
-	  		
-	  		var promise = $timeout(function(){
-	  			//se ponen aca xq aca ya tienen valor
-	 			var item = $scope.contextoOdontograma();
-		 		var piezaDental = item.piezasDentalesScope();
-	 			piezaDental.leerOdontogramaBase();
-	 			$timeout.cancel(promise);
-	  		}, 8000);
+	  		var promise = $interval(function(){
+	  			if(angular.isFunction($scope.contextoOdontograma)){
+		  			//se ponen aca xq aca ya tienen valor
+		 			var item = $scope.contextoOdontograma();
+			 		var piezaDental = item.piezasDentalesScope();
+		 			piezaDental.leerOdontogramaBase();
+		 			$interval.cancel(promise);
+		 			deferred.resolve("ok");
+	  			}
+	  		}, 500);
 	  	}
+	  	
+	  	return deferred.promise;
 	}
 	 
 	$scope.dxSeleccionado = function(item){

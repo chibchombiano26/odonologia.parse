@@ -1,3 +1,4 @@
+/*global moment, angular*/
 angular.module('directivas').
 directive('datePicker', ['$parse', '$timeout', function ($parse, $timeout) {
 	
@@ -11,7 +12,7 @@ directive('datePicker', ['$parse', '$timeout', function ($parse, $timeout) {
 		scope: {
 			format : '='
 		},
-		templateUrl : 'app/lib/hefesoft.standard/Directivas/Date-Picker/templates/DatePicker.html',
+		templateUrl : 'vendors/hefesoft/Directivas/Date-Picker/templates/DatePicker.html',
 		link: function (scope, element, attr, ngModelCtrl) {			
 		  var datePicker = $(element).find('.input-group').datetimepicker({
 		      format: scope.format

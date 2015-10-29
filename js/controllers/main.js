@@ -65,7 +65,7 @@ materialAdmin
         
         this.adicionarComoPaciente = function(w){
             
-            pacienteService.validarExistePacienteFacebook(w.idUsuario).then(function(result){
+            pacienteService.validarExistePacienteFacebook(w.text).then(function(result){
                 if(!result){
                     
                     pacienteService.saveFromFacebook(w).then(function(paciente){

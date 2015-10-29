@@ -4,9 +4,35 @@
  angular.module('odontologiaApp')
 .controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope){
 	
-	$scope.Paciente;
+	$scope.Paciente = {fecha : new Date()};
 	var idPaciente = "";
 	var modo = "nuevo";
+	
+	$scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+
+    $scope.toggleMin = function() {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.open = function($event, opened) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope[opened] = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[0];
 	
 	if($stateParams.pacienteId.length > 0){
 		modo = "modificar";

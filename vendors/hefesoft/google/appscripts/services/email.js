@@ -9,9 +9,11 @@ angular.module("hefesoft.google")
       var url = "https://script.google.com/macros/s/AKfycbys8yRou7As5TYyYrynutnsCWFHOUzNqK3dV09rUqvLu6hD_zE/exec?recipient=" + recipient + "&subject=" + subject + "&body=" + body + "&callback=?";
       var win = window.open(url, "_blank");
       
+      /*
       $timeout(function(){
           win.close();
       },8000);
+      */
   }
   
  

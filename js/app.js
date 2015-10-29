@@ -24,7 +24,8 @@ var materialAdmin = angular.module('materialAdmin', [
     'Hefesoft',
     'hefesoft.services',
     'Shared',
-    'readMore'
+    'readMore',
+    'cfp.loadingBar'
 ])
 
 

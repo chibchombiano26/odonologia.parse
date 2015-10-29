@@ -39,9 +39,6 @@
                 </dd>
             </div>
             
-             
-
-            
             <div class="row">   
 
                    <div class="col-sm-4">
@@ -58,13 +55,19 @@
                           </div>
                       </div>
                   </div>
-                  <div class="col-sm-4">                      
-                      <div class="input-group form-group">
-                       <date-picker format="'DD/MM/YYYY'" ng-model="Paciente.fecha"/>
-                      </div>
+                  <div class="col-sm-4">
+                      
+                    <div class="date-picker input-group" ng-class="{ 'is-opened': opened == true }">
+                        <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
+                        <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
+                            <input ng-click="open($event, 'opened')" type="text" class="form-control" datepicker-popup="{{format}}" show-weeks="false" ng-model="Paciente.fecha" is-open="opened" min-date="minDate" datepicker-options="dateOptions" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" placeholder="Fecha" />
+                        </div>
+                    </div>
+                      
                   </div>
+            </div>
 
-
+            <div class="row">   
 
                    <div class="col-sm-4">
                       <div class="form-group">
@@ -73,6 +76,7 @@
                           </div>
                       </div>
                   </div>
+                  
                   <div class="col-sm-4">
                       <div class="form-group">
                           <div class="fg-line">
@@ -87,6 +91,10 @@
                           </div>
                       </div>
                   </div>
+                  
+              </div>
+              
+            <div class="row">   
 
                   <div class="col-sm-4">
                       <div class="form-group">
@@ -109,21 +117,17 @@
                           </div>
                       </div>
                   </div>
-                                
-                               
-              </div>
-
-            
-           
+                </div>
         </div>
     </div>
+    
 
     <div class="card">
+     
      <div class="card-header">
       <h2>Observaciones <small>Por favor suministre informacion adicinal del paciente de ser necesario</small></h2>
     </div>
-
-    <div class="card-body card-padding">     
+     <div class="card-body card-padding">     
              
       <div class="form-group">
           <div class="fg-line">
@@ -143,7 +147,7 @@
       </div>           
     </div>
     
-</div>
+    </div>
 
  <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
 
