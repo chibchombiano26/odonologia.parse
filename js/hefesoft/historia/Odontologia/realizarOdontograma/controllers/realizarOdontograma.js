@@ -89,13 +89,15 @@ angular.module('Historia')
 	  	//Crear uno nuevo
 	  	else{
 	  		var promise = $interval(function(){
-	  			if(angular.isFunction($scope.contextoOdontograma) && angular.isFunction(item.piezasDentalesScope)){
+	  			if(angular.isFunction($scope.contextoOdontograma)){
 		  			//se ponen aca xq aca ya tienen valor
 		 			var item = $scope.contextoOdontograma();
-			 		var piezaDental = item.piezasDentalesScope();
-		 			piezaDental.leerOdontogramaBase();
-		 			$interval.cancel(promise);
-		 			deferred.resolve("ok");
+		 			if(angular.isFunction(item.piezasDentalesScope)){
+				 		var piezaDental = item.piezasDentalesScope();
+			 			piezaDental.leerOdontogramaBase();
+			 			$interval.cancel(promise);
+			 			deferred.resolve("ok");
+		 			}
 	  			}
 	  		}, 500);
 	  	}
