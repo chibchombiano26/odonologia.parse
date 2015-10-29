@@ -89,7 +89,7 @@ angular.module('Historia')
 	  	//Crear uno nuevo
 	  	else{
 	  		var promise = $interval(function(){
-	  			if(angular.isFunction($scope.contextoOdontograma)){
+	  			if(angular.isFunction($scope.contextoOdontograma) && angular.isFunction(item.piezasDentalesScope)){
 		  			//se ponen aca xq aca ya tienen valor
 		 			var item = $scope.contextoOdontograma();
 			 		var piezaDental = item.piezasDentalesScope();
