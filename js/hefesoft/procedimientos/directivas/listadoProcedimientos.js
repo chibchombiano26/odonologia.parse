@@ -6,7 +6,7 @@ angular.module('odontologiaApp')
 		require: ['ngModel'],
 		link: function (scope, iElement, attrs, ngModelCtrl) {
 			
-		   debugger
+		   
 		   $(iElement[0]).css('zoom', scope.zoom);
 			
 		   var cargarTratamiento = scope.inicializarElementos;

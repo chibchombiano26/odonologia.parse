@@ -1,0 +1,3 @@
+git remote add openshift -f ssh://5632e9ff89f5cf0b61000098@dentilab-dentilab.rhcloud.com/~/git/dentilab.git/
+git merge openshift/master -s recursive -X ours
+git push openshift HEAD
