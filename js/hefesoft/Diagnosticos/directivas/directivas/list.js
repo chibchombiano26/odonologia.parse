@@ -124,6 +124,7 @@ $scope.openEdit = function (seleccionado) {
     animation: true,
     templateUrl: 'js/hefesoft/Diagnosticos/views/addDiagnostico.html',
     controller: 'AddDxCtrl',
+    windowClass: 'my-dialog',
     size: 'lg',
     resolve: {
       dxSeleccionado : function () {

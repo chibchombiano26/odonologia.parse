@@ -21,6 +21,7 @@
 	        animation: true,
 	        templateUrl: 'js/hefesoft/tratamientos/views/addTratamiento.html',
 	        controller: 'AddTratamientoCtrl',
+	        windowClass: 'my-dialog',
 	        size: size,
 	        resolve: {
 	          listado : function () {

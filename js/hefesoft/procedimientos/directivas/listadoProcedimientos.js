@@ -5,6 +5,10 @@ angular.module('odontologiaApp')
 		restrict: 'E',
 		require: ['ngModel'],
 		link: function (scope, iElement, attrs, ngModelCtrl) {
+			
+		   debugger
+		   $(iElement[0]).css('zoom', scope.zoom);
+			
 		   var cargarTratamiento = scope.inicializarElementos;
 
 		   var existClick = attrs['seleccionadoCallback'];
@@ -48,7 +52,8 @@ angular.module('odontologiaApp')
 			ocultarAddProcedimiento : '=',
 			editable : '=',
 			modoPagos : '=',
-			contexto :  '=' 
+			contexto :  '=',
+			zoom : '='
 		}
 	};
 }])

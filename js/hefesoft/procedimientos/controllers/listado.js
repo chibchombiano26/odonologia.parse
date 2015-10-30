@@ -15,6 +15,7 @@ angular.module('odontologiaApp')
         animation: true,
         templateUrl: 'js/hefesoft/procedimientos/views/addProcedimiento.html',
         controller: 'AddProcedimientoCtrl',
+        windowClass: 'my-dialog',
         size: size,
         resolve: {
           seleccionado : function () {
