@@ -60,7 +60,8 @@ materialAdmin
         var messageResult;
         
         this.irCitas = function(){
-            $state.go('pages.citas')
+            hefesoft.util.loadingBar.start();
+            $state.go('pages.citas', {}, {reload: true})
         }
         
         this.adicionarComoPaciente = function(w){
@@ -289,13 +290,14 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar){
 
         //Status
         this.login = 1;
         this.register = 0;
         this.forgot = 0;
         
+        hefesoft.util["loadingBar"] = cfpLoadingBar;
        
         $scope.$on('event:google-plus-signin-success', function (event, authResult) {
           hefesoft.googleAuth = authResult;

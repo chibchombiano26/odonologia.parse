@@ -130,7 +130,8 @@ hefesoft = function () {
     "experimental": false,
     "nombreToSuperficie" : nombreToSuperficie,
     "googleAuth" : {},
-    "global" : {}
+    "global" : {},
+    "util": {}
   }
 
 }();

@@ -1,39 +1,4 @@
 
-<style type="text/css">
-
-.contenedor-pieza-dental{
-	width: 6%;
-	margin-left: 1%;
-}
-
-.contenedor-fila-piezas-dentales{
-	display: -webkit-box;
-}
-
-.contenedor-fila-piezas-dentales-temporales{
-	display: -webkit-box;
-	margin-left: 20%;
-}
-
-.imagen-diente{
-    height: 70px;
-    margin-left: 20%;
-    margin-bottom: 10px;
-}
-
-.imagen-boca{
-	margin-top: 30%;
-    height: 40px;    
-  	margin-left: 10%;
-}
-
-.boca-item{
-	margin-top: 30%;
-  	margin-left: 10%;
-}
-
-</style>
-
 <!-- 
 	En el ng model va un object que tiene arriba_objectHefesoft 
 	cambia el arriba por el nombre de cada superficie
@@ -108,9 +73,6 @@
 </div>
 
 <div ng-show="permanente" class="contenedor-fila-piezas-dentales">
-
-	
-
 	<div 
 	class="contenedor-pieza-dental" 
 	ng-repeat="n in listado | filter:'parte4' | filter: textoBuscar">
@@ -161,10 +123,10 @@
 
 <script type="text/ng-template" id="opcionesPiezaDental.html">
     <div>{{dynamicPopover.content}}</div>
-    <div class="form-group">      
-      <input type="text" ng-model="dynamicPopover.title" class="form-control">
-       
-
+    <div class="form-group">
+		<!--
+		<input type="text" ng-model="dynamicPopover.title" class="form-control">
+		
        <div class="row">
        <button        
         ng-click="clickPiezaDental()" 
@@ -172,11 +134,12 @@
             Editar
        </button>
        </div>
-
+       -->
+       
        </br>
        
-       <p ng-hide="esBoca">Supernumerario</p>
-       <div ng-hide="esBoca" class="row">
+       <p ng-hide="esBoca || esSupernumerario">Adicionar supernumerario izquierda o derecha de esta pieza</p>
+       <div ng-hide="esBoca || esSupernumerario" class="row">
 			
 			<button
 			class="btn btn-info btn-sm waves-effect waves-button waves-float"
@@ -193,7 +156,7 @@
 
 	   </br>   
 
-	   <div ng-hide="esBoca" class="row">
+	   <div ng-hide="esBoca || esSupernumerario" class="row">
 		   <button
 		   class="btn btn-info btn-sm waves-effect waves-button waves-float"
 		   ng-click="ausente()">

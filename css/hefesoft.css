@@ -59,6 +59,37 @@
 	overflow: auto;
 }
 
+.contenedor-pieza-dental{
+	width: 6%;
+	margin-left: 1%;
+}
+
+.contenedor-fila-piezas-dentales{
+	display: -webkit-box;
+}
+
+.contenedor-fila-piezas-dentales-temporales{
+	display: -webkit-box;
+	margin-left: 20%;
+}
+
+.imagen-diente{
+    height: 70px;
+    margin-left: 20%;
+    margin-bottom: 10px;
+}
+
+.imagen-boca{
+	margin-top: 30%;
+    height: 40px;    
+  	margin-left: 10%;
+}
+
+.boca-item{
+	margin-top: 30%;
+  	margin-left: 10%;
+}
+
 .zoom8{
 	zoom : 0.8;
 }

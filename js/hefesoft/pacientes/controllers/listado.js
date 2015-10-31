@@ -65,20 +65,22 @@
 	$scope.pacientes =  [];
 	
 	$scope.navegarAdjuntos = function(item){
+		hefesoft.util.loadingBar.start()
 		$rootScope.currentPacient = item;
 		$scope.Paciente = item;
-		$state.go("pages.picker", { pacienteId: item.objectId}, {reload: true});		
+		$state.go("pages.picker", { pacienteId: item.objectId}, {reload: true});
 	}
 	
 	$scope.irDiagnosticos = function(item){
+		hefesoft.util.loadingBar.start()
 		$rootScope.currentPacient = item;
 		$scope.Paciente = item;
 		varsFactoryService.fijarPaciente(item.RowKey);
-		$state.go("pages.diagnosticoPaciente", { pacienteId: item.objectId});
+		$state.go("pages.diagnosticoPaciente", { pacienteId: item.objectId}, {reload: true});
 	}
 	
 	$scope.editar = function(item){
-		$state.go("pages.paciente", { pacienteId: item.objectId});
+		$state.go("pages.paciente", { pacienteId: item.objectId} , {reload: true});
 	}
 	
 	$scope.eliminar = function(item, index){
@@ -95,7 +97,7 @@
 	}
 	
 	$scope.enviarCorreo = function(item){
-		$state.go("pages.email", {recipient: item.email})
+		$state.go("pages.email", {recipient: item.email}, {reload: true})
 	}
 	
 	$rootScope.$on("pacienteModificado", function(event, payload) {

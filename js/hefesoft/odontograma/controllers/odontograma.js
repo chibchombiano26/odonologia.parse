@@ -1,3 +1,4 @@
+/*global angular, Parse*/
 angular.module('odontologiaApp')
 .controller('odontogramaCtrl', ['$scope', 
 	function ($scope) {

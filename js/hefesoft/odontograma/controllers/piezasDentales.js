@@ -72,7 +72,8 @@ angular.module('odontologiaApp')
 
 	$scope.supernumerario = function(posicion){
 		var numero = $scope.piezaSeleccionada.numeroPiezaDental + "+";
-		agregarSupernumerario(index, numero, posicion);		
+		agregarSupernumerario(index, numero, posicion);
+		hidePopOver();
 	}
 
 	$scope.ausente = function(){
@@ -91,6 +92,7 @@ angular.module('odontologiaApp')
 
 	$scope.eliminar = function(){
 		$scope.listado.splice(index, 1);
+		hidePopOver();
 	}
 
 	$scope.leerOdontogramaBase = function(){
