@@ -1,4 +1,4 @@
-/*global angular, moment*/
+/*global angular, moment, hefesoft*/
 angular.module("hefesoft.google")
 .service("appScriptEmailServices", function($timeout){
   
@@ -8,6 +8,7 @@ angular.module("hefesoft.google")
   dataFactory.sendEmailWindow = function(recipient, subject, body){
       var url = "https://script.google.com/macros/s/AKfycbys8yRou7As5TYyYrynutnsCWFHOUzNqK3dV09rUqvLu6hD_zE/exec?recipient=" + recipient + "&subject=" + subject + "&body=" + body + "&callback=?";
       var win = window.open(url, "_blank");
+      hefesoft.detectPopUp(win);
       
       /*
       $timeout(function(){

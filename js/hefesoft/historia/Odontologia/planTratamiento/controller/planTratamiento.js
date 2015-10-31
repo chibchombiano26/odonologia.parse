@@ -76,12 +76,7 @@ controller('planTratamientoCtrl',
 	}
 	
 	$scope.generarCotizacion = function(){
- 	   if(hefesoft.detectPopUp()){
- 	   	mostrarCotizacion();
- 	   }
- 	   else{
- 	   	 growlService.growl("Por favor habilite loas ventanas emergentes para ese sitio para disfrutar de esta funcionalidad (En la parte superior derecha versa una opcion para habilitar esta funcionalidad)", 'warning'); 
- 	   }
+ 	   mostrarCotizacion();
  	}
  	
  	function mostrarCotizacion(){

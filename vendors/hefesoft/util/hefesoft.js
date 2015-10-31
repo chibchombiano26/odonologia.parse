@@ -70,15 +70,33 @@ hefesoft = function () {
 		}
   }
   
-  function detectPopUp(){
-    var pop = window.open('https://www.google.com');
-    if (pop) {
-      pop.close();
-      return true;
-    } else {
-       return false;
-    }
-  }
+  var detectPopUp = {
+        check: function(popup_window){
+            var _scope = this;
+            if (popup_window) {
+                if(/chrome/.test(navigator.userAgent.toLowerCase())){
+                    setTimeout(function () {
+                        _scope._is_popup_blocked(_scope, popup_window);
+                     },200);
+                }else{
+                    popup_window.onload = function () {
+                        _scope._is_popup_blocked(_scope, popup_window);
+                    };
+                }
+            }else{
+                _scope._displayError();
+            }
+        },
+        _is_popup_blocked: function(scope, popup_window){
+            if ((popup_window.innerHeight > 0)==false){ scope._displayError(); }
+        },
+        _displayError: function(){
+            alert("Chrome esta bloquenado una ventana que se intenta abrir en la parte superior derecha veras un icono da click y habilitalos");
+        }
+    };
+  
+  
+  
   
   function nombreToSuperficie(item){
     switch (item && item.toLocaleLowerCase()) {
