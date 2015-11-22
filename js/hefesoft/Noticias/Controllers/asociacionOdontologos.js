@@ -10,7 +10,6 @@ angular.module('odontologiaApp')
 	}
 
 	function success(data){		
-		
 		var listado = _.uniq( ( [] ).concat(
         _.where( data, { 'type': "photo" } ),
         _.where( data, { 'type': "link" } ) ) );

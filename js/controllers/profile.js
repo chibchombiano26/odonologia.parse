@@ -1,5 +1,7 @@
+/*global materialAdmin, Parse, Hefesoft*/
 materialAdmin
 .controller('profileCtrl', function($scope, growlService){
+  
   
     
 })
@@ -84,7 +86,6 @@ materialAdmin
         
         profile.save(null, {
           success: function(profile) {
-            growlService.growl(message+' Ha sido actualizado', 'inverse');
             
           },
           error: function(profile, error) {
@@ -119,8 +120,6 @@ materialAdmin
           success: function(profile) {
             objectRetrieved = profile;
             modo = "editar";
-            growlService.growl(message+' Ha sido actualizado', 'inverse');
-            
           },
           error: function(profile, error) {
             // Execute any logic that should take place if the save fails.
@@ -131,15 +130,17 @@ materialAdmin
     }
     
     function getData(elementoActualizar){
+        hefesoft.util.loadingBar.start();
         var Profile = Parse.Object.extend("Profile");
         var query = new Parse.Query(Profile);
         query.equalTo("username", Parse.User.current().get("email"));
         query.first({
           success: function(object) {
             convertirAObjeto(elementoActualizar, object);
+            hefesoft.util.loadingBar.complete();
           },
           error: function(error) {
-            
+            hefesoft.util.loadingBar.complete();
           }
         });
     }

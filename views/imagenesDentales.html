@@ -1,0 +1,45 @@
+<div class="container" ng-controller="fbImagesCtrl as vm">
+    <div class="block-header">
+        <h2>Imagenes compartidas por usuarios</h2>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Imagenes <small>Imagenes compartidas porusuarios como tu</small></h2>
+        </div>
+
+        <div class="card-body card-padding">
+            
+            <!--
+            <p class="f-500 c-black m-b-20">Images</p>
+            -->
+            
+            <ng-file-input tmpl="'js/templates/ngFileInput.html'" callback="fileLoaded(file)"></ng-file-input>
+            
+            </br>
+            </br>
+
+            <div class="lightbox photos" ng-repeat="item in data">
+             
+                <div data-src="media/gallery/2.jpg" foo="{{item.images[0].source}}" style="background-image: url({{item.images[0].source}}); background-size: contain;" class="col-sm-2 col-xs-6">
+                    <div class="lightbox-item">
+                        <img style="width:200px; height:200px;" ng-src="{{item.images[item.images.length - 1].source}}" alt="" />
+                    </div>
+                </div>
+                
+            </div>
+
+            
+            <div class="clearfix"></div>
+
+            <!--
+            <div class="load-more m-t-30">
+                <a href=""><i class="zmdi zmdi-refresh-alt"></i> Cargar mas...</a>
+            </div>
+            -->
+            
+        </div>
+    </div>
+
+</div>

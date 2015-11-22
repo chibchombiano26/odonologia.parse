@@ -1,0 +1,36 @@
+{
+  "name": "simple-angular-file-input",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test",
+    "tests",
+    "bower_components"
+  ],
+  "dependencies": {
+    "angularjs": "~1.2.20"
+  },
+  "homepage": "https://github.com/Goldark/angular-file-input",
+  "authors": [
+    "Goldark <opensource@goldark.com.br>",
+    "Leonardo Rossetti <leonardo@goldark.com.br>"
+  ],
+  "description": "Simple angularjs directive to handle the File Reader API",
+  "main": "./dist/angular-file-input.min.js",
+  "keywords": [
+    "angularjs",
+    "file",
+    "reader"
+  ],
+  "_release": "49708690ce",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "49708690ce2cf676b6fb41404138e3eb069ce6ac"
+  },
+  "_source": "git://github.com/Goldark/angular-file-input.git",
+  "_target": "*",
+  "_originalSource": "simple-angular-file-input",
+  "_direct": true
+}

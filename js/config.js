@@ -14,7 +14,7 @@ materialAdmin
             status     : false,  // check Facebook Login status
             cookie     : true,  // enable cookies to allow Parse to access the session
             xfbml      : true,  // initialize Facebook social plugins on the page
-            version    : 'v2.3' // point to the latest Facebook Graph API version
+            version    : 'v2.5' // point to the latest Facebook Graph API version
           });
               // Run code after the Facebook SDK is loaded.
          };
@@ -396,6 +396,35 @@ materialAdmin
                 url: '/photos',
                 templateUrl: 'views/photos.html'
             })
+            
+            .state ('photo-gallery.model', {
+                url: '/model',
+                templateUrl: 'views/model.html'
+            })
+            
+            .state ('photo-gallery.imagenesDentales', {
+                url: '/imagenesDentales',
+                templateUrl: 'views/imagenesDentales.html',
+                resolve: {
+                    loadPlugin: function($ocLazyLoad) {
+                        return $ocLazyLoad.load ([
+                            {
+                                name: 'vendors',
+                                insertBefore: '#app-level',
+                                files: dependenciasGalleryAppLevel()
+                            },
+                            {
+                                name: 'vendors',
+                                files: dependenciasGallery()
+                            },
+                            {
+                                name: 'vendors',
+                                files: dependenciasNews()
+                            }
+                        ])
+                    }
+                }
+            })
 
             //Timeline
 
@@ -430,12 +459,17 @@ materialAdmin
             .state ('pages.profile', {
                 url: '/profile',
                 templateUrl: 'views/profile.html',
-                controller: 'profileCtrl'
+                data: {
+                  requireLogin: true
+                }
             })
 
             .state ('pages.profile.profile-about', {
                 url: '/profile-about',
-                templateUrl: 'views/profile-about.html'
+                templateUrl: 'views/profile-about.html',
+                data: {
+                  requireLogin: true
+                }
             })
 
             .state ('pages.profile.profile-timeline', {

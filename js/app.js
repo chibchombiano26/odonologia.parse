@@ -1,3 +1,4 @@
+/*global angular*/
 var materialAdmin = angular.module('materialAdmin', [
     'ngAnimate',
     'ngResource',
@@ -25,7 +26,9 @@ var materialAdmin = angular.module('materialAdmin', [
     'hefesoft.services',
     'Shared',
     'readMore',
-    'cfp.loadingBar'
+    'cfp.loadingBar',
+    'angularFileInput',
+    'ngImgur'
 ])
 
 

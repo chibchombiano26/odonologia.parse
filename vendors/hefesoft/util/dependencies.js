@@ -525,9 +525,6 @@ function dependenciasDate(){
        return dependencias;
    }
 
-
-
-
 function cargarPacientes($ocLazyLoad){
       return $ocLazyLoad.load
       ([
@@ -670,7 +667,3 @@ function cargarPacientes($ocLazyLoad){
         dependenciasEmail()
       ]);
    }
-   
-   
-   
- 

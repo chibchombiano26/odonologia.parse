@@ -24,7 +24,8 @@ service('fbGroupsService', ['$q', function ($q) {
   	var deferred = $q.defer();
   	FB.api(query,
 	    {
-	        "access_token": "426977727468725|02f6z047IaTUyc8tLE4mkfVP61E"
+	    	  "fields": "name,type,picture,link,message,description,comments{message}",
+	        "access_token": "1665259377039481|sFBCPhvzZ0hYVZHJYZblYBV_yi8"
 	    },
 	    function (response) {
 	    	
