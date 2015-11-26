@@ -1,4 +1,4 @@
-/*global angular, Parse, gapi*/
+/*global angular, Parse, gapi, hefesoft*/
 
 angular.module('hefesoft.google')
 .service('authGoogleService', 
@@ -94,12 +94,20 @@ angular.module('hefesoft.google')
          query.equalTo("username", user);
          query.find({
            success: function(result) {
-             var item = result[0].toJSON();
-             if(item.authAs && item.authAs === "Facebook"){
-              deferred.reject("Este correo se encuentra vinculada a una cuenta de google ya existente , debes salir de tu cuenta actual de facebook e ingresar con otra" + item.email);
+             
+             var existe = hefesoft.isEmpty(result[0]);
+             
+             if(existe){
+                 var item = result[0].toJSON();
+                 if(item.authAs && item.authAs === "Facebook"){
+                  deferred.reject("Este correo se encuentra vinculada a una cuenta de google ya existente , debes salir de tu cuenta actual de facebook e ingresar con otra" + item.email);
+                 }
+                 else{
+                 deferred.resolve(result);
+                 }
              }
              else{
-             deferred.resolve(result);
+                 return [];
              }
            },
            error : function(e){ 
