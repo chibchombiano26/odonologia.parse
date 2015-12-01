@@ -8,7 +8,7 @@ angular.module("hefesoft.google")
   dataFactory.sendEmailWindow = function(recipient, subject, body){
       var url = "https://script.google.com/macros/s/AKfycbys8yRou7As5TYyYrynutnsCWFHOUzNqK3dV09rUqvLu6hD_zE/exec?recipient=" + recipient + "&subject=" + subject + "&body=" + body + "&callback=?";
       var win = window.open(url, "_blank");
-      hefesoft.detectPopUp(win);
+      hefesoft.detectPopUp.check(win);
       
       /*
       $timeout(function(){
