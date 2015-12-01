@@ -95,7 +95,7 @@ angular.module('hefesoft.google')
          query.find({
            success: function(result) {
              
-             var existe = hefesoft.isEmpty(result[0]);
+             var existe = !hefesoft.isEmpty(result[0]);
              
              if(existe){
                  var item = result[0].toJSON();
@@ -107,7 +107,7 @@ angular.module('hefesoft.google')
                  }
              }
              else{
-                 return [];
+                 deferred.resolve([]);
              }
            },
            error : function(e){ 
