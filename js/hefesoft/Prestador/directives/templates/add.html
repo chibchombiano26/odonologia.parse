@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header">
+        <h2>Prestador <small></small></h2>
+    </div>
+    
+    <div class="card-body card-padding">
+        <p class="c-black f-500">Por favor digite la informacion del prestador</p>       
+    
+        <div class="form-group">
+            <div class="fg-line">
+                <input type="text" class="form-control input-sm" placeholder="Nombres y apellidos" ng-model="prestador.nombre">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <dt class="p-t-10">Genero {{prestador.genero}}</dt>
+            <dd>
+                <div class="fg-line">
+                    <select class="form-control" ng-model="prestador.genero">
+                        <option>Mujer</option>
+                        <option>Hombre</option>
+                        <option>Otro</option>
+                    </select>
+                </div>
+            </dd>
+        </div>
+
+        <div class="form-group">
+            <div class="fg-line">
+                <input type="text" class="form-control input-sm" placeholder="Numero de identificacion" ng-model="prestador.cedula">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="fg-line">
+                <input type="text" class="form-control input-sm" placeholder="Email" ng-model="prestador.email">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="fg-line">
+                <input type="text" class="form-control input-sm" placeholder="Telefono" ng-model="prestador.telefono">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <dt class="p-t-10">Especialidad {{prestador.especialidad}}</dt>
+            <dd>
+                <div class="fg-line">
+                    <select class="form-control" ng-model="prestador.especialidad">
+                        <option>Odontologia</option>
+                        <option>Ortodoncista</option>
+                        <option>Periodontologo</option>
+                    </select>
+                </div>
+            </dd>
+        </div>
+        
+        <div class="clearfix"></div>
+        
+        <div class="row">
+            <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
+        </div>
+
+</div>
+</div>

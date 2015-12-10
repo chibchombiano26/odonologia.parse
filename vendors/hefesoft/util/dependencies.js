@@ -524,6 +524,23 @@ function dependenciasDate(){
        
        return dependencias;
    }
+   
+   function dependenciasPrestadores(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,        
+        files: 
+        [
+            "js/hefesoft/Prestador/directives/js/add.js",
+            "js/hefesoft/Prestador/sevice/prestador.js",
+            "js/hefesoft/Prestador/directives/js/list.js",
+            'js/hefesoft/Prestador/directives/js/buscador.js'
+        ]
+    }
+
+    return dependencias;
+    }
 
 function cargarPacientes($ocLazyLoad){
       return $ocLazyLoad.load
@@ -572,6 +589,7 @@ function cargarPacientes($ocLazyLoad){
       ]);
    }
    
+   
    function cargarDiagnosticosPacientes($ocLazyLoad){
       return $ocLazyLoad.load
       ([
@@ -602,7 +620,8 @@ function cargarPacientes($ocLazyLoad){
           dependenciasHistoria(),
           dependenciasTratamientos(),
           dependenciasCieCups(),
-          dependenciasFont()
+          dependenciasFont(),
+          dependenciasPrestadores()
       ]);
    }
    
@@ -621,6 +640,7 @@ function cargarPacientes($ocLazyLoad){
           dependenciasStringFormat(),
           dependenciasPlanTratamiento(),
           dependenciasPdf(),
+          dependenciasPrestadores()
       ]);
    }
    
@@ -644,6 +664,7 @@ function cargarPacientes($ocLazyLoad){
         dependenciasImagenes(),
         dependenciasCalendar(),
         dependenciasAgenda(),
+        dependenciasPrestadores()
       ]);
    }
    
@@ -665,5 +686,14 @@ function cargarPacientes($ocLazyLoad){
       return $ocLazyLoad.load
       ([
         dependenciasEmail()
+      ]);
+   }
+   
+   function cargarPrestadores($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+        dependenciasPrestadores(),
+        dependenciasCalendar(),
+        dependenciasAgenda()
       ]);
    }

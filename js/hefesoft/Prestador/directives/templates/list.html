@@ -1,0 +1,56 @@
+   <div>
+       <section id="content">
+        <div class="container">
+            <div class="block-header">
+                <h2>Prestadores</h2>
+            </div>
+        
+            <div class="card">
+                <div class="listview lv-bordered lv-lg">
+                  <div class="card-header ch-alt m-b-20">
+                    <h2>Prestadores <small> Listado los diferentes prestadores en el sistema</small></h2>
+                  
+                    <button 
+                        tooltip="Adicionar un prestador"
+                        ng-click="nueva()"
+                        class="btn bgm-cyan btn-float btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus zmdi-hc-5x"></i>
+                	</button>
+
+                </div>
+
+                    
+                    <div class="lv-body">                             
+                        
+                        <div ng-repeat="item in listado" class="lv-item media">
+                            
+                           <div class="pull-left">
+                                <img class="lv-img-sm" src="{{item.pictureUrl}}" alt="">
+                           </div>
+                           
+                           <div class="pull-right">
+                                <ul class="lv-attrs">
+                                    <li>
+                                        <button ng-click="editar(item)" class="btn btn-info waves-effect">Editar</button>
+                                    </li>
+                                    <li>
+                                        <button ng-click="eliminar(item, $index)" class="btn btn-warning waves-effect">Eliminar</button>
+                                    </li>
+                                </ul>
+                           </div>
+                            
+                            
+                           <div class="media-body">
+                                <div class="lv-title">{{item.nombre}}</div>
+                                <small class="lv-small">{{item.cedula}}</small>
+                                <small class="lv-small">{{item.especialidad}}</small>
+                                <small class="lv-small">{{item.email}}</small>
+                                <small class="lv-small">{{item.telefono}}</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>                       
+            </div>
+        </div>
+    </section>
+</div>

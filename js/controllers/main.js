@@ -404,7 +404,7 @@ materialAdmin
         //Open new event modal on selecting a day
         this.onSelect = function(argStart, argEnd) {
             var modalInstance  = $modal.open({
-                templateUrl: 'addEvent.html',
+                templateUrl: 'js/hefesoft/Agenda/modal/add.html',
                 controller: 'addeventCtrl',
                 backdrop: 'static',
                 keyboard: false,

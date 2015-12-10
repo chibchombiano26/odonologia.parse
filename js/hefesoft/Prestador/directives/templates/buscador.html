@@ -1,0 +1,59 @@
+<div class="card">
+    
+    
+    <div class="fg-line">
+        <div class="pull-right p-relative p-r-25 p-t-25">
+            <button tooltip="crear un nuevo prestador" ng-click="nueva()" class="btn btn-default waves-effect"><i class="zmdi zmdi-plus"></i></button>
+        </div>
+    </div>
+    
+    
+    <div class="card-header">
+        <h2>Prestador<small></small></h2>
+    </div>
+    
+    <div class="card-body card-padding">
+
+        <div class="form-group">
+            <div class="fg-line" tooltip="Escribe el nombre del prestador">
+                 <input 
+                 name="buscadorPrestador"
+                 type="text" 
+                 ng-model="seleccionadoPrestador" 
+                 typeahead="item.nombre for item in datosPrestador | filter:$viewValue | limitTo:8" 
+                 class="form-control">
+            </div>
+        </div>
+        
+        
+     <div class="form-group" ng-show="showPrestador">
+        <div class="fg-line">
+            <div class="pull-left">
+                <img class="lv-img-sm" src="{{seleccionadoPrestador.pictureUrl}}" alt="">
+            </div>
+            
+            <div class="pull-right">
+                
+                <div class="btn-group btn-group-xs">
+                    <button ng-click="editar(seleccionadoPrestador)" type="button" class="btn btn-success waves-effect">Editar</button>
+                    <!--
+                    <button type="button" class="btn btn-success waves-effect">Middle</button>
+                    -->
+                </div>
+                
+            </div>
+            
+            <div class="media-body">
+                <div class="lv-title">Nombre: {{seleccionadoPrestador.nombre}}</div>
+                <small class="lv-small">Cedula: {{seleccionadoPrestador.cedula}}</small>
+                <small class="lv-small">Especialidad: {{seleccionadoPrestador.especialidad}}</small>
+                <small class="lv-small">Email: {{seleccionadoPrestador.email}}</small>
+                <small class="lv-small">Telefono: {{seleccionadoPrestador.telefono}}</small>
+            </div>
+        </div>
+    </div>
+        
+    </div>
+    
+   
+</div>

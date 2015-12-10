@@ -1,6 +1,6 @@
 /*global angular, Parse*/
 angular.module("odontologiaApp")
-.controller("helpCtrl", function($modal, $scope){
+.controller("helpCtrl", function($modal, $rootScope, $scope){
     
     var modalInstance;
     
@@ -21,17 +21,24 @@ angular.module("odontologiaApp")
         });
     }
     
+    $rootScope.$on('openPopUp', function(event, payload) {
+        modalInstances(true, payload.size, true, true, payload.template);
+    })
+    
     $scope.open = function (size, template) {
         modalInstances(true, size, true, true, template)
     }
     
-    
 })
 
-.controller("helpModalCtrl", function($scope, $modalInstance){
+.controller("helpModalCtrl", function($rootScope, $scope, $modalInstance){
     
     $scope.close = function(){
         $modalInstance.dismiss();
     }
+    
+    $rootScope.$on('closePopUp', function(event, payload) {
+        $modalInstance.dismiss();
+    })
     
 })

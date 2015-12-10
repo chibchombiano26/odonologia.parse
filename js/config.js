@@ -670,6 +670,20 @@ materialAdmin
             }
           })
           
+          .state('pages.listadoPrestadores', {
+            url: "/listadoPrestadores",
+            cache: false,
+            templateUrl: 'js/hefesoft/Prestador/listado.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarPrestadores($ocLazyLoad)
+               }
+            }
+          })
+          
           .state('pages.diagnosticoPaciente', {
             url: "/diagnosticosPacientes/:pacienteId",
             controller: "diagnosticoPacienteCtrl",

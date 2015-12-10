@@ -55,6 +55,10 @@ angular.module('odontologiaApp')
  			odontograma.set("indiceCup", item.indiceCup.toString());
  		}
  		
+ 		if(item && item.prestador){
+ 			odontograma.set("prestador", item.prestador);
+ 		}
+ 		
  		
  		if(odontogramaId){
  			odontograma.set("id", odontogramaId);

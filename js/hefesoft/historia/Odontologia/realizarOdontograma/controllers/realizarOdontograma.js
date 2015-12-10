@@ -63,6 +63,9 @@ angular.module('Historia')
 	  		$scope.indiceCie = Odontograma.indiceCie;
 	  		$scope.indiceCup = Odontograma.indiceCup;
 	  		
+	  		debugger
+	  		$scope.fijarPrestador(Odontograma.prestador);
+	  		
 	  		OdontogramaCargadoId = Odontograma.objectId;
 	  		
 	  		Odontograma.listado = _.sortBy(Odontograma.listado, function(item){
@@ -103,6 +106,10 @@ angular.module('Historia')
 	  	}
 	  	
 	  	return deferred.promise;
+	}
+	
+	$scope.prestadorSeleccionado = function(item){
+		$rootScope.prestadorSeleccionado = item;
 	}
 	 
 	$scope.dxSeleccionado = function(item){
@@ -182,6 +189,9 @@ angular.module('Historia')
       	var item = $scope.contextoOdontograma();
  		var piezaDental = item.piezasDentalesScope();
  		
+ 		if($rootScope.prestadorSeleccionado){
+ 			$scope['prestador'] = $rootScope.prestadorSeleccionado;
+ 		}
  		
  		odontogramService.saveOdontograma(listadoGuardar, diagnosticoPacienteId, OdontogramaCargadoId, $scope).then(function(result){
  			var item = result.toJSON();

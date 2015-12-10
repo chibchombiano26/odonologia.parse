@@ -1,81 +1,31 @@
-<button 
-ng-click="auth()"
-ng-show="mostrarBotonAutorizar"> 
-	Autenticar	
-</button>
-
-
-
 <section id="content" data-ng-controller="calendarAgendaCtrl as clctrl">
+    
     <div class="container" data-ng-controller="ModalDemoCtrl">
+        
+        <button 
+        ng-click="auth()"
+        ng-show="mostrarBotonAutorizar"> 
+        	Autenticar	
+        </button>
+        
         <div class="block-header">
             <h2>Agenda <small>Agenda odontologica</small></h2>
             
             <button 
-	            tooltip="Necesitas ayuda este video puede ayudarte"
-	            ng-controller="helpCtrl" 
-	            ng-click="open('lg', 'js/hefesoft/help/agenda.html')" 
-	            class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
-	            <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>
+                tooltip="Necesitas ayuda este video puede ayudarte"
+                ng-controller="helpCtrl" 
+                ng-click="open('lg', 'js/hefesoft/help/agenda.html')" 
+                class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
+                <i class="zmdi zmdi-pin-help zmdi-hc-fw"></i>
         	</button>
         	</br>
-            
+        
         </div>
+        
+        <buscador-prestador prestador-seleccionado="cargarEventos(item.idCalendar)"></buscador-prestador>
 
         <div id="calendar" ng-model="listadoEventos" default-view="'basicWeek'" data-lang="'es'" data-calendar data-action-links="clctrl.actionMenu" data-event-click="clctrl.onEventSelected(calEvent, jsEvent, view)" data-select="clctrl.onSelect(start, end)"></div>
         
-        <!-- Add event -->
-        <script type="text/ng-template" id="addEvent.html">
-            <div class="modal-header">
-                <h4 class="modal-title">Nueva cita</h4>
-            </div>
-            <div class="modal-body">
-                <form class="addEvent" role="form">
-                    <div class="form-group" data-ng-class="{ 'has-error': calendarData.eventName === '' }">
-                        <label for="eventName">Nombre</label>
-                        <div class="fg-line">
-                            <input type="text" class="input-sm form-control" data-ng-model="calendarData.eventName" placeholder="ej: Juan perez">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="eventName">Color cita</label>
-                        <div class="event-tag" data-ng-class="{ 'active': activeState }">
-                            <span data-ng-repeat="w in tags" data-tag="{{ w }}" class="{{ w }}" data-ng-class="{ 'selected': activeState === $index }" data-ng-click="onTagClick(w, $index)"></span>
-                        </div>
-                    </div>
-                    
-                    <div ng-show="mostrarEliminar" class="form-group">
-                        <label for="eventName">Ver en google</label>
-                        <div class="fg-line">
-                            <a ng-href="{{link}}" hrefb>
-                                <p>{{calendarData.eventName}}</p>
-                            </a>
-                        </div>
-                    </div>
-
-
-					<div class="form-group fg-line">
-                        <label>Time</label>
-                        <input type="text" class="form-control" data-input-mask="{mask: '00:00'}" placeholder="ej: 14:20" data-ng-model="getStart">
-                    </div>
-                    
-                    <div class="form-group fg-line">
-                        <label>Time</label>
-                        <input type="text" class="form-control" data-input-mask="{mask: '00:00'}" placeholder="ej: 14:40" data-ng-model="getEnd">
-                    </div>
-
-
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-link" data-ng-click="addEvent()">{{action}}</button>
-                
-                <button ng-show="mostrarEliminar" type="button" class="btn btn-link" data-ng-click="eliminar()">eliminar</button>
-                
-                <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">Cerrar</button>
-            </div>
-        </script>
+      
     </div>
 </section>

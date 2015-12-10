@@ -1,14 +1,22 @@
+/*global _, angular, moment*/
 angular.module('odontologiaApp')
 .controller('AgendaCtrl', 
-	['$scope', 'calendarGetData', 'agendaHelperService', 'dataTableStorageFactory', '$rootScope',
-	function ($scope, calendarGetData, agendaHelperService, dataTableStorageFactory, $rootScope) {
+	['$scope', 'calendarGetData', 'agendaHelperService', 'dataTableStorageFactory', '$rootScope', 'prestadorService',
+	function ($scope, calendarGetData, agendaHelperService, dataTableStorageFactory, $rootScope, prestadorService) {
 	 
 	$scope.mostrarBotonAutorizar = false;
+	$scope.prestadores = [];
 	$scope.listadoEventos = [];
 	$scope.contextoCalendar = {};
 	$scope.calendarId = 'primary';
 	var listadoGoogleCalendar = [];
 
+    
+    $scope.cargarEventos = function(id){
+        $('#calendar').fullCalendar( 'removeEvents');
+        $scope.calendarId = id;
+        eventApiCargada();
+    }
 
 	$scope.adicionado = function(item){
 		var elementoProcesado = agendaHelperService.procesarAdicionado(item);
@@ -42,6 +50,16 @@ angular.module('odontologiaApp')
 
 	function inicializar(){
 		calendarGetData.loadEventApi().then(eventApiCargada);
+		
+		/*Listado de prestadores*/
+		prestadorService.list().then(function(result){
+		    
+		    $scope.prestadores = [];
+		    for (var i = 0; i < result.length; i++) {
+		        $scope.prestadores.push(result[i].toJSON());
+		    }
+		    
+		})
 	}
 
 	function eventApiCargada(){		
@@ -68,8 +86,6 @@ angular.module('odontologiaApp')
 				array.push({id : items[i].id, row: i });
 			}
 		}
-        
-		//dataTableStorageFactory.postTableArray(array, 'TmCalendarsUsuario',  Parse.User.current().get("email"), 'row');
 	}
 	
 	
@@ -117,7 +133,7 @@ angular.module('odontologiaApp')
         //Open new event modal on selecting a day
         this.onSelect = function(argStart, argEnd) {
             var modalInstance  = $modal.open({
-                templateUrl: 'addEvent.html',
+                templateUrl: 'js/hefesoft/Agenda/modal/add.html',
                 controller: 'addeventAgendaCtrl',
                 backdrop: 'static',
                 keyboard: false,
@@ -132,7 +148,7 @@ angular.module('odontologiaApp')
         
         this.onEventSelected = function(calEvent, jsEvent, view){
             var modalInstance  = $modal.open({
-                templateUrl: 'addEvent.html',
+                templateUrl: 'js/hefesoft/Agenda/modal/add.html',
                 controller: 'addeventAgendaCtrl',
                 backdrop: 'static',
                 keyboard: false,

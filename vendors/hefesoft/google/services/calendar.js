@@ -1,3 +1,4 @@
+/*global gapi, angular, moment, jstz, hefesoft*/
 angular.module('hefesoft.google')
 .service('calendarGetData', 
 	['$q', function ($q) {
@@ -97,8 +98,101 @@ angular.module('hefesoft.google')
       deferred.resolve(respt);
     });
 
-    return deferred;
-
+    return deferred.promise;
+  }
+  
+  dataFactory.createCalendar = function(name, description){
+    var deferred = $q.defer();
+    
+    var apiCargada = !hefesoft.isEmpty(gapi.client.calendar);
+    
+    if(apiCargada){
+      createCalendar(name, description).then(function(result){
+        deferred.resolve(result);
+      })
+    }
+    else{
+      dataFactory.loadEventApi().then(function(){
+        createCalendar(name, description).then(function(result){
+          deferred.resolve(result);
+        })
+      })
+    }
+    
+    return deferred.promise;
+  }
+  
+  function createCalendar(name, description){
+    var deferred = $q.defer();
+    var tz = jstz.determine().name();
+    var request = gapi.client.calendar.calendars.insert({
+        
+        "summary": name,
+        "description": description,
+        "timeZone": tz
+        
+      });
+      request.execute(function(result){
+        deferred.resolve(result);
+        dataFactory.updateAcl(result.id, "freeBusyReader");
+      })
+      
+      return deferred.promise;
+  }
+  
+  dataFactory.deleteCalendar = function(id){
+    
+    var deferred = $q.defer();
+    
+    var apiCargada = !hefesoft.isEmpty(gapi.client.calendar);
+    
+    if(apiCargada){
+      deleteCalendar(id).then(function(result){
+        deferred.resolve(result);
+      })
+    }
+    else{
+      dataFactory.loadEventApi().then(function(){
+        deleteCalendar(id).then(function(result){
+          deferred.resolve(result);
+        })
+      })
+    }
+    
+    return deferred.promise;
+   
+  }
+  
+  function deleteCalendar(id){
+    var deferred = $q.defer();
+    var request = gapi.client.calendar.calendars.delete({
+      "calendarId": id
+    })
+    
+    request.execute(function(result){
+      deferred.resolve(result);
+    })
+    
+    return deferred.promise;
+  }
+  
+  function createCalendarRest(name, description){
+    var tz = jstz.determine().name();
+    var deferred = $q.defer();
+    
+    var restRequest = gapi.client.request({
+        'path': '/calendar/v3/calendars',
+        'method': 'POST',
+        'body': {'summary': name, 'description': description, "timeZone": tz}
+      });
+      restRequest.then(function(resp) {
+        deferred.resolve(resp.result);
+      }, function(reason) {
+        deferred.reject(reason.result.error.message);
+        console.log('Error: ' + reason.result.error.message);
+      });
+      
+      return deferred.promise;
   }
 
 	return dataFactory;
