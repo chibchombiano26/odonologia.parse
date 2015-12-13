@@ -7,22 +7,25 @@ angular.module('hefesoft.google')
 	var dataFactory = {};
 
 	dataFactory.getCalendar = function(calendarId){
-        var deferred = $q.defer();
-        var request = gapi.client.calendar.events.list({
-          'calendarId': calendarId,
-          'timeMin': (moment().add(-10, 'days')).toISOString(),
-          'showDeleted': false,
-          'singleEvents': true,
-          'maxResults': 500,
-          'orderBy': 'startTime'
-        });
-
-        request.execute(function(resp) {
-          var events = resp.items;
-          deferred.resolve(events);
-        });
-
-        return deferred.promise;
+        
+    var deferred = $q.defer();
+    
+    var apiCargada = !hefesoft.isEmpty(gapi.client.calendar);
+    
+    if(apiCargada){
+      getCalendar(calendarId).then(function(result){
+        deferred.resolve(result);
+      })
+    }
+    else{
+      dataFactory.loadEventApi().then(function(){
+        getCalendar(calendarId).then(function(result){
+          deferred.resolve(result);
+        })
+      })
+    }
+    
+    return deferred.promise;
 	}
 
   dataFactory.loadEventApi = function(){
@@ -122,24 +125,6 @@ angular.module('hefesoft.google')
     return deferred.promise;
   }
   
-  function createCalendar(name, description){
-    var deferred = $q.defer();
-    var tz = jstz.determine().name();
-    var request = gapi.client.calendar.calendars.insert({
-        
-        "summary": name,
-        "description": description,
-        "timeZone": tz
-        
-      });
-      request.execute(function(result){
-        deferred.resolve(result);
-        dataFactory.updateAcl(result.id, "freeBusyReader");
-      })
-      
-      return deferred.promise;
-  }
-  
   dataFactory.deleteCalendar = function(id){
     
     var deferred = $q.defer();
@@ -161,6 +146,43 @@ angular.module('hefesoft.google')
     
     return deferred.promise;
    
+  }
+  
+  function getCalendar(calendarId){
+	  var deferred = $q.defer();
+        var request = gapi.client.calendar.events.list({
+          'calendarId': calendarId,
+          'timeMin': (moment().add(-10, 'days')).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 500,
+          'orderBy': 'startTime'
+        });
+
+        request.execute(function(resp) {
+          var events = resp.items;
+          deferred.resolve(events);
+        });
+
+        return deferred.promise;
+	}
+  
+  function createCalendar(name, description){
+    var deferred = $q.defer();
+    var tz = jstz.determine().name();
+    var request = gapi.client.calendar.calendars.insert({
+        
+        "summary": name,
+        "description": description,
+        "timeZone": tz
+        
+      });
+      request.execute(function(result){
+        deferred.resolve(result);
+        dataFactory.updateAcl(result.id, "freeBusyReader");
+      })
+      
+      return deferred.promise;
   }
   
   function deleteCalendar(id){
