@@ -41,6 +41,52 @@
             
             <div class="row">   
 
+                   <div class="col-sm-6">
+                      <div class="form-group">
+                        <dt class="p-t-10">Vinculacion Eps</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <select class="form-control" ng-model="Paciente.vinculacionEps">
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </dd>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                        <dt class="p-t-10">Tipo de vinculacion</dt>
+                        <div class="fg-line">
+                            <input type="text" class="form-control input-sm" placeholder="Tipo Vinculacion" ng-model="Paciente.tipoVinculacion">
+                        </div>
+                    </div>
+                  </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Ocupacion" ng-model="Paciente.Ocupacion">
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <dt class="p-t-10">Grupo de poblacion</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.grupoPoblacion">
+                            <option>5-14 años</option>
+                            <option>embarazada</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="row">   
+
                    <div class="col-sm-4">
                       <div class="form-group">
                           <div class="fg-line">
@@ -118,6 +164,32 @@
                       </div>
                   </div>
                 </div>
+                
+            <div class="row">   
+
+                   <div class="col-sm-4">
+                      <div class="form-group">
+                          <div class="fg-line">
+                              <input type="text" class="form-control" placeholder="Nombre acudiente" ng-model="Paciente.nombreAcudiente">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-4">
+                      <div class="form-group">
+                          <div class="fg-line">
+                              <input type="text" class="form-control" placeholder="Parentesco acudiente" ng-model="Paciente.parentescoAcudiente">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-sm-4">
+                       <div class="form-group">
+                              <input type="text" class="form-control" placeholder="Telefono acudiente" ng-model="Paciente.telefonoAcudiente">
+                          <div class="fg-line">
+                          </div>
+                      </div>
+                  </div>
+            </div>
+                
         </div>
     </div>
     
@@ -150,6 +222,519 @@
     
     </div>
     
+    <div class="card">
+     
+     <div class="card-header">
+      <h2>Higiene horal <small>Habitos de higiene horal</small></h2>
+    </div>
+     <div class="card-body card-padding">     
+            
+            <div class="row">   
+
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                        <dt class="p-t-10">Cepillado</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <select class="form-control" ng-model="Paciente.cepillado">
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </dd>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-4">
+                      <div class="form-group">
+                          <dt class="p-t-10"># de veces</dt>
+                          <div class="fg-line">
+                              <input type="text" class="form-control" placeholder="Cuantas veces" ng-model="Paciente.cepilladoCuantasVeces">
+                          </div>
+                      </div>
+                  </div>
+                 
+            </div>
+            
+            <div class="row">   
+
+                  <div class="col-sm-6">
+                      <div class="form-group">
+                        <dt class="p-t-10">Seda dental</dt>
+                        <dd>
+                            <div class="fg-line">
+                                <select class="form-control" ng-model="Paciente.sedaDental">
+                                    <option>Si</option>
+                                    <option>No</option>
+                                </select>
+                            </div>
+                        </dd>
+                    </div>
+                  </div>
+                  
+                  <div class="col-sm-4">
+                      <div class="form-group">
+                          <dt class="p-t-10"># de veces</dt>
+                          <div class="fg-line">
+                              <input type="text" class="form-control" placeholder="Cuantas veces" ng-model="Paciente.sedaDentalCuantasVeces">
+                          </div>
+                      </div>
+                  </div>
+                 
+            </div>
+    </div>
+    
+    </div>
+    
+    <div class="card">
+     
+     <div class="card-header">
+      <h2>Anamnesis<small></small></h2>
+     </div>
+         <div class="card-body card-padding">     
+                 
+            <div class="form-group">
+                <dt class="p-t-10">1. Tratamiento medico</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.tratamientoMedico">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">2. Ingestion de medicamentos</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.ingestionMedicamentos">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">3. Reacciones alergicas</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.reaccionesAlergicas">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">4. Hemorragias</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.hemorragias">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">5. Irradiaciones</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.irradiaciones">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">6. Sinusitis</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.sinusitis">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">7. Enfermedades respiratorias</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.enfermedadesRespiratorias">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">8. Cardiopatias</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.cardiopatias">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">9. Diabetes</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.diabetes">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">10. Fiebre Reumatica</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.fiebreReumatica">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">11. Hepatitis</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.hepatitis">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">12. Hipertension Arterial</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.hipertensionArterial">
+                            <option>Si</option>
+                            <option>No</option>
+                            <option>N. S.</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">13. Otras enfermedades</dt>
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="otras enfermedades" ng-model="Paciente.otrasEnfermedades">
+                </div>
+            </div>
+               
+        </div>
+    
+    </div>
+    
+    <div class="card">
+     
+     <div class="card-header">
+      <h2>Examen Fisico Estomatologico<small></small></h2>
+     </div>
+         <div class="card-body card-padding">     
+                 
+            <div class="form-group">
+                <dt class="p-t-10">1. Articulacion temporal - mandibular</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.articulacionTemporalMandibular">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">2. Labios</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.labios">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">3. Lengua</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.lengua">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">4. Paladar</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.paladar">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">5. Piso de la boca</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.pisoBoca">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">6. Carrillo</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.carrillo">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">7. Glandulas salivares</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.glandulasSalivares">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">8. Maxilares</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.maxilares">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">9. Senos maxilares</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.senosMaxilares">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">10. Musculos masticadores</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.musculosMasticadores">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">11. Sistema Nervioso</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.sitemaNervioso">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">12. Sistema Vascular</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.sitemaVascular">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">13. Sistema linfatico regional</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.sitemaLinfaticoRegional">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">14. Funcion de oclusion</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.funcionOclusion">
+                            <option>Normal</option>
+                            <option>Anormal</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+             <div class="form-group">
+                <dt class="p-t-10">15. Otros</dt>
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Otros" ng-model="Paciente.otrosExamenFisico">
+                </div>
+            </div>
+               
+        </div>
+    
+    </div>
+    
+    <div class="card">
+     
+     <div class="card-header">
+      <h2>Examen oral<small></small></h2>
+     </div>
+         <div class="card-body card-padding">     
+                 
+            <div class="form-group">
+                <dt class="p-t-10">1. Supernumerarios</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.supernumerarios">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">2. Abrasion</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.abrasion">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">3. Manchas</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.manchas">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">4. Patologia pulpar</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.patalogiaPulpar">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">5. Placa bacteriana</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.placaBacteriana">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">6. Placa calificada</dt>
+                <dd>
+                    <div class="fg-line">
+                        <select class="form-control" ng-model="Paciente.placaCalificada">
+                            <option>Si</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                </dd>
+            </div>
+            
+            <div class="form-group">
+                <dt class="p-t-10">7. Otros</dt>
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Otros" ng-model="Paciente.examenOralOtros">
+                </div>
+            </div>
+               
+        </div>
+    
+    </div>
 
     <div class="card">
      
@@ -178,5 +763,5 @@
     
     </div>
 
- <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
+    <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
 

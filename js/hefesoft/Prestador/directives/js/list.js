@@ -11,7 +11,7 @@ angular.module('odontologiaApp')
     return directive;
 })
 
-.controller('listPrestadorCtrl', function($rootScope, $scope, $state, $stateParams, prestadorService, calendarGetData){
+.controller('listPrestadorCtrl', function($rootScope, $scope, $state, $stateParams, prestadorService, calendarGetData, modalService){
     
     $scope.listado = [];
     
@@ -30,12 +30,12 @@ angular.module('odontologiaApp')
     
     $scope.nueva = function(){
         $rootScope['prestadorSeleccionado'] = undefined; 
-        $rootScope.$broadcast('openPopUp', { size: "lg", template : 'js/hefesoft/Prestador/add.html'});
+        modalService.open('lg', 'js/hefesoft/Prestador/add.html', undefined)
     }
     
     $scope.editar = function(item){
         $rootScope['prestadorSeleccionado'] = item; 
-        $rootScope.$broadcast('openPopUp', { size: "lg", template : 'js/hefesoft/Prestador/add.html'});
+        modalService.open('lg', 'js/hefesoft/Prestador/add.html', undefined)
     }
     
     $scope.eliminar = function(item, $index){

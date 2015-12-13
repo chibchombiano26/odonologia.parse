@@ -19,13 +19,16 @@
 </br>
 </br>
 
-<piezas-dentales
-        click-callback="clickPiezaDental(item)"
-        odontograma-base-cargado-callback="odontogramaCargado(item)"
-        numero-pieza-modificada="numeroPiezaModificada"
-    	permanente="piezasDentales.Permanente"
-        modificado="modificado(item)"
-    	ng-model="piezasDentales"
-        contexto="piezasDentalesScope"
-        >
-</piezas-dentales>
+<!-- se usa para el snapshot este div -->
+<div id="odontograma">
+    <piezas-dentales
+            click-callback="clickPiezaDental(item)"
+            odontograma-base-cargado-callback="odontogramaCargado(item)"
+            numero-pieza-modificada="numeroPiezaModificada"
+        	permanente="piezasDentales.Permanente"
+            modificado="modificado(item)"
+        	ng-model="piezasDentales"
+            contexto="piezasDentalesScope"
+            >
+    </piezas-dentales>
+</div>

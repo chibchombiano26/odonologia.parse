@@ -60,6 +60,11 @@ angular.module('odontologiaApp')
  		}
  		
  		
+ 		if(item && item.snap){
+ 			odontograma.set("snap", item.snap);
+ 		}
+ 		
+ 		
  		if(odontogramaId){
  			odontograma.set("id", odontogramaId);
  		}

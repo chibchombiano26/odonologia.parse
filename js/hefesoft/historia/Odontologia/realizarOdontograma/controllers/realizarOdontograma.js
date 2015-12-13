@@ -1,9 +1,9 @@
-/*global angular, Parse, _,hefesoft*/
+/*global angular, Parse, _,hefesoft, html2canvas*/
 
 angular.module('Historia')
 .controller('realizarOdontogramaCtrl', 
-	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval', 'odontogramService', 'cfpLoadingBar',
-	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval, odontogramService, cfpLoadingBar) {
+	['$scope', 'dataTableStorageFactory', 'tratamientoServices', 'odontogramaJsonServices', '$rootScope', '$state', 'piezasDentalesServices', '$timeout', '$q', 'messageService','$stateParams', 'diagnosticosService', '$interval', 'odontogramService', 'cfpLoadingBar', 'driveApiUpload',
+	function ($scope, dataTableStorageFactory, tratamientoServices, odontogramaJsonServices, $rootScope, $state, piezasDentalesServices, $timeout, $q, messageService, $stateParams, diagnosticosService, $interval, odontogramService, cfpLoadingBar, driveApiUpload) {
 	
 	var Hefesoft  = window.Hefesot;
 	
@@ -63,8 +63,9 @@ angular.module('Historia')
 	  		$scope.indiceCie = Odontograma.indiceCie;
 	  		$scope.indiceCup = Odontograma.indiceCup;
 	  		
-	  		debugger
-	  		$scope.fijarPrestador(Odontograma.prestador);
+	  		if(Odontograma.prestador){
+	  		 $scope.fijarPrestador(Odontograma.prestador);
+	  		}
 	  		
 	  		OdontogramaCargadoId = Odontograma.objectId;
 	  		
@@ -175,13 +176,34 @@ angular.module('Historia')
 
  	$scope.guardarCommand = function(){
  		var deferred = $q.defer();
- 		var item = $scope.contextoOdontograma();
- 		var piezaDental = item.piezasDentalesScope();
+ 		snap().then(function(url){
+ 			
+ 			$scope.snap = url;
+	 		var item = $scope.contextoOdontograma();
+	 		var piezaDental = item.piezasDentalesScope();
+	 		
+	 		var listadoGuardar = piezasDentalesServices.getModifiedPiezas(true); 		
+	 		guardar(listadoGuardar, piezaDental.listado, deferred);
+ 			
+ 		})
  		
- 		var listadoGuardar = piezasDentalesServices.getModifiedPiezas(true); 		
- 		guardar(listadoGuardar, piezaDental.listado, deferred);
-
  		return deferred.promise;
+ 	}
+ 	
+ 	function snap(){
+ 		hefesoft.util.loadingBar.start();
+ 		var deferred = $q.defer();
+ 		html2canvas($("#odontograma"), {
+		    onrendered: function(canvas) {
+		        var img = canvas.toDataURL('image/png');
+    			driveApiUpload.insertFile(img,"snap").then(function(link){
+    				deferred.resolve(link.id);
+    				hefesoft.util.loadingBar.complete();
+    			})
+		    }
+		});
+		
+		return deferred.promise;
  	}
 
  	function guardar(listadoGuardar, source, deferred){

@@ -672,7 +672,7 @@ materialAdmin
           
           .state('pages.listadoPrestadores', {
             url: "/listadoPrestadores",
-            cache: false,
+            cache: true,
             templateUrl: 'js/hefesoft/Prestador/listado.html',
             data: {
               requireLogin: true
@@ -749,7 +749,7 @@ materialAdmin
           .state('pages.agenda', {
             url: "/agenda",
             controller: "AgendaCtrl",
-            cache: false,
+            cache: true,
             templateUrl: 'js/hefesoft/Agenda/views/agenda.html',
             data: {
               requireLogin: true

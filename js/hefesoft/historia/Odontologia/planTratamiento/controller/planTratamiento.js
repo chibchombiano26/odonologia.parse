@@ -8,6 +8,7 @@ controller('planTratamientoCtrl',
 	var idOdontograma;
 	var diagnosticoPacienteId;
 	var piezaDentalSeleccionada;
+	var odontogramaData;
 
 	$scope.Listado = [];
 	$scope.Source = [];
@@ -30,6 +31,7 @@ controller('planTratamientoCtrl',
 	  	var result = data.toJSON().listado;
 	  	
 	  	idOdontograma = data.toJSON().objectId;
+	  	odontogramaData = data.toJSON(); 
 	  	
 	  	$scope.Source = result;
       	piezasDentalesServices.fijarPiezasDentales($scope.Source);
@@ -80,7 +82,15 @@ controller('planTratamientoCtrl',
  	}
  	
  	function mostrarCotizacion(){
+ 		
+ 		var paciente = angular.copy($rootScope.currentPacient);
+ 		delete paciente.pictureUrl;
+ 		delete paciente.objectId;
+ 		delete paciente.createdAt;
+ 		delete paciente.updatedAt;
+ 		
  		var parameters = {
+ 			templateid : '1Hs8YaOe5dZjzMuw84X4Bipft2NnUK33xovHQ9vKeOEY',
             name : $rootScope.currentPacient.nombre, 
             fileName : "cotizacion "  + $rootScope.currentPacient.nombre, 
             rowsData: [], 
@@ -88,9 +98,11 @@ controller('planTratamientoCtrl',
             subject: "Cotizacion",
             message : "Cotizacion",
             clinica: "Nombre medico : "  + Parse.User.current().get("name"),
-            direccion : "Direccion clinica :",
+            direccionClinica : "Direccion clinica :",
             telefono: "Telefono clinica :",
-            email: "Email : " + Parse.User.current().get("email")
+            email: "Email : " + Parse.User.current().get("email"),
+            paciente : paciente,
+            snap : odontogramaData.snap
         };
         
         var titulos = ['Pieza dental', 'Procedimiento', 'Superficie', 'Valor', 'Valor pagado','Saldo'];

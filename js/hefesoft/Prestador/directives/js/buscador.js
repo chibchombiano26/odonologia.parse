@@ -16,14 +16,12 @@ angular.module("odontologiaApp")
       }
       
     }
-    
-    
    
     return directive;
     
 })
 
-.controller('buscadorPrestadorCtrl', function($rootScope, $scope,  prestadorService){
+.controller('buscadorPrestadorCtrl', function($rootScope, $scope,  prestadorService, modalService){
     
     $scope.datosPrestador = [];
     $scope.seleccionadoPrestador;
@@ -40,16 +38,19 @@ angular.module("odontologiaApp")
         		}
             }
         }
+        else{
+            $scope.showPrestador = false;
+        }
     });
     
     $scope.nueva = function(){
         $rootScope['prestadorSeleccionado'] = undefined; 
-        $rootScope.$broadcast('openPopUp', { size: "lg", template : 'js/hefesoft/Prestador/add.html'});
+        modalService.open('lg', 'js/hefesoft/Prestador/add.html', undefined);
     }
     
     $scope.editar = function(item){
         $rootScope['prestadorSeleccionado'] = item; 
-        $rootScope.$broadcast('openPopUp', { size: "lg", template : 'js/hefesoft/Prestador/add.html'});
+        modalService.open('lg', 'js/hefesoft/Prestador/add.html', undefined);
     }
     
     $scope.fijarPrestador = function(prestador){
@@ -71,7 +72,7 @@ angular.module("odontologiaApp")
         var modo = payload.modo;
         
         if(modo === "Adicionado"){
-            $scope.listado.push(payload.item);
+            $scope.datosPrestador.push(payload.item);
         }
         else{
             inicializar();

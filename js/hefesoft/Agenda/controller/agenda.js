@@ -1,4 +1,4 @@
-/*global _, angular, moment*/
+/*global _, angular, moment, hefesoft*/
 angular.module('odontologiaApp')
 .controller('AgendaCtrl', 
 	['$scope', 'calendarGetData', 'agendaHelperService', 'dataTableStorageFactory', '$rootScope', 'prestadorService',
@@ -13,7 +13,7 @@ angular.module('odontologiaApp')
 
     
     $scope.cargarEventos = function(id){
-        $('#calendar').fullCalendar( 'removeEvents');
+        $('#calendar').fullCalendar('removeEvents');
         $scope.calendarId = id;
         eventApiCargada();
     }
@@ -62,7 +62,8 @@ angular.module('odontologiaApp')
 		})
 	}
 
-	function eventApiCargada(){		
+	function eventApiCargada(){
+	    hefesoft.util.loadingBar.start();
 		calendarGetData.getCalendar($scope.calendarId).then(eventosCargados);		
 		calendarGetData.listCalendars().then(listCalendarsSuccess);
 		
@@ -86,6 +87,8 @@ angular.module('odontologiaApp')
 				array.push({id : items[i].id, row: i });
 			}
 		}
+		
+		hefesoft.util.loadingBar.complete();
 	}
 	
 	
