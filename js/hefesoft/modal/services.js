@@ -6,25 +6,32 @@ angular.module("odontologiaApp")
     
     var modalInstance;
     
-    function modalInstances(animation, size, backdrop, keyboard, template, context) {
-            modalInstance = $modal.open({
-            animation: animation,
-            templateUrl: template,
-            controller: 'helpModalCtrl',
-            size: size,
-            backdrop: backdrop,
-            keyboard: keyboard,
-            resolve: {
-                content: function () {
-                    return context;
+    function modalInstances(animation, size, backdrop, keyboard, template, context, windowClass) {
+            var options = {
+                animation: animation,
+                templateUrl: template,
+                controller: 'helpModalCtrl',
+                size: size,
+                backdrop: backdrop,
+                keyboard: keyboard,
+                resolve: {
+                    content: function () {
+                        return context;
+                    }
                 }
+            
             }
-        
-        });
+            
+            if(windowClass){
+                options.windowClass = windowClass;
+            }
+            
+            
+            modalInstance = $modal.open(options);
     }
     
-    dataFactory.open = function (size, template, context) {
-        modalInstances(true, size, true, true, template, context)
+    dataFactory.open = function (size, template, context, windowClass) {
+        modalInstances(true, size, true, true, template, context, windowClass)
     }
     
     dataFactory.close = function(){

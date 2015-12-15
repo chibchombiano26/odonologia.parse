@@ -36,6 +36,8 @@
                     <a href="">
                         <img class="img-responsive" ng-src="{{urlPicture}}" alt="">
                     </a>
+                    
+                    <ng-file-input mode="binary-string" tmpl="'js/hefesoft/templates/upload.html'" callback="pctrl.changePicture(file)">Cambiar imagen</ng-file-input>
 
 
                     <div class="dropdown pmop-message" dropdown>

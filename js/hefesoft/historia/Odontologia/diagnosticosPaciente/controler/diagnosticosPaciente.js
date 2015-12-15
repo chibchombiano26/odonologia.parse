@@ -1,6 +1,6 @@
 /*global Parse, angular, moment, hefesoft*/
 angular.module('Historia')
-.controller('diagnosticoPacienteCtrl', function ($scope, $rootScope, dataTableStorageFactory, $state, $q, diagnosticoPacienteService, $stateParams) {
+.controller('diagnosticoPacienteCtrl', function ($scope, $rootScope, dataTableStorageFactory, $state, $q, diagnosticoPacienteService, $stateParams, modalService) {
 
 	var idPaciente = "";
 	var diagnosticoPaciente = {};
@@ -51,6 +51,7 @@ angular.module('Historia')
 	}
 
 	$scope.navegarOdontograma = function(item){
+		//modalService.open('lg', 'js/hefesoft/odontograma/vistas/listadoOdontogramas.html', undefined, 'my-dialog');
 		$state.go("pages.odontograma", {"diagnosticoPacienteId": item.objectId});
 	}
 

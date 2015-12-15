@@ -13,6 +13,7 @@ controller('planTratamientoCtrl',
 	$scope.Listado = [];
 	$scope.Source = [];
 	$scope.contextoProcedimientos = {};
+	$scope.pacienteId = $rootScope.currentPacient.objectId; 
 	
 	
 	if($stateParams.diagnosticoPacienteId.length > 0){
@@ -26,7 +27,7 @@ controller('planTratamientoCtrl',
 
 	function inicializarDatos(){
       
-  	  odontogramService.cargarOdontograma(diagnosticoPacienteId).then(function(data){
+  	  odontogramService.cargarOdontograma($scope.pacienteId).then(function(data){
   	  	var datos = data;
 	  	var result = data.toJSON().listado;
 	  	
@@ -104,6 +105,11 @@ controller('planTratamientoCtrl',
             paciente : paciente,
             snap : odontogramaData.snap
         };
+        
+        if(Parse.User.current().get('idLogo'))
+        {
+        	parameters['idLogo'] = Parse.User.current().get('idLogo');
+        }
         
         var titulos = ['Pieza dental', 'Procedimiento', 'Superficie', 'Valor', 'Valor pagado','Saldo'];
         var lista = angular.copy($scope.Listado);

@@ -1,4 +1,4 @@
-/*global materialAdmin, Parse, Hefesoft*/
+/*global materialAdmin, Parse, Hefesoft, hefesoft*/
 materialAdmin
 .controller('profileCtrl', function($scope, growlService){
   
@@ -6,7 +6,7 @@ materialAdmin
     
 })
 
-.controller('profileAboutCtrl', function($scope, growlService){
+.controller('profileAboutCtrl', function($scope, growlService, driveApiUpload){
     
     var modo = "insertar";
     var objectRetrieved;
@@ -39,6 +39,18 @@ materialAdmin
     this.editSummary = 0;
     this.editInfo = 0;
     this.editContact = 0;
+    
+    this.changePicture = function(file){
+        hefesoft.util.loadingBar.start();
+        driveApiUpload.insertFile(file,file.name, false, 'binary').then(function(link){
+			hefesoft.util.loadingBar.complete();
+			
+			$scope.urlPicture = "https://docs.google.com/uc?id=" + link.id;
+			Parse.User.current().set('pictureUrl', "https://docs.google.com/uc?id=" + link.id);
+			Parse.User.current().set('idLogo', link.id);
+			Parse.User.current().save();
+		})
+    }
 
 
     this.submit = function(item, message) {

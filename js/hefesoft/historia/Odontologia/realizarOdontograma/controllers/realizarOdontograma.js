@@ -22,6 +22,7 @@ angular.module('Historia')
 	$scope.numeroPiezasDentales = 0;
 	$scope.indiceCie = 0;
 	$scope.indiceCup = 0;
+	$scope.pacienteId = $rootScope.currentPacient.objectId; 
 	
 	var Odontograma;
 	var OdontogramaCargadoId;
@@ -42,8 +43,7 @@ angular.module('Historia')
 		  }
 	  })
 	  
-	  
-	  odontogramService.cargarOdontograma(diagnosticoPacienteId).then(function(data){
+	  odontogramService.cargarOdontograma($scope.pacienteId).then(function(data){
 	  	inicializarOdontograma(data).then(function(data){
 	  		
 	  	})
@@ -107,6 +107,15 @@ angular.module('Historia')
 	  	}
 	  	
 	  	return deferred.promise;
+	}
+	
+	$scope.cambiarHistorico = function(id){
+		hefesoft.util.loadingBar.start();
+		odontogramService.getOdontogramaByid(id).then(function(data){
+	  	inicializarOdontograma(data).then(function(data){
+	  		hefesoft.util.loadingBar.complete();
+	  	})
+	  })
 	}
 	
 	$scope.prestadorSeleccionado = function(item){
@@ -193,10 +202,14 @@ angular.module('Historia')
  	function snap(){
  		hefesoft.util.loadingBar.start();
  		var deferred = $q.defer();
+ 		$('#odontogramaPiezas').width('80%');
+ 		
  		html2canvas($("#odontograma"), {
 		    onrendered: function(canvas) {
+		    	$('#odontogramaPiezas').width('100%');
 		        var img = canvas.toDataURL('image/png');
-    			driveApiUpload.insertFile(img,"snap").then(function(link){
+		        
+    			driveApiUpload.insertFile(img,"snap", true).then(function(link){
     				deferred.resolve(link.id);
     				hefesoft.util.loadingBar.complete();
     			})

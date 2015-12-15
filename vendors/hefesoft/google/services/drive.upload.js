@@ -32,8 +32,57 @@ angular.module('hefesoft.google')
         });
     }
     
-    function insertFile(fileData, filename,parentId) {
-        fileData = dataURItoBlob(fileData);
+    function insertFileWithOutRead(fileData, filename,parentId) {
+        
+        var deferred = $q.defer();
+    
+        var boundary = '-------314159265358979323846';
+        var delimiter = "\r\n--" + boundary + "\r\n";
+        var close_delim = "\r\n--" + boundary + "--";
+    
+        var contentType = fileData.type || 'application/octet-stream';
+        var metadata = {
+            'title': filename,
+            'mimeType': contentType,
+            "parents": [{"id":parentId}]
+        };
+
+        var base64Data = btoa(fileData.content);
+        var multipartRequestBody =
+            delimiter +
+            'Content-Type: application/json\r\n\r\n' +
+            JSON.stringify(metadata) +
+            delimiter +
+            'Content-Type: ' + contentType + '\r\n' +
+            'Content-Transfer-Encoding: base64\r\n' +
+            '\r\n' +
+            base64Data +
+            close_delim;
+
+        var request = gapi.client.request({
+            'path': '/upload/drive/v2/files',
+            'method': 'POST',
+            'params': {'uploadType': 'multipart'},
+            'headers': {
+                'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
+            },
+            'body': multipartRequestBody});
+        request.then(function(file){
+            deferred.resolve(file.result);
+        },function(reason){
+            deferred.reject(reason);
+        });
+        
+    
+        return deferred.promise;
+    }
+    
+    function insertFile(fileData, filename,parentId, toBinary) {
+        
+        if(toBinary){
+            fileData = dataURItoBlob(fileData);
+        }
+        
         var deferred = $q.defer();
     
         var boundary = '-------314159265358979323846';
@@ -101,7 +150,6 @@ angular.module('hefesoft.google')
         return deferred.promise;
     }
 
-
     function insertPermission(file){
         return gapi.client.drive.permissions.insert({
             'fileId': file.id,
@@ -133,12 +181,18 @@ angular.module('hefesoft.google')
     return new Blob([ia], {type:mimeString});
 }
     
-    dataFactory.insertFile = function (fileData, filename) {
+    dataFactory.insertFile = function (fileData, filename, toBinary, modo) {
         return gapi.client.load('drive', 'v2')
         .then(function(){
             return ensureUploadFolderPresent();
         }).then(function(directory){
-            return insertFile(fileData,filename,directory.id);
+            if(!modo){
+                return insertFile(fileData,filename,directory.id, toBinary);
+            }
+            else{
+                return insertFileWithOutRead(fileData,filename,directory.id, toBinary)
+            }
+            
         }).then(function(file){
             return waitForFileToBecomeActive(file.id).then(function(){
                 return insertPermission(file).then(function(){

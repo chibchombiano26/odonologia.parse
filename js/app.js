@@ -28,7 +28,8 @@ var materialAdmin = angular.module('materialAdmin', [
     'readMore',
     'cfp.loadingBar',
     'angularFileInput',
-    'ngImgur'
+    'ngImgur',
+    'angularFileInput'
 ])
 
 

@@ -246,7 +246,8 @@ function dependenciasOdontograma(){
             "js/hefesoft/odontograma/directivas/odontograma/directiva/odontograma.js",
             "js/hefesoft/odontograma/controllers/piezaDentalSeleccionada.js",
             "js/hefesoft/Diagnosticos/directivas/directivas/buscadorDiagnosticos.js",
-            "js/hefesoft/odontograma/services/odontograma.js"
+            "js/hefesoft/odontograma/services/odontograma.js",
+            "js/hefesoft/odontograma/controllers/listadoOdontogramas.js"
         ]
  	}
 
@@ -604,6 +605,7 @@ function cargarPacientes($ocLazyLoad){
           dependenciasTratamientos(),
           dependenciasCieCups(),
           dependenciasDiagnosticosPacientes(),
+          dependenciasWizard()
       ]);
    }
    
