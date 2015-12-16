@@ -79,9 +79,10 @@
         </li>
         
         <li class="sub-menu" data-ng-class="{ 'active toggled': mactrl.$state.includes('form') }">
-            <a href="" toggle-submenu><i class="zmdi zmdi-image"></i> Modelos</a>
+            <a href="" toggle-submenu><i class="zmdi zmdi-image"></i> Recursos</a>
 
             <ul>
+                <li><a data-ui-sref-active="active" data-ui-sref="photo-gallery.videos" data-ng-click="mactrl.sidebarStat($event)">Videos</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="photo-gallery.model" data-ng-click="mactrl.sidebarStat($event)">Modelos 3d</a></li>
                 <li><a data-ui-sref-active="active" data-ui-sref="photo-gallery.imagenesDentales" data-ng-click="mactrl.sidebarStat($event)">Imagenes</a></li>
             </ul>

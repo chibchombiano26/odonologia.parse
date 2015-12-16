@@ -1,0 +1,52 @@
+
+<section id="content">
+    <div class="container">
+        <div class="block-header">
+            
+        </div>
+       
+        <div class="card">
+            <div class="listview lv-bordered lv-lg">
+            <div class="card-header ch-alt m-b-20">
+                <h2>Videos<small> Videos de procedimientos odontologicos</small></h2>
+            </div>
+                
+            <div class="lv-body">
+                <div class="p-10 ">
+                    <h4>Da click en el video y te enseñara como podras visualizar los diferentes videos </h4>
+                </div>
+                
+                <br/>
+                <div class="p-10 " id="ytplayer"></div>
+            </div>
+            </div>                       
+        </div>
+    </div>
+</section>
+
+
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '500',
+      width: '800',
+      videoId: '5xnzb4KmZ0Q',
+      playerVars: {
+                      listType:'playlist',
+                      list: 'PLc4ZtAvk4ejZkxCVetOmabqZ-AEBpn61u'
+                  }
+    });
+  }
+</script>
+
+
+

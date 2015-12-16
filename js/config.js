@@ -397,6 +397,11 @@ materialAdmin
                 templateUrl: 'views/photos.html'
             })
             
+            .state ('photo-gallery.videos', {
+                url: '/videos',
+                templateUrl: 'js/hefesoft/videos/videos.html'
+            })
+            
             .state ('photo-gallery.model', {
                 url: '/model',
                 templateUrl: 'views/model.html'
