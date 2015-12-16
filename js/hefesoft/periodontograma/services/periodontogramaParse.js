@@ -28,7 +28,7 @@ angular.module("odontologiaApp")
 		return deferred.promise;
 	}
 	
-	dataFactory.savePeriodontograma = function(listadoGuardar, id, periodontogramaId){
+	dataFactory.savePeriodontograma = function(listadoGuardar, id, periodontogramaId, prestador){
 	    
  		var deferred = $q.defer();
  		
@@ -46,6 +46,11 @@ angular.module("odontologiaApp")
  		
  		periodontograma.set("idPeriodontograma", id);
  		periodontograma.set("listado", listadoGuardar);
+ 		
+ 		if(prestador){
+ 			periodontograma.set("prestador", prestador);
+ 		}
+ 		
  		periodontograma.save()
  		.then(function(entidad){
  			deferred.resolve(entidad);

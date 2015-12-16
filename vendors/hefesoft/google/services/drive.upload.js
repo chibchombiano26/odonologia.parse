@@ -4,11 +4,11 @@ angular.module('hefesoft.google')
     
     var dataFactory = {};
     
-    function createFolder(){
+    function createFolder(folder){
         return gapi.client.drive.files.insert(
             {
                 'resource':{
-                    "title":'Drive API From JS Sample',
+                    "title": folder,
                     "mimeType": "application/vnd.google-apps.folder"
                 }
             }
@@ -16,14 +16,16 @@ angular.module('hefesoft.google')
     }
     
     
-    function ensureUploadFolderPresent(){
+    function ensureUploadFolderPresent(folder){
+        var folderQuery = "title=" + "'" + folder + "'";
+        var query = "mimeType = 'application/vnd.google-apps.folder' and " +  folderQuery + " and trashed = false";
         return gapi.client.drive.files.list(
-            {q:"mimeType = 'application/vnd.google-apps.folder' and trashed = false"}
+            {q: query}
         ).then(function(files){
             var directory=files.result.items;
     
             if(!directory.length){
-                return createFolder().then(function(res){
+                return createFolder(folder).then(function(res){
                     return res.result;
                 });
             }else{
@@ -181,10 +183,10 @@ angular.module('hefesoft.google')
     return new Blob([ia], {type:mimeString});
 }
     
-    dataFactory.insertFile = function (fileData, filename, toBinary, modo) {
+    dataFactory.insertFile = function (fileData, filename, toBinary, modo, folder) {
         return gapi.client.load('drive', 'v2')
         .then(function(){
-            return ensureUploadFolderPresent();
+            return ensureUploadFolderPresent(folder);
         }).then(function(directory){
             if(!modo){
                 return insertFile(fileData,filename,directory.id, toBinary);

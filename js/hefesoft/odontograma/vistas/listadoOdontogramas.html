@@ -1,25 +1,8 @@
-<div class="container">
 
-    <div class="card">
-        <div class="card-header">
-            <h2>Historico odontogramas<small></small></h2>
-        </div>
-        
-        <div class="card-body card-padding">
-            
-        <div class="form-group">
-            <dd>
-                <div class="fg-line">
-                    <select ng-options="item as item.cretedAt for item in listado" 
-                        class="form-control" 
-                        ng-change="seleccionado()" 
-                        ng-model="selectedItem">
-                    </select>
-                </div>
-            </dd>
-        </div>
-                   
-        </div>
-    </div>
-
+<div style="width: 200px;">
+    <h5>Odontogramas anteriores: </h5>
+    <select style="width: 200px;" ng-options="item as item.nombreMostrar for item in listado" 
+        ng-change="seleccionado()" 
+        ng-model="selectedItem">
+    </select>
 </div>

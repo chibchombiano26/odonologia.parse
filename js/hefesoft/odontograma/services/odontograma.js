@@ -40,7 +40,7 @@ angular.module('odontologiaApp')
 		return deferred.promise;
 	}
 	
-	dataFactory.saveOdontograma = function(listadoGuardar, id, odontogramaId, item){
+	dataFactory.saveOdontograma = function(listadoGuardar, id, odontogramaId, item, guardarHistorico){
  		
  		var deferred = $q.defer();
  		var Odontograma = Parse.Object.extend("Odontograma");
@@ -52,6 +52,7 @@ angular.module('odontologiaApp')
  		listadoGuardar = JSON.parse(listadoGuardar);
  		
  		//odontograma.set("idOdontograma", id);
+ 		
  		odontograma.set("pacienteId", item.pacienteId);
  		
  		odontograma.set("listado", listadoGuardar);
@@ -71,20 +72,40 @@ angular.module('odontologiaApp')
  		if(item && item.prestador){
  			odontograma.set("prestador", item.prestador);
  		}
+ 		else{
+ 			odontograma.set("prestador", {nombre: "No indicado"});
+ 		}
+ 		
+ 		if(item && item.tipo){
+ 			odontograma.set("tipo", item.tipo);
+ 		}
+ 		else{
+ 			odontograma.set("tipo", "No indicado");
+ 		}
+ 		
+ 		if(item && item.observaciones){
+ 			odontograma.set("observaciones", item.observaciones);
+ 		}
+ 		else{
+ 			odontograma.set("observaciones", "No indicado");
+ 		}
  		
  		if(item && item.snap){
  			odontograma.set("snap", item.snap);
  		}
  		
- 		/*
+ 		
  		if(odontogramaId){
  			odontograma.set("id", odontogramaId);
  		}
- 		*/
+ 		
  		
  		odontograma.save()
  		.then(function(entidad){
- 			dataFactory.savehistorico({odontogramaId: entidad.toJSON().objectId, tipo: 'Inicial', prestador : 'Nombre del prestador', pacienteId : item.pacienteId});
+ 			if(guardarHistorico){
+	 			var result = entidad.toJSON();
+	 			dataFactory.savehistorico({odontogramaId: result.objectId, tipo: result.tipo, prestador : result.prestador.nombre, pacienteId : item.pacienteId, observaciones: result.observaciones});
+ 			}
  			deferred.resolve(entidad);
  		},
  		function(entidad, error){
@@ -105,6 +126,7 @@ angular.module('odontologiaApp')
  		historico.set('tipo', item.tipo);
  		historico.set('prestador', item.prestador);
  		historico.set('pacienteId', item.pacienteId);
+ 		historico.set('observaciones', item.observaciones);
  		
  		historico.save().then(function(result){
  			deferred.resolve(result);
@@ -119,6 +141,7 @@ angular.module('odontologiaApp')
 	   	var Odontograma = Parse.Object.extend("Historico_Odontograma");
 		var query = new Parse.Query(Odontograma);
 		query.equalTo('pacienteId', pacienteId);
+		query.descending("createdAt");
 		query.find().then(function(result){
 			deferred.resolve(result);
 		},

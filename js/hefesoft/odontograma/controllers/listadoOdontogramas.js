@@ -1,4 +1,4 @@
-/*global angular*/
+/*global angular, moment, hefesoft*/
 angular.module('odontologiaApp')
 .directive('historicoOdontograma', function(){
     
@@ -31,17 +31,23 @@ angular.module('odontologiaApp')
         odontogramService.getHistorico(id).then(function(result){
             $scope.listado = [];
             for (var i = 0; i < result.length; i++) {
-                $scope.listado.push(result[i].toJSON());
+                var item = result[i].toJSON();
+                item['nombreMostrar'] = item.tipo + " " + item.observaciones + " " + moment(item.createdAt).format("dddd, MMMM Do YYYY");
+                $scope.listado.push(item);
+            }
+            
+            if(!hefesoft.isEmpty($scope.listado)){
+                $scope.selectedItem = $scope.listado[0];         
             }
         })
     }
     
-    $scope.irOdontograma = function(){
-        $scope.mostrarListado = false;
-        $scope.mostrarWizard = true;
-        
-        //$state.go("pages.odontograma", {"diagnosticoPacienteId": item.objectId});
+    $scope.adicionarHistorico = function(item){
+        item['nombreMostrar'] = item.tipo + " " + item.observaciones + " " + moment(item.createdAt).format("dddd, MMMM Do YYYY");
+        $scope.listado.push(item);
+        $scope.selectedItem = item;
     }
+   
     
     $scope.seleccionado = function(){
         var id = $scope.selectedItem.odontogramaId;

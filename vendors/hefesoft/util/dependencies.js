@@ -247,7 +247,8 @@ function dependenciasOdontograma(){
             "js/hefesoft/odontograma/controllers/piezaDentalSeleccionada.js",
             "js/hefesoft/Diagnosticos/directivas/directivas/buscadorDiagnosticos.js",
             "js/hefesoft/odontograma/services/odontograma.js",
-            "js/hefesoft/odontograma/controllers/listadoOdontogramas.js"
+            "js/hefesoft/odontograma/controllers/listadoOdontogramas.js",
+            "js/hefesoft/odontograma/controllers/guardarOdontogramaModal.js"
         ]
  	}
 
@@ -536,7 +537,8 @@ function dependenciasDate(){
             "js/hefesoft/Prestador/directives/js/add.js",
             "js/hefesoft/Prestador/sevice/prestador.js",
             "js/hefesoft/Prestador/directives/js/list.js",
-            'js/hefesoft/Prestador/directives/js/buscador.js'
+            "js/hefesoft/Prestador/directives/js/buscador.js",
+            "js/hefesoft/modal/prestadorModalCtrl.js"
         ]
     }
 
@@ -604,8 +606,7 @@ function cargarPacientes($ocLazyLoad){
           dependenciasHistoria(),
           dependenciasTratamientos(),
           dependenciasCieCups(),
-          dependenciasDiagnosticosPacientes(),
-          dependenciasWizard()
+          dependenciasDiagnosticosPacientes()
       ]);
    }
    
@@ -654,6 +655,7 @@ function cargarPacientes($ocLazyLoad){
           dependenciasClinicas(),         
           dependenciasAzure(),
           dependenciasPeriodontograma(),
+          dependenciasPrestadores()
       ]);
    }
    

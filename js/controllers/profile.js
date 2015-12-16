@@ -42,7 +42,8 @@ materialAdmin
     
     this.changePicture = function(file){
         hefesoft.util.loadingBar.start();
-        driveApiUpload.insertFile(file,file.name, false, 'binary').then(function(link){
+        
+        driveApiUpload.insertFile(file,file.name, false, 'binary', "logo dentiline").then(function(link){
 			hefesoft.util.loadingBar.complete();
 			
 			$scope.urlPicture = "https://docs.google.com/uc?id=" + link.id;

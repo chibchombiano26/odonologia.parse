@@ -11,14 +11,19 @@
     	</br>
  	</div>
 	
-	
 	<div class="row">
 		<div class="col-sm-2">
 		</div>
 		
 		<div class="col-sm-8">
+			
+			<div class="pull-left">
+				{{prestadorNombre}}
+			</div>
+			
 			<div class="pull-right p-r-25">
 				<div class="btn-group btn-group-xs" role="group">
+					<button ng-click="seleccionarPrestador()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Seleccionar prestador</button>
 				    <button ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
 				</div>
 			</div>
@@ -195,6 +200,7 @@
 				<div slider ng-model="selecionado.profundidad3" start=0 end=100>
 				</div>
 			</div>
+			
 		</div>
 
 	</div>	

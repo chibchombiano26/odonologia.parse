@@ -6,7 +6,8 @@ angular.module("odontologiaApp")
     
     var modalInstance;
     
-    function modalInstances(animation, size, backdrop, keyboard, template, context, windowClass) {
+    function modalInstances(animation, size, backdrop, keyboard, template, controller, windowClass, callbackFunction) {
+            
             var options = {
                 animation: animation,
                 templateUrl: template,
@@ -15,11 +16,15 @@ angular.module("odontologiaApp")
                 backdrop: backdrop,
                 keyboard: keyboard,
                 resolve: {
-                    content: function () {
-                        return context;
+                    callback: function () {
+                        return callbackFunction;
                     }
                 }
             
+            }
+            
+            if(controller){
+                options.controller = controller;
             }
             
             if(windowClass){
@@ -30,8 +35,8 @@ angular.module("odontologiaApp")
             modalInstance = $modal.open(options);
     }
     
-    dataFactory.open = function (size, template, context, windowClass) {
-        modalInstances(true, size, true, true, template, context, windowClass)
+    dataFactory.open = function (size, template, context, windowClass, callbackFunction) {
+        modalInstances(true, size, true, true, template, context, windowClass, callbackFunction)
     }
     
     dataFactory.close = function(){

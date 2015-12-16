@@ -1,13 +1,16 @@
-/*global angular, Parse, _*/
+/*global angular, Parse, _, hefesoft*/
 angular.module('odontologiaApp').
 controller('realizarPeriodontogramaCtrl', 
-    ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService', '$stateParams', 'periodontogramaServiceParse', '$interval', '$timeout',
-    function ($scope, dataTableStorageFactory, $rootScope, piezasDentalesServices, messageService, $stateParams, periodontogramaServiceParse, $interval, $timeout) {
+    ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService', '$stateParams', 'periodontogramaServiceParse', '$interval', '$timeout', 'modalService',
+    function ($scope, dataTableStorageFactory, $rootScope, piezasDentalesServices, messageService, $stateParams, periodontogramaServiceParse, $interval, $timeout, modalService) {
 	
 	$scope.selecionado = {numeroPiezaDental: 18, mostrarFurca : false, tipoFurca: 'vacio', "movilidad" : "", parte: 'parte1'};
 	$scope.mostrarFurca = false;
 	$scope.contextoPiezaDental = {};
-	var cambioDetectado = false; 
+	var cambioDetectado = false;
+	var prestador;
+	$scope.prestadorNombre = "";
+	
 	$scope.seleccionado = false;
     $scope.zoom = 0.8;
 
@@ -23,12 +26,18 @@ controller('realizarPeriodontogramaCtrl',
 
     function inicializarDatos(){
     
+      hefesoft.util.loadingBar.start();
       periodontogramaServiceParse.cargarPeriodontograma(diagnosticoPacienteId).then(function(data){
+	  hefesoft.util.loadingBar.complete();
 	  
 	  	if(data){
 	  	    var result = data.toJSON();
 	  	    idPeriodontograma = result.objectId;
 	  	    var Periodontograma = result.listado;
+	  	    
+	  	    if(result.prestador){
+	  	        $scope.prestadorNombre = "Prestador: " +  result.prestador.nombre;
+	  	    }
 	  	    
 	  	    //Ordenarlos deacuerdo al codigo como en la nube se guardan en string no los ordena bien
             data = _.sortBy(Periodontograma, function(item) {
@@ -64,6 +73,14 @@ controller('realizarPeriodontogramaCtrl',
 	  	
 	  })
 
+    }
+    
+    $scope.seleccionarPrestador = function(){
+        modalService.open('lg', 'js/hefesoft/modal/prestadorModal.html', 'prestadorModelCtrl', undefined, function(e){
+            modalService.close();
+            prestador = e.item;
+            $scope.prestadorNombre = "Prestador: " +  prestador.nombre;
+        });
     }
 
 	$scope.piezaDentalSeleccionada = function(item){
@@ -146,7 +163,7 @@ controller('realizarPeriodontogramaCtrl',
 
     function guardar(Listado){
         var contextoPiezas = $scope.contextoPiezaDental();
-        periodontogramaServiceParse.savePeriodontograma(Listado, diagnosticoPacienteId, idPeriodontograma).then(function(result){
+        periodontogramaServiceParse.savePeriodontograma(Listado, diagnosticoPacienteId, idPeriodontograma, prestador).then(function(result){
             var item = result.toJSON();
             idPeriodontograma = item.objectId;
         })
