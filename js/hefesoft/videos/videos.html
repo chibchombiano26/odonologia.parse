@@ -1,28 +1,55 @@
 
-<section id="content">
-    <div class="container">
-        <div class="block-header">
-            
+
+<div class="container">
+    
+    <div class="card">
+        <div class="listview lv-bordered lv-lg">
+        <div class="card-header ch-alt m-b-20">
+            <h2>Videos<small> Videos de procedimientos odontologicos</small></h2>
         </div>
-       
-        <div class="card">
-            <div class="listview lv-bordered lv-lg">
-            <div class="card-header ch-alt m-b-20">
-                <h2>Videos<small> Videos de procedimientos odontologicos</small></h2>
+            
+        <div class="lv-body">
+            <div class="p-10 ">
+                <h4>Da click en el video y te enseñara como podras visualizar los diferentes videos </h4>
             </div>
-                
-            <div class="lv-body">
-                <div class="p-10 ">
-                    <h4>Da click en el video y te enseñara como podras visualizar los diferentes videos </h4>
+            <br/>
+            <div class="p-10 " id="ytplayer"></div>
+        </div>
+        </div>                       
+    </div>
+    
+    <div class="card">
+        <div class="card-body card-padding">
+            <div class="form-group">
+                <div class="fg-line">
+                    <input type="text" class="form-control input-sm" placeholder="Filtrar videos" ng-model="search">
                 </div>
-                
-                <br/>
-                <div class="p-10 " id="ytplayer"></div>
             </div>
-            </div>                       
         </div>
     </div>
-</section>
+    
+    <div class="card">
+        <div class="card-body table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Descripcion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in list | filter:search">
+                    <td> <img ng-click="reproduceVideo(item)" ng-src="{{item.snippet.thumbnails.default.url}}"/> </td>
+                    <td>{{item.snippet.title}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    </div>
+    
+</div>
+
 
 
 <script>
@@ -34,9 +61,10 @@
 
   // Replace the 'ytplayer' element with an <iframe> and
   // YouTube player after the API code downloads.
-  var player;
+  
+  hefesoft.util["ytPlayer"] = {};
   function onYouTubePlayerAPIReady() {
-    player = new YT.Player('ytplayer', {
+    hefesoft.util.ytPlayer = new YT.Player('ytplayer', {
       height: '500',
       width: '800',
       videoId: '5xnzb4KmZ0Q',

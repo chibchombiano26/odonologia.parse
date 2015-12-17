@@ -21,7 +21,7 @@ angular.module('directive.g+signin', []).
         attrs.$set('data-clientid', attrs.clientid);
         attrs.$set('theme', attrs.theme);
         
-        var SCOPES =  'https://www.googleapis.com/auth/photos https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/photos.upload https://www.googleapis.com/auth/plus.login  https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://mail.google.com/ https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.compose https://www.googleapis.com/auth/gmail.send';
+        var SCOPES =  'https://www.googleapis.com/auth/photos https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/photos.upload https://www.googleapis.com/auth/plus.login  https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/tasks https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email https://mail.google.com/ https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.compose https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/youtube';
 
 
         // Some default values, based on prior versions of this directive
