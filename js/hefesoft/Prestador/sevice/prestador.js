@@ -18,7 +18,7 @@ angular.module('odontologiaApp')
 		  }
 		  else{
 		    var prestador = Parse.User.current().toJSON();
-	        dataFactory.save({email: prestador.email, nombre: prestador.email, especialidad : '', telefono : '', idCalendar : 'primary', pictureUrl : prestador.pictureUrl })
+	        dataFactory.save({email: prestador.email, nombre: prestador.email, especialidad : '', telefono : '', idCalendar : prestador.email, pictureUrl : prestador.pictureUrl })
 	        .then(function(result){
 	            var data = [];
 	            data.push(result);

@@ -290,7 +290,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService){
 
         //Status
         this.login = 1;
@@ -304,6 +304,9 @@ materialAdmin
           window.hefesoftGoogleToken = authResult.client_id;    
           authGoogleService.token = authResult.client_id;
           authGoogleService.getUserInfo().then(success, parseService.errorHandler);
+          
+          //Inicializa los prestadores y crea uno por defecto si no se han inicializado
+          prestadorService.list();
         });
         
         $scope.$on('event:google-plus-signin-failure', function (event, authResult) {

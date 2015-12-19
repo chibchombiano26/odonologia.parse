@@ -90,9 +90,8 @@ angular.module('odontologiaApp')
    
     
     function adicionarGoogleCalendar(item){
-        debugger
         var elementoProcesado = agendaHelperService.procesarAdicionado(item);
-		calendarGetData.insert(elementoProcesado, $scope.calendarId).then(
+		calendarGetData.insert(elementoProcesado, item.prestador.idCalendar).then(
 		 function(insertado){
 		 	console.log(insertado);
 		 });
