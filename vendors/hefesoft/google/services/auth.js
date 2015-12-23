@@ -130,6 +130,7 @@ angular.module('hefesoft.google')
              
              if(error.code === 202){
                 alert("Este correo electronico ya ha sido registrado, probablemente con una paciente por favor use otra cuenta");
+                dataFactory.logOutGoogle();
              }
              else{
                  alert(error.message);
