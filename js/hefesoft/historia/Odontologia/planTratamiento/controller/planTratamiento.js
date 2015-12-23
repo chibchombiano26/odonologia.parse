@@ -52,6 +52,11 @@ controller('planTratamientoCtrl',
       	if(angular.isDefined(result) && result.length > 0){	
 	        $scope.Listado = tratamientoServices.extraerTodosProcedimientos($scope.Source);
  		}
+ 		
+ 		if($rootScope['generarCotizacion'] === true){
+ 			$rootScope['generarCotizacion'] = false;
+ 			$scope.generarCotizacion();		
+ 		}
 	}
 
 	//Como los elementos se estan pasando por referencia se puede guardar el mismo objeto que se cargo inicialmente

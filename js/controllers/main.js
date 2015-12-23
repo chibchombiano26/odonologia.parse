@@ -5,7 +5,7 @@ materialAdmin
     // Base controller for common functions
     // =========================================================================
 
-    .controller('materialadminCtrl', function($timeout, $state, growlService){
+    .controller('materialadminCtrl', function($timeout, $state, growlService, $interval){
         
         // Detact Mobile Browser
         if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -14,9 +14,22 @@ materialAdmin
 
         // By default Sidbars are hidden in boxed layout and in wide layout only the right sidebar is hidden.
         this.sidebarToggle = {
-            left: false,
-            right: false
+            left: true,
+            right: true
         }
+        
+        var sidebarToggle = this.sidebarToggle;
+        
+        
+        var promise = $interval(function(){
+            
+               sidebarToggle.left = false;
+               sidebarToggle.right = false;
+               $interval.cancel(promise);
+                
+            }
+        ,4000);
+        
 
         // By default template has a boxed layout
         this.layoutType = localStorage.getItem('ma-layout-status');
@@ -290,7 +303,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService, $interval){
 
         //Status
         this.login = 1;
@@ -325,6 +338,7 @@ materialAdmin
             
             $rootScope.$broadcast('onLogin');
             var ultimaPagina = hefesoft.getStorageObject("ultimaPagina");
+            
             
             
             if(!hefesoft.isEmpty(ultimaPagina)){

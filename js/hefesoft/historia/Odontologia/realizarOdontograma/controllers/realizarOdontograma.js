@@ -151,6 +151,11 @@ angular.module('Historia')
 	$scope.planTratamiento = function(){
 		$state.go("pages.planTratamiento", { diagnosticoPacienteId : diagnosticoPacienteId});
 	}
+	
+	$scope.cotizacion = function(){
+		$rootScope['generarCotizacion'] = true;
+		$state.go("pages.planTratamiento", { diagnosticoPacienteId : diagnosticoPacienteId});
+	}
 
 	$scope.procedimientoEliminado = function(item){
 		console.log(item);
