@@ -125,8 +125,9 @@ angular.module('hefesoft.google')
              deferred.resolve(user);
              saveRegistrationId(user);
            },
-           error: function(e){ 
+           error: function(e,  error){ 
              deferred.reject(e);
+             alert(error);
            }
          });
          
