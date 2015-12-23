@@ -127,7 +127,13 @@ angular.module('hefesoft.google')
            },
            error: function(e,  error){ 
              deferred.reject(e);
-             alert(error);
+             
+             if(error.code === 202){
+                alert("Este correo electronico ya ha sido registrado, probablemente con una paciente por favor use otra cuenta");
+             }
+             else{
+                 alert(error.message);
+             }
            }
          });
          
