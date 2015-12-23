@@ -39,8 +39,8 @@
             </div>
             -->
             
-            <asociacion-odontologos url="'/351781574835113/feed'"></asociacion-odontologos>
             <asociacion-odontologos url="'/1479338312367444/feed'"></asociacion-odontologos>
+            <asociacion-odontologos url="'/351781574835113/feed'"></asociacion-odontologos>
             <odontologoscomco></odontologoscomco>
             
         
@@ -59,7 +59,7 @@
                     
                     <div class="dropdown-basic-demo clearfix">
                         <ul class="dropdown-menu dm-icon" role="menu" style="-webkit-box-shadow: none;	-moz-box-shadow: none;	box-shadow: none;" >
-                            <li data-ng-repeat="w in items"><a  ng-href="{{w.ref}}"><i class="zmdi zmdi-{{ w.icon }}"></i> {{ w.name }}</a></li>
+                            <li data-ng-repeat="w in items"><a tooltip="{{tooltip}}" ng-href="{{w.ref}}"><i class="zmdi zmdi-{{ w.icon }}"></i> {{ w.name }}</a></li>
                         </ul>
                     </div>
                     

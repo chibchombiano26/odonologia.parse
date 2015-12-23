@@ -304,9 +304,6 @@ materialAdmin
           window.hefesoftGoogleToken = authResult.client_id;    
           authGoogleService.token = authResult.client_id;
           authGoogleService.getUserInfo().then(success, parseService.errorHandler);
-          
-          //Inicializa los prestadores y crea uno por defecto si no se han inicializado
-          prestadorService.list();
         });
         
         $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
@@ -349,6 +346,9 @@ materialAdmin
                 //Reconociminto de voz
                 speechService.inicializar();
             }
+            
+            //Inicializa los prestadores y crea uno por defecto si no se han inicializado
+            prestadorService.list();
         }
         
         /*Valida que existan horarios para este usuario en los que atendera las citas*/

@@ -2,11 +2,24 @@
 /*global angular, Parse, hefesoft*/
 
  angular.module('odontologiaApp')
-.controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope){
+.controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope, driveApiUpload){
 	
 	$scope.Paciente = {fecha : new Date()};
 	var idPaciente = "";
 	var modo = "nuevo";
+	
+	$scope.changeImage = function(file){
+        hefesoft.util.loadingBar.start();
+        driveApiUpload.insertFile(file,file.name, false, 'binary', "Imagenes pacientes").then(function(link){
+			hefesoft.util.loadingBar.complete();
+			$scope.Paciente.pictureUrl = "https://docs.google.com/uc?id=" + link.id;
+			
+			if(modo !== "nuevo")
+			{
+				pacienteService.save(idPaciente, $scope.Paciente);
+			}
+		})
+	}
 	
 	$scope.today = function() {
         $scope.dt = new Date();

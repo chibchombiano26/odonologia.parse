@@ -169,6 +169,9 @@ angular.module('odontologiaApp')
 		if(hefesoft.isEmpty(item.pictureUrl)){
 			paciente.set("pictureUrl", hefesoft.generoPic(item, "genero"));
 		}
+		else{
+			paciente.set("pictureUrl", item.pictureUrl);
+		}
 		
 		paciente.set("username", Parse.User.current().get("email"));
 		

@@ -11,7 +11,7 @@ angular.module('odontologiaApp')
     return directive;
 })
 
-.controller('addPrestadorCtrl', function($rootScope, $scope, $state, $stateParams, prestadorService, calendarGetData, modalService){
+.controller('addPrestadorCtrl', function($rootScope, $scope, $state, $stateParams, prestadorService, calendarGetData, modalService, driveApiUpload){
     
     $scope.prestador = {nombre: '', cedula: '', email : '', especialidad : '', telefono: ''};
     var modo = 'Adicionado';
@@ -20,6 +20,19 @@ angular.module('odontologiaApp')
         modo = 'Editar';
         $scope.prestador = $rootScope.prestadorSeleccionado;
     }
+    
+    
+    $scope.changeImage = function(file){
+        hefesoft.util.loadingBar.start();
+        driveApiUpload.insertFile(file,file.name, false, 'binary', "Fotos prestadores").then(function(link){
+			hefesoft.util.loadingBar.complete();
+			$scope.prestador.pictureUrl = "https://docs.google.com/uc?id=" + link.id;
+			
+			if(modo == 'Editar'){
+			    prestadorService.save($scope.prestador);
+			}
+		})
+	}
     
     $scope.save = function(){
         hefesoft.util.loadingBar.start();

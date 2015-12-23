@@ -3,6 +3,13 @@
     <div class="card">
         <div class="card-header">
             <h2>Datos Pacientes <small></small></h2>
+            
+            <div class="pull-right">
+                <img class="lv-img" src="{{Paciente.pictureUrl}}" alt="">
+                <ng-file-input mode="binary-string" tmpl="'js/hefesoft/templates/upload.html'" callback="changeImage(file)">Cambiar imagen</ng-file-input>
+            </div>
+            
+            
         </div>
         
         <div class="card-body card-padding">
