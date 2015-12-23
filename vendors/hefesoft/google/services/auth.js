@@ -92,6 +92,7 @@ angular.module('hefesoft.google')
          var deferred = $q.defer();
          var query = new Parse.Query(Parse.User);
          query.equalTo("username", user);
+         query.equalTo("esMedico", true);
          query.find({
            success: function(result) {
              
