@@ -17,12 +17,12 @@ angular.module('odontologiaApp')
   	      deferred.resolve(data);
   	    }
   	    else{
-  	      if(!hefesoft.global['cargandoDiagnosticosEjemplo']){
-  	        hefesoft.global['cargandoDiagnosticosEjemplo'] =  true;
+  	      //if(!hefesoft.global['cargandoDiagnosticosEjemplo']){
+  	        //hefesoft.global['cargandoDiagnosticosEjemplo'] =  true;
     	      datafactory.cargarDiagnosticosEjemplo().then(function(data){
               	deferred.resolve(data);
     	      })
-  	      }
+  	      //}
   	    }
   	  },
   	  function(result,error){

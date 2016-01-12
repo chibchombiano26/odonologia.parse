@@ -95,6 +95,12 @@ angular.module('odontologiaApp')
  		}
  		
  		
+ 		if(item && item.ppr){
+ 			var ppr = JSON.parse(angular.toJson(item.ppr));
+ 			odontograma.set("ppr", ppr);
+ 		}
+ 		
+ 		
  		if(odontogramaId){
  			odontograma.set("id", odontogramaId);
  		}

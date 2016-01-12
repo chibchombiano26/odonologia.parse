@@ -63,6 +63,14 @@ angular.module('Historia')
 	  		$scope.indiceCie = Odontograma.indiceCie;
 	  		$scope.indiceCup = Odontograma.indiceCup;
 	  		
+	  		if(Odontograma.ppr){
+	  			$scope.ppr = Odontograma.ppr;	
+	  		}
+	  		else{
+	  			$scope.ppr = {};
+	  		}
+	  		
+	  		
 	  		fijarPrestador();
 	  		
 	  		OdontogramaCargadoId = Odontograma.objectId;

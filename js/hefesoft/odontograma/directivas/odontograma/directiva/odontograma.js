@@ -1,3 +1,4 @@
+/*global angular*/
 angular.module('directivas').
 directive('odontograma', ['$parse',
 	function ($parse) {

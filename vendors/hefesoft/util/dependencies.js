@@ -248,7 +248,8 @@ function dependenciasOdontograma(){
             "js/hefesoft/Diagnosticos/directivas/directivas/buscadorDiagnosticos.js",
             "js/hefesoft/odontograma/services/odontograma.js",
             "js/hefesoft/odontograma/controllers/listadoOdontogramas.js",
-            "js/hefesoft/odontograma/controllers/guardarOdontogramaModal.js"
+            "js/hefesoft/odontograma/controllers/guardarOdontogramaModal.js",
+            "js/hefesoft/odontograma/directivas/odontograma/directiva/ppr.js"
         ]
  	}
 
