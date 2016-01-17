@@ -1,3 +1,4 @@
+/*global angular*/
 angular.module('odontologiaApp')
 .directive('listadoProcedimientos', ['$parse',
 	function ($parse) {

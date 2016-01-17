@@ -31,19 +31,33 @@ angular.module("odontologiaApp")
     $scope.seleccionado;
     $scope.show = false;
     
-    $scope.$watch('seleccionado', function(e) {
-        if(e){
-            var result = _.find($scope.datos, 'nombre', e);
-            if(result){
-                if(angular.isDefined($scope.fnDiagnosticoSeleccionado) && angular.isFunction($scope.fnDiagnosticoSeleccionado)){
-                    $scope.seleccionado = result;
-                    $scope.show = true;
-        			$scope.fnDiagnosticoSeleccionado($scope, { 'item' : result });
-        		}
-                
+    $scope.fnSeleccionado = function(result){
+        
+        if(angular.isDefined($scope.fnDiagnosticoSeleccionado) && angular.isFunction($scope.fnDiagnosticoSeleccionado)){
+         $scope.seleccionado = result;
+         
+		 $scope.fnDiagnosticoSeleccionado($scope, { 'item' : result });
+		 $scope.seleccionado = "";
+		 
+		 mostrarDiagnosticoEvolucion();
+		 
+        }
+    }
+    
+    function mostrarDiagnosticoEvolucion() {
+        try {
+            if ($scope.mostrarDiagnosticoInfo == false) {
+                $scope.show = false;
+            }
+            else {
+                $scope.show = true;
             }
         }
-    });
+        catch (ex) {
+            $scope.show = true;
+        }
+    }
+  
     
     function inicializar(){
         diagnosticosService.cargarDiagnosticos('').then(function(result){

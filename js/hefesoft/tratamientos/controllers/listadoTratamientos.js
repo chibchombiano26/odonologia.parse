@@ -1,8 +1,8 @@
   
-  /*global angular, Parse, Hefesoft*/
+  /*global angular, Parse, Hefesoft, Hefesot*/
   angular.module('odontologiaApp')
-  .controller('listadoTratamientosCtrl', ['$scope', '$modal', 'dataTableStorageFactory', 'messageService', 
-    function ($scope, $modal, dataTableStorageFactory, messageService) {
+  .controller('listadoTratamientosCtrl', ['$scope', '$modal', 'dataTableStorageFactory', 'messageService', '$timeout',
+    function ($scope, $modal, dataTableStorageFactory, messageService, $timeout) {
     	
     	$scope.listado = [];
 
@@ -40,6 +40,16 @@
 
 	  $scope.inicializarElementos = function(elementos){	  	
 	  	$scope.listado = Hefesot.aListado(elementos);
+	  	
+	  	
+	  	if($scope.listado && $scope.listado.length > 0){
+	  		
+	  		$timeout(function(){
+	  			$scope.selected($scope.listado[0]);	
+	  		},500);
+	  		
+	  	}
+	  	
 	  }
 
 	  $scope.eliminar = function(item, $index){	      

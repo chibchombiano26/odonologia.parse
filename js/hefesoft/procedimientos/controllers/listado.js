@@ -1,4 +1,4 @@
-/*global angular, Hefesoft, hefesoft, Parse*/
+/*global angular, Hefesoft, hefesoft, Parse, Hefesot, jsPDF*/
 
 angular.module('odontologiaApp')
 .controller('listadoProcedimientosCtrl', 

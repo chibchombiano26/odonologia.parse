@@ -679,6 +679,21 @@ materialAdmin
             }
           })
           
+          .state('pages.cotizador', {
+            url: "/cotizador",
+            //controller: "DxListadoCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/cotizador/vistas/cotizador.html',
+            data: {
+              requireLogin: true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarDiagnosticos($ocLazyLoad)
+               }
+            }
+          })
+          
           .state('pages.listadoPrestadores', {
             url: "/listadoPrestadores",
             cache: true,
@@ -878,4 +893,14 @@ materialAdmin
      }
     
   })
+  
+  
+  $rootScope.$on('$ViewContentLoading', function(event, viewConfig) {
+      console.log("View Load: the view is loaded, and DOM rendered!");
+  });
+  
+  $rootScope.$on('$ViewContentLoaded', function(event, viewConfig) {
+      console.log("View Load: the view is loaded, and DOM rendered!");
+  });
+  
 });

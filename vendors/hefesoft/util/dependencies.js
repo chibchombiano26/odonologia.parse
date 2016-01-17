@@ -15,9 +15,6 @@ function dependenciasNews(){
             /* Import.io */
             'vendors/hefesoft/import.io/services/read.js',
             'vendors/hefesoft/Directivas/nhRef/nhref.js',
-            
-            /* lodash */
-            'vendors/bower_components/lodash/lodash.min.js'
         ]
     return dp;
     
@@ -130,12 +127,29 @@ function dependenciasDiagnosticos(){
             "vendors/farbtastic/farbtastic.min.js",
             'vendors/bower_components/angular-farbtastic/angular-farbtastic.js',
             "js/hefesoft/tratamientos/directivas/wizardSimbolo/services/pasoVariables.js",
-            'js/hefesoft/Diagnosticos/services/diagnosticos.js'
+            'js/hefesoft/Diagnosticos/services/diagnosticos.js',
+            "js/hefesoft/procedimientos/servicios/procedimientos.js"
         ]
  	}
 
  	return dependencias;
 }
+
+function dependenciasCotizador(){
+	var dependencias = 
+	{
+        name : "odontologiaApp",
+        cache: true,
+        files: 
+        [
+            "js/hefesoft/cotizador/directivas/cotizador.js"
+        ]
+ 	}
+
+ 	return dependencias;
+}
+
+
 
 function dependenciasWizard(){
 	var wizard = 
@@ -587,6 +601,7 @@ function cargarPacientes($ocLazyLoad){
         dependenciasCieCups(),
         dependenciasFont(),
         dependenciasOdontograma(),
+        dependenciasCotizador()
          /* Para pruebas
          authDependencies()
         */

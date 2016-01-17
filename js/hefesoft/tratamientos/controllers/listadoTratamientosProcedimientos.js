@@ -1,4 +1,4 @@
-/*global angular, Parse, hefesoft*/
+/*global angular, Parse, hefesoft, _,  numeral*/
 
 angular.module('odontologiaApp')
 .controller('listadoProcedimientosTratamientosCtrl', ['$scope', 'dxSeleccionado','$modalInstance', 
@@ -68,6 +68,14 @@ angular.module('odontologiaApp')
 			   	
 			   	tratamiento.set("id", id);
 			   	tratamiento.set("arrayHefesoftTratamientos", tratamientos);
+			   	
+			   	var valor = _.sumBy(tratamientos, function(o) {
+			   		return parseFloat(o.valor);
+			   	});
+			   	
+			   	valor = numeral(valor).format('$0,0.00');
+			   	tratamiento.set("valor", valor);
+			   	
 			   	tratamiento.save();
 		   	}
 	   	

@@ -1,14 +1,15 @@
   /*global angular, Parse*/
   angular.module('odontologiaApp')
   .controller('DxListadoCtrl', 
-    ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', '$rootScope', '$q', 'diagnosticosService',
-    function ($scope, CieCupsServices, $modal, dataTableStorageFactory, $rootScope, $q, diagnosticosService) {
+    ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', '$rootScope', '$q', 'diagnosticosService', 'procedimientosService',
+    function ($scope, CieCupsServices, $modal, dataTableStorageFactory, $rootScope, $q, diagnosticosService, procedimientosService) {
 
     var modalInstance;
     $scope.Listado = [];
     $scope.diagnosticoSeleccionado = {};
    
   	function inicializar(){
+  	  //procedimientosService.cargarDiagnosticosEjemplo();
   	  diagnosticosService.cargarDiagnosticos(Parse.User.current().get("email")).then(function(result){
   		  for (var i = 0; i < result.length; i++) {
 			    $scope.Listado.push(result[i].toJSON());
