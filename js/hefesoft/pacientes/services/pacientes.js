@@ -36,6 +36,32 @@ angular.module('odontologiaApp')
 	  return PacienteDfd.promise;
     }
     
+     dataFactory.buscarPaciente = function(texto){
+        var deferred = $q.defer();
+        var Paciente = Parse.Object.extend("Paciente");
+        
+        var query = new Parse.Query(Paciente);
+        query.contains("nombre", texto);
+    	query.equalTo("username", Parse.User.current().get("email"));
+        query.find().then(function(data){
+            var result = [];
+            
+            for (var i = 0; i < data.length; i++) {
+                result.push((data[i]).toJSON());
+            }
+            
+            deferred.resolve(result);
+            
+        },
+        function(data, error){
+            deferred.reject(error);
+        }
+        )
+        
+        return deferred.promise;
+        
+    }
+    
     dataFactory.validarExistePacienteFacebook = function(id){
 	  var PacienteDfd = $q.defer();
 	  var Paciente = Parse.Object.extend('Paciente');

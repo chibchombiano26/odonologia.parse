@@ -303,7 +303,7 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService, $interval){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService, $interval, procedimientosService){
 
         //Status
         this.login = 1;
@@ -363,6 +363,12 @@ materialAdmin
             
             //Inicializa los prestadores y crea uno por defecto si no se han inicializado
             prestadorService.list();
+            
+            //Cargar los diagnosticos de prueba
+            hefesoft.util.loadingBar.start();
+            procedimientosService.cargarDiagnosticosEjemplo().then(function(data){
+                hefesoft.util.loadingBar.complete();
+            })
         }
         
         /*Valida que existan horarios para este usuario en los que atendera las citas*/

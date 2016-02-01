@@ -9,7 +9,6 @@
     $scope.diagnosticoSeleccionado = {};
    
   	function inicializar(){
-  	  //procedimientosService.cargarDiagnosticosEjemplo();
   	  diagnosticosService.cargarDiagnosticos(Parse.User.current().get("email")).then(function(result){
   		  for (var i = 0; i < result.length; i++) {
 			    $scope.Listado.push(result[i].toJSON());

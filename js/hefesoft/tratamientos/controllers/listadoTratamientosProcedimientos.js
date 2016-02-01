@@ -28,7 +28,10 @@ angular.module('odontologiaApp')
 
 		$scope.close = function(tipo){
 			if(tipo == "close"){
+				var valor = _.sumBy($scope.diagnosticoSeleccionado.arrayHefesoftTratamientos, function(o){ return parseFloat(o.valor);});
+				valor = numeral(valor).format('$0,0.00');
 				
+				$scope.diagnosticoSeleccionado.valor = valor;
 				var elementoActualizar = JSON.parse(angular.toJson(angular.copy($scope.diagnosticoSeleccionado)));
 				
 				if(!hefesoft.isEmpty(elementoActualizar.arrayHefesoftTratamientos)){

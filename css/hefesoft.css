@@ -93,3 +93,18 @@
 .zoom8{
 	zoom : 0.8;
 }
+
+
+.btn-leaf {
+}
+
+.btn-leaf:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80); /* For IE8 and earlier */
+}
+
+.img-leaf {
+    opacity: 0.2;
+    filter: alpha(opacity=20); /* For IE8 and earlier */
+}
+

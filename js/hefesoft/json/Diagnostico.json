@@ -14,12 +14,22 @@
         "valor": "0"
     }],
     "diagnostico": {
-        "objectHefesoftFuente": "Arial",
-        "pathImagen": "//hefesoft.blob.core.windows.net/files/files/atGN8A2kAb2xW5godP4YvQg52v1pMWmk?sv=2014-02-14&sr=c&sig=RqRcu1vwp56UdXTdRpZfEEWzv7rYrDT87B5iZafAOS4%3D&st=2015-05-15T05%3A00%3A00Z&se=2030-12-02T05%3A00%3A00Z&sp=rwl"
+        "objectHefesoftFuente": {
+            "codigo" : 1,
+            "fuente" : "Arial",
+            "fuenteColor" : "#000"
+        },
+        "pathImagen": "",
+        "simbolo" : ""
     },
     "evolucion": {
-        "objectHefesoftFuente": "Arial",
-        "pathImagen": "//hefesoft.blob.core.windows.net/files/files/KKSM9RCvbtU7RhrtFSrxNNn2P6VLkf4a?sv=2014-02-14&sr=c&sig=RqRcu1vwp56UdXTdRpZfEEWzv7rYrDT87B5iZafAOS4%3D&st=2015-05-15T05%3A00%3A00Z&se=2030-12-02T05%3A00%3A00Z&sp=rwl"
+        "objectHefesoftFuente": {
+            "codigo" : 1,
+            "fuente" : "Arial",
+            "fuenteColor" : "#000"
+        },
+        "pathImagen": "",
+        "simbolo" : ""
     },
     "nombre": "",
     "tipo": {

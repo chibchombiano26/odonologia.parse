@@ -112,7 +112,12 @@ angular.module('hefesoft.google')
              }
            },
            error : function(e){ 
-             deferred.reject(e);
+               if(!e.code === 107){
+                   deferred.reject(e);
+               }
+               else{
+                   deferred.resolve([]);
+               }
            }
          });
          return deferred.promise;

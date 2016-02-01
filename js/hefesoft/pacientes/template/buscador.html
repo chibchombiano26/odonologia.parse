@@ -1,0 +1,42 @@
+<div class="card">
+
+    <div class="card-header">
+        <h2>Buscar un paciente<small></small></h2>
+    </div>
+
+    <div class="card-body card-padding">
+
+        <div class="form-group">
+
+            <div class="pull-right">
+                <div class="btn-group btn-group-xs">
+                    
+                    <button ng-click="fnSeleccionarPaciente()" type="button" class="btn btn-success waves-effect">Seleccionar este paciente</button>
+                    <button ng-click="click()" type="button" class="btn btn-warning waves-effect">X</button>
+                    
+                </div>
+            </div>
+
+            <div class="fg-line" tooltip="Digite el nombre de el paciente que desea buscar">
+                <input type="text" ng-model="seleccionado" ng-click="click()" typeahead-wait-ms="300" typeahead-on-select="fnSeleccionado($item)" typeahead="item as item.nombre + ' (' + item.cedula + ')' for item in pacientes($viewValue) | filter:$viewValue | limitTo:8"
+                class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="show">
+            <div class="fg-line">
+                <div class="pull-left">
+                    <img class="lv-img-sm" src="{{seleccionado.pictureUrl}}" alt="">
+                </div>
+
+                <div class="media-body">
+                    <div class="lv-title">Nombre: {{seleccionado.nombre}}</div>
+                    <small class="lv-small">Cedula: {{seleccionado.cedula}}</small>
+                    <small class="lv-small">Email: {{seleccionado.email}}</small>
+                    <small class="lv-small">Telefono: {{seleccionado.telefono}}</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

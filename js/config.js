@@ -5,7 +5,10 @@ materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/login");
 
-        Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
+        //Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
+        Parse.initialize("hefesoft", "h123456");
+        Parse.serverURL = '//162.243.50.36/parse'
+        
         moment.locale("es");
 
         window.fbAsyncInit = function() {
@@ -685,11 +688,28 @@ materialAdmin
             cache: false,
             templateUrl: 'js/hefesoft/cotizador/vistas/cotizador.html',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true
             },
             resolve :{
                controller : function($ocLazyLoad){
                  return cargarDiagnosticos($ocLazyLoad)
+               }
+            }
+          })
+          
+          .state('pages.tree', {
+            url: "/tree",
+            controller : "treeCtrl",
+            cache: false,
+            templateUrl: 'js/hefesoft/tree/views/tree.html',
+            data: {
+              requireLogin: true,
+              requirePacient : true
+            },
+            resolve :{
+               controller : function($ocLazyLoad){
+                 return cargarTree($ocLazyLoad)
                }
             }
           })
@@ -890,17 +910,22 @@ materialAdmin
         
         event.preventDefault();
         $state.go('login');
+        
+        
+        try {
+            hefesoft.util.loadingBar.start();
+        }
+        catch (ex) {}
+        
      }
     
   })
   
-  
-  $rootScope.$on('$ViewContentLoading', function(event, viewConfig) {
-      console.log("View Load: the view is loaded, and DOM rendered!");
-  });
-  
-  $rootScope.$on('$ViewContentLoaded', function(event, viewConfig) {
-      console.log("View Load: the view is loaded, and DOM rendered!");
+  $rootScope.$on('$stateChangeSuccess', function(event, viewConfig) {
+      try {
+            hefesoft.util.loadingBar.complete();
+        }
+        catch (ex) {}
   });
   
 });

@@ -79,6 +79,8 @@ angular.module('Historia')
 	  		 return parseFloat(item.id);
   		  	})
 	  		
+	  		infoParaCotizacion(Odontograma.listado);
+	  		
   			var promise = $interval(function(){
   			
 	  			if(angular.isFunction($scope.contextoOdontograma)){
@@ -113,6 +115,11 @@ angular.module('Historia')
 	  	}
 	  	
 	  	return deferred.promise;
+	}
+	
+	function infoParaCotizacion(listado){
+		hefesoft.util['listadoDiagnosticos'] = tratamientoServices.extraerTodosDiagnosticos(listado);
+	  	hefesoft.util['pacienteSeleccionado'] = $rootScope.currentPacient;
 	}
 	
 	function fijarPrestador(){
@@ -162,7 +169,7 @@ angular.module('Historia')
 	
 	$scope.cotizacion = function(){
 		$rootScope['generarCotizacion'] = true;
-		$state.go("pages.planTratamiento", { diagnosticoPacienteId : diagnosticoPacienteId});
+		$state.go("pages.cotizador", { diagnosticoPacienteId : diagnosticoPacienteId});
 	}
 
 	$scope.procedimientoEliminado = function(item){
@@ -251,6 +258,8 @@ angular.module('Historia')
  	}
 
  	function guardar(listadoGuardar, source, deferred, historico){
+ 		hefesoft.util.loadingBar.start();
+ 		
  		//se ponen aca xq aca ya tienen valor
       	var item = $scope.contextoOdontograma();
  		var piezaDental = item.piezasDentalesScope();
@@ -258,6 +267,8 @@ angular.module('Historia')
  		if($rootScope.prestadorSeleccionado){
  			$scope['prestador'] = $rootScope.prestadorSeleccionado;
  		}
+ 		
+ 		infoParaCotizacion(listadoGuardar);
  		
  		//El tercer parametro va como undefined para generar un odontograma cada vez
  		odontogramService.saveOdontograma(listadoGuardar, diagnosticoPacienteId, undefined, $scope, historico).then(function(result){
@@ -270,6 +281,15 @@ angular.module('Historia')
  				item["odontogramaId"] = item.objectId;
  				elementoHistorico.adicionarHistorico(item);
  			}
+ 			
+ 			hefesoft.util.loadingBar.complete();
+ 			
+ 			//Para que no navegue en el odontograma inicial
+ 			if(historico){
+	 			hefesoft.util['pacienteSeleccionado'] = $rootScope.currentPacient;
+				$state.go("pages.tree");
+ 			}
+ 			
  		});
  	}
  	

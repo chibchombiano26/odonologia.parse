@@ -1,4 +1,4 @@
-/*global angular, _, Parse, numeral*/
+/*global angular, _, Parse, numeral, hefesoft*/
 angular.module("odontologiaApp")
 .directive('cotizador', function(){
     
@@ -10,7 +10,7 @@ angular.module("odontologiaApp")
     
 })
 
-.controller('cotizadorCtrl', function($scope, appScriptTemplateServices){
+.controller('cotizadorCtrl', function($scope, appScriptTemplateServices, modalService, cotizacionService, $q){
     
     $scope.listado = [];
     $scope.footer = { suma : 0 };
@@ -21,15 +21,51 @@ angular.module("odontologiaApp")
         var elemento = angular.copy(item);
         elemento["valor"] = _.sumBy(elemento.arrayHefesoftTratamientos, function(o){ return parseFloat(o.valor);});
         $scope.listado.push(elemento);
-        
-        $scope.footer.suma = _.sumBy($scope.listado, function(o) { return parseFloat(o.valor); });
+        sumar();
     }
     
     $scope.eliminar = function(item, $index){
         $scope.listado.splice($index, 1);
-        
-        $scope.footer.suma = _.sumBy($scope.listado, function(o) { return parseFloat(o.valor); });
+        sumar();
     }
+    
+    $scope.buscarCotizacion = function(){
+        var deferred = $q.defer();
+ 		 modalService.open('lg', 'js/hefesoft/cotizador/template/buscadorCotizacionesModal.html', 'buscarCotizacionModalCtrl', undefined, function(e){
+ 		 	modalService.close();
+ 	        
+ 	        $scope.listado = e.listado;
+ 	        sumar();
+ 		 })
+ 		return deferred.promise;
+    }
+    
+    $scope.limpiar = function(){
+        $scope.listado = [];
+        sumar();
+        
+        if(hefesoft.util['pacienteSeleccionado']){
+            delete hefesoft.util.pacienteSeleccionado;
+        }
+        
+        if(hefesoft.util['listadoDiagnosticos']){
+            delete hefesoft.util.listadoDiagnosticos;
+        }
+    }
+    
+    $scope.guardarCommand = function(){
+ 		var deferred = $q.defer();
+ 		 modalService.open('lg', 'js/hefesoft/cotizador/vistas/guardarModal.html', 'guardarCotizacionModal', undefined, function(e){
+ 		 	modalService.close();
+ 		 	
+ 		 	var listado = angular.copy($scope.listado);
+ 		 	listado = JSON.parse(angular.toJson(listado));
+ 		 	
+ 		 	cotizacionService.saveCotizacion(e,  listado);
+ 		 	
+ 		 })
+ 		return deferred.promise;
+ 	}
     
     $scope.generarCotizacion = function(){
  		
@@ -71,4 +107,17 @@ angular.module("odontologiaApp")
         appScriptTemplateServices.templateWindow(parameters);
  	}
     
+    function sumar(){
+        $scope.footer.suma = _.sumBy($scope.listado, function(o) { return parseFloat(o.valor); });
+    }
+    
+    function inicializar(){
+        if(hefesoft.util['listadoDiagnosticos'] && (hefesoft.util['listadoDiagnosticos']).length > 0){
+            _.each(hefesoft.util['listadoDiagnosticos'], function(e){
+                $scope.dxSeleccionado(e);
+            });
+        }
+    }
+    
+    inicializar();
 })

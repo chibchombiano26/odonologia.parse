@@ -70,7 +70,7 @@ angular.module('odontologiaApp')
 	$scope.diagnosticoSeleccionado;
 	
 	$scope.test = function(item){
-	  debugger
+	  
 	}
 
 	$scope.openTratamiento = function(item){

@@ -1,3 +1,4 @@
+/*global angular*/
 angular.module('odontologiaApp')
 .service('tratamientoServices', [function () {
 	

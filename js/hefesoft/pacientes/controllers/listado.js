@@ -85,11 +85,16 @@
 	}
 	
 	$scope.irDiagnosticos = function(item){
+		/*
 		hefesoft.util.loadingBar.start()
 		$rootScope.currentPacient = item;
 		$scope.Paciente = item;
 		varsFactoryService.fijarPaciente(item.RowKey);
 		$state.go("pages.diagnosticoPaciente", { pacienteId: item.objectId}, {reload: true});
+		*/
+		
+		$state.go("pages.tree");
+		hefesoft.util['pacienteSeleccionado'] = item;
 	}
 	
 	$scope.editar = function(item){

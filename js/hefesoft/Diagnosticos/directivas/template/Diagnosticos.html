@@ -31,6 +31,7 @@
                     <thead>
                         <tr>
                             <th class="col-sm-1">Nombre</th>
+                            <th class="col-sm-1">Valor</th>
                             <th class="col-sm-1" 
                             ng-show="verSuperficie">
                                 Superficie
@@ -46,6 +47,7 @@
                     <tbody>
                        <tr ng-repeat="item in source">
                             <td class="col-sm-1">{{item.nombre}}</td>
+                            <th class="col-sm-1">{{item.valor}}</th>
                             <td class="col-sm-1" ng-show="verSuperficie">
                                 {{item.superficie}}
                             </td>

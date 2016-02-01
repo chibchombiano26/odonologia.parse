@@ -58,12 +58,45 @@ function dependenciasPacientes(){
             "js/hefesoft/pacientes/services/inicializarListado.js",            
             "js/hefesoft/pacientes/controllers/listado.js",
             "js/hefesoft/pacientes/services/pacientes.js",
-            "vendors/hefesoft/Fixes/fixes.js"     
+            "vendors/hefesoft/Fixes/fixes.js",
         ]
     }
 
     return dependencias;
 }
+
+function dependenciasBuscadorPacientes(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        files:
+        [
+            "js/hefesoft/pacientes/directivas/buscador.js",
+            "js/hefesoft/pacientes/controllers/buscadorModal.js"
+        ]
+    }
+    
+    return dependencias;
+}
+
+function dependenciasTree(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        files:
+        [
+            "js/hefesoft/tree/directives/tree.js",
+            "js/hefesoft/tree/directives/leaf.js",
+            "js/hefesoft/tree/controller/tree.js",
+            "js/hefesoft/tree/services/tree.js"
+        ]
+    }
+    
+    return dependencias;
+}
+
 
 function dependenciasImagenes(){
     var dependencias = 
@@ -142,7 +175,11 @@ function dependenciasCotizador(){
         cache: true,
         files: 
         [
-            "js/hefesoft/cotizador/directivas/cotizador.js"
+            "js/hefesoft/cotizador/directivas/cotizador.js",
+            "js/hefesoft/cotizador/controllers/guardarCotizacionModal.js",
+            "js/hefesoft/cotizador/servicios/cotizador.js",
+            "js/hefesoft/cotizador/directivas/buscador.js",
+            "js/hefesoft/cotizador/controllers/buscarCotizacionesModal.js"
         ]
  	}
 
@@ -601,7 +638,8 @@ function cargarPacientes($ocLazyLoad){
         dependenciasCieCups(),
         dependenciasFont(),
         dependenciasOdontograma(),
-        dependenciasCotizador()
+        dependenciasCotizador(),
+        dependenciasBuscadorPacientes()
          /* Para pruebas
          authDependencies()
         */
@@ -715,5 +753,13 @@ function cargarPacientes($ocLazyLoad){
         dependenciasPrestadores(),
         dependenciasCalendar(),
         dependenciasAgenda()
+      ]);
+   }
+   
+   function cargarTree($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+        dependenciasTree(),
+        dependenciasTratamientos()
       ]);
    }

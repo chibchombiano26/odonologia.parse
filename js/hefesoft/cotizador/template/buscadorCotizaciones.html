@@ -1,0 +1,22 @@
+<div class="card">
+
+    <div class="card-header">
+        <h2>Buscar una cotizacion<small></small></h2>
+    </div>
+
+    <div class="card-body card-padding">
+
+        <div class="form-group">
+            <div class="fg-line" tooltip="Digite el nombre de la persona a la cual realizo la cotizacion">
+                <input 
+                type="text"
+                ng-model="seleccionadoCotizacion" 
+                typeahead-wait-ms="300"
+                typeahead-on-select="fnSeleccionadoCotizacion($item)" 
+                typeahead="item as item.nombres + ' (' + item.fechaFormat + ')' for item in cotizaciones($viewValue) | filter:$viewValue | limitTo:8" 
+                class="form-control">
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -10,7 +10,9 @@ angular.module('odontologiaApp')
         
       var Diagnosticos = Parse.Object.extend("Diagnostico");
   	  var query = new Parse.Query(Diagnosticos);
+  	  query.limit(500);
   	  query.equalTo("username", Parse.User.current().get("email"));
+  	  
   	  
   	  query.find().then(function(data){
   	    if(!hefesoft.isEmpty(data)){
@@ -19,9 +21,9 @@ angular.module('odontologiaApp')
   	    else{
   	      //if(!hefesoft.global['cargandoDiagnosticosEjemplo']){
   	        //hefesoft.global['cargandoDiagnosticosEjemplo'] =  true;
-    	      datafactory.cargarDiagnosticosEjemplo().then(function(data){
+    	      /*datafactory.cargarDiagnosticosEjemplo().then(function(data){
               	deferred.resolve(data);
-    	      })
+    	      })*/
   	      //}
   	    }
   	  },
@@ -109,7 +111,6 @@ angular.module('odontologiaApp')
     datafactory.obtenerEsquema = function(nombre){
         return $http.get('js/hefesoft/json/' + nombre);
     }
-    
       
     datafactory.inicializar = function(){
         datafactory.obtenerEsquema("Diagnostico.json").then(function(data){

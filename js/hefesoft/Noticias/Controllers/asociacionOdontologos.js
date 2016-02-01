@@ -11,8 +11,8 @@ angular.module('odontologiaApp')
 
 	function success(data){		
 		var listado = _.uniq( ( [] ).concat(
-        _.where( data, { 'type': "photo" } ),
-        _.where( data, { 'type': "link" } ) ) );
+        _.find( data, { 'type': "photo" } ),
+        _.find( data, { 'type': "link" } ) ) );
         
         listado = _.sortBy(listado, function(o) { return new Date(o.created_time); })
 		$scope.data = filtrarDatos(listado);
