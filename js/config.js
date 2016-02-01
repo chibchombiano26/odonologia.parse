@@ -7,7 +7,7 @@ materialAdmin
 
         //Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
         Parse.initialize("hefesoft", "h123456");
-        Parse.serverURL = '//162.243.50.36/parse'
+        Parse.serverURL = '//162.243.50.36:82/parse'
         
         moment.locale("es");
 
