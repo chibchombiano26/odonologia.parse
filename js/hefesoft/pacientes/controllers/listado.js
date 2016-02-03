@@ -2,7 +2,7 @@
 /*global angular, Parse, hefesoft*/
 
  angular.module('odontologiaApp')
-.controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope, driveApiUpload){
+.controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope, driveApiUpload, callback){
 	
 	$scope.Paciente = {fecha : new Date()};
 	var idPaciente = "";
@@ -47,33 +47,32 @@
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
 	
-	if($stateParams.pacienteId.length > 0){
+	if(hefesoft.util['pacienteSeleccionado'] !== null){
 		modo = "modificar";
-		idPaciente = $stateParams.pacienteId;
-		cargarPaciente(idPaciente);
+		$scope.Paciente = hefesoft.util['pacienteSeleccionado'];
 	}
-	
-	function cargarPaciente(idPaciente){
-		pacienteService.obtenerPaciente(idPaciente).then(function(result){
-			$scope.Paciente = result.toJSON();
-		})
-	}
-  
 	
 	$scope.save = function(){
 		pacienteService.save(idPaciente,$scope.Paciente).then(function(paciente){
 			idPaciente = paciente.id;
 			
+			/*
 			if(modo === "nuevo"){
 				$rootScope.$broadcast('pacienteModificado', {paciente: paciente, modo: "Modificado"});
 			}
 			
 			$state.go("pages.listadopacientes");
+			*/
+			
+			if(callback){
+				callback(paciente);
+			}
+			
 		})
 	}
 })
 
-.controller("listadoPacientesCtrl", function($scope, $state, $q, $rootScope, varsFactoryService, pacienteService){
+.controller("listadoPacientesCtrl", function($scope, $state, $q, $rootScope, varsFactoryService, pacienteService, modalService){
 
 	$scope.pacientes =  [];
 	
@@ -93,12 +92,18 @@
 		$state.go("pages.diagnosticoPaciente", { pacienteId: item.objectId}, {reload: true});
 		*/
 		
+		$rootScope.$broadcast('pacienteSeleccionado', {paciente: item });
 		$state.go("pages.tree");
 		hefesoft.util['pacienteSeleccionado'] = item;
 	}
 	
 	$scope.editar = function(item){
-		$state.go("pages.paciente", { pacienteId: item.objectId} , {reload: true});
+		hefesoft.util['pacienteSeleccionado'] = item;
+		
+		modalService.open('lg', 'js/hefesoft/pacientes/views/paciente.html', 'pacientesController', 'my-dialog', function(e) {
+			modalService.close();
+		});
+		
 	}
 	
 	$scope.eliminar = function(item, index){
@@ -111,24 +116,37 @@
 	
 	$scope.nuevo = function(){
 		$scope.Paciente = {};
-		$state.go("pages.paciente", { pacienteId: ""});		
+		hefesoft.util['pacienteSeleccionado'] = null;
+		
+		modalService.open('lg', 'js/hefesoft/pacientes/views/paciente.html', 'pacientesController', 'my-dialog', function(e) {
+			modalService.close();
+			$scope.pacientes.push(e);
+		});
+		
 	}
 	
 	$scope.enviarCorreo = function(item){
 		$state.go("pages.email", {recipient: item.email}, {reload: true})
 	}
 	
+	/*
 	$rootScope.$on("pacienteModificado", function(event, payload) {
         var paciente = payload.paciente.toJSON();
         $scope.pacientes.push(paciente);
     })
+    */
 	
 	function listarPacientes(){
+		hefesoft.util.loadingBar.start();
 		pacienteService.listarPacientes().then(function(result){
+			
 			for (var i = 0; i < result.length; i++) {
 			  $scope.pacientes.push(result[i].toJSON());
 			}
-		})
+			
+			hefesoft.util.loadingBar.complete();
+			
+		});
 	}
 	
 	listarPacientes();

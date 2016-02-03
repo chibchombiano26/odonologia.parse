@@ -14,28 +14,34 @@
                     <b>{{paciente.nombre}}</b>
                     
                     <div class="btn-group btn-group-xs" role="group">
-                        <button type="button" ng-click="leafClick('editar' true)" class="btn btn-info waves-effect">Editar</button>
+                        <button type="button" ng-click="leafClick('editar', true)" class="btn btn-info waves-effect">Editar</button>
+                        <button type="button" ng-click="leafClick('email', true)" class="btn btn-info waves-effect">Enviar correo</button>
                         <button type="button" ng-click="leafClick('eliminar', true)" class="btn btn-danger waves-effect">Eliminar</button>
+                        
                     </div>
-                    
                 </div>
-                
             </div>
 
 
             <!-- First Row -->
             <div class="row">
-                <div class="col-md-2 col-md-offset-3 text-center">
-                    <leaf texto="'Odontograma inicial'" ng-click="leafClick('odontograma inicial', true)" activo="true" url-imagen="'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNZRFNEVIcYKn_98doL8MtN8UXxpv6pObxd8WGma0sEBJMCV2P'"></leaf>
-                </div>
-                <div class="col-md-2 text-center">
+                
+                <div class="col-md-2 col-md-offset-2 text-center">
                     <leaf texto="'Archvos adjuntos para este paciente'" ng-click="leafClick('adjuntos', true)" activo="true" url-imagen="'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ4ROo63GVUNqmitYlDIhyngN0QymktOLRQQ9GDDQ6XbfOdO70S'"></leaf>
                 </div>
                 
                 <div class="col-md-2 text-center">
-                    <leaf texto="'Email'" ng-click="leafClick('email', true)" activo="true" url-imagen="'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv3ig96Q3eMpFk3gS15Ebi86MYU8AhZUqgKDZrKVh5eSslieNr-g'"></leaf>
+                    <leaf texto="'Odontograma inicial'" ng-click="leafClick('odontograma inicial', true)" activo="true" url-imagen="'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNZRFNEVIcYKn_98doL8MtN8UXxpv6pObxd8WGma0sEBJMCV2P'"></leaf>
+                    
                 </div>
                 
+                <div class="col-md-2 text-center">
+                    <leaf texto="'Periodontograma'" ng-click="leafClick('periodontograma', true)" activo="true" url-imagen="'http://static.miweb.paginasamarillas.es/var/m_e/e6/e6e/8363/176841-icono-de-un-paciente-en-un-sillon-odontologico.png'"></leaf>
+                </div>
+                
+                <div class="col-md-2 text-center">
+                    <leaf texto="'Exportar historia'" ng-click="leafClick('historia', true)" activo="true" url-imagen="'http://www.export.org.au/eca/Exfiles/May/Subcontracting-campaign_REPORT-ICON.jpg'"></leaf>
+                </div>
                 
             </div>
 

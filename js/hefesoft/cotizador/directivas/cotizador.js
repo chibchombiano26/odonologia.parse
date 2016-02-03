@@ -10,7 +10,7 @@ angular.module("odontologiaApp")
     
 })
 
-.controller('cotizadorCtrl', function($scope, appScriptTemplateServices, modalService, cotizacionService, $q){
+.controller('cotizadorCtrl', function($scope, $rootScope, $state, appScriptTemplateServices, modalService, cotizacionService, $q){
     
     $scope.listado = [];
     $scope.footer = { suma : 0 };
@@ -61,7 +61,12 @@ angular.module("odontologiaApp")
  		 	var listado = angular.copy($scope.listado);
  		 	listado = JSON.parse(angular.toJson(listado));
  		 	
- 		 	cotizacionService.saveCotizacion(e,  listado);
+ 		 	hefesoft.util.loadingBar.start();
+ 		 	cotizacionService.saveCotizacion(e,  listado).then(function(){
+ 		 	    hefesoft.util.loadingBar.complete();
+ 		 	    hefesoft.util['pacienteSeleccionado'] = $rootScope.currentPacient;
+				$state.go("pages.tree");    
+ 		 	})
  		 	
  		 })
  		return deferred.promise;

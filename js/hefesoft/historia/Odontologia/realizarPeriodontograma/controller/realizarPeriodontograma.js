@@ -1,8 +1,8 @@
 /*global angular, Parse, _, hefesoft*/
 angular.module('odontologiaApp').
 controller('realizarPeriodontogramaCtrl', 
-    ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService', '$stateParams', 'periodontogramaServiceParse', '$interval', '$timeout', 'modalService',
-    function ($scope, dataTableStorageFactory, $rootScope, piezasDentalesServices, messageService, $stateParams, periodontogramaServiceParse, $interval, $timeout, modalService) {
+    ['$scope', 'dataTableStorageFactory', '$rootScope', 'piezasDentalesPeriodontogramaServices', 'messageService', '$stateParams', 'periodontogramaServiceParse', '$interval', '$timeout', 'modalService', '$state',
+    function ($scope, dataTableStorageFactory, $rootScope, piezasDentalesServices, messageService, $stateParams, periodontogramaServiceParse, $interval, $timeout, modalService, $state) {
 	
 	$scope.selecionado = {numeroPiezaDental: 18, mostrarFurca : false, tipoFurca: 'vacio', "movilidad" : "", parte: 'parte1'};
 	$scope.mostrarFurca = false;
@@ -157,22 +157,30 @@ controller('realizarPeriodontogramaCtrl',
 	$scope.guardarCommand = function(){
 	    var contextoPiezas = $scope.contextoPiezaDental();
         var Listado = contextoPiezas.items;
-        guardar(Listado);
+        guardar(Listado, true);
         
 	}
 
-    function guardar(Listado){
+    function guardar(Listado, navegar){
+        
         var contextoPiezas = $scope.contextoPiezaDental();
+        hefesoft.util.loadingBar.start();
         periodontogramaServiceParse.savePeriodontograma(Listado, diagnosticoPacienteId, idPeriodontograma, prestador).then(function(result){
             var item = result.toJSON();
             idPeriodontograma = item.objectId;
+            hefesoft.util.loadingBar.complete();
+            
+            if(navegar){
+                $state.go("pages.tree");    
+            }
+            
         })
     }
 
     //Periodontograma base cargado
     $scope.periodontogramaBaseCargado = function(item){        
         var listadoGuardar = item;
-        guardar(listadoGuardar);
+        guardar(listadoGuardar, false);
     }
     
 }])

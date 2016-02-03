@@ -5,9 +5,9 @@ materialAdmin
     .config(function ($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/login");
 
-        //Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
-        Parse.initialize("hefesoft", "h123456");
-        Parse.serverURL = '//162.243.50.36:82/parse'
+        Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
+        //Parse.initialize("hefesoft", "h123456");
+        //Parse.serverURL = '//162.243.50.36:82/parse'
         
         moment.locale("es");
 
@@ -643,7 +643,8 @@ materialAdmin
             templateUrl: 'js/hefesoft/pacientes/views/paciente.html',
             controller : 'pacientesController',
             data: {
-              requireLogin: true
+              requireLogin: true,
+              requirePacient : true
             },
             resolve :{
                controller : function($ocLazyLoad){

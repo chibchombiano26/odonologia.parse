@@ -90,7 +90,8 @@ function dependenciasTree(){
             "js/hefesoft/tree/directives/tree.js",
             "js/hefesoft/tree/directives/leaf.js",
             "js/hefesoft/tree/controller/tree.js",
-            "js/hefesoft/tree/services/tree.js"
+            "js/hefesoft/tree/services/tree.js",
+            "vendors/hefesoft/google/appscripts/services/template.js"
         ]
     }
     

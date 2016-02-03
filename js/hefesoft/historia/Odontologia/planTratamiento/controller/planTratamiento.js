@@ -78,9 +78,12 @@ controller('planTratamientoCtrl',
 		var dataToSave = angular.toJson($scope.Source, true);
 		
 		//El tercer parametro NO va como undefined para que tome el ultimo odontograma y sobre este modifique
+		hefesoft.util.loadingBar.start();
 		odontogramService.saveOdontograma(JSON.parse(dataToSave), diagnosticoPacienteId, idOdontograma, item, historico).then(function(data){
 			var item = data.toJSON();
 			idOdontograma = item.objectId;
+			hefesoft.util.loadingBar.complete();	
+			$state.go("pages.tree");
 		})
 	}
 
@@ -107,77 +110,6 @@ controller('planTratamientoCtrl',
    	   		}
    		}	   
 	}
-	
-	$scope.generarCotizacion = function(){
- 	   mostrarCotizacion();
- 	}
- 	
- 	function mostrarCotizacion(){
- 		
- 		var paciente = angular.copy($rootScope.currentPacient);
- 		delete paciente.pictureUrl;
- 		delete paciente.objectId;
- 		delete paciente.createdAt;
- 		delete paciente.updatedAt;
- 		
- 		var parameters = {
- 			templateid : '1Hs8YaOe5dZjzMuw84X4Bipft2NnUK33xovHQ9vKeOEY',
-            name : $rootScope.currentPacient.nombre, 
-            fileName : "cotizacion "  + $rootScope.currentPacient.nombre, 
-            rowsData: [], 
-            to: $rootScope.currentPacient.email, 
-            subject: "Cotizacion",
-            message : "Cotizacion",
-            clinica: "Nombre medico : "  + Parse.User.current().get("name"),
-            direccionClinica : "Direccion clinica :",
-            telefono: "Telefono clinica :",
-            email: "Email : " + Parse.User.current().get("email"),
-            paciente : paciente,
-            snap : odontogramaData.snap
-        };
-        
-        if(Parse.User.current().get('idLogo'))
-        {
-        	parameters['idLogo'] = Parse.User.current().get('idLogo');
-        }
-        
-        var titulos = ['Pieza dental', 'Procedimiento', 'Superficie', 'Valor', 'Valor pagado','Saldo'];
-        var lista = angular.copy($scope.Listado);
-        var sumaValor = 0;
-        var saldoValor = 0;
-        var valorPagado = 0;
-        
-        
-        
-        parameters.rowsData.push(titulos);
-        
-        for (var i = 0; i < lista.length; i++) {
-        	var item = [lista[i].numeroPiezaDental, lista[i].nombre, hefesoft.nombreToSuperficie(lista[i].superficie), numeral(lista[i].valor).format('$0,0.00'), numeral(lista[i].valorPagado).format('$0,0.00'), numeral(lista[i].saldo).format('$0,0.00')];
-        	parameters.rowsData.push(item);
-        }
-        
-        
-        
-        sumaValor = _.sum(lista, function(object) {
-		  return object.valor;
-		});
-		
-		saldoValor = _.sum(lista, function(object) {
-		  return object.saldo;
-		});
-		
-		valorPagado = _.sum(lista, function(object) {
-		  return object.valorPagado;
-		});
-        
-        sumaValor = numeral(sumaValor).format('$0,0.00');
-        saldoValor = numeral(saldoValor).format('$0,0.00');
-        valorPagado = numeral(valorPagado).format('$0,0.00');
-        
-        var footer = ['Total', '', '', sumaValor, valorPagado, saldoValor];
-        parameters.rowsData.push(footer);
-        appScriptTemplateServices.templateWindow(parameters);
- 	}
 
 
 	//Dado el procedimiento se saca la pieza dental a la que corresponde
