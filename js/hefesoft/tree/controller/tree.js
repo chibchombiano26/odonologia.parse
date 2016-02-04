@@ -191,6 +191,15 @@ angular.module("odontologiaApp")
         $state.go("pages.planTratamiento", { diagnosticoPacienteId : $scope.paciente.objectId});
     }
     
+    function tutorial() {
+        if (!hefesoft.getStorageObject("tutorialTree")) {
+            hefesoft.tutorial.inicializar(3);
+            hefesoft.saveStorageObject("tutorialTree", {
+                mostrarTutorial: true
+            });
+        }
+    }
+    
     function inicializar(){
         if($scope.paciente){
             
@@ -204,6 +213,8 @@ angular.module("odontologiaApp")
                 
                 $scope.ElementosHabilitados = { odontogramaInicial : result[0], cotizacion : cotizacion}
                 hefesoft.util.loadingBar.complete();
+                
+                tutorial();
             })
             
         }

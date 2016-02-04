@@ -12,7 +12,7 @@
 			</div>
 			
 			<div class="pull-right p-r-25">
-				<div class="btn-group btn-group-xs" role="group">
+				<div class="btn-group btn-group-xs" data-step='9' data-intro='No olvide guardar al salir' role="group">
 					
 					<!--
 					<button ng-click="cotizacion()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Cotizacion apartir de odontograma</button>
@@ -43,10 +43,10 @@
             	</br>
 		 	</div>
 			
-			<buscador-diagnosticos diagnostico-seleccionado="dxSeleccionado(item)">
+			<buscador-diagnosticos data-step='3' data-intro='Busca un diagnostico seleccionalo y luego da click sobre la superficie de un diente' diagnostico-seleccionado="dxSeleccionado(item)">
 			</buscador-diagnosticos>
 			
-			<buscador-prestador prestador-seleccionado="prestadorSeleccionado(item)"></buscador-prestador>
+			<buscador-prestador data-step='4' data-intro='Busca un prestador' prestador-seleccionado="prestadorSeleccionado(item)"></buscador-prestador>
 			
 			<div class="card">
 			
@@ -54,7 +54,7 @@
 					<h2>Indices</h2>
 				</div>
 				
-				<div class="card-body card-padding">
+				<div class="card-body card-padding" data-step='7' data-intro='Fija los indices para cada pieza dental'>
 					
 					<div class="form-group">
 						<dt class="p-t-10">Numero de piezas dentales</dt>
@@ -103,6 +103,7 @@
 			</br>
 		
 			<listados-diagnosticos-no-header
+				data-step='6' data-intro='Muestra los diagnosticos para cada pieza dental'
 				titulo-tabla="true"
 				modo-lectura="'true'"
 				ver-superficie="true"

@@ -1,5 +1,5 @@
 <br/>
-<div class="toggle-switch" data-ts-color="green">
+<div data-step='8' data-intro='Permite intercambiar entre odontograma de adulto y de niño' class="toggle-switch" data-ts-color="green">
     <label 
         for="ts2" 
         class="ts-label">
@@ -24,6 +24,7 @@
 <div id="odontograma">
     <div id="odontogramaPiezas">
     <piezas-dentales
+            data-step='5' data-intro='Da click en cada pieza dental y se mostrara un menu, da click en cada superficie con un diagnostico seleccionado y se pintara ese diagnostico'
             click-callback="clickPiezaDental(item)"
             odontograma-base-cargado-callback="odontogramaCargado(item)"
             numero-pieza-modificada="numeroPiezaModificada"

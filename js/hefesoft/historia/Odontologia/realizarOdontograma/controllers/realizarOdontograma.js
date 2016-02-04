@@ -46,6 +46,13 @@ angular.module('Historia')
 	  odontogramService.cargarOdontograma($scope.pacienteId).then(function(data){
 	  	inicializarOdontograma(data).then(function(data){
 	  		
+	  		 if (!hefesoft.getStorageObject("tutorialOdontograma")) {
+	  		 	hefesoft.tutorial.inicializar(3);
+	  		 	hefesoft.saveStorageObject("tutorialOdontograma", {
+	  		 		mostrarTutorial: true
+	  		 	});
+	  		 }
+	  		
 	  	})
 	  })
 	 }

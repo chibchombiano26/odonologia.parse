@@ -13,7 +13,7 @@
                     <img class="lv-img" src="{{paciente.pictureUrl}}" alt="">
                     <b>{{paciente.nombre}}</b>
                     
-                    <div class="btn-group btn-group-xs" role="group">
+                    <div class="btn-group btn-group-xs" role="group" data-intro='Aca podras editar y eliminar el paciente' data-step='3'>
                         <button type="button" ng-click="leafClick('editar', true)" class="btn btn-info waves-effect">Editar</button>
                         <button type="button" ng-click="leafClick('email', true)" class="btn btn-info waves-effect">Enviar correo</button>
                         <button type="button" ng-click="leafClick('eliminar', true)" class="btn btn-danger waves-effect">Eliminar</button>
@@ -26,12 +26,12 @@
             <!-- First Row -->
             <div class="row">
                 
-                <div class="col-md-2 col-md-offset-2 text-center">
+                <div class="col-md-2 col-md-offset-2 text-center" data-intro='Aca podras guardar los archivos adjuntos del paciente como radiografias, fotos y todo lo referente al paciente. (Quedaran guardados en tu cuenta de google drive por lo que siempre estaran contigo)' data-step='6'>
                     <leaf texto="'Archvos adjuntos para este paciente'" ng-click="leafClick('adjuntos', true)" activo="true" url-imagen="'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ4ROo63GVUNqmitYlDIhyngN0QymktOLRQQ9GDDQ6XbfOdO70S'"></leaf>
                 </div>
                 
-                <div class="col-md-2 text-center">
-                    <leaf texto="'Odontograma inicial'" ng-click="leafClick('odontograma inicial', true)" activo="true" url-imagen="'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNZRFNEVIcYKn_98doL8MtN8UXxpv6pObxd8WGma0sEBJMCV2P'"></leaf>
+                <div class="col-md-2 text-center" data-intro='Cada elemento te permitira realizar una accion y activara otra por ejemplo al realizar un odontograma inicial podra realizar una cotizacion' data-step='4'>
+                    <leaf texto="'Odontograma inicial'"  ng-click="leafClick('odontograma inicial', true)" activo="true" url-imagen="'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSNZRFNEVIcYKn_98doL8MtN8UXxpv6pObxd8WGma0sEBJMCV2P'"></leaf>
                     
                 </div>
                 
@@ -39,7 +39,7 @@
                     <leaf texto="'Periodontograma'" ng-click="leafClick('periodontograma', true)" activo="true" url-imagen="'http://static.miweb.paginasamarillas.es/var/m_e/e6/e6e/8363/176841-icono-de-un-paciente-en-un-sillon-odontologico.png'"></leaf>
                 </div>
                 
-                <div class="col-md-2 text-center">
+                <div class="col-md-2 text-center" data-intro='Esta opcion generara un documento en google docs con la historia del paciente que luego podras enviar por correo o guardar en word' data-step='5'>
                     <leaf texto="'Exportar historia'" ng-click="leafClick('historia', true)" activo="true" url-imagen="'http://www.export.org.au/eca/Exfiles/May/Subcontracting-campaign_REPORT-ICON.jpg'"></leaf>
                 </div>
                 

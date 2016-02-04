@@ -112,6 +112,13 @@ materialAdmin
              
              $('#notificationNumber').html(notificationNumber);
           })
+          
+          
+          if(!hefesoft.getStorageObject("tutorial")){
+              hefesoft.tutorial.inicializar(1);
+              hefesoft.saveStorageObject("tutorial", {mostrarTutorial : true});
+          }
+          
         }
         
         
