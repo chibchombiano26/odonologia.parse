@@ -55,6 +55,7 @@ angular.module("odontologiaApp")
             hefesoft.util['pacienteSeleccionado'] = e;
 			modalService.close();
 		});
+		hefesoft.util.loadingBar.complete();
     }
     
     function historiaPaciente(){

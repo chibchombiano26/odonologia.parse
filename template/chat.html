@@ -1,17 +1,34 @@
 <div ng-controller="listadoPacientesCtrl">
-    
-   <div class="fg-line">
+
+    <div class="fg-line">
         <div class="pull-right p-relative p-r-25">
             <button ng-click="nuevo()" class="btn btn-default waves-effect"><i class="zmdi zmdi-plus"></i></button>
         </div>
+
+        <div class="pull-left p-relative p-l-5" ng-show="seleccionadoShow">
+            <div class="media">
+                <div class="pull-left p-relative">
+                    <img class="lv-img-sm" ng-src="{{seleccionado.pictureUrl}}" alt="">
+                    <i class="chat-status-busy"></i>
+                </div>
+                <div class="media-body">
+                    <div class="lv-title">{{seleccionado.nombre}}</div>
+                    
+                    <div class="btn-group btn-group-xs" role="group">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
     </div>
-    
+
     <div class="chat-search">
         <div class="fg-line">
             <input type="text" ng-model="busquedaPaciente" class="form-control" placeholder="Buscar pacientes">
         </div>
     </div>
-    
+
     <div class="listview" ng-repeat="item in pacientes | filter:busquedaPaciente">
         <a class="lv-item" href="">
             <div class="media">
@@ -24,15 +41,13 @@
                     <!--
                     <small class="lv-small">Available</small>
                     -->
-                    
-                <div class="btn-group btn-group-xs" role="group">
-                    <button type="button" ng-click="irDiagnosticos(item)" class="btn btn-default waves-effect">Ver paciente</button>
-                </div>
-                    
+
+                    <div class="btn-group btn-group-xs" role="group">
+                        <button type="button" ng-click="irDiagnosticos(item)" class="btn btn-default waves-effect">Ver paciente</button>
+                    </div>
+
                 </div>
             </div>
         </a>
     </div>
 </div>
-
-

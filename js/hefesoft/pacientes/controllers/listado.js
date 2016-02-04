@@ -8,6 +8,8 @@
 	var idPaciente = "";
 	var modo = "nuevo";
 	
+	$scope.Paciente['pictureUrl'] = hefesoft.generoPic($scope.Paciente, "genero");
+	
 	$scope.changeImage = function(file){
         hefesoft.util.loadingBar.start();
         driveApiUpload.insertFile(file,file.name, false, 'binary', "Imagenes pacientes").then(function(link){
@@ -19,6 +21,10 @@
 				pacienteService.save(idPaciente, $scope.Paciente);
 			}
 		})
+	}
+	
+	$scope.genero = function(){
+		$scope.Paciente['pictureUrl'] = hefesoft.generoPic($scope.Paciente, "genero");
 	}
 	
 	$scope.today = function() {
@@ -75,6 +81,8 @@
 .controller("listadoPacientesCtrl", function($scope, $state, $q, $rootScope, varsFactoryService, pacienteService, modalService){
 
 	$scope.pacientes =  [];
+	$scope.seleccionado = {};
+	$scope.seleccionadoShow = false;
 	
 	$scope.navegarAdjuntos = function(item){
 		hefesoft.util.loadingBar.start()
@@ -84,13 +92,8 @@
 	}
 	
 	$scope.irDiagnosticos = function(item){
-		/*
-		hefesoft.util.loadingBar.start()
-		$rootScope.currentPacient = item;
-		$scope.Paciente = item;
-		varsFactoryService.fijarPaciente(item.RowKey);
-		$state.go("pages.diagnosticoPaciente", { pacienteId: item.objectId}, {reload: true});
-		*/
+		$scope.seleccionado = item;
+		$scope.seleccionadoShow = true;
 		
 		$rootScope.$broadcast('pacienteSeleccionado', {paciente: item });
 		$state.go("pages.tree");

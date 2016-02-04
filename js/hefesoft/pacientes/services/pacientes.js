@@ -104,8 +104,8 @@ angular.module('odontologiaApp')
 		var paciente = new Paciente();
 		
 		//Para que actualice y no inserte
-		if(idPaciente.length > 0){
-			paciente.id = idPaciente;
+		if(item.objectId){
+			paciente.set("objectId", item.objectId);
 		}
 		
 		
@@ -186,10 +186,6 @@ angular.module('odontologiaApp')
 		paciente.set("placaBacteriana", parseService.validateUndefined(item.placaBacteriana));
 		paciente.set("placaCalificada", parseService.validateUndefined(item.placaCalificada));
 		paciente.set("examenOralOtros", parseService.validateUndefined(item.examenOralOtros));
-		
-		
-		
-		
 		
 		
 		if(hefesoft.isEmpty(item.pictureUrl)){
