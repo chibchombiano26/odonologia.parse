@@ -4,7 +4,16 @@ var hefesoft = hefesoft;
 hefesoft.tutorial = {};
 
 hefesoft.tutorial.inicializar = function(state) {
-    introJs().goToStep(state).oncomplete(function(e) {
+    introJs()
+    .setOptions({
+        'nextLabel' : 'Siguiente',
+        'prevLabel': 'Anterior',
+        'skipLabel': 'Saltar',
+        'doneLabel': "Listo",
+        'skipLabel': 'Salir'
+    })
+    .goToStep(state)
+    .oncomplete(function(e) {
 
     }).onexit(function(e) {
 

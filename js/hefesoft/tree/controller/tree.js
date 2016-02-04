@@ -1,6 +1,6 @@
 /*global angular, hefesoft, Parse, numeral, _*/
 angular.module("odontologiaApp")
-.controller("treeCtrl", function($scope, $rootScope, $state, treeService, $q, tratamientoServices, appScriptTemplateServices, modalService){
+.controller("treeCtrl", function($scope, $rootScope, $state, treeService, $q, $timeout, tratamientoServices, appScriptTemplateServices, modalService){
     
     $scope.paciente = hefesoft.util['pacienteSeleccionado'];
     $scope.ElementosHabilitados = {};
@@ -192,6 +192,7 @@ angular.module("odontologiaApp")
     }
     
     function tutorial() {
+        
         if (!hefesoft.getStorageObject("tutorialTree")) {
             hefesoft.tutorial.inicializar(3);
             hefesoft.saveStorageObject("tutorialTree", {
@@ -214,7 +215,10 @@ angular.module("odontologiaApp")
                 $scope.ElementosHabilitados = { odontogramaInicial : result[0], cotizacion : cotizacion}
                 hefesoft.util.loadingBar.complete();
                 
-                tutorial();
+                $timeout(function(){
+                    tutorial();    
+                }, 2000);
+                
             })
             
         }
