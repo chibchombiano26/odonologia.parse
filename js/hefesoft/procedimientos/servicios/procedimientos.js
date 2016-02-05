@@ -8,6 +8,7 @@ angular.module('odontologiaApp')
        var deferred = $q.defer();
        var Diagnosticos = Parse.Object.extend("Diagnostico");
        var query = new Parse.Query(Diagnosticos);
+       query.equalTo("username", Parse.User.current().get("email"));
        query.count({
            success: function(count) {
                if (count == 0) {
