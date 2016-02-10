@@ -3,6 +3,7 @@
 materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoadingBar, $state, $timeout, $q, $http){
     
     hefesoft.util["loadingBar"] = cfpLoadingBar;
+    cfpLoadingBar.start();
     
     var intro = [
         "vendors/bower_components/intro.js/intro.js",
@@ -158,7 +159,6 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
     function navegar() {
         $timeout(function() {
             $ocLazyLoad.getModules();
-            cfpLoadingBar.complete();
             $state.go("login");
         }, 1000);
     }
@@ -176,7 +176,6 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
     }())
     
     (function inicializarElementos(){
-        cfpLoadingBar.start();
         $q.all([lazyLoadLibraries(), lazyDentilineVendors(), lazyLoadVendors()]).then(function(data){
             injectDependencies();
             navegar();
