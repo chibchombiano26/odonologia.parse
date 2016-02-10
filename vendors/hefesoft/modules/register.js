@@ -1,3 +1,4 @@
+/*global angular*/
 angular.module('fixes', []);
 angular.module('hefesoft.pubnub', []);
 angular.module('hefesoft.parse', []);

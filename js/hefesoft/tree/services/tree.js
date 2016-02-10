@@ -4,14 +4,26 @@ angular.module("odontologiaApp")
 
         var dataFactory = {};
 
-        dataFactory.odontogramaInicial = function(id) {
+        dataFactory.odontograma = function(id, type, order) {
             var deferred = $q.defer();
 
             var Odontograma = Parse.Object.extend("Odontograma");
             var query = new Parse.Query(Odontograma);
             query.equalTo('pacienteId', id);
-            query.equalTo('tipo', "Inicial");
-            query.descending("createdAt");
+            
+            
+            if(type !== null){
+                query.equalTo('tipo', type);
+            }
+            
+            
+            if(order === "descending"){
+                query.descending("createdAt");    
+            }
+            if(order === "ascending"){
+                query.ascending("createdAt");    
+            }
+            
             query.limit(1);
 
             query.find()

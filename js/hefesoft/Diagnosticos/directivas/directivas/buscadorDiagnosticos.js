@@ -25,7 +25,7 @@ angular.module("odontologiaApp")
     
 })
 
-.controller('buscadorDiagnosticosCtrl', function($scope, diagnosticosService){
+.controller('buscadorDiagnosticosCtrl', function($scope, diagnosticosService, modalService){
     
     $scope.datos = [];
     $scope.seleccionado;
@@ -37,11 +37,13 @@ angular.module("odontologiaApp")
          $scope.seleccionado = result;
          
 		 $scope.fnDiagnosticoSeleccionado($scope, { 'item' : result });
-		 $scope.seleccionado = "";
-		 
 		 mostrarDiagnosticoEvolucion();
 		 
         }
+    }
+    
+    $scope.limpiar = function(){
+        $scope.seleccionado = "";
     }
     
     function mostrarDiagnosticoEvolucion() {
@@ -57,15 +59,16 @@ angular.module("odontologiaApp")
             $scope.show = true;
         }
     }
-  
     
-    function inicializar(){
-        diagnosticosService.cargarDiagnosticos('').then(function(result){
-            for (var i = 0; i < result.length; i++) {
-                $scope.datos.push(result[i].toJSON());
-            }
+    $scope.buscadorBuscarDiagnosticos = function(texto){
+        return diagnosticosService.buscarDiagnosticos(texto);
+    }
+    
+    $scope.new = function() {
+        modalService.open('lg', 'js/hefesoft/Diagnosticos/views/wizard.html', undefined, undefined, function(e) {
+            modalService.close();
         })
     }
   
-    inicializar();
+   
 })

@@ -8,7 +8,7 @@ controller('planTratamientoCtrl',
 	var idOdontograma;
 	var diagnosticoPacienteId;
 	var piezaDentalSeleccionada;
-	var odontogramaData;
+	var odontograma;
 
 	$scope.Listado = [];
 	$scope.Source = [];
@@ -20,31 +20,13 @@ controller('planTratamientoCtrl',
 		diagnosticoPacienteId = $stateParams.diagnosticoPacienteId;
 		inicializarDatos();
 	}
-
-	$scope.odontograma = function(){
-		$state.go("pages.odontograma", { diagnosticoPacienteId : diagnosticoPacienteId});
-	}
 	
-	$scope.cambiarHistorico = function(id){
-		hefesoft.util.loadingBar.start();
-		odontogramService.getOdontogramaByid(id).then(function(data){
-	  	  procesarDatos(data);
-	  	  hefesoft.util.loadingBar.complete();
-	  })
-	}
-
 	function inicializarDatos(){
-  	  odontogramService.cargarOdontograma($scope.pacienteId).then(function(data){
-  	  	procesarDatos(data);
-  	  });
-	}
-	
-	function procesarDatos(data){
-		var datos = data;
-	  	var result = data.toJSON().listado;
+		
+		odontograma = hefesoft.util.obtenerTipoOdontograma();
+	  	var result = odontograma.get("listado");
 	  	
-	  	idOdontograma = data.toJSON().objectId;
-	  	odontogramaData = data.toJSON(); 
+	  	idOdontograma = odontograma.get("objectId");
 	  	
 	  	$scope.Source = result;
       	piezasDentalesServices.fijarPiezasDentales($scope.Source);
@@ -53,39 +35,24 @@ controller('planTratamientoCtrl',
 	        $scope.Listado = tratamientoServices.extraerTodosProcedimientos($scope.Source);
  		}
  		
- 		if($rootScope['generarCotizacion'] === true){
- 			$rootScope['generarCotizacion'] = false;
- 			$scope.generarCotizacion();		
+ 		if (!hefesoft.getStorageObject("tutorialPlanTratamiento")) {
+ 			hefesoft.tutorial.inicializar(3);
+ 			hefesoft.saveStorageObject("tutorialPlanTratamiento", {
+ 				mostrarTutorial: true
+ 			});
  		}
-	}
+ 	}
 
 	//Como los elementos se estan pasando por referencia se puede guardar el mismo objeto que se cargo inicialmente
 	$scope.guardarCommand = function(){
 		
-		/*Todavia no activar esta opcion hasta preguntar*/
-		/*
-		modalService.open('lg', 'js/hefesoft/odontograma/vistas/guardarModal.html', 'guardarOdontogramaModal', undefined, function(e){
- 		 	modalService.close();
- 		 	save({tipo : e.tipoSeleccionado, observaciones:  e.observaciones})
-		})
-		*/
-		
-		save({}, false);
+		hefesoft.util.loadingBar.start();
+		odontograma.save().then(function(){
+			$state.go("pages.tree");
+		});
+		hefesoft.util.loadingBar.complete();	
 	}	
 	
-	
-	function save(item, historico){
-		var dataToSave = angular.toJson($scope.Source, true);
-		
-		//El tercer parametro NO va como undefined para que tome el ultimo odontograma y sobre este modifique
-		hefesoft.util.loadingBar.start();
-		odontogramService.saveOdontograma(JSON.parse(dataToSave), diagnosticoPacienteId, idOdontograma, item, historico).then(function(data){
-			var item = data.toJSON();
-			idOdontograma = item.objectId;
-			hefesoft.util.loadingBar.complete();	
-			$state.go("pages.tree");
-		})
-	}
 
 	//Se toma el procedimiento que se ha indicado como realizado
 	//Luego se busca dentro de las piezas dentales
@@ -123,7 +90,7 @@ controller('planTratamientoCtrl',
 
 	   if(index >= 0){
 	   		piezaDentalSeleccionada = $scope.Source[index];	   		
-	   		listadoDiagnosticos = piezaDentalSeleccionada[procedimiento.superficie + "Diagnosticos_arrayHefesoft"];
+	   		var listadoDiagnosticos = piezaDentalSeleccionada[procedimiento.superficie + "Diagnosticos_arrayHefesoft"];
 	   		listadoDiagnosticos = Hefesot.aListado(listadoDiagnosticos);
 
 	   		var indexDiagnostico = _.findIndex(listadoDiagnosticos, function(chr) {

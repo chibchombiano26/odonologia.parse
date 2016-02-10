@@ -2,8 +2,8 @@
 
 
 materialAdmin
-    .config(function ($stateProvider, $urlRouterProvider){
-        $urlRouterProvider.otherwise("/login");
+    .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider){
+        $urlRouterProvider.otherwise("/preload");
 
         Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
         //Parse.initialize("hefesoft", "h123456");
@@ -26,11 +26,15 @@ materialAdmin
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) {return;}
           js = d.createElement(s); js.id = id;
-          //js.src = "//connect.facebook.net/en_US/sdk.js";
-          js.src = "//connect.facebook.net/en_US/sdk/debug.js";
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          //js.src = "//connect.facebook.net/en_US/sdk/debug.js";
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         
+        
+        $ocLazyLoadProvider.config({
+            debug : true
+        });
 
         $stateProvider
 
@@ -565,6 +569,12 @@ materialAdmin
                 templateUrl: 'views/invoice.html'
             })
             
+            .state ('preload', {
+                url: '/preload',
+                controller: 'preloadCtrl',
+                templateUrl: 'views/preload.html',
+             })
+            
             .state ('login', {
                 url: '/login',
                 templateUrl: 'views/login.html',
@@ -583,7 +593,7 @@ materialAdmin
                                 name: 'vendors',
                                 files: [
                                     'vendors/bower_components/mediaelement/build/mediaelement-and-player.js',
-                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js'
+                                    'vendors/bower_components/lightgallery/light-gallery/js/lightGallery.min.js',
                                 ]
                             },
                             {
@@ -910,7 +920,7 @@ materialAdmin
         }
         
         event.preventDefault();
-        $state.go('login');
+        $state.go('preloader');
         
         
         try {

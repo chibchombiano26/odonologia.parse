@@ -6,6 +6,7 @@ var materialAdmin = angular.module('materialAdmin', [
     'ui.bootstrap',
     'angular-loading-bar',
     'oc.lazyLoad',
+    "pubnub.angular.service",
     'ngSanitize',
     'providers',
     'cfp.loadingBar'

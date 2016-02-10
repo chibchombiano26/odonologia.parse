@@ -1,0 +1,50 @@
+<div class="cp-container" ng-show="item.mostrarColor">
+    <div class="input-group form-group">
+        <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+        <div class="fg-line dropdown" dropdown>
+            <input type="text" class="form-control cp-value" ng-model="wizard.color" dropdown-toggle>
+
+            <div class="dropdown-menu">
+                <ng-farbtastic ng-model="wizard.color"></ng-farbtastic>
+            </div>
+            
+            <i class="cp-value" style="background-color: {{ wizard.color }}"></i>
+        </div>
+    </div>
+</div>
+
+<div ng-show="item.mostrarTexto">
+
+    <div class="col-sm-6">
+        <p>Color fuente</p>
+        <div class="cp-container">
+            <div class="input-group form-group">
+                <span class="input-group-addon"><i class="zmdi zmdi-invert-colors"></i></span>
+                <div class="fg-line dropdown" dropdown>
+                    <input type="text" class="form-control cp-value" ng-model="wizard.objectHefesoftFuente.fuenteColor" dropdown-toggle>
+
+                    <div class="dropdown-menu">
+                        <ng-farbtastic ng-model="wizard.objectHefesoftFuente.fuenteColor"></ng-farbtastic>
+                    </div>
+
+                    <i class="cp-value" style="background-color: {{wizard.objectHefesoftFuente.fuenteColor}}"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <p>Letra a Usar</p>
+        <div class="fg-line">
+            <input type="text" ng-style="
+                            {
+                                'color' : (wizard.objectHefesoftFuente.fuenteColor)
+                            }" name="nombre" class="form-control" placeholder="" ng-model="wizard.simbolo" required>
+        </div>
+    </div>
+</div>
+
+<div ng-show="item.mostrarImagen">
+    <img class="lv-img" src="{{wizard.urlImagen}}" alt="">
+    <ng-file-input mode="binary-string" tmpl="'js/hefesoft/templates/upload.html'" callback="changeImage(file)">Cambiar imagen</ng-file-input>
+</div>

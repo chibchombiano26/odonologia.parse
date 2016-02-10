@@ -54,8 +54,8 @@ angular.module('odontologiaApp')
 .controller('listadosDiagnosticosCtrl', ['$scope', '$modal',
   function($scope, $modal) {
 
-    $scope.diagnosticoSeleccionado;
-
+    $scope.diagnosticoSeleccionado = {};
+  
     $scope.openTratamiento = function(item) {
       if (angular.isDefined($scope.fnTratamientos) && angular.isFunction($scope.fnTratamientos)) {
         $scope.fnTratamientos($scope.$parent, {
@@ -65,6 +65,7 @@ angular.module('odontologiaApp')
 
       $scope.openTratamiento(item);
     }
+  
 
     $scope.open = function(item) {
       if (angular.isDefined($scope.fnEdit) && angular.isFunction($scope.fnEdit)) {

@@ -310,14 +310,12 @@ materialAdmin
     // LOGIN
     //=================================================
 
-    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pushGcmService, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService, $interval, procedimientosService){
+    .controller('loginCtrl', function($scope, $q, authGoogleService, $state, pubNubService, PubNub, $rootScope, parseService, growlService, speechService, diagnosticosService, citasService, cfpLoadingBar, prestadorService, $interval, procedimientosService){
 
         //Status
         this.login = 1;
         this.register = 0;
         this.forgot = 0;
-        
-        hefesoft.util["loadingBar"] = cfpLoadingBar;
        
         $scope.$on('event:google-plus-signin-success', function (event, authResult) {
           hefesoft.googleAuth = authResult;
@@ -331,14 +329,7 @@ materialAdmin
         });
         
         function success(result){
-            /*
-            pushGcmService.push({
-                message: "Mensaje de prueba",
-                id: subscriptionId,
-                rid : subscriptionId
-            });
-            */
-            
+         
             var username = Parse.User.current().get("username");
             pubNubService.initialise(username);
             subscribeMessage(username);

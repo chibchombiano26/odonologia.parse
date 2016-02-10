@@ -91,7 +91,7 @@ angular.module("odontologiaApp")
         
         
         if($scope.ElementosHabilitados.odontogramaInicial.existe){
-            var Odontograma = $scope.ElementosHabilitados.odontogramaInicial.valor.toJSON();
+            var Odontograma = hefesoft.util.obtenerTipoOdontograma().toJSON();
             var odontogramaListado = Odontograma.listado;
             cotizacionDiagnosticos(parameters, odontogramaListado);
             
@@ -173,7 +173,7 @@ angular.module("odontologiaApp")
     
     function cotizacion(){
         
-        var Odontograma = $scope.ElementosHabilitados.odontogramaInicial.valor.toJSON();
+        var Odontograma = hefesoft.util.obtenerTipoOdontograma().toJSON();
         var item = $scope.paciente;
         $rootScope.currentPacient = item;
 		$scope.Paciente = item;
@@ -188,6 +188,7 @@ angular.module("odontologiaApp")
         $rootScope.currentPacient = item;
 		$scope.Paciente = item;
 		hefesoft.util['tipoOdontograma'] = "Plan de tratamiento";
+		hefesoft.util['infoPaciente'] = $scope.ElementosHabilitados;
         $state.go("pages.planTratamiento", { diagnosticoPacienteId : $scope.paciente.objectId});
     }
     
@@ -204,15 +205,17 @@ angular.module("odontologiaApp")
     function inicializar(){
         if($scope.paciente){
             
-            var odontogramaInicialQuery = treeService.odontogramaInicial($scope.paciente.objectId);
+            var odontogramaInicialQuery = treeService.odontograma($scope.paciente.objectId, "Inicial", "descending");
             var cotizacionQuery = treeService.cotizacion($scope.paciente.objectId);
+            var odontogramaActualQuery = treeService.odontograma($scope.paciente.objectId, null, "ascending");
             
             hefesoft.util.loadingBar.start();
-            $q.all([odontogramaInicialQuery, cotizacionQuery]).then(function(result){
+            $q.all([odontogramaInicialQuery, cotizacionQuery, odontogramaActualQuery]).then(function(result){
                 var odontogramaInicial = result[0];
                 var cotizacion = result[1];
+                var OdontogramaActual = result[2];
                 
-                $scope.ElementosHabilitados = { odontogramaInicial : result[0], cotizacion : cotizacion}
+                $scope.ElementosHabilitados = { odontogramaInicial : result[0], cotizacion : cotizacion, odontogramaActual : OdontogramaActual}
                 hefesoft.util.loadingBar.complete();
                 
                 $timeout(function(){
@@ -221,6 +224,16 @@ angular.module("odontologiaApp")
                 
             })
             
+        }
+    }
+    
+    // Obtiene el odontograma que este disponible
+    hefesoft.util.obtenerTipoOdontograma = function(){
+        if($scope.ElementosHabilitados.OdontogramaActual){
+            return $scope.ElementosHabilitados.OdontogramaActual.valor;    
+        }
+        else{
+            return $scope.ElementosHabilitados.odontogramaInicial.valor;    
         }
     }
     

@@ -162,7 +162,9 @@ function dependenciasDiagnosticos(){
             'vendors/bower_components/angular-farbtastic/angular-farbtastic.js',
             "js/hefesoft/tratamientos/directivas/wizardSimbolo/services/pasoVariables.js",
             'js/hefesoft/Diagnosticos/services/diagnosticos.js',
-            "js/hefesoft/procedimientos/servicios/procedimientos.js"
+            "js/hefesoft/procedimientos/servicios/procedimientos.js",
+            "js/hefesoft/Diagnosticos/directivas/directivas/wizardSimple.js",
+            "js/hefesoft/Diagnosticos/directivas/directivas/tipoVisualizacionDiagnostico.js"
         ]
  	}
 
@@ -262,7 +264,7 @@ function dependenciasFileInput(){
 	{
         name : "Util",
         cache: true,
-        serie : true,
+        serie : false,
         files: 
         [
             "vendors/bower_components/bootstrap-fileinput/css/fileinput.min.css",
@@ -597,6 +599,21 @@ function dependenciasDate(){
 
     return dependencias;
     }
+    
+    function dependenciasIniciales(){
+    var dependencias = 
+    {
+        name : "odontologiaApp",
+        cache: true,
+        serie: false,
+        files: 
+        [
+            
+        ]
+    }
+
+    return dependencias;
+    }
 
 function cargarPacientes($ocLazyLoad){
       return $ocLazyLoad.load
@@ -762,5 +779,12 @@ function cargarPacientes($ocLazyLoad){
       ([
         dependenciasTree(),
         dependenciasTratamientos()
+      ]);
+   }
+   
+   function cargaInicial($ocLazyLoad){
+      return $ocLazyLoad.load
+      ([
+        dependenciasIniciales()
       ]);
    }

@@ -2,7 +2,10 @@
     
     <div class="fg-line">
         <div class="pull-right p-relative p-r-25 p-t-25">
-            <button tooltip="crear un diagnostico (Cuidado te iras de esta pagina)" ui-sref="pages.listadoDiagnosticos" class="btn btn-default waves-effect"><i class="zmdi zmdi-plus"></i></button>
+            <div class="btn-group btn-group-xs" role="group">
+        		<button ng-click="new()" class="btn btn-info btn-icon-text waves-effect"><i class="zmdi zmdi-plus"></i>Nuevo diagnostico</button>
+        		<button ng-click="limpiar()" class="btn btn-warning btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Limpiar</button>
+        	</div>
         </div>
     </div>
     
@@ -18,8 +21,9 @@
                  name="buscadorDiagnosticos"
                  type="text" 
                  ng-model="seleccionado"
+                 typeahead-wait-ms="300"
                  typeahead-on-select="fnSeleccionado($item)"
-                 typeahead="item as item.nombre + ' (' + item.valor + ')' for item in datos | filter:$viewValue | limitTo:8" 
+                 typeahead="item as item.nombre + ' (' + item.valor + ')' for item in buscadorBuscarDiagnosticos($viewValue) | filter:$viewValue | limitTo:8" 
                  class="form-control">
             </div>
         </div>

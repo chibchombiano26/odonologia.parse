@@ -18,21 +18,13 @@
 	<div class="col-sm-10">
 		
 		<div class="pull-left">
-			<!--
-				No activar todavia
-				<historico-odontograma callback="cambiarHistorico(id)"></historico-odontograma>
-			-->
+		
 		</div>
 		
 		<div class="pull-right p-r-25">
 			<div class="btn-group btn-group-xs" role="group">
 				
-				<!--
-				<button ng-click="odontograma()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Odontograma</button>
-				<button ng-click="generarCotizacion()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Generar cotizacion</button>
-				-->
-				
-			    <button ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
+			    <button data-step='4' data-intro='No olvide guardar sus cambios' ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
 			</div>
 		</div>
 	</div>
@@ -50,6 +42,7 @@
 	
 	<div class="col-sm-10">
 		<listado-procedimientos
+		data-step='3' data-intro='Seleccione los procedimientos que han sido realizados y cuales han sido pagados dando click en el check de la columna realizado y pagado'
 		zoom="'0.8'"
 	    ocultar-add-procedimiento="'true'"
 	    modo-pagos="'true'"
