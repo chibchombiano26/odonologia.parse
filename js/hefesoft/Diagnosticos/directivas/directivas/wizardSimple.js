@@ -6,6 +6,10 @@ angular.module('odontologiaApp')
       directiva.templateUrl = "js/hefesoft/Diagnosticos/directivas/template/wizardSimple.html";
       directiva.controller = "wizardSimpleCtrl";
       
+      directiva.scope = {
+         callback: '&'
+      };
+      
       return directiva;
       
   })
@@ -31,26 +35,31 @@ angular.module('odontologiaApp')
       mostrarOcultar(tipo, etapaDiagnostico);
     }
     
-    $scope.seleccionadoDiagnostico = function(item){
-      
-      //Se inicializa el diagnostico vacio
-      $scope.esquema.diagnostico = $scope.esquemaLimpio.diagnostico;
-      
-      if(item.modo.mostrarColor){
-        $scope.esquema.diagnostico['color'] = item.color;
-      }
-      else if(item.modomostrar.Texto){
-        $scope.esquema.diagnostico['simbolo'] = item.simbolo;
-        $scope.esquema.diagnostico.objectHefesoftFuente = item.objectHefesoftFuente;
-      }
-      else if(item.modo.mostrarImagen){
-        $scope.esquema.diagnostico['pathImagen'] = item.urlImagen;
-      }
-      
+    $scope.seleccionadoDiagnostico = function(item) {
+      inicializarValoresDiagnosticoEvolucion(item, "diagnostico");
     }
     
     $scope.seleccionadoEvolucion = function(item){
-      console.log(item);
+      inicializarValoresDiagnosticoEvolucion(item, "evolucion");
+    }
+    
+    function inicializarValoresDiagnosticoEvolucion(item, tipo){
+      
+      if ($scope.esquema[tipo]) {
+        //Se inicializa el diagnostico vacio
+        $scope.esquema[tipo] = angular.copy($scope.esquemaLimpio.diagnostico);
+    
+        if (item.modo.mostrarColor) {
+          $scope.esquema[tipo]['color'] = item.color;
+        }
+        else if (item.modo.mostrarTexto) {
+          $scope.esquema[tipo]['simbolo'] = item.simbolo;
+          $scope.esquema[tipo].objectHefesoftFuente = item.objectHefesoftFuente;
+        }
+        else if (item.modo.mostrarImagen) {
+          $scope.esquema[tipo]['pathImagen'] = item.urlImagen;
+        }
+      }
     }
     
     (function obtenerEsquema(){
@@ -83,10 +92,32 @@ angular.module('odontologiaApp')
       }
     }
     
-    $scope.save = function(){
+    $scope.save = function() {
+      debugger
+      $scope.esquema['nombre'] = $scope.diagnostico.nombre;
+      $scope.esquema['valor'] = $scope.diagnostico.valor;
       
+      $scope.esquema.arrayHefesoftTratamientos[0].nombre = $scope.diagnostico.nombre;
+      $scope.esquema.arrayHefesoftTratamientos[0].arrayHefesoftProcedimientos[0].nombre = $scope.diagnostico.nombre;
+      
+      $scope.esquema.arrayHefesoftTratamientos[0].valor = $scope.diagnostico.valor;
+      $scope.esquema.arrayHefesoftTratamientos[0].arrayHefesoftProcedimientos[0].valor = $scope.diagnostico.valor;
+      
+      
+      if ($scope.callback) {
+        $scope.callback({
+          item: $scope.esquema
+        });
+      }
     }
     
+  })
+  
+  .controller('wizardDiagnosticoSimple', function($scope, callback){
+    
+    $scope.callback = function(item){
+      callback(item);
+    }
     
   })
   

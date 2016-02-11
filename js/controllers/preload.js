@@ -3,7 +3,6 @@
 materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoadingBar, $state, $timeout, $q, $http){
     
     hefesoft.util["loadingBar"] = cfpLoadingBar;
-    cfpLoadingBar.start();
     
     var intro = [
         "vendors/bower_components/intro.js/intro.js",
@@ -46,7 +45,8 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
         "js/templates.js",
         "js/controllers/ui-bootstrap.js",
         "js/controllers/table.js",
-        "js/controllers/common.js"
+        "js/controllers/common.js",
+        "js/controllers/profile.js"
     ]
     
     var vendorHefesoft = [

@@ -1,4 +1,4 @@
-/*global angular, Parse, _*/  
+/*global angular, Parse, _, hefesoft*/  
 angular.module("odontologiaApp")
 .directive("buscadorDiagnosticos", function($parse){
     
@@ -61,11 +61,19 @@ angular.module("odontologiaApp")
     }
     
     $scope.buscadorBuscarDiagnosticos = function(texto){
-        return diagnosticosService.buscarDiagnosticos(texto);
+        return diagnosticosService.buscarDiagnosticos(texto.toLowerCase());
     }
     
     $scope.new = function() {
-        modalService.open('lg', 'js/hefesoft/Diagnosticos/views/wizard.html', undefined, undefined, function(e) {
+        modalService.open('lg', 'js/hefesoft/Diagnosticos/views/wizard.html', 'wizardDiagnosticoSimple', undefined, function(e) {
+            
+            var diagnosticoAdicionar = diagnosticosService.addDiagnostico(e);
+            
+            hefesoft.util["loadingBar"].start();
+            diagnosticoAdicionar.save().then(function(){
+                hefesoft.util["loadingBar"].complete();
+            })
+            
             modalService.close();
         })
     }

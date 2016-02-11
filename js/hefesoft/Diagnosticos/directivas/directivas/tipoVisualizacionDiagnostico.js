@@ -33,6 +33,14 @@ angular.module('odontologiaApp')
        $scope.$watch("wizard.color", function(e){
            propagateEvent();
        });
+       
+       $scope.$watch("wizard.simbolo", function(e){
+           propagateEvent();
+       });
+       
+       $scope.$watch("wizard.objectHefesoftFuente.fuenteColor", function(e){
+           propagateEvent();
+       });
       
       $scope.changeImage = function(file) {
           hefesoft.util.loadingBar.start();
