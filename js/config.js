@@ -33,7 +33,7 @@ materialAdmin
         
         
         $ocLazyLoadProvider.config({
-            debug : true
+            //debug : true
         });
 
         $stateProvider
@@ -920,7 +920,7 @@ materialAdmin
         }
         
         event.preventDefault();
-        $state.go('preloader');
+        $state.go('preload');
         
         
         try {

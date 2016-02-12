@@ -59,6 +59,7 @@ function dependenciasPacientes(){
             "js/hefesoft/pacientes/controllers/listado.js",
             "js/hefesoft/pacientes/services/pacientes.js",
             "vendors/hefesoft/Fixes/fixes.js",
+            "vendors/hefesoft/Azure/tableStorage.js"
         ]
     }
 
@@ -91,7 +92,11 @@ function dependenciasTree(){
             "js/hefesoft/tree/directives/leaf.js",
             "js/hefesoft/tree/controller/tree.js",
             "js/hefesoft/tree/services/tree.js",
-            "vendors/hefesoft/google/appscripts/services/template.js"
+            "vendors/hefesoft/google/appscripts/services/template.js",
+            "js/hefesoft/odontograma/services/odontograma.js",
+            "js/hefesoft/odontograma/services/json/odontogramaBase.js",
+            "vendors/hefesoft/Azure/tableStorage.js",
+            "vendors/hefesoft/Globales/urlServicio.js"
         ]
     }
     

@@ -128,7 +128,7 @@ angular.module('hefesoft.google')
          user.signUp(null, {
            success: function(user) {
              deferred.resolve(user);
-             saveRegistrationId(user);
+             //saveRegistrationId(user);
            },
            error: function(e,  error){ 
              deferred.reject(e);
@@ -151,7 +151,7 @@ angular.module('hefesoft.google')
          Parse.User.logIn(username, pass, {
           success: function(user) {
             deferred.resolve(user);
-            saveRegistrationId(user);
+            //saveRegistrationId(user);
           },
           error: function(e){ 
             deferred.resolve(e);

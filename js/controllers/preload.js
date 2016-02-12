@@ -173,14 +173,14 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
             var item = items[Math.floor(Math.random()*items.length)];
             $('#datoCurioso').text("Sabias que " + item.valor);
         })
-    }())
+    }());
     
     (function inicializarElementos(){
         $q.all([lazyLoadLibraries(), lazyDentilineVendors(), lazyLoadVendors()]).then(function(data){
             injectDependencies();
             navegar();
         });
-    }())
+    }());
     
 });
       

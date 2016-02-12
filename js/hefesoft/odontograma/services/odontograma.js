@@ -1,7 +1,7 @@
 /* global angular, Parse, hefesoft*/
 
 angular.module('odontologiaApp')
-.service('odontogramService', function($q){
+.service('odontogramService', function($q, odontogramaJsonServices){
 
    var dataFactory = {};
    
@@ -188,6 +188,19 @@ angular.module('odontologiaApp')
 	  
 	   return deferred.promise;
 	 }
+	 
+	dataFactory.generarOdontogramaBase  = function(objetoOdontograma){
+		
+		var deferred = $q.defer();
+		odontogramaJsonServices.obtenerOdontogramaBase().then(function(e){
+			debugger
+			dataFactory.saveOdontograma(e, null, undefined, objetoOdontograma, false).then(function(result){
+				deferred.resolve(result);
+			})
+		});
+		
+		return deferred.promise;
+	}
     
     return dataFactory;
     

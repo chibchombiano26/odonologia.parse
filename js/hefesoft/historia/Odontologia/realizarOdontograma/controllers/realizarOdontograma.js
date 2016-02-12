@@ -170,14 +170,6 @@ angular.module('Historia')
 		inicializarOdontograma({});
 	}
 
-	$scope.planTratamiento = function(){
-		$state.go("pages.planTratamiento", { diagnosticoPacienteId : diagnosticoPacienteId});
-	}
-	
-	$scope.cotizacion = function(){
-		$rootScope['generarCotizacion'] = true;
-		$state.go("pages.cotizador", { diagnosticoPacienteId : diagnosticoPacienteId});
-	}
 
 	$scope.procedimientoEliminado = function(item){
 		console.log(item);

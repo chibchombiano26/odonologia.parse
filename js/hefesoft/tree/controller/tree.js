@@ -1,6 +1,6 @@
 /*global angular, hefesoft, Parse, numeral, _*/
 angular.module("odontologiaApp")
-.controller("treeCtrl", function($scope, $rootScope, $state, treeService, $q, $timeout, tratamientoServices, appScriptTemplateServices, modalService){
+.controller("treeCtrl", function($scope, $rootScope, $state, treeService, $q, $timeout, tratamientoServices, appScriptTemplateServices, modalService, odontogramService){
     
     $scope.paciente = hefesoft.util['pacienteSeleccionado'];
     $scope.ElementosHabilitados = {};
@@ -202,6 +202,20 @@ angular.module("odontologiaApp")
         }
     }
     
+    
+    function crearOdontogramaInicial(odontogramaCargado) {
+        if (odontogramaCargado.existe === false) {
+            hefesoft.util.loadingBar.start();
+            odontogramService.generarOdontogramaBase({
+                pacienteId: $scope.paciente.objectId,
+                tipo : "Inicial"
+            }).then(function(data) {
+                hefesoft.util.loadingBar.complete();
+                inicializar();
+            });
+        }
+    }
+    
     function inicializar(){
         if($scope.paciente){
             
@@ -218,14 +232,20 @@ angular.module("odontologiaApp")
                 $scope.ElementosHabilitados = { odontogramaInicial : result[0], cotizacion : cotizacion, odontogramaActual : OdontogramaActual}
                 hefesoft.util.loadingBar.complete();
                 
+                crearOdontogramaInicial(odontogramaInicial);
+                
                 $timeout(function(){
                     tutorial();    
                 }, 2000);
+                
+                
                 
             })
             
         }
     }
+    
+    
     
     // Obtiene el odontograma que este disponible
     hefesoft.util.obtenerTipoOdontograma = function(){
