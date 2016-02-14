@@ -173,7 +173,7 @@ angular.module("odontologiaApp")
     
     function cotizacion(){
         
-        var Odontograma = hefesoft.util.obtenerTipoOdontograma().toJSON();
+        var Odontograma = angular.copy(hefesoft.util.obtenerTipoOdontograma()).toJSON();
         var item = $scope.paciente;
         $rootScope.currentPacient = item;
 		$scope.Paciente = item;
@@ -221,7 +221,7 @@ angular.module("odontologiaApp")
             
             var odontogramaInicialQuery = treeService.odontograma($scope.paciente.objectId, "Inicial", "descending");
             var cotizacionQuery = treeService.cotizacion($scope.paciente.objectId);
-            var odontogramaActualQuery = treeService.odontograma($scope.paciente.objectId, null, "ascending");
+            var odontogramaActualQuery = treeService.odontograma($scope.paciente.objectId, null, "descending");
             
             hefesoft.util.loadingBar.start();
             $q.all([odontogramaInicialQuery, cotizacionQuery, odontogramaActualQuery]).then(function(result){
@@ -249,8 +249,8 @@ angular.module("odontologiaApp")
     
     // Obtiene el odontograma que este disponible
     hefesoft.util.obtenerTipoOdontograma = function(){
-        if($scope.ElementosHabilitados.OdontogramaActual){
-            return $scope.ElementosHabilitados.OdontogramaActual.valor;    
+        if($scope.ElementosHabilitados.odontogramaActual && $scope.ElementosHabilitados.odontogramaActual.existe){
+            return $scope.ElementosHabilitados.odontogramaActual.valor;    
         }
         else{
             return $scope.ElementosHabilitados.odontogramaInicial.valor;    

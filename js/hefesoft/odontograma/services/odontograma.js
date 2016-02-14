@@ -193,7 +193,6 @@ angular.module('odontologiaApp')
 		
 		var deferred = $q.defer();
 		odontogramaJsonServices.obtenerOdontogramaBase().then(function(e){
-			debugger
 			dataFactory.saveOdontograma(e, null, undefined, objetoOdontograma, false).then(function(result){
 				deferred.resolve(result);
 			})

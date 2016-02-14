@@ -123,7 +123,7 @@
 		
 		modalService.open('lg', 'js/hefesoft/pacientes/views/paciente.html', 'pacientesController', 'my-dialog', function(e) {
 			modalService.close();
-			$scope.pacientes.push(e);
+			listarPacientes();
 		});
 		
 	}
@@ -132,17 +132,10 @@
 		$state.go("pages.email", {recipient: item.email}, {reload: true})
 	}
 	
-	/*
-	$rootScope.$on("pacienteModificado", function(event, payload) {
-        var paciente = payload.paciente.toJSON();
-        $scope.pacientes.push(paciente);
-    })
-    */
-	
 	function listarPacientes(){
 		hefesoft.util.loadingBar.start();
 		pacienteService.listarPacientes().then(function(result){
-			
+			$scope.pacientes = [];
 			for (var i = 0; i < result.length; i++) {
 			  $scope.pacientes.push(result[i].toJSON());
 			}
