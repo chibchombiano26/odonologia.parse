@@ -16,12 +16,16 @@
 
         <div class="form-group">
             <div class="fg-line" tooltip="Escribe el nombre del prestador">
+                
                  <input 
                  name="buscadorPrestador"
                  type="text" 
-                 ng-model="seleccionadoPrestador" 
-                 typeahead="item.nombre for item in datosPrestador | filter:$viewValue | limitTo:8" 
+                 ng-model="seleccionadoPrestador"
+                 typeahead-wait-ms="300"
+                 typeahead-on-select="fnSeleccionado($item)"
+                 typeahead="item as item.buscar  for item in buscadorPrestador($viewValue) | filter:$viewValue | limitTo:8" 
                  class="form-control">
+                
             </div>
         </div>
         

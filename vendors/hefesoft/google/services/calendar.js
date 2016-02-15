@@ -94,14 +94,35 @@ angular.module('hefesoft.google')
   }
   
   //Change de acl for the calendar to private to public
-  dataFactory.updateAcl = function(calendarID, role){
+  dataFactory.updateAcl = function(calendarID, role) {
+  
     var deferred = $q.defer();
-    var setRequest = gapi.client.calendar.acl.insert({ calendarId: calendarID, role: role, scope: { type: "default"} });
-    setRequest.execute(function(respt) {
-      deferred.resolve(respt);
-    });
-
+  
+    var apiCargada = !hefesoft.isEmpty(gapi.client.calendar);
+  
+    if (apiCargada) {
+      updateCalendar(calendarID, role, deferred)
+    }
+    else{
+      dataFactory.loadEventApi().then(function(){
+        updateCalendar(calendarID, role, deferred);
+      })
+    }
+  
     return deferred.promise;
+  }
+  
+  function updateCalendar(calendarID, role, deferred){
+    var setRequest = gapi.client.calendar.acl.insert({
+        calendarId: calendarID,
+        role: role,
+        scope: {
+          type: "default"
+        }
+      });
+      setRequest.execute(function(respt) {
+        deferred.resolve(respt);
+      });
   }
   
   dataFactory.createCalendar = function(name, description){

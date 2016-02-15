@@ -87,7 +87,8 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
         "//cdnjs.cloudflare.com/ajax/libs/numeral.js/1.4.5/numeral.min.js",
         "//cdnjs.cloudflare.com/ajax/libs/annyang/2.0.0/annyang.min.js",
         "vendors/hefesoft/speech/speech.js",
-        "vendors/hefesoft/google/appscripts/services/template.js"
+        "vendors/hefesoft/google/appscripts/services/template.js",
+        "vendors/hefesoft/google/services/calendar.js"
         
     ]
     

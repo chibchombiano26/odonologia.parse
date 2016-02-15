@@ -14,7 +14,7 @@ angular.module('odontologiaApp')
       
   })
   
-  .controller('wizardSimpleCtrl', function($scope, procedimientosService){
+  .controller('wizardSimpleCtrl', function($scope, procedimientosService, $interval){
     
     $scope.VisualizarTipoDiagnostico = { mostrarColor : true, mostrarTexto : false, mostrarImagen : false};
     $scope.VisualizarTipoEvolucion = { mostrarColor : true, mostrarTexto : false, mostrarImagen : false};
@@ -44,7 +44,16 @@ angular.module('odontologiaApp')
     }
     
     function inicializarValoresDiagnosticoEvolucion(item, tipo){
+      var promise = $interval(function(){
+        if ($scope.esquema[tipo]) {
+          esquema(item, tipo);
+          $interval.cancel(promise);
+        }
+      }, 3000);
       
+    }
+    
+    function esquema(item, tipo){
       if ($scope.esquema[tipo]) {
         //Se inicializa el diagnostico vacio
         $scope.esquema[tipo] = angular.copy($scope.esquemaLimpio.diagnostico);
@@ -93,7 +102,7 @@ angular.module('odontologiaApp')
     }
     
     $scope.save = function() {
-      debugger
+      
       $scope.esquema['nombre'] = $scope.diagnostico.nombre;
       $scope.esquema['valor'] = $scope.diagnostico.valor;
       

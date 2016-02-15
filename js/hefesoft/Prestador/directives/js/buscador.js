@@ -27,21 +27,19 @@ angular.module("odontologiaApp")
     $scope.seleccionadoPrestador;
     $scope.showPrestador = false;
     
-    $scope.$watch('seleccionadoPrestador', function(e) {
-        if(e){
-            var result = _.find($scope.datosPrestador, 'nombre', e);
-            if(result){
-                if(angular.isDefined($scope.fnprestadorSeleccionado) && angular.isFunction($scope.fnprestadorSeleccionado)){
-                    $scope.seleccionadoPrestador = result;
-                    $scope.showPrestador = true;
-        			$scope.fnprestadorSeleccionado($scope, { 'item' : result });
-        		}
-            }
-        }
-        else{
+     $scope.fnPrestadorSeleccionado = function(result) {
+
+         if (angular.isDefined($scope.fnprestadorSeleccionado) && angular.isFunction($scope.fnprestadorSeleccionado)) {
+             $scope.seleccionadoPrestador = result;
+             $scope.showPrestador = true;
+             $scope.fnprestadorSeleccionado($scope, {
+                 'item': result
+             });
+         }
+         else{
             $scope.showPrestador = false;
         }
-    });
+     }
     
     $scope.nueva = function(){
         $rootScope['prestadorSeleccionado'] = undefined; 
@@ -59,25 +57,7 @@ angular.module("odontologiaApp")
 		$scope.fnprestadorSeleccionado($scope, { 'item' : prestador });
     }
     
-    function inicializar(){
-        prestadorService.list().then(function(result){
-            $scope.datosPrestador = [];
-            for (var i = 0; i < result.length; i++) {
-                $scope.datosPrestador.push(result[i].toJSON());
-            }
-        })
+    $scope.buscadorPrestador = function(texto){
+        return prestadorService.buscarPrestador(texto.toLowerCase());
     }
-    
-    $rootScope.$on('prestador', function(event, payload) {
-        var modo = payload.modo;
-        
-        if(modo === "Adicionado"){
-            $scope.datosPrestador.push(payload.item);
-        }
-        else{
-            inicializar();
-        }
-    })
-  
-    inicializar();
 })

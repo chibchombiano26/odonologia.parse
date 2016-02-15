@@ -64,5 +64,9 @@ angular.module('odontologiaApp')
           }
       }
       
+      (function inicializar(){
+        //Para que se inicialize con el valor por defecto
+        propagateEvent();
+      }());
   })
   

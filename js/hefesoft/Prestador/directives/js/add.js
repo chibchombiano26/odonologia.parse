@@ -21,6 +21,8 @@ angular.module('odontologiaApp')
         $scope.prestador = $rootScope.prestadorSeleccionado;
     }
     
+    $scope.prestador['pictureUrl'] = hefesoft.generoPic($scope.prestador, "genero");
+    
     
     $scope.changeImage = function(file){
         hefesoft.util.loadingBar.start();
@@ -32,6 +34,10 @@ angular.module('odontologiaApp')
 			    prestadorService.save($scope.prestador);
 			}
 		})
+	}
+	
+	$scope.genero = function() {
+	    $scope.prestador['pictureUrl'] = hefesoft.generoPic($scope.prestador, "genero");
 	}
     
     $scope.save = function(){
@@ -60,6 +66,9 @@ angular.module('odontologiaApp')
             hefesoft.util.loadingBar.complete();
             $rootScope.$broadcast('prestador', { modo: modo, item : $scope.prestador});
             modalService.close();
+            
+            //Volverlo publico
+            calendarGetData.updateAcl($scope.prestador.idCalendar, "freeBusyReader");
         })
     }
     
