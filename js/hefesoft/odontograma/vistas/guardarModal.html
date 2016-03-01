@@ -1,19 +1,19 @@
 <div class="card">
     <div class="card-header">
-        <h2>Guardar Odontograma <small></small></h2>
+        <h2>{{ 'SAVE_ODONTOGRAMA.TITLE' | translate }} <small></small></h2>
     </div>
     
     <div class="card-body card-padding">
-        <p class="c-black f-500">Informacion del odontograma</p>       
+        <p class="c-black f-500">{{ 'SAVE_ODONTOGRAMA.SUBTITLE' | translate }}</p>       
         
         <div class="form-group">
             <dt class="p-t-10">Tipo</dt>
             <dd>
                 <div class="fg-line">
                     <select class="form-control" ng-change="tipoOdontograma()" ng-model="odontograma.tipoSeleccionado">
-                        <option>Inicial</option>
-                        <option>Plan de tratamiento</option>
-                        <option>Otro</option>
+                        <option>{{ 'SAVE_ODONTOGRAMA.INITIAL' | translate }}</option>
+                        <option>{{ 'SAVE_ODONTOGRAMA.THREATMENT_PLAN' | translate }}</option>
+                        <option>{{ 'SAVE_ODONTOGRAMA.OTHER' | translate }}</option>
                     </select>
                 </div>
             </dd>
@@ -21,21 +21,21 @@
     
         <div ng-show="mostrarOtro" class="form-group">
             <div class="fg-line">
-                <input type="text" class="form-control input-sm" placeholder="Digite el otro tipo de odontograma" ng-model="odontograma.tipoSeleccionado">
+                <input type="text" class="form-control input-sm" placeholder="{{ 'SAVE_ODONTOGRAMA.ANOTHER_TYPE' | translate }}" ng-model="odontograma.tipoSeleccionado">
             </div>
         </div>
         
 
         <div class="form-group">
             <div class="fg-line">
-                <input type="text" class="form-control input-sm" placeholder="Observaciones" ng-model="odontograma.observaciones">
+                <input type="text" class="form-control input-sm" placeholder="{{ 'SAVE_ODONTOGRAMA.OBSERVATION' | translate }}" ng-model="odontograma.observaciones">
             </div>
         </div>
         
         <div class="clearfix"></div>
         
         <div class="row">
-            <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
+            <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">{{ 'SAVE' | translate }}</button>
         </div>
 
 </div>

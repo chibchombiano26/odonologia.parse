@@ -3,10 +3,10 @@
         <div class="container">
             <div class="card">
                 <div class="card-header ch-alt m-b-20">
-                    <h2>Horario <small> El horario en el que el laboratorio clinico estara funcionando</small></h2>
+                    <h2>{{ 'SCHEDULE' | translate }} <small> {{ 'SCHEDULE_SUB_TITLE' | translate }}</small></h2>
                     
                     <button 
-        	            tooltip="Necesitas ayuda este video puede ayudarte"
+        	            tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
         	            ng-controller="helpCtrl" 
         	            ng-click="open('lg', 'js/hefesoft/help/horario.html')" 
         	            class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -22,18 +22,18 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                                 <div class="fg-line">
-                                    <input tooltip="La hora a la que se dara la primera cita" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.horaInicio" class="input-sm form-control fg-input">
+                                    <input tooltip="{{ 'TIME_FIRST_APPOINTMENT' | translate }}" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.horaInicio" class="input-sm form-control fg-input">
                                 </div>
-                                <label class="fg-label">Hora de inicio de trabajo</label>
+                                <label class="fg-label">{{ 'START_TIME_WORK' | translate }}</label>
                             </div>
                         </div>
                         
                         <div class="col-sm-4">
                            <div class="form-group">
                                 <div class="fg-line">
-                                    <input tooltip="El numero de horas en las que estara abierta el consultorio" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.numeroHorasTrabajo" class="input-sm form-control fg-input">
+                                    <input tooltip="{{ 'APPOINTMENTS_NUMBER_HOURS' | translate }}" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.numeroHorasTrabajo" class="input-sm form-control fg-input">
                                 </div>
-                                <label class="fg-label">Numero de horas de trabajo</label>
+                                <label class="fg-label">{{ 'NUMBER_OF_WORKING_HOURS' | translate }}</label>
                             </div>
                         </div>
                         
@@ -41,9 +41,9 @@
                         <div class="col-sm-4">
                            <div class="form-group">
                                 <div class="fg-line">
-                                    <input tooltip="Los intervalos en los que se dara cada cita" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.intervaloCitas" class="input-sm form-control fg-input">
+                                    <input tooltip="{{ 'APPOINTMENTS_INTERVALS' | translate }}" type="text" data-input-mask="{mask: '00'}" ng-model="Intervalos.intervaloCitas" class="input-sm form-control fg-input">
                                 </div>
-                                <label class="fg-label">Intervalo de citas</label>
+                                <label class="fg-label">{{ 'RANGE_OF_APPOINTMENTS' | translate }}</label>
                             </div>
                         </div>
                         

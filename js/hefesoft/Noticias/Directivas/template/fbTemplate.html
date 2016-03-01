@@ -1,0 +1,31 @@
+<div class="card" ng-repeat="item in data">
+    <div ng-show="item.type == 'link'">
+        <div class="card-header">
+            <div class="media">
+                <div class="pull-left">
+                    <img class="lv-img" src="img/icon.png" alt="">
+                </div>
+
+                <div class="media-body m-t-5">
+                    <h2>
+                        <a ng-href="{{item.link}}" hrefb>
+                            <p>{{item.name}}</p>
+                        </a>
+                    </h2>
+                </div>
+
+
+                <div class="wall-img-preview lightbox clearfix">
+                    <div class="wip-item" data-src="media/gallery/2.jpg" foo="{{item.picture}}" style="background-image: url({{item.picture}}); background-size: contain;">
+                        <img ng-src="{{item.picture}}">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body card-padding p-t-0">
+            <p ng-bind-html="(item.description | limitTo:'10000')"></p>
+        </div>
+    </div>
+</div>

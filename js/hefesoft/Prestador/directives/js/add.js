@@ -11,13 +11,13 @@ angular.module('odontologiaApp')
     return directive;
 })
 
-.controller('addPrestadorCtrl', function($rootScope, $scope, $state, $stateParams, prestadorService, calendarGetData, modalService, driveApiUpload){
+.controller('addPrestadorCtrl', function($rootScope, $scope, $state, $stateParams, prestadorService, calendarGetData, modalService, driveApiUpload, $translate){
     
     $scope.prestador = {nombre: '', cedula: '', email : '', especialidad : '', telefono: ''};
-    var modo = 'Adicionado';
+    var modo = $translate.instant('SAVE');
     
     if($rootScope.prestadorSeleccionado){
-        modo = 'Editar';
+        modo = $translate.instant('EDIT');
         $scope.prestador = $rootScope.prestadorSeleccionado;
     }
     
@@ -30,7 +30,7 @@ angular.module('odontologiaApp')
 			hefesoft.util.loadingBar.complete();
 			$scope.prestador.pictureUrl = "https://docs.google.com/uc?id=" + link.id;
 			
-			if(modo == 'Editar'){
+			if(modo == $translate.instant('EDIT')){
 			    prestadorService.save($scope.prestador);
 			}
 		})

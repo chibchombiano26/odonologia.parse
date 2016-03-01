@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="block-header">
-        <h2>Adjuntos</h2>
+        <h2>{{ 'ATACHAMENT' | translate }}</h2>
     </div>
 
 
@@ -10,7 +10,7 @@
     
     <div class="card">
     	<div class="card-header">
-            <h2>Adjuntos por paciente <small>Permite ver y adjuntar los archivos de un paciente</small></h2>
+            <h2>{{ 'ATTACHMENTS_FOR_THIS_PATIENT_MESSAGE' | translate }} <small>{{ 'ATACHAMENT_SUBTITLE' | translate }}</small></h2>
         </div>
 
         <div class="card-body card-padding">
@@ -20,7 +20,7 @@
 	                <button
 						class="btn btn-info btn-sm waves-effect waves-button waves-float" 
 						ng-click="mostrarPicker()"> 
-							Ver archivos
+							{{ 'SEE_FILES' | translate }}
 					</button>
 	            </div>
                
@@ -31,7 +31,7 @@
     
     <div class="card">
         <div class="card-header">
-            <h2>Necesitas ayuda? <small>Este video podria ayudarte</small></h2>
+            <h2>{{ 'DO_YOU_NEED_HELP' | translate }} <small></small></h2>
         </div>
 
         <div class="card-body card-padding">

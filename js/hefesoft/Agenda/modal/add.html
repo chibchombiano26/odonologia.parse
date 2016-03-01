@@ -46,8 +46,8 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-link" data-ng-click="addEvent()">{{action}}</button>
         
-        <button ng-show="mostrarEliminar" type="button" class="btn btn-link" data-ng-click="eliminar()">eliminar</button>
+        <button ng-show="mostrarEliminar" type="button" class="btn btn-link" data-ng-click="eliminar()">{{ 'DELETE' | translate }}</button>
         
-        <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">Cerrar</button>
+        <button type="button" class="btn btn-link" data-ng-click="eventDismiss()">{{ 'CLOSE' | translate }}</button>
     </div>
         

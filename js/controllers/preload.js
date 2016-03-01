@@ -1,6 +1,6 @@
 /* global hefesoft, materialAdmin, Parse, angular, gapi */
 
-materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoadingBar, $state, $timeout, $q, $http){
+materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoadingBar, $state, $timeout, $q, $http, hefesoft_util_service, $translate){
     
     hefesoft.util["loadingBar"] = cfpLoadingBar;
     
@@ -29,7 +29,8 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
         "js/hefesoft/Prestador/sevice/prestador.js",
         "js/hefesoft/help/helperModalController.js",
         "vendors/hefesoft/google/directivas/signUp/directive/directive.js",
-        "js/hefesoft/modal/services.js"
+        "js/hefesoft/modal/services.js",
+        "js/hefesoft/Noticias/Directivas/directive/fbPageNews.js"
     ]
     
     var templates = [
@@ -169,10 +170,21 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
     }
     
     (function datosCuriosos(){
-        $http.get('js/hefesoft/json/datosCuriosos.json').then(function(data){
+        var lang = hefesoft_util_service.languaje();
+        var urlToload = "";
+        
+        if(lang.startsWith("es")){
+            urlToload = "js/hefesoft/json/datosCuriosos.json";
+        }
+        else{
+            urlToload = "js/hefesoft/json/datosCuriosos_en.json";
+        }
+        
+        $http.get(urlToload).then(function(data){
             var items = data.data;
             var item = items[Math.floor(Math.random()*items.length)];
-            $('#datoCurioso').text("Sabias que " + item.valor);
+            
+            $('#datoCurioso').text($translate.instant("DID_YOU_KNOW") + item.valor);
         })
     }());
     

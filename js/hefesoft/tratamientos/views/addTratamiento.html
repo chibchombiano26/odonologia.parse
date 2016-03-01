@@ -1,17 +1,17 @@
 <form name="formAdicionarTratamiento">
 <div class="card">
         <div class="card-header">
-            <h2>Adicionar o modificar<small></small></h2>
+            <h2>{{ 'TREATMENT' | translate }}<small></small></h2>
         </div>
         
         <div class="card-body card-padding">
-             <p class="c-black f-500">Crear o modificar un tratamiento</p> 
+             <p class="c-black f-500">{{ 'CREATE_OR_MODIFY_THREATMENT' | translate }}</p> 
 
             <div class="form-group">
                 <div class="fg-line">
                     <input type="text" 
                     class="form-control"
-                    placeholder="Nombre"
+                    placeholder="{{ 'NAME' | translate }}"
                     name="nombre"
                     ng-model="Tratamiento.nombre" required>
                 </div>
@@ -23,7 +23,7 @@
                     ng-disabled="formAdicionarTratamiento.nombre.$invalid"
                     ng-click="adicionar()" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                        Guardar
+                        {{ 'SAVE' | translate }}
                     </button>    
                 </div>
             </div>

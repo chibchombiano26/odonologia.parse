@@ -67,23 +67,6 @@ materialAdmin
     .controller('CollapseDemoCtrl', function ($scope) {
         $scope.isCollapsed = false;
     })
-
-
-    //====================================
-    // DROPDOWN
-    //====================================
-
-    .controller('DropdownDemoCtrl', function ($scope) {
-        $scope.items = [
-            { name: 'Pacientes', icon: 'home', ref : "#/pages/listadopacientes" },
-            { name: 'Prestadores', icon: 'plus', ref : "#/pages/listadoPrestadores", tooltip : "Crear odontologos, periodoncitas y otros especialistas" },
-            { name: 'Parametrizar diagnosticos', icon: 'plus', ref : "#/pages/listadoDiagnosticos" },
-            /*{ name: 'And another choice', icon: 'account' },
-            { name: 'But wait! A third!', icon: 'email' },
-            { name: 'And fourth on here', icon: 'pin' }*/
-        ];
-    })
-
     
     //====================================
     // MODAL

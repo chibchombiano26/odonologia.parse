@@ -113,7 +113,7 @@ angular.module('odontologiaApp')
     // CALENDAR
     //=================================================
 
-    .controller('calendarAgendaCtrl', function($modal){
+    .controller('calendarAgendaCtrl', function($modal, $translate){
 
         //Create and add Action button with dropdown in Calendar header.
         this.month = 'month';
@@ -142,7 +142,7 @@ angular.module('odontologiaApp')
                 keyboard: false,
                 resolve: {
                     calendarData: function() {
-                        var x = [{modo: "insertar"}, argStart, argEnd];
+                        var x = [{modo: $translate.instant('ADD')}, argStart, argEnd];
                         return x;
                     }
                 }
@@ -157,7 +157,7 @@ angular.module('odontologiaApp')
                 keyboard: false,
                 resolve: {
                     calendarData: function() {
-                        var x = [{modo: "editar"}, calEvent];
+                        var x = [{modo: $translate.instant('EDIT')}, calEvent];
                         return x;
                     }
                 }
@@ -166,7 +166,7 @@ angular.module('odontologiaApp')
     })
 
     //Add event Controller (Modal Instance)
-    .controller('addeventAgendaCtrl', function($scope, $modalInstance, calendarData, $rootScope){
+    .controller('addeventAgendaCtrl', function($scope, $modalInstance, calendarData, $rootScope, $translate){
 
         var tipo =calendarData[0];
 
@@ -176,17 +176,17 @@ angular.module('odontologiaApp')
             eventEndDate:  calendarData[2]
         };
         
-        if(tipo.modo === "editar"){
+        if(tipo.modo === $translate.instant('EDIT')){
             var event = calendarData[1];
             $scope.calendarData.eventName = event.title;
             $scope.getStart = new moment(event.start).format("HH:mm");
             $scope.getEnd = new moment(event.end).format("HH:mm");;
             $scope.link = event.htmlLink;
             $scope.mostrarEliminar = true;
-            $scope.action = "Editar";
+            $scope.action = $translate.instant('EDIT');
         }
         else{
-            $scope.action = "Adicionar";
+            $scope.action = $translate.instant('ADD');
         }
 
         //Tags
@@ -239,7 +239,7 @@ angular.module('odontologiaApp')
 
                 
 
-                 if(tipo.modo === "insertar"){
+                 if(tipo.modo === $translate.instant('ADD')){
                     $rootScope.$broadcast('nuevoEvento', {evento: evento});
                  }
                  else{

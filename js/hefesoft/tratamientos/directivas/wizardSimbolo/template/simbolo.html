@@ -7,16 +7,16 @@
     <wizard on-finish="finishedWizard()"> 
 
         <!-- Primer paso -->        
-        <wz-step title="Inicio">
-            <h4>Simbolo diagnostico</h4>
-            <p>Seleccione el tipo de simbolo que desea para su diagnostico</p>
+        <wz-step title="{{ 'INDEX' | translate }}">
+            <h4>{{ 'DIAGNOSTIC_SYMBOL' | translate }}</h4>
+            <p>{{ 'SYMBOL_SELECT' | translate }}</p>
 
 
             <div class="row">
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Color <small>Selecciona un color que identifique tu diagnostico</small></h2>
+                            <h2>{{ 'COLOR' | translate }} <small>{{ 'COLOR_SELECT' | translate }}</small></h2>
                         </div>
 
                         <div class="card-body card-padding">
@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <div class="fg-line">
                                     <button 
-                                    wz-next value="Simbolo"
+                                    wz-next value="{{ 'SYMBOL' | translate }}"
                                     ng-click="mostrarSimbolo('Color')"
                                     class="btn btn-primary btn-lg waves-effect waves-button waves-float">
                                       &nbsp;&nbsp;&nbsp;&nbsp;
@@ -39,7 +39,7 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Simbolo <small>Selecciona un simbolo que identifique tu diagnostico</small></h2>                         
+                            <h2>{{ 'SYMBOL' | translate }} <small>{{ 'SYMBOL_SELECT' | translate }}</small></h2>                         
                         </div>
 
                         <div class="card-body card-padding">                            
@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <div class="fg-line">
                                     <button 
-                                    wz-next value="Simbolo"
+                                    wz-next value="{{ 'SYMBOL' | translate }}"
                                     ng-click="mostrarSimbolo('Simbolo')"
                                     class="btn btn-default btn-lg waves-effect waves-button waves-float">
                                       &nbsp;&nbsp;A&nbsp;&nbsp;
@@ -62,7 +62,7 @@
                 <div class="col-sm-4">
                     <div class="card">
                         <div class="card-header">
-                            <h2>Imagen <small>Selecciona una imagen que identifique tu diagnostico</small></h2>                            
+                            <h2>{{ 'PICTURE' | translate }} <small>{{ 'PICTURE_CHOSE' | translate }}</small></h2>                            
                         </div>
 
                         <div class="card-body card-padding">
@@ -70,7 +70,7 @@
                             <div class="form-group">
                                 <div class="fg-line">
                                     <button
-                                     wz-next value="Simbolo"
+                                     wz-next value="{{ 'SYMBOL' | translate }}"
                                      ng-click="mostrarSimbolo('Imagen')"
                                      style=" background-image: url('img/icon.png'); background-size: contain;" 
                                      class="btn btn-default btn-lg waves-effect waves-button waves-float">
@@ -86,9 +86,9 @@
         </wz-step>
 
         <!-- segundo paso -->
-        <wz-step title="Simbolo">
-            <h4>Simbolo</h4>
-            <p>Selecciona el elemento</p>           
+        <wz-step title="{{ 'SYMBOL' | translate }}">
+            <h4>{{ 'SYMBOL' | translate }}</h4>
+            <p>{{ 'CHOOSE_AN_ELEMENT' | translate }}</p>           
 
              <div ng-show="wizard.mostrarColor" class="form-group">
                 <div class="fg-line">
@@ -149,7 +149,7 @@
                     </div>
 
                     <div class="col-sm-3">
-                        <p>Simbolo</p>
+                        <p>{{ 'SYMBOL' | translate }}</p>
                         <div class="fg-line">
                             <input type="text"
                             ng-style="
@@ -212,7 +212,7 @@
                 class="btn btn-default waves-effect waves-button waves-float"
                 wz-next value="Simbolo"
             >
-                <i class="md md-arrow-forward"></i> Siguiente
+                <i class="md md-arrow-forward"></i> {{ 'NEXT' | translate }}
             </button>
             
             
@@ -220,8 +220,8 @@
 
 
 
-        <wz-step title="Finalizar">
-            <p>Asi se ve tu diagnostico en una superficie del odontograma</p>
+        <wz-step title="{{ 'FINISH' | translate }}">
+            <p>{{ 'PREVIEW' | translate }}</p>
             
             <div style="max-width: 50px;">
                 <superficie
@@ -236,9 +236,9 @@
 
             <button               
                 class="btn btn-default waves-effect waves-button waves-float"
-                wz-next value="Finalizar"
+                wz-next value="{{ 'FINISH' | translate }}"
             >
-                <i class="md md-arrow-forward"></i> Finalizar
+                <i class="md md-arrow-forward"></i> {{ 'FINISH' | translate }}
             </button>
             
         </wz-step>

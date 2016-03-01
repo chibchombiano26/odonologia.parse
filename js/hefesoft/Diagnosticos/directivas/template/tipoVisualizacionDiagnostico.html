@@ -34,7 +34,7 @@
     </div>
 
     <div class="col-sm-6">
-        <p>Letra a Usar</p>
+        <p>{{ 'LETER_TO_USE' | translate }}</p>
         <div class="fg-line">
             <input type="text" ng-style="
                             {
@@ -46,5 +46,5 @@
 
 <div ng-show="item.mostrarImagen">
     <img class="lv-img" src="{{wizard.urlImagen}}" alt="">
-    <ng-file-input mode="binary-string" tmpl="'js/hefesoft/templates/upload.html'" callback="changeImage(file)">Cambiar imagen</ng-file-input>
+    <ng-file-input mode="binary-string" tmpl="'js/hefesoft/templates/upload.html'" callback="changeImage(file)">{{ 'CHANGE_IMAGE' | translate }}</ng-file-input>
 </div>

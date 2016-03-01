@@ -1,6 +1,6 @@
 <div class="pmb-block">
     <div class="pmbb-header">
-        <h2><i class="zmdi zmdi-equalizer m-r-5"></i> Resumen</h2>
+        <h2><i class="zmdi zmdi-equalizer m-r-5"></i> {{ 'SUMMARY' | translate }}</h2>
 
         <ul class="actions" data-ng-if="pctrl.editSummary === 0">
             <li class="dropdown" dropdown>
@@ -10,7 +10,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a data-ng-click="pctrl.editSummary = 1" href="">Editar</a>
+                        <a data-ng-click="pctrl.editSummary = 1" href="">{{ 'EDIT' | translate }}</a>
                     </li>
                 </ul>
             </li>
@@ -26,8 +26,8 @@
                 <textarea data-ng-model="pctrl.profileSummary" class="form-control" rows="5" placeholder="Summary...">Sed eu est vulputate, fringilla ligula ac, maximus arcu. Donec sed felis vel magna mattis ornare ut non turpis. Sed id arcu elit. Sed nec sagittis tortor. Mauris ante urna, ornare sit amet mollis eu, aliquet ac ligula. Nullam dolor metus, suscipit ac imperdiet nec, consectetur sed ex. Sed cursus porttitor leo.</textarea>
             </div>
             <div class="m-t-10">
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editSummary = 0" >Cancelar</button>
+                <button class="btn btn-primary btn-sm" type="submit">{{ 'SAVE' | translate }}</button>
+                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editSummary = 0" >{{ 'CANCEL' | translate }}</button>
             </div>
         </form>
     </div>
@@ -35,7 +35,7 @@
 
 <div class="pmb-block">
     <div class="pmbb-header">
-        <h2><i class="zmdi zmdi-person m-r-5"></i> Informacion basica</h2>
+        <h2><i class="zmdi zmdi-person m-r-5"></i> {{ 'BASIC_INFORMATION' | translate }}</h2>
 
         <ul class="actions" data-ng-if="pctrl.editInfo === 0">
             <li class="dropdown" dropdown>
@@ -45,7 +45,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a data-ng-click="pctrl.editInfo = 1" href="">Editar</a>
+                        <a data-ng-click="pctrl.editInfo = 1" href="">{{ 'EDIT' | translate }}</a>
                     </li>
                 </ul>
             </li>
@@ -54,26 +54,26 @@
     <div class="pmbb-body p-l-30">
         <div class="pmbb-view" data-ng-if="pctrl.editInfo === 0">
             <dl class="dl-horizontal">
-                <dt>Nombre</dt>
+                <dt>{{ 'NAME' | translate }}</dt>
                 <dd>{{ pctrl.fullName }}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>Genero</dt>
+                <dt>{{ 'GENDER' | translate }}</dt>
                 <dd>{{ pctrl.gender }}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>Fecha de cumpleaños</dt>
+                <dt>{{ 'BIRTHDAY_DATE' | translate }}</dt>
                 <dd>{{ pctrl.birthDay }}</dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt>Estado civil</dt>
+                <dt>{{ 'MARITAL_STATUS' | translate }}</dt>
                 <dd>{{ pctrl.martialStatus }}</dd>
             </dl>
         </div>
 
         <form data-ng-submit="pctrl.submit('profileInfo', 'Profile Information')" class="pmbb-edit" data-ng-if="pctrl.editInfo === 1">
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Nombre completo</dt>
+                <dt class="p-t-10">{{ 'NAME_LASTNAME' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <input data-ng-model="pctrl.fullName" type="text" class="form-control" value="{{ pctrl.fullName }}" placeholder="eg. Mallinda Hollaway">
@@ -82,41 +82,29 @@
                 </dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Genero</dt>
+                <dt class="p-t-10">{{ 'GENDER' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <select class="form-control" ng-model="pctrl.gender">
-                            <option>Mujer</option>
-                            <option>Hombre</option>
-                            <option>Otro</option>
+                            <option>{{ 'GENDER.OPTIONS.WOMAN' | translate }}</option>
+                            <option>{{ 'GENDER.OPTIONS.MAN' | translate }}</option>
+                            <option>{{ 'GENDER.OPTIONS.OTHER' | translate }}</option>
                         </select>
                     </div>
                 </dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Fecha de cumpleaños</dt>
+                <dt class="p-t-10">{{ 'BIRTHDAY_DATE' | translate }}</dt>
                 <dd>
                     <div class="dtp-container dropdown fg-line">
                         <input type='text' class="form-control" data-dt-picker="DD/MM/YYYY" dropdown-toggle placeholder="eg. 23/06/1988">
                     </div>
                 </dd>
             </dl>
-            <dl class="dl-horizontal">
-                <dt class="p-t-10">Estado civil</dt>
-                <dd>
-                    <div class="fg-line">
-                        <select class="form-control" ng-model="pctrl.martialStatus">
-                            <option>Soltero</option>
-                            <option>Casado</option>
-                            <option>Otro</option>
-                        </select>
-                    </div>
-                </dd>
-            </dl>
 
             <div class="m-t-30">
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editInfo = 0" >Cancelar</button>
+                <button class="btn btn-primary btn-sm" type="submit">{{ 'SAVE' | translate }}</button>
+                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editInfo = 0" >{{ 'CANCEL' | translate }}</button>
             </div>
         </form>
     </div>
@@ -125,7 +113,7 @@
 
 <div class="pmb-block">
     <div class="pmbb-header">
-        <h2><i class="zmdi zmdi-phone m-r-5"></i> Informacion de contacto</h2>
+        <h2><i class="zmdi zmdi-phone m-r-5"></i> {{ 'CONTACT_INFORMATION_PROFILE' | translate }}</h2>
 
         <ul class="actions" data-ng-if="pctrl.editContact === 0">
             <li class="dropdown" dropdown>
@@ -135,7 +123,7 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li>
-                        <a data-ng-click="pctrl.editContact = 1" href="">Editar</a>
+                        <a data-ng-click="pctrl.editContact = 1" href="">{{ 'EDIT' | translate }}</a>
                     </li>
                 </ul>
             </li>
@@ -144,7 +132,7 @@
     <div class="pmbb-body p-l-30">
         <div class="pmbb-view" data-ng-if="pctrl.editContact === 0">
             <dl class="dl-horizontal">
-                <dt>Numero movil</dt>
+                <dt>{{ 'EMAIL' | translate }}</dt>
                 <dd>{{ pctrl.mobileNumber }}</dd>
             </dl>
             <dl class="dl-horizontal">
@@ -163,7 +151,7 @@
 
         <form data-ng-submit="pctrl.submit('profileContact', 'Profile Contact Information')" class="pmbb-edit" data-ng-if="pctrl.editContact === 1">
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Numero movil</dt>
+                <dt class="p-t-10">{{ 'PHONE' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <input data-ng-model="pctrl.mobileNumber" type="text" class="form-control" placeholder="eg. 00971 12345678 9">
@@ -171,7 +159,7 @@
                 </dd>
             </dl>
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Correo electronico</dt>
+                <dt class="p-t-10">{{ 'EMAIL' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <input data-ng-model="pctrl.emailAddress" type="email" class="form-control" placeholder="eg. malinda.h@gmail.com">
@@ -197,7 +185,7 @@
             </dl>
             
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Ciudad</dt>
+                <dt class="p-t-10">{{ 'CITY' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <input data-ng-model="pctrl.addressCity" type="text" class="form-control" placeholder="eg. Bogota">
@@ -206,7 +194,7 @@
             </dl>
             
             <dl class="dl-horizontal">
-                <dt class="p-t-10">Direccion</dt>
+                <dt class="p-t-10">{{ 'ADDRESS' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <input data-ng-model="pctrl.addressCountry" type="text" class="form-control" placeholder="eg. Calle 112 22 este">
@@ -215,8 +203,8 @@
             </dl>
              
             <div class="m-t-30">
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editContact = 0" >Cancelar</button>
+                <button class="btn btn-primary btn-sm" type="submit">{{ 'SAVE' | translate }}</button>
+                <button class="btn btn-link btn-sm" data-ng-click="pctrl.editContact = 0" >{{ 'CANCEL' | translate }}</button>
             </div>
         </form>
     </div>

@@ -2,16 +2,16 @@
        <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Prestadores</h2>
+                <h2>{{ 'PROVIDERS' | translate }}</h2>
             </div>
         
             <div class="card">
                 <div class="listview lv-bordered lv-lg">
                   <div class="card-header ch-alt m-b-20">
-                    <h2>Prestadores <small> Listado los diferentes prestadores en el sistema</small></h2>
+                    <h2>{{ 'PROVIDERS' | translate }} <small> {{ 'PROVIDERS_LIST_DESCRIPTION' | translate }}</small></h2>
                   
                     <button 
-                        tooltip="Adicionar un prestador"
+                        tooltip="{{ 'PROVIDER_ADD_TOOLTIP' | translate }}"
                         ng-click="nueva()"
                         class="btn bgm-cyan btn-float btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus zmdi-hc-5x"></i>
                 	</button>
@@ -30,10 +30,10 @@
                            <div class="pull-right">
                                 <ul class="lv-attrs">
                                     <li>
-                                        <button ng-click="editar(item)" class="btn btn-info waves-effect">Editar</button>
+                                        <button ng-click="editar(item)" class="btn btn-info waves-effect">{{ 'EDIT' | translate }}</button>
                                     </li>
                                     <li>
-                                        <button ng-click="eliminar(item, $index)" class="btn btn-warning waves-effect">Eliminar</button>
+                                        <button ng-click="eliminar(item, $index)" class="btn btn-warning waves-effect">{{ 'DELETE' | translate }}</button>
                                     </li>
                                 </ul>
                            </div>

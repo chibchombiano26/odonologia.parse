@@ -2,7 +2,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h2>Datos Pacientes <small></small></h2>
+            <h2>{{ 'PATIENT_INFORMATION' | translate }} <small></small></h2>
             
             <div class="pull-right">
                 <img class="lv-img" src="{{Paciente.pictureUrl}}" alt="">
@@ -14,40 +14,40 @@
         </div>
         
         <div class="card-body card-padding">
-            <p class="c-black f-500">Por favor digite la informacion del paciente</p>       
+            <p class="c-black f-500">{{ 'PATIENT_INFORMATION' | translate }}</p>
         
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Nombres y apellidos" ng-model="Paciente.nombre">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'FULL_NAME' | translate }}" ng-model="Paciente.nombre">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Numero de identificacion" ng-model="Paciente.cedula">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'IDENTITY' | translate }}" ng-model="Paciente.cedula">
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Email" ng-model="Paciente.email">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'EMAIL' | translate }}" ng-model="Paciente.email">
                 </div>
             </div>
             
             <div class="form-group">
-                <dt class="p-t-10">Genero</dt>
+                <dt class="p-t-10">{{ 'GENDER' | translate }}</dt>
                 <dd>
                     <div class="fg-line">
                         <select class="form-control" ng-change="genero()" ng-model="Paciente.genero">
-                            <option>Mujer</option>
-                            <option>Hombre</option>
-                            <option>Otro</option>
+                            <option>{{ 'GENDER.OPTIONS.WOMAN' | translate }}</option>
+                            <option>{{ 'GENDER.OPTIONS.MAN' | translate }}</option>
+                            <option>{{ 'GENDER.OPTIONS.OTHER' | translate }}</option>
                         </select>
                     </div>
                 </dd>
             </div>
             
-            <div class="row">   
+            <div class="row" ng-show="colombia">   
 
                    <div class="col-sm-6">
                       <div class="form-group">
@@ -75,12 +75,12 @@
             
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Ocupacion" ng-model="Paciente.Ocupacion">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'PROFESSION' | translate }}" ng-model="Paciente.Ocupacion">
                 </div>
             </div>
             
             
-            <div class="form-group">
+            <div class="form-group" ng-show="colombia">
                 <dt class="p-t-10">Grupo de poblacion</dt>
                 <dd>
                     <div class="fg-line">
@@ -98,23 +98,25 @@
                    <div class="col-sm-4">
                       <div class="form-group">
                           <div class="fg-line">
-                              <input type="text" class="form-control" placeholder="Ciudad" ng-model="Paciente.ciudad">
+                              <input type="text" class="form-control" placeholder="{{ 'CITY' | translate }}" ng-model="Paciente.ciudad">
                           </div>
                       </div>
                   </div>
-                  <div class="col-sm-4">
+                  
+                  <div class="col-sm-4" ng-show="colombia">
                       <div class="form-group">
                           <div class="fg-line">
                               <input type="text" class="form-control" placeholder="Municipio" ng-model="Paciente.municipio">
                           </div>
                       </div>
                   </div>
-                  <div class="col-sm-4">
+                  
+                  <div class="col-sm-4" ng-show="colombia">
                       
                     <div class="date-picker input-group" ng-class="{ 'is-opened': opened == true }">
                         <span class="input-group-addon"><i class="zmdi zmdi-calendar ma-icon"></i></span>
                         <div class="fg-line" ng-class="{ 'fg-toggled': opened == true }">
-                            <input ng-click="open($event, 'opened')" type="text" class="form-control" datepicker-popup="{{format}}" show-weeks="false" ng-model="Paciente.fecha" is-open="opened" min-date="minDate" datepicker-options="dateOptions" current-text="Hoy" clear-text="Limpiar" close-text="Cerrar" placeholder="Fecha" />
+                            <input ng-click="open($event, 'opened')" type="text" class="form-control" datepicker-popup="{{format}}" show-weeks="false" ng-model="Paciente.fecha" is-open="opened" min-date="minDate" datepicker-options="dateOptions" current-text="Hoy" clear-text="Limpiar" close-text="{{ 'CLOSE' | translate }}" placeholder="Fecha" />
                         </div>
                     </div>
                       
@@ -126,7 +128,7 @@
                    <div class="col-sm-4">
                       <div class="form-group">
                           <div class="fg-line">
-                              <input type="text" class="form-control" placeholder="Edad" ng-model="Paciente.edad">
+                              <input type="text" class="form-control" placeholder="{{ 'AGE' | translate }}" ng-model="Paciente.edad">
                           </div>
                       </div>
                   </div>
@@ -134,11 +136,12 @@
                   <div class="col-sm-4">
                       <div class="form-group">
                           <div class="fg-line">
-                              <input type="text" class="form-control" placeholder="Telefono" ng-model="Paciente.telefono">
+                              <input type="text" class="form-control" placeholder="{{ 'PHONE' | translate }}" ng-model="Paciente.telefono">
                           </div>
                       </div>
                   </div>
-                  <div class="col-sm-4">
+                 
+                  <div class="col-sm-4" ng-show="colombia">
                       <div class="form-group">
                           <div class="fg-line">
                               <input type="text" class="form-control" placeholder="Eps" ng-model="Paciente.eps">
@@ -148,7 +151,7 @@
                   
               </div>
               
-            <div class="row">   
+            <div class="row" ng-show="colombia">   
 
                   <div class="col-sm-4">
                       <div class="form-group">
@@ -173,7 +176,7 @@
                   </div>
                 </div>
                 
-            <div class="row">   
+            <div class="row" ng-show="colombia">   
 
                    <div class="col-sm-4">
                       <div class="form-group">
@@ -204,11 +207,11 @@
     <div class="card">
      
      <div class="card-header">
-      <h2>Datos de contacto <small>Datos de contacto del paciente</small></h2>
+      <h2>{{ 'CONTACT_INFORMATION_PATIENT' | translate }} <small>{{ 'CONTACT_INFORMATION_PATIENT_SUBTITLE' | translate }}</small></h2>
     </div>
      <div class="card-body card-padding">     
              
-            <div class="form-group">
+            <div class="form-group" ng-show="colombia">
                 <div class="fg-line">
                     <input type="text" class="form-control input-sm" placeholder="Telefono fijo" ng-model="Paciente.telefonoFijo">
                 </div>
@@ -216,13 +219,13 @@
             
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Telefono celular" ng-model="Paciente.telefonoCelular">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'MOBILE_NUMBER' | translate }}" ng-model="Paciente.telefonoCelular">
                 </div>
             </div>
             
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Direccion" ng-model="Paciente.direccion">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'ADDRESS' | translate }}" ng-model="Paciente.direccion">
                 </div>
             </div>
            
@@ -230,7 +233,7 @@
     
     </div>
     
-    <div class="card">
+    <div class="card" ng-show="colombia">
      
      <div class="card-header">
       <h2>Higiene horal <small>Habitos de higiene horal</small></h2>
@@ -294,7 +297,7 @@
     
     </div>
     
-    <div class="card">
+    <div class="card" ng-show="colombia">
      
      <div class="card-header">
       <h2>Anamnesis<small></small></h2>
@@ -468,7 +471,7 @@
     
     </div>
     
-    <div class="card">
+    <div class="card" ng-show="colombia">
      
      <div class="card-header">
       <h2>Examen Fisico Estomatologico<small></small></h2>
@@ -654,7 +657,7 @@
     
     </div>
     
-    <div class="card">
+    <div class="card" ng-show="colombia">
      
      <div class="card-header">
       <h2>Examen oral<small></small></h2>
@@ -744,7 +747,7 @@
     
     </div>
 
-    <div class="card">
+    <div class="card" ng-show="colombia">
      
      <div class="card-header">
       <h2>Observaciones <small>Por favor suministre informacion adicinal del paciente de ser necesario</small></h2>
@@ -771,6 +774,6 @@
     
     </div>
 
-    <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
+    <button ng-click="save()" class="btn btn-info btn-sm waves-effect waves-button waves-float">{{ 'SAVE' | translate }}</button>
 
 </div>

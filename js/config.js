@@ -2,14 +2,33 @@
 
 
 materialAdmin
-    .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider){
+    .config(function ($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, $translateProvider){
         $urlRouterProvider.otherwise("/preload");
+        
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'js/i18n/locale-',
+            suffix: '.json'
+        });
+        
+        
+        $translateProvider
+        .useSanitizeValueStrategy('sanitize');
+        
+        $translateProvider.preferredLanguage(hefesoft.languaje());
+        
+        
+        /*
+        $translateProvider.determinepreferredlanguage();
+        $translateProvider.registerAvailableLanguageKeys(['en', 'es'], {
+            'en_*': 'en',
+            'es_*': 'es'
+        })*/
 
         Parse.initialize("kWv0SwtEaz20E7gm5jUNRtzdbLoJktNYvpVWTYpc", "xhg8VzMlpguoJt3TffH62LntLUJj2DFYtYXwJ0Lg");
         //Parse.initialize("hefesoft", "h123456");
         //Parse.serverURL = '//162.243.50.36:82/parse'
         
-        moment.locale("es");
+        moment.locale(hefesoft.languaje());
 
         window.fbAsyncInit = function() {
           Parse.FacebookUtils.init({ // this line replaces FB.init({

@@ -1,14 +1,14 @@
 <div class="container">
     <div class="block-header">
-        <h2>Nuevo correo</h2>
+        <h2>{{ 'NEW_EMAIL' | translate }}</h2>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h2>Correos <small>Envio de correos</small></h2>
+            <h2>{{ 'EMAIL' | translate }} <small></small></h2>
             
             <button 
-	            tooltip="Necesitas ayuda este video puede ayudarte"
+	            tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
 	            ng-controller="helpCtrl" 
 	            ng-click="open('lg', 'js/hefesoft/help/email.html')" 
 	            class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -22,21 +22,21 @@
            
            <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" ng-model="recipient" class="form-control input-sm" placeholder="Destinatario">
+                    <input type="text" ng-model="recipient" class="form-control input-sm" placeholder="{{ 'EMAIL_PATIENT.SUBJECT' | translate }}">
                 </div>
             </div>
            
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" ng-model="subject" class="form-control input-sm" placeholder="Asunto">
+                    <input type="text" ng-model="subject" class="form-control input-sm" placeholder="{{ 'EMAIL_PATIENT.TO' | translate }}">
                 </div>
             </div>
            
-            <p class="c-black f-500 m-t-20 m-b-20">Mensaje</p>
+            <p class="c-black f-500 m-t-20 m-b-20">{{ 'MESSAGE' | translate }}</p>
 
             <div class="form-group">
                 <div class="fg-line">
-                    <textarea class="form-control auto-size" ng-model="body" data-auto-size placeholder="Contenido del correo"></textarea>
+                    <textarea class="form-control auto-size" ng-model="body" data-auto-size placeholder="{{ 'BODY' | translate }}"></textarea>
                 </div>
             </div>
             

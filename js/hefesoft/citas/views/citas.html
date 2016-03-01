@@ -2,16 +2,16 @@
        <section id="content">
         <div class="container">
             <div class="block-header">
-                <button ng-click="agenda()" class="btn btn-info waves-effect">Ver agenda</button>
+                <button ng-click="agenda()" class="btn btn-info waves-effect">{{ 'SEE_AGENDA' | translate }}</button>
             </div>
            
             <div class="card">
                 <div class="listview lv-bordered lv-lg">
                 <div class="card-header ch-alt m-b-20">
-                    <h2>Citas <small> Listado de citas por aprobar/denegar</small></h2>
+                    <h2>{{ 'APPOINTMENTS' | translate }} <small> {{ 'LIST_OF_APPOINTMENT_APPROVE_DENY' | translate }}</small></h2>
                     
                     <button 
-        	            tooltip="Necesitas ayuda este video puede ayudarte"
+        	            tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
         	            ng-controller="helpCtrl" 
         	            ng-click="open('lg', 'js/hefesoft/help/citas.html')" 
         	            class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -32,23 +32,23 @@
                                 <div class="lv-title">{{item.name}}</div>
                                 <small class="lv-small">{{item.email}}</small>
                                 
-                                <div class="lv-title">Estado: {{item.estado}}</div>
+                                <div class="lv-title">{{ 'STATE' | translate }}: {{item.estado}}</div>
                                 <small class="lv-small">{{item.message}}</small>
                                 
-                                <small class="lv-small">Prestador: {{item.prestador.nombre}}</small>
+                                <small class="lv-small">{{ 'PROVIDER' | translate }}: {{item.prestador.nombre}}</small>
                                 
                                 <ul class="lv-attrs">
                                     
                                     <li>
-                                        <button ng-click="aprobacion(item, 'aprobado')" class="btn btn-info waves-effect">aprobar</button>
+                                        <button ng-click="aprobacion(item, 'aprobado')" class="btn btn-info waves-effect">{{ 'APROVE' | translate }}</button>
                                     </li>
                                     
                                     <li>
-                                        <button ng-click="aprobacion(item, 'denegado')" class="btn btn-warning waves-effect">denegar</button>
+                                        <button ng-click="aprobacion(item, 'denegado')" class="btn btn-warning waves-effect">{{ 'DENY' | translate }}</button>
                                     </li>
                                     
                                     <li>
-                                        <button ng-click="eliminar(item, $index)" class="btn btn-danger waves-effect">eliminar</button>
+                                        <button ng-click="eliminar(item, $index)" class="btn btn-danger waves-effect">{{ 'DELETE' | translate }}</button>
                                     </li>
                                     
                                 </ul>

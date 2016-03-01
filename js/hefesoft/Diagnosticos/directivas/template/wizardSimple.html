@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h2>Nuevo diagnostico</h2>
+        <h2>{{ 'NEW_DIAGNOSTICO' | translate }}</h2>
     </div>
 
     <div class="card-body card-padding">
@@ -12,7 +12,7 @@
                 <div class="input-group">
                     <span class="input-group-addon"><i class="zmdi zmdi-text-format"></i></span>
                     <div class="fg-line">
-                        <input name="nombre" type="text" ng-model="diagnostico.nombre" class="form-control" placeholder="Nombre" required>
+                        <input name="nombre" type="text" ng-model="diagnostico.nombre" class="form-control" placeholder="{{ 'NAME' | translate }}" required>
                     </div>
                 </div>
 
@@ -26,7 +26,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="zmdi zmdi-money-box"></i></span>
                             <div class="fg-line">
-                                <input name="valor" type="text" ng-model="diagnostico.valor" class="form-control" placeholder="Valor" required>
+                                <input name="valor" type="text" ng-model="diagnostico.valor" class="form-control" placeholder="{{ 'VALUE' | translate }}" required>
                             </div>
                         </div>
                     </div>
@@ -40,8 +40,8 @@
 
             </br>
 
-            <p class="c-black f-500 m-b-5 m-t-20">Tipo de visualizacion</p>
-            <small>Seleccione el tipo de visualizacion para el diagnostico</small>
+            <p class="c-black f-500 m-b-5 m-t-20">{{ 'TYPE_OF_DIAGNOSTICO' | translate }}</p>
+            <small>{{ 'TYPE_OF_VISUALITATION' | translate }}</small>
 
             </br>
 
@@ -53,15 +53,15 @@
                         <span class="input-group-addon"><i class="zmdi zmdi-brush "></i></span>
                         <div class="fg-line">
                             <select name="seleccionadoDiagnostico" class="form-control" ng-model="tipoSeleccionadoDiagnostico" ng-change="cambioVisualizacion(tipoSeleccionadoDiagnostico, 'VisualizarTipoDiagnostico')" required>
-                                <option value="Texto">Texto</option>
-                                <option value="Color">Color</option>
-                                <option value="Imagen">Imagen</option>
+                                <option value="Texto">{{ 'VISUALIZACION_TYPE.TEXT' | translate }}</option>
+                                <option value="Color">{{ 'VISUALIZACION_TYPE.COLOR' | translate }}</option>
+                                <option value="Imagen">{{ 'VISUALIZACION_TYPE.IMAGE' | translate }}</option>
                             </select>
                         </div>
                     </div>
 
                     <br>
-                    <b>Simbolo para el diagnostico</b>
+                    <b>{{ 'SYMBOL_OF_EVOLUTION' | translate }}</b>
                     <br>
                     <tipo-visualizacion-diagnostico id="tipoDiagnostico1" item="VisualizarTipoDiagnostico" callback="seleccionadoDiagnostico(item)"></tipo-visualizacion-diagnostico>
                 </div>
@@ -72,15 +72,15 @@
                         <span class="input-group-addon"><i class="zmdi zmdi-brush "></i></span>
                         <div class="fg-line">
                             <select name="seleccionadoEvolucion" class="form-control" ng-model="tipoSeleccionadoEvolucion" ng-change="cambioVisualizacion(tipoSeleccionadoEvolucion, 'VisualizarTipoEvolucion')" required>
-                                <option value="Texto">Texto</option>
-                                <option value="Color">Color</option>
-                                <option value="Imagen">Imagen</option>
+                                <option value="Texto">{{ 'VISUALIZACION_TYPE.TEXT' | translate }}</option>
+                                <option value="Color">{{ 'VISUALIZACION_TYPE.COLOR' | translate }}</option>
+                                <option value="Imagen">{{ 'VISUALIZACION_TYPE.IMAGE' | translate }}</option>
                             </select>
                         </div>
                     </div>
 
                     <br>
-                    <b>Simbolo para cuando este realizado</b>
+                    <b>{{ 'SYMBOL_FOR_WHEN_DONE' | translate }}</b>
                     <br>
 
                     <tipo-visualizacion-diagnostico id="tipoEvolucion2" item="VisualizarTipoEvolucion" callback="seleccionadoEvolucion(item)"></tipo-visualizacion-diagnostico>

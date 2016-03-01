@@ -2,13 +2,13 @@
        <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Mis pacientes</h2>
+                <h2>{{ 'MY_PATIENTS' | translate }}</h2>
             </div>
         
             <div class="card">
                 <div class="listview lv-bordered lv-lg">
                   <div class="card-header ch-alt m-b-20">
-                    <h2>Pacientes <small> Listado de los pacientes en el sistema</small></h2>
+                    <h2>{{ 'PATIENTS' | translate }} <small> {{ 'LIST_PATIENTS' | translate }}</small></h2>
                   
                     <button ng-click="nuevo()" class="btn bgm-cyan btn-float btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus zmdi-hc-5x"></i></button>
 
@@ -29,19 +29,19 @@
                                 <ul class="lv-attrs">
                                     
                                     <li>
-                                        <button ng-click="editar(item)" class="btn btn-info waves-effect">Editar</button>
+                                        <button ng-click="editar(item)" class="btn btn-info waves-effect">{{ 'EDIT' | translate }}</button>
                                     </li>
                                     
                                     <li>
-                                        <button ng-click="eliminar(item, $index)" class="btn btn-warning waves-effect">Eliminar</button>
+                                        <button ng-click="eliminar(item, $index)" class="btn btn-warning waves-effect">{{ 'DELETE' | translate }}</button>
                                     </li>
                                     
                                     <li>
-                                        <button ng-click="irDiagnosticos(item)" class="btn btn-default waves-effect">Ver Paciente</button>
+                                        <button ng-click="irDiagnosticos(item)" class="btn btn-default waves-effect">{{ 'SEE_PATIENTS' | translate }}</button>
                                     </li>
                                    
                                     <li>
-                                        <button ng-click="navegarAdjuntos(item)" class="btn btn-default waves-effect">Adjuntos</button>
+                                        <button ng-click="navegarAdjuntos(item)" class="btn btn-default waves-effect">{{ 'ATACHAMENT' | translate }}</button>
                                     </li>
                                 </ul>
                             </div>

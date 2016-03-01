@@ -66,11 +66,19 @@ materialAdmin
     // =========================================================================
     // Header
     // =========================================================================
-    .controller('headerCtrl', function($timeout, messageService, $scope, PubNub, $rootScope, $state, citasService, $interval, $q, pacienteService, growlService){
+    .controller('headerCtrl', function($timeout, messageService, $scope, PubNub, $rootScope, $state, citasService, $interval, $q, pacienteService, growlService, $translate){
 
         var channelName = Parse.User.current().get("username");
         var notificationNumber = 0;
         var messageResult;
+        
+        $scope.lang = hefesoft.languaje();
+        
+        $scope.changeLanguage = function (langKey) {
+            $translate.use(langKey);
+            $scope.lang = langKey;
+            $rootScope.$broadcast("langChanged", { lang : langKey});
+         };
         
         this.irCitas = function(){
             hefesoft.util.loadingBar.start();
@@ -240,6 +248,27 @@ materialAdmin
             }
         ,1000);
 
+    })
+    
+    .controller('feedCtrl', function($scope, hefesoft_util_service, $rootScope){
+        
+        var lang = hefesoft_util_service.languaje();
+        changeLang(lang);
+        
+        function changeLang(lang) {
+            if (lang.startsWith("es")) {
+                $scope.url = "/1546017965696242/feed";
+            }
+            else {
+                $scope.url = "/753801254752118/feed";
+            }
+        }
+        
+        $rootScope.$on("langChanged", function(e, payload){
+            changeLang(payload.lang);
+        });
+        
+        
     })
 
 

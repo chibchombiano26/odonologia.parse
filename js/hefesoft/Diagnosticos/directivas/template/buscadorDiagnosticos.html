@@ -3,20 +3,20 @@
     <div class="fg-line">
         <div class="pull-right p-relative p-r-25 p-t-25">
             <div class="btn-group btn-group-xs" role="group">
-        		<button ng-click="new()" class="btn btn-info btn-icon-text waves-effect"><i class="zmdi zmdi-plus"></i>Nuevo diagnostico</button>
-        		<button ng-click="limpiar()" class="btn btn-warning btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Limpiar</button>
+        		<button ng-click="new()" class="btn btn-info btn-icon-text waves-effect"><i class="zmdi zmdi-plus"></i>{{ 'NEW_DIAGNOSTICO' | translate }}</button>
+        		<button ng-click="limpiar()" class="btn btn-warning btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>{{ 'CLEAR' | translate }}</button>
         	</div>
         </div>
     </div>
     
     <div class="card-header">
-        <h2>Buscar un diagnostico<small></small></h2>
+        <h2>{{ 'SEARCH_DIAGNOSTIC' | translate }}<small></small></h2>
     </div>
     
     <div class="card-body card-padding">
 
         <div class="form-group">
-            <div class="fg-line" tooltip="Escribe el nombre del diagnostico ej: caries saldra un menu desplegable y da click sobre el diagnostico">
+            <div class="fg-line" tooltip="{{ 'DIAGNOSTIC_TOOLTIP' | translate }}">
                  <input 
                  name="buscadorDiagnosticos"
                  type="text" 

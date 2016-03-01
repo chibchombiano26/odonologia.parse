@@ -3,29 +3,10 @@
 <div class="card">
      <div class="listview lv-bordered lv-lg">
           <div class="card-header ch-alt m-b-20">
-            <h2>Procedimientos <small> Listado de procedimientos </small></h2>
+            <h2>{{ 'PROCEDURES' | translate }} <small> {{ 'LIST_OF_PROCEDURES' | translate }} </small></h2>
 
             
-            <ul class="actions">                
-                <li>
-                    <a ng-click="generarPdf()">
-                        <i class="md md-print"></i>
-                    </a>
-                </li>
-                
-                <!--
-                <li class="dropdown">
-                    <a href="" data-toggle="dropdown">
-                        <i class="md md-more-vert"></i>
-                    </a>
-                    
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li>
-                            <a ng-click="generarPdf()">Imprimir</a>
-                        </li>                        
-                    </ul>
-                </li>
-                -->
+            <ul class="actions"> 
             </ul>
                                         
             
@@ -42,16 +23,16 @@
                 <tr>
                     <th></th>
                     <th ng-hide="editable" ng-hide="modoPagos"></th>
-                    <th>Nombre de procedimiento</th>
-                    <th ng-show="modoPagos">Numero pieza dental</th>
-                    <th ng-show="modoPagos">Superficie</th>
-                    <th>Especialidad</th>
-                    <th>Indice de Cups</th>
-                    <th>Valor</th>
-                    <th ng-show="modoPagos">Realizado</th>
-                    <th ng-show="modoPagos">Pagado</th>
-                    <th ng-show="modoPagos">Valor pagado</th>
-                    <th ng-show="modoPagos">Saldo</th>                        
+                    <th>{{ 'PROCEDDURE_NAME' | translate }}</th>
+                    <th ng-show="modoPagos">{{ 'NUMBER_OF_TEETH' | translate }}</th>
+                    <th ng-show="modoPagos">{{ 'SURFACE' | translate }}</th>
+                    <th>{{ 'SPECIALITY' | translate }}</th>
+                    <th>{{ 'INDEXEX' | translate }} Cups</th>
+                    <th>{{ 'VALUE' | translate }}</th>
+                    <th ng-show="modoPagos">{{ 'REALIZED' | translate }}</th>
+                    <th ng-show="modoPagos">{{ 'PAID' | translate }}</th>
+                    <th ng-show="modoPagos">{{ 'VALUE' | translate }} {{ 'PAID' | translate }}</th>
+                    <th ng-show="modoPagos">{{ 'BALANCE' | translate }}</th>                        
                 </tr>
             </thead>
             <tbody>
@@ -64,7 +45,7 @@
                         <i 
                             class="md md-keyboard-arrow-right" 
                             ng-click="openProcedimientos('lg',item)">
-                            Editar
+                            {{ 'EDIT' | translate }}
                         </i>
                     </td>                      
                     <td>

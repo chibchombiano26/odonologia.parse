@@ -2,7 +2,7 @@
 
 <div class="p-l-5 p-b-5">
  	<button 
-        tooltip="Necesitas ayuda este video puede ayudarte"
+        tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
         ng-controller="helpCtrl" 
         ng-click="open('lg', 'js/hefesoft/help/planTratamiento.html')" 
         class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -24,7 +24,7 @@
 		<div class="pull-right p-r-25">
 			<div class="btn-group btn-group-xs" role="group">
 				
-			    <button data-step='4' data-intro='No olvide guardar sus cambios' ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
+			    <button data-step='4' data-intro="{{ 'DO_NOT_FORGET_SAVE' | translate }}" ng-click="guardarCommand()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>{{ 'SAVE' | translate }}</button>
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
 	
 	<div class="col-sm-10">
 		<listado-procedimientos
-		data-step='3' data-intro='Seleccione los procedimientos que han sido realizados y cuales han sido pagados dando click en el check de la columna realizado y pagado'
+		data-step='3' data-intro="{{ 'TUTORIAL_SELECT_PROCEDURES' | translate }}"
 		zoom="'0.8'"
 	    ocultar-add-procedimiento="'true'"
 	    modo-pagos="'true'"

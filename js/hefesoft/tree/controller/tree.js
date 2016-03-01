@@ -1,6 +1,6 @@
 /*global angular, hefesoft, Parse, numeral, _*/
 angular.module("odontologiaApp")
-.controller("treeCtrl", function($scope, $rootScope, $state, treeService, $q, $timeout, tratamientoServices, appScriptTemplateServices, modalService, odontogramService){
+.controller("treeCtrl", function($scope, $rootScope, $state, treeService, $q, $timeout, tratamientoServices, appScriptTemplateServices, modalService, odontogramService, $translate){
     
     $scope.paciente = hefesoft.util['pacienteSeleccionado'];
     $scope.ElementosHabilitados = {};
@@ -70,18 +70,21 @@ angular.module("odontologiaApp")
  		delete paciente.updatedAt;
  		
  		var parameters = {
- 			templateid : '1Hs8YaOe5dZjzMuw84X4Bipft2NnUK33xovHQ9vKeOEY',
+ 			templateid : $translate.instant("FILES.HISTORY"),
             name : $rootScope.currentPacient.nombre, 
-            fileName : "cotizacion "  + $rootScope.currentPacient.nombre, 
+            fileName : $translate.instant("REPORT.PRICE") + " "  + $rootScope.currentPacient.nombre, 
             rowsData: [], 
             to: $rootScope.currentPacient.email, 
-            subject: "Cotizacion",
-            message : "Cotizacion",
-            clinica: "Nombre medico : "  + Parse.User.current().get("name"),
-            direccionClinica : "Direccion clinica :",
-            telefono: "Telefono clinica :",
-            email: "Email : " + Parse.User.current().get("email"),
-            paciente : paciente
+            subject: $translate.instant("REPORT.PRICE"),
+            message : $translate.instant("REPORT.PRICE"),
+            clinica:  $translate.instant("REPORT.NAME_OF_MEDICO") + " : "  + Parse.User.current().get("name"),
+            direccionClinica : $translate.instant("REPORT.CLINIC_ADDRESS") + " :",
+            telefono: $translate.instant("REPORT.CLINIC_PHONE") + " :",
+            email: $translate.instant("EMAIL") + " : " + Parse.User.current().get("email"),
+            paciente : paciente,
+            outTitle : $translate.instant("REPORT.TITLE_OUT"),
+            outMessage : $translate.instant("REPORT.MESSAGE")
+            
         };
         
         if(Parse.User.current().get('idLogo'))
@@ -152,7 +155,7 @@ angular.module("odontologiaApp")
         var item = $scope.paciente;
         $rootScope.currentPacient = item;
 		$scope.Paciente = item;
-		hefesoft.util['tipoOdontograma'] = "Inicial";
+		hefesoft.util['tipoOdontograma'] = $translate.instant("SAVE_ODONTOGRAMA.INITIAL");
 		$state.go("pages.odontograma", {"diagnosticoPacienteId": $scope.paciente.objectId});
     }
     
@@ -187,7 +190,7 @@ angular.module("odontologiaApp")
         var item = $scope.paciente;
         $rootScope.currentPacient = item;
 		$scope.Paciente = item;
-		hefesoft.util['tipoOdontograma'] = "Plan de tratamiento";
+		hefesoft.util['tipoOdontograma'] = $translate.instant("SAVE_ODONTOGRAMA.THREATMENT_PLAN");
 		hefesoft.util['infoPaciente'] = $scope.ElementosHabilitados;
         $state.go("pages.planTratamiento", { diagnosticoPacienteId : $scope.paciente.objectId});
     }
@@ -208,7 +211,7 @@ angular.module("odontologiaApp")
             hefesoft.util.loadingBar.start();
             odontogramService.generarOdontogramaBase({
                 pacienteId: $scope.paciente.objectId,
-                tipo : "Inicial"
+                tipo : $translate.instant("SAVE_ODONTOGRAMA.INITIAL")
             }).then(function(data) {
                 hefesoft.util.loadingBar.complete();
                 inicializar();
@@ -219,7 +222,7 @@ angular.module("odontologiaApp")
     function inicializar(){
         if($scope.paciente){
             
-            var odontogramaInicialQuery = treeService.odontograma($scope.paciente.objectId, "Inicial", "descending");
+            var odontogramaInicialQuery = treeService.odontograma($scope.paciente.objectId, $translate.instant("SAVE_ODONTOGRAMA.INITIAL"), "descending");
             var cotizacionQuery = treeService.cotizacion($scope.paciente.objectId);
             var odontogramaActualQuery = treeService.odontograma($scope.paciente.objectId, null, "descending");
             
@@ -244,8 +247,6 @@ angular.module("odontologiaApp")
             
         }
     }
-    
-    
     
     // Obtiene el odontograma que este disponible
     hefesoft.util.obtenerTipoOdontograma = function(){

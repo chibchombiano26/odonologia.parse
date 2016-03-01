@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <h2>Prestador <small></small></h2>
+        <h2>{{ 'PROVIDER' | translate }} <small></small></h2>
         
         <div class="pull-right">
             <img class="lv-img" src="{{prestador.pictureUrl}}" alt="">
@@ -10,23 +10,23 @@
     </div>
     
     <div class="card-body card-padding">
-        <p class="c-black f-500">Por favor digite la informacion del prestador</p>       
+        <p class="c-black f-500">{{ 'PROVIDER_INFORMATION' | translate }}</p>       
     
         <form name="addPrestador">
             <div class="form-group">
                 <div class="fg-line">
-                    <input name="nombres" type="text" class="form-control input-sm" placeholder="Nombres y apellidos" ng-model="prestador.nombre" required>
+                    <input name="nombres" type="text" class="form-control input-sm" placeholder="{{ 'NAME_LASTNAME' | translate }}" ng-model="prestador.nombre" required>
                 </div>
             </div>
             
             <div class="form-group">
-                <dt class="p-t-10">Genero {{prestador.genero}}</dt>
+                <dt class="p-t-10">{{ 'GENDER' | translate }} {{prestador.genero}}</dt>
                 <dd>
                     <div class="fg-line">
                         <select class="form-control" ng-change="genero()" ng-model="prestador.genero">
-                            <option>Mujer</option>
-                            <option>Hombre</option>
-                            <option>Otro</option>
+                            <option>{{ 'GENDER.OPTIONS.WOMAN' | translate }}</option>
+                            <option>{{ 'GENDER.OPTIONS.MAN' | translate }}</option>
+                            <option>{{ 'GENDER.OPTIONS.OTHER' | translate }}</option>
                         </select>
                     </div>
                 </dd>
@@ -34,24 +34,24 @@
     
             <div class="form-group">
                 <div class="fg-line">
-                    <input name="identificacion" type="text" class="form-control input-sm" placeholder="Numero de identificacion" ng-model="prestador.cedula" required>
+                    <input name="identificacion" type="text" class="form-control input-sm" placeholder="{{ 'ID' | translate }}" ng-model="prestador.cedula" required>
                 </div>
             </div>
     
             <div class="form-group">
                 <div class="fg-line">
-                    <input name="email" type="text" class="form-control input-sm" placeholder="Email" ng-model="prestador.email" required>
+                    <input name="email" type="text" class="form-control input-sm" placeholder="{{ 'EMAIL' | translate }}" ng-model="prestador.email" required>
                 </div>
             </div>
             
             <div class="form-group">
                 <div class="fg-line">
-                    <input type="text" class="form-control input-sm" placeholder="Telefono" ng-model="prestador.telefono">
+                    <input type="text" class="form-control input-sm" placeholder="{{ 'PHONE' | translate }}" ng-model="prestador.telefono">
                 </div>
             </div>
             
             <div class="form-group">
-                <dt class="p-t-10">Especialidad {{prestador.especialidad}}</dt>
+                <dt class="p-t-10">{{ 'SPECIALITY' | translate }} {{prestador.especialidad}}</dt>
                 <dd>
                     <div class="fg-line">
                         <select name="especialidad" class="form-control" ng-model="prestador.especialidad" required>
@@ -69,7 +69,7 @@
                 <button 
                 ng-disabled="addPrestador.nombres.$invalid || addPrestador.identificacion.$invalid || addPrestador.email.$invalid || addPrestador.especialidad.$invalid" 
                 ng-click="save()" 
-                class="btn btn-info btn-sm waves-effect waves-button waves-float">Guardar</button>
+                class="btn btn-info btn-sm waves-effect waves-button waves-float">{{ 'SAVE' | translate }}</button>
             </div>
         </form>
 

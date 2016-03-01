@@ -13,18 +13,18 @@
 <form name="addDiagnostico">
 <div class="card">
         <div class="card-header">
-            <h2>Adicionar o modificar<small></small></h2>
+            <h2>{{ 'ADD_OR_MODIFY' | translate }}<small></small></h2>
         </div>
         
         <div class="card-body card-padding">
-           <p class="c-black f-500">Crear o modificar un diagnostico</p> 
+           <p class="c-black f-500">{{ 'CREATE_OR_MODIFY_DIGNOSTIC' | translate }}</p> 
 
             <div class="form-group">
                 <div class="fg-line">
                     <input type="text" 
-                    name="nombre" 
+                    name="Nombre" 
                     class="form-control" 
-                    placeholder="Nombre" 
+                    placeholder="{{ 'NAME' | translate }}" 
                     ng-model="Diagnostico.nombre" 
                     required>
                 </div>
@@ -37,13 +37,13 @@
                     ng-model="Diagnostico.activo"
                     ng-checked="Diagnostico.activo">
                     <i class="input-helper"></i>
-                    Activo
+                    {{ 'ACTIVE' | translate }}
                 </label>
             </div>
 
             <div class="form-group">
                 <div class="fg-line">
-                    <p>Tipo <mark>{{Diagnostico.tipo.nombre}}</mark></p>
+                    <p>{{ 'TYPE' | translate }} <mark>{{Diagnostico.tipo.nombre}}</mark></p>
                     <div class="select">
                        <select 
                             class="form-control" 
@@ -58,7 +58,7 @@
              <div class="row">
                 <div class="col-sm-6">
                     <div class="cp-container">
-                       <p>Simbolo diagnostico</p>
+                       <p>{{ 'SYMBOL' | translate }} {{ 'DIAGNOSTICS' | translate }}</p>
 
                    <div class="wizarSimboloBoton">
                        <wizard-simbolo ng-model="Diagnostico.diagnostico"></wizard-simbolo>
@@ -79,7 +79,7 @@
                 
                 <div class="col-sm-6">
                     <div class="cp-container">
-                      <p>Simbolo evolución</p>
+                      <p>{{ 'SYMBOL' | translate }} {{ 'EVOLUTION' | translate }}</p>
                       
                       <div class="wizarSimboloBoton">
                           <wizard-simbolo 
@@ -104,7 +104,7 @@
             
             <br>
 
-            <p class="c-black f-500">Indicar Cie</p> 
+            <p class="c-black f-500">Cie</p> 
 
             <div class="form-group">
                 <div class="fg-line">

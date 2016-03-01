@@ -12,15 +12,15 @@
 			</div>
 			
 			<div class="pull-right p-r-25">
-				<div class="btn-group btn-group-xs" data-step='9' data-intro='No olvide guardar al salir' role="group">
+				<div class="btn-group btn-group-xs" data-step='9' data-intro="{{ 'DO_NOT_FORGET_SAVE' | translate }}" role="group">
 					
 					<!--
 					<button ng-click="cotizacion()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Cotizacion apartir de odontograma</button>
 					<button ng-click="planTratamiento()" class="btn btn-default btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Ver plan de tratamientoo</button>
 					-->
 					
-				    <button ng-click="guardarCommand()" class="btn btn-info btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>Guardar</button>
-				    <button ng-click="borrarTodo()" tooltip="Crea un odontograma desde cero" class="btn btn-warning btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>Limpiar odontograma</button>
+				    <button ng-click="guardarCommand()" class="btn btn-info btn-icon-text waves-effect"><i class="zmdi zmdi-check"></i>{{ 'SAVE' | translate }}</button>
+				    <button ng-click="borrarTodo()" tooltip="{{ 'DENTAL_CHART' | translate }}" class="btn btn-warning btn-icon-text waves-effect"><i class="zmdi zmdi-apps"></i>{{ 'CLEAN' | translate }}</button>
 				</div>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 		 	
 		 	<div class="p-l-5 p-b-5">
 		 		<button 
-		            tooltip="Necesitas ayuda este video puede ayudarte"
+		            tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
 		            ng-controller="helpCtrl" 
 		            ng-click="open('lg', 'js/hefesoft/help/odontograma.html')" 
 		            class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -43,10 +43,10 @@
             	</br>
 		 	</div>
 			
-			<buscador-diagnosticos data-step='3' data-intro='Busca un diagnostico seleccionalo y luego da click sobre la superficie de un diente' diagnostico-seleccionado="dxSeleccionado(item)">
+			<buscador-diagnosticos data-step='3' data-intro="{{ 'TUTORIAL_DIAGNOSTIC' | translate }}" diagnostico-seleccionado="dxSeleccionado(item)">
 			</buscador-diagnosticos>
 			
-			<buscador-prestador data-step='4' data-intro='Busca un prestador' prestador-seleccionado="prestadorSeleccionado(item)"></buscador-prestador>
+			<buscador-prestador data-step='4' data-intro="{{ 'SEARCH_PROVIDER' | translate }}" prestador-seleccionado="prestadorSeleccionado(item)"></buscador-prestador>
 			
 			<div class="card">
 			
@@ -54,26 +54,26 @@
 					<h2>Indices</h2>
 				</div>
 				
-				<div class="card-body card-padding" data-step='7' data-intro='Fija los indices para cada pieza dental'>
+				<div class="card-body card-padding" data-step='7' data-intro="{{ 'TUTORIAL_INDEXES' | translate }}">
 					
 					<div class="form-group">
-						<dt class="p-t-10">Numero de piezas dentales</dt>
+						<dt class="p-t-10">{{ 'NUMBER_OF_TEETH' | translate }}</dt>
                           <div class="fg-line">
-                              <input type="text" class="form-control" placeholder="Numero pieza dentales" ng-model="numeroPiezasDentales">
+                              <input type="text" class="form-control" placeholder="{{ 'INDEXEX' | translate }}" ng-model="numeroPiezasDentales">
                           </div>
                      </div>
                      
                      <div class="form-group">
-                     	 <dt class="p-t-10">Indice CIE</dt>
+                     	 <dt class="p-t-10">{{ 'INDEXEX' | translate }} CIE</dt>
                           <div class="fg-line">
-                              <input type="text" class="form-control" placeholder="Indice Cie" ng-model="indiceCie">
+                              <input type="text" class="form-control" placeholder="{{ 'INDEXEX' | translate }} Cie" ng-model="indiceCie">
                           </div>
                      </div>
                      
                      <div class="form-group">
-                     	 <dt class="p-t-10">Indice CUP</dt>
+                     	 <dt class="p-t-10">{{ 'INDEXEX' | translate }} CUP</dt>
                           <div class="fg-line">
-                              <input type="text" class="form-control" placeholder="Indice Cup" ng-model="indiceCup">
+                              <input type="text" class="form-control" placeholder="{{ 'INDEXEX' | translate }} Cup" ng-model="indiceCup">
                           </div>
                      </div>
 					
@@ -103,7 +103,7 @@
 			</br>
 		
 			<listados-diagnosticos-no-header
-				data-step='6' data-intro='Muestra los diagnosticos para cada pieza dental'
+				data-step='6' data-intro="{{ 'TUTORIAL_DIAGNOSTIC_LIST' | translate }}"
 				titulo-tabla="true"
 				modo-lectura="'true'"
 				ver-superficie="true"

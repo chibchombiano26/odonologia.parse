@@ -8,7 +8,8 @@ var materialAdmin = angular.module('materialAdmin', [
     'oc.lazyLoad',
     'ngSanitize',
     'providers',
-    'cfp.loadingBar'
+    'cfp.loadingBar',
+    'pascalprecht.translate'
 ])
 
 

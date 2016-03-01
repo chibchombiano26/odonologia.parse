@@ -1,7 +1,7 @@
 /*global angular, Parse, _.,_*/
 angular.module('odontologiaApp')
-.controller('piezasDentalesCtrl', ['$scope', 'odontogramaJsonServices', '$modal', 'diagnosticoServices', 'piezasDentalesServices',
-	function ($scope, odontogramaJsonServices, $modal, diagnosticoServices, piezasDentalesServices) {
+.controller('piezasDentalesCtrl', ['$scope', 'odontogramaJsonServices', '$modal', 'diagnosticoServices', 'piezasDentalesServices', '$translate',
+	function ($scope, odontogramaJsonServices, $modal, diagnosticoServices, piezasDentalesServices, $translate) {
 
 	$scope.listado = [];	
 	$scope.tratamientoPiezaDental = [];
@@ -23,9 +23,9 @@ angular.module('odontologiaApp')
     });
 
 	$scope.dynamicPopover = {
-	    content: 'Acciones sobre la pieza dental',
+	    content:  $translate.instant("ACTION_ON_DENTAL_PIECE"),
 	    templateUrl: 'opcionesPiezaDental.html',
-	    title: 'Pieza dental'
+	    title: $translate.instant("DENTAL_PIECE")
 	};
 
 	$scope.seleccionar = function(item, $index){

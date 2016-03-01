@@ -1,17 +1,17 @@
 <div class="card">
         <div class="card-header">
-            <h2>Adicionar o modificar<small></small></h2>
+            <h2>{{ 'ADD_OR_MODIFY' | translate }}<small></small></h2>
         </div>
         
         <div class="card-body card-padding">
-             <p class="c-black f-500">Crear o modificar un procedimiento</p> 
+             <p class="c-black f-500">{{ 'CREATE_OR_MODIFY_PROCEDURE' | translate }}</p> 
 
             <div class="form-group">
                 <div class="fg-line">
                     <input 
                         type="text" 
                         class="form-control" 
-                        placeholder="Nombre" 
+                        placeholder="{{ 'NAME' | translate }}" 
                         ng-model="Procedimiento.nombre">
                 </div>
             </div>
@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <div class="fg-line">
-                    <p>Tipo <mark>{{Procedimiento.objectHefesoftEspecialidad.nombre}}</mark></p>
+                    <p>{{ 'TYPE' | translate }} <mark>{{Procedimiento.objectHefesoftEspecialidad.nombre}}</mark></p>
                     <div class="select">
                        <select 
                             class="form-control" 
@@ -32,7 +32,7 @@
             </div>
 
              
-            <p class="c-black f-500">Indicar Cup</p> 
+            <p class="c-black f-500">Cup</p> 
 
             <div class="form-group">
                 <div class="fg-line">
@@ -44,7 +44,7 @@
                 <div class="fg-line">
                     <input type="text" 
                     class="form-control"
-                    placeholder="Valor"
+                    placeholder="{{ 'VALUE' | translate }}"
                     ng-model="Procedimiento.valor"
                     numeric-only>
                 </div>

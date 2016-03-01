@@ -1,16 +1,17 @@
   /*global angular, Parse, hefesoft*/  
   angular.module('odontologiaApp')
   .controller('AddDxCtrl', 
-    ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', 'messageService', 'dxSeleccionado', '$modalInstance', '$rootScope', '$q',
-    function ($scope, CieCupsServices, $modal, dataTableStorageFactory, messageService, dxSeleccionado, $modalInstance, $rootScope, $q) {
+    ['$scope', 'CieCupsServices', '$modal', 'dataTableStorageFactory', 'messageService', 'dxSeleccionado', '$modalInstance', '$rootScope', '$q', '$translate',
+    function ($scope, CieCupsServices, $modal, dataTableStorageFactory, messageService, dxSeleccionado, $modalInstance, $rootScope, $q, $translate) {
 
+    
     $scope.Diagnostico = {};
     $scope.listadoCie = []; 
-    $scope.modo = "Guardar";
+    $scope.modo = $translate.instant('SAVE');
     $scope.Tipo = [{nombre: 'Pieza', codigo : 1}, {nombre: 'Superficie', codigo : 2}, {nombre: 'General', codigo : 3}];
     
     if(!hefesoft.isEmpty(dxSeleccionado)){
-      $scope.modo = "Editar";
+      $scope.modo = $translate.instant('EDIT');
       $scope.Diagnostico = dxSeleccionado;
     }
 
@@ -33,7 +34,7 @@
       diagnostico.set("evolucion", data.evolucion);
       diagnostico.set("username", Parse.User.current().get("email"));
       
-      if($scope.modo == "Editar"){
+      if($scope.modo == $translate.instant('EDIT')){
         diagnostico.set("id", dxSeleccionado.objectId);
       }
       
@@ -51,7 +52,7 @@
         var returnData = result.toJSON();
         
         //Cuando se edita no se debe adicionar al listado
-        if($scope.modo === "Editar"){
+        if($scope.modo == $translate.instant('EDIT')){
           returnData["modo"] = "Edicion";
         }
         else{

@@ -6,26 +6,25 @@ materialAdmin
     
 })
 
-.controller('profileAboutCtrl', function($scope, growlService, driveApiUpload){
+.controller('profileAboutCtrl', function($scope, growlService, driveApiUpload, $translate){
     
     var modo = "insertar";
     var objectRetrieved;
     
      //User
-    this.profileSummary = "Informacion relativa a la clinica";
+    this.profileSummary = $translate.instant("CLINIC_INFORMATION.SUMMARY");
 
-    this.fullName = "Nombre";
-    this.gender = "Genero";
-    this.birthDay = "23/06/1988";
-    this.martialStatus = "Soltero";
-    this.mobileNumber = "57315241218";
-    this.emailAddress = "correo@gmail.com";
-    this.twitter = "@twitter";
-    this.twitterUrl = "twitter.com/twitter";
-    this.skype = "hefesoft.twitter";
-    this.addressSuite = "Direccion clinica";
-    this.addressCity = "Bogota";
-    this.addressCountry = "Colombia";
+    this.fullName = $translate.instant("CLINIC_INFORMATION.FULL_NAME");
+    this.gender = $translate.instant("CLINIC_INFORMATION.GENDER");
+    this.birthDay = $translate.instant("CLINIC_INFORMATION.BIRTHDAY");
+    this.mobileNumber = $translate.instant("CLINIC_INFORMATION.MOBILE_NUMBER");
+    this.emailAddress = $translate.instant("CLINIC_INFORMATION.EMAIL_ADDRESS");
+    this.twitter = $translate.instant("CLINIC_INFORMATION.TWITTER");
+    this.twitterUrl = $translate.instant("CLINIC_INFORMATION.TWITTER_URL");
+    this.skype = $translate.instant("CLINIC_INFORMATION.SKYPE");
+    this.addressSuite = $translate.instant("CLINIC_INFORMATION.ADDRESSSUITE");
+    this.addressCity = $translate.instant("CLINIC_INFORMATION.ADDRESSCITY");
+    this.addressCountry = $translate.instant("CLINIC_INFORMATION.ADDRESSCOUNTRY");
     
     if(Parse.User.current() !== null){
         $scope.urlPicture = Parse.User.current().get("pictureUrl");
@@ -86,7 +85,6 @@ materialAdmin
         profile.set("fullName", item.fullName);
         profile.set("gender", item.gender);
         profile.set("birthDay", item.birthDay);
-        profile.set("martialStatus", item.martialStatus);
         profile.set("mobileNumber", item.mobileNumber);
         profile.set("emailAddress", item.emailAddress);
         profile.set("twitter", item.twitter);
@@ -118,7 +116,6 @@ materialAdmin
         profile.set("fullName", item.fullName);
         profile.set("gender", item.gender);
         profile.set("birthDay", item.birthDay);
-        profile.set("martialStatus", item.martialStatus);
         profile.set("mobileNumber", item.mobileNumber);
         profile.set("emailAddress", item.emailAddress);
         profile.set("twitter", item.twitter);
@@ -165,7 +162,6 @@ materialAdmin
             elementoActualizar.fullName =             item.get("fullName");
             elementoActualizar.gender =               item.get("gender");
             elementoActualizar.birthDay =             item.get("birthDay");
-            elementoActualizar.martialStatus =        item.get("martialStatus");
             elementoActualizar.mobileNumber =         item.get("mobileNumber");
             elementoActualizar.emailAddress =         item.get("emailAddress");
             elementoActualizar.twitter =              item.get("twitter");

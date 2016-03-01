@@ -1,7 +1,7 @@
 <div class="card">
     
     <div class="card-header">
-        <h2>Diagnosticos <small>Coincidencias con su busqueda</small></h2>
+        <h2>{{ 'DIAGNOSTICS' | translate }} <small>{{ 'MATCHES' | translate }}</small></h2>
         
         <div class="row">
             <div class="pull-right p-r-25">
@@ -16,18 +16,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="col-sm-1">Nombre</th>
-                        <th class="col-sm-1">Valor</th>
+                        <th class="col-sm-1">{{ 'NAME' | translate }}</th>
+                        <th class="col-sm-1">{{ 'VALUE' | translate }}</th>
                         <th class="col-sm-1" 
                         ng-show="verSuperficie">
-                            Superficie
+                            {{ 'SURFACE' | translate }}
                         </th>
-                        <th ng-hide="modoLectura">Orden</th>
-                        <th ng-hide="modoLectura">Estado</th>
-                        <th class="col-sm-1">Tipo</th>
-                        <th class="col-sm-1">Simbolo diagnostico</th>
-                        <th class="col-sm-1">Simbolo evolucion</th>
-                        <th class="col-sm-1">Desc Cie</th>
+                        <th ng-hide="modoLectura">{{ 'ORDER' | translate }}</th>
+                        <th ng-hide="modoLectura">{{ 'STATE' | translate }}</th>
+                        <th class="col-sm-1">{{ 'ORDER' | translate }}</th>
+                        <th class="col-sm-1">{{ 'SYMBOL' | translate }} {{ 'DIAGNOSTICS' | translate }}</th>
+                        <th class="col-sm-1">{{ 'SYMBOL' | translate }} {{ 'EVOLUTION' | translate }}</th>
+                        <th class="col-sm-1">{{ 'DESCRIPTION' | translate }} Cie</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +37,7 @@
                         <td class="col-sm-1" ng-show="verSuperficie">
                             {{item.superficie}}
                         </td>
-                        <td ng-hide="modoLectura">orden</td>
+                        <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
                         <td ng-hide="modoLectura"
                             class="checkbox">                                 
                             <input 
@@ -82,7 +82,7 @@
                             <button 
                                 ng-click="openTratamiento(item)" 
                                 class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                                Tratamientos
+                                {{ 'TREATMENT' | translate }}
                             </button>
                         </td>
                         
@@ -90,7 +90,7 @@
                             <button 
                                 ng-click="open(item)" 
                                 class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                                Editar
+                                {{ 'EDIT' | translate }}
                             </button>    
                         </td>
 
@@ -98,7 +98,7 @@
                             <button 
                                 ng-click="eliminar(source, item, $index)" 
                                 class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                                Eliminar
+                                {{ 'DELETE' | translate }}
                             </button>    
                         </td>
                     </tr>

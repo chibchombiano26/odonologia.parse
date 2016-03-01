@@ -3,7 +3,7 @@
 	
 		<div class='pull-right  p-r-25  p-t-5'>
             <button 
-                tooltip="Necesitas ayuda este video puede ayudarte"
+                tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
                 ng-controller="helpCtrl" 
                 ng-click="open('lg', 'js/hefesoft/help/diagnostico.html')" 
                 class="btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -19,12 +19,12 @@
                         <div class="fg-line">
                             <input type="text" ng-change="buscadorDiagnostico()" ng-model="diagnosticoSeleccionado" class="input-lg form-control fg-input">
                         </div>
-                        <label class="fg-label">Buscar diagnostico</label>
+                        <label class="fg-label">{{ 'SEARCH_DIAGNOSTIC' | translate }}</label>
                     </div>
                 </div>
 
                 <div class="col-sm-2">
-                    <button type="submit" ng-click="buscadorDiagnostico()" class="btn btn-primary btn-sm m-t-5 waves-effect">Buscar</button>
+                    <button type="submit" ng-click="buscadorDiagnostico()" class="btn btn-primary btn-sm m-t-5 waves-effect">{{ 'SEARCH' | translate }}</button>
                 </div>
             </form>
         </div>

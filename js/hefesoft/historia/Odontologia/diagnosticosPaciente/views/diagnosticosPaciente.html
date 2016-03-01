@@ -2,13 +2,13 @@
        <section id="content">
         <div class="container">
             <div class="block-header">
-                <h2>Diagnosticos para {{paciente.nombre}}</h2>
+                <h2>{{ 'DIAGNOSTICS' | translate }} {{ 'FOR' | translate }} {{paciente.nombre}}</h2>
             </div>
         
             <div class="card">
                 <div class="listview lv-bordered lv-lg">
                   <div class="card-header ch-alt m-b-20">
-                    <h2>Nombre paciente <small> Listado de diagnosticos en el sistema por paciente</small></h2>
+                    <h2>{{ 'PATIENTS_NAME' | translate }} <small> {{ 'PATIENTS_SUBTITLE' | translate }}</small></h2>
                 
                     
                     <button ng-click="adicionar()" 
@@ -33,24 +33,24 @@
                                 <ul class="lv-attrs">
                                     
                                     <li>
-                                        <button ng-click="navegarOdontograma(item)" class="btn btn-default waves-effect">Odontograma</button>
+                                        <button ng-click="navegarOdontograma(item)" class="btn btn-default waves-effect">{{ 'ODONTOGRAMA' | translate }}</button>
                                     </li>
 
                                     <li>
-                                        <button ng-click="navegarPlanTratamiento(item)" class="btn btn-default waves-effect">Plan de tratamiento</button>
+                                        <button ng-click="navegarPlanTratamiento(item)" class="btn btn-default waves-effect">{{ 'TREATMENT_PLAN' | translate }}</button>
                                     </li>
 
 
                                     <li>
-                                        <button ng-click="navegarPeriododntograma(item)" class="btn btn-default waves-effect">Periodontograma</button>
+                                        <button ng-click="navegarPeriododntograma(item)" class="btn btn-default waves-effect">{{ 'PERIODONTOGRAMA' | translate }}</button>
                                     </li>
 
                                     <li>
-                                        <button ng-click="navegarAdjuntos(item)" class="btn btn-default waves-effect">Adjuntos</button>
+                                        <button ng-click="navegarAdjuntos(item)" class="btn btn-default waves-effect">{{ 'ATACHAMENT' | translate }}</button>
                                     </li>
                                     
                                     <li>
-                                        <button ng-click="delete(item, $index)" class="btn btn-danger waves-effect">Eliminar</button>
+                                        <button ng-click="delete(item, $index)" class="btn btn-danger waves-effect">{{ 'DELETE' | translate }}</button>
                                     </li>
                                     
                                 </ul> 

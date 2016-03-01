@@ -1,197 +1,21 @@
-<div class="container wall">
+<div class="container wall" ng-controller="feedCtrl">
 
-    <div class="block-header" data-intro='En esta seccion podra encontrar las noticias del ramo odontologico' data-step='3'>
-        <h2>dentiline <small>Dentiline indexa (Busca y muestra estas noticias de diferentes medios) Pero no tiene nada que ver con la informacion que aca se presenta por favor sea cauto sobre los productos que son ofrecidos</small></h2>
+    <div class="block-header" data-intro="{{ 'WALL_ADVERTISEMENT_TOOLTIP' | translate }}" data-step='3'>
+        <h2>dentiline <small>{{ 'WALL_ADVERTISEMENT' | translate }}</small></h2>
     </div>
     
     <div class="row">
         <div class="col-md-8">
             
-            <!-- Post
-            <div class="card wall-posting">
-                <div class="card-body card-padding">
-                    <textarea class="wp-text" data-auto-size placeholder="Write Something..."></textarea>
-                    
-                    <div class="wp-media" data-ng-if="mactrl.wallImage">
-                        Images - Coming soon...
-                    </div>
-                    
-                    <div class="wp-media" data-ng-if="mactrl.wallVideo">
-                        Video Links - Coming soon...
-                    </div>
-                    
-                    <div class="wp-media" data-ng-if="mactrl.wallLink">
-                        Links - Coming soon...
-                    </div>
-                </div>
-                
-                <ul class="list-unstyled clearfix wpb-actions">
-                    <li class="wpba-attrs">
-                        <ul class="list-unstyled list-inline m-l-0 m-t-5">
-                            <li><a data-wpba="image" href="" data-ng-class="{ 'active': mactrl.wallImage }" data-ng-click="mactrl.wallImage = true; mactrl.wallVideo = false; mactrl.wallLink = false"><i class="zmdi zmdi-image"></i></a></li>
-                            <li><a data-wpba="video" href="" data-ng-class="{ 'active': mactrl.wallVideo }" data-ng-click="mactrl.wallVideo= true; mactrl.wallImage = false; mactrl.wallLink = false"><i class="zmdi zmdi-play-circle"></i></a></li>
-                            <li><a data-wpba="link" href="" data-ng-class="{ 'active': mactrl.wallLink }" data-ng-click="mactrl.wallLink = true; mactrl.wallImage = false; mactrl.wallVideo = false"><i class="zmdi zmdi-link"></i></a></li>
-                        </ul>
-                    </li>
-
-                    <li class="pull-right"><button class="btn btn-primary btn-sm">Post</button></li>
-                </ul>
-            </div>
-            -->
-            
-            <asociacion-odontologos url="'/1479338312367444/feed'"></asociacion-odontologos>
-            <asociacion-odontologos url="'/351781574835113/feed'"></asociacion-odontologos>
-            <odontologoscomco></odontologoscomco>
-            
-        
-           
+            <fb-news ng-model="url"></fb-news>
         
         </div>
         
         <div class="col-md-4 hidden-sm">
             
-            <div class="card" ng-controller="DropdownDemoCtrl">
-                <div class="card-header">
-                    <h2>Vinculos rapidos</h2>
-                </div>
-                
-                <div class="card-body card-padding">
-                    
-                    <div class="dropdown-basic-demo clearfix">
-                        <ul class="dropdown-menu dm-icon" role="menu" style="-webkit-box-shadow: none;	-moz-box-shadow: none;	box-shadow: none;" >
-                            <li data-ng-repeat="w in items"><a tooltip="{{tooltip}}" ng-href="{{w.ref}}"><i class="zmdi zmdi-{{ w.icon }}"></i> {{ w.name }}</a></li>
-                        </ul>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            
-            
-            
-            <!--
-            <div class="card picture-list">
-                <div class="card-header">
-                    <h2>Photos <small>Cras congue nec lorem eget posuere</small></h2>
-    
-                    <ul class="actions">
-                        <li class="dropdown action-show" dropdown>
-                            <a href="" dropdown-toggle>
-                                <i class="zmdi zmdi-more-vert"></i>
-                            </a>
-    
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <a href="">Refresh</a>
-                                </li>
-                                <li>
-                                    <a href="">Manage Widgets</a>
-                                </li>
-                                <li>
-                                    <a href="">Widgets Settings</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-    
-                <div class="pl-body">
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/1.png" alt="">
-                        </a>
-                    </div>
-    
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/2.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/3.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/4.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/5.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/6.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/7.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/8.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/9.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/1.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/2.png" alt="">
-                        </a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a href="">
-                            <img src="img/headers/square/3.png" alt="">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card" data-ng-controller="recentpostCtrl as rpctrl">
-                <div class="card-header">
-                    <h2>Recent Comments <small>Commodo vel pharetra nisi. Donec velit libero</small></h2>
-                </div>
-                <div class="listview">
-                    <div class="lv-body">
-    
-                        <a class="lv-item" href="" data-ng-repeat="w in rpctrl.rpResult.list">
-                            <div class="media">
-                                <div class="pull-left">
-                                    <img class="lv-img-sm" data-ng-src="img/profile-pics/{{ w.img }}" alt="">
-                                </div>
-                                <div class="media-body">
-                                    <div class="lv-title">{{ w.user }}</div>
-                                    <small class="lv-small">{{ w.text }}</small>
-                                </div>
-                            </div>
-                        </a>
-    
-                    </div>
-                    
-                    <div class="clearfix"></div>
-                    
-                    <a class="lv-footer" href="">View All</a>
-                </div>
-            </div>
-            
-            -->
-            
             <div class="card">
                 <div class="card-header">
-                    <h2>Estas aca y no sabes que hacer? <small>Ve alguno de los videos de ayudar dando click en el icono con un signo de interrogacion</small></h2>
+                    <h2>{{ 'YOU_ARE_HERE_MESSAGE' | translate }} <small>{{ 'SEE_OUR_VIDEOS_MESSAGE' | translate }}</small></h2>
                 </div>
                 <div class="card-body card-padding">
                     <button ng-controller="helpCtrl" ng-click="open('lg', 'js/hefesoft/help/home.html')" class="pull-right btn bgm-lightgreen btn-icon waves-effect waves-circle">
@@ -203,7 +27,7 @@
             
             <div class="card">
                 <div class="card-header">
-                    <h2>Informacion de contacto (Quieres darnos trabajo) <small>La fabrica de lo que ves...</small></h2>
+                    <h2>{{ 'CONTACT_INFORMATION' | translate }} <small>La fabrica de lo que ves...</small></h2>
                 </div>
                 <div class="card-body card-padding">
                     <div class="pmo-contact">        

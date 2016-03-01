@@ -9,10 +9,10 @@
         </button>
         
         <div class="block-header">
-            <h2>Agenda <small>Agenda odontologica</small></h2>
+            <h2>{{ 'AGENDA' | translate }} <small>{{ 'DENTIST_AGENDA' | translate }}</small></h2>
             
             <button 
-                tooltip="Necesitas ayuda este video puede ayudarte"
+                tooltip="{{ 'DO_YOU_NEED_HELP' | translate }}"
                 ng-controller="helpCtrl" 
                 ng-click="open('lg', 'js/hefesoft/help/agenda.html')" 
                 class="btn bgm-lightgreen btn-icon waves-effect waves-circle">

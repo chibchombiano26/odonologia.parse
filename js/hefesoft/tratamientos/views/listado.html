@@ -1,8 +1,8 @@
  <div class="card">
     <div class="listview lv-bordered lv-lg">
           <div class="card-header ch-alt m-b-20">
-            <h2>Tratamientos 
-            <small> Listado de tratamientos </small></h2>                    
+            <h2>{{ 'TREATMENT' | translate }} 
+            <small> {{ 'TREATMENT_LIST' | translate }} </small></h2>                    
             
             <button ng-click="openTratamiento()"
                     ng-hide="ocultarAddTratamiento"
@@ -18,9 +18,9 @@
                 <tr>
                     <th></th>
                     <th ng-hide="editable"></th>
-                    <th>Nombre</th>
-                    <th ng-show="verSuperficies">Supericie</th>
-                    <th>Valor</th>                            
+                    <th>{{ 'NAME' | translate }}</th>
+                    <th ng-show="verSuperficies">{{ 'SURFACE' | translate }}</th>
+                    <th>{{ 'VALUE' | translate }}</th>                            
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                         <button class="btn btn-default waves-effect" ng-click="eliminar(item, $index)"><i class="zmdi zmdi-delete"></i></button>
                     </td>
                     <td ng-hide="editable">
-                        <i class="md md-keyboard-arrow-right" ng-click="selected(item)">Procedimientos</i>                            
+                        <i class="md md-keyboard-arrow-right" ng-click="selected(item)">{{ 'PROCEDURES' | translate }}</i>                            
                     </td>
                     <td>
                         <p tooltip="{{item.nombre}}" read-more ng-model="item.nombre" words="false" length="10"></p>

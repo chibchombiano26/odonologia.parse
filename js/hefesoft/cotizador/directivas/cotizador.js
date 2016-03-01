@@ -10,7 +10,7 @@ angular.module("odontologiaApp")
     
 })
 
-.controller('cotizadorCtrl', function($scope, $rootScope, $state, appScriptTemplateServices, modalService, cotizacionService, $q){
+.controller('cotizadorCtrl', function($scope, $rootScope, $state, appScriptTemplateServices, modalService, cotizacionService, $q, $translate){
     
     $scope.listado = [];
     $scope.footer = { suma : 0 };
@@ -75,18 +75,20 @@ angular.module("odontologiaApp")
     $scope.generarCotizacion = function(){
  		
  		var parameters = {
- 			templateid : '1F-fnU4-KIs1LQY1l2qkfgq6uxNwGLHwFulx31GNjOSY',
+ 			templateid : $translate.instant("FILES.BUDGET"),
             name : '', 
-            fileName : "cotizacion ", 
+            fileName : $translate.instant("REPORT.PRICE") + " ", 
             rowsData: [], 
             to: '', 
-            subject: "Cotizacion",
-            message : "Cotizacion",
-            clinica: "Nombre medico : "  + Parse.User.current().get("name"),
-            direccionClinica : "Direccion clinica :",
-            telefono: "Telefono clinica :",
-            email: "Email : " + Parse.User.current().get("email"),
-            paciente : {}
+            subject: $translate.instant("REPORT.PRICE"),
+            message : $translate.instant("REPORT.PRICE"),
+            clinica: $translate.instant("REPORT.NAME_OF_MEDICO") + " : "  + Parse.User.current().get("name"),
+            direccionClinica : $translate.instant("REPORT.CLINIC_ADDRESS") +  " :",
+            telefono: $translate.instant("REPORT.CLINIC_PHONE") + " :",
+            email: $translate.instant("REPORT.EMAIL") + " : " + Parse.User.current().get("email"),
+            paciente : {},
+            outTitle : $translate.instant("REPORT.TITLE_OUT"),
+            outMessage : $translate.instant("REPORT.MESSAGE")
         };
         
         if(Parse.User.current().get('idLogo'))
@@ -94,7 +96,7 @@ angular.module("odontologiaApp")
         	parameters['idLogo'] = Parse.User.current().get('idLogo');
         }
         
-        var titulos = ['Numero', 'Descripcion', 'Valor'];
+        var titulos = [$translate.instant("REPORT.NUMBER"), $translate.instant("REPORT.DESCRIPTION"), $translate.instant("REPORT.VALUE")];
         var lista = angular.copy($scope.listado);
         
         

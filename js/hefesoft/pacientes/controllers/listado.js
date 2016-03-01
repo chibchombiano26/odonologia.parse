@@ -2,13 +2,23 @@
 /*global angular, Parse, hefesoft*/
 
  angular.module('odontologiaApp')
-.controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope, driveApiUpload, callback){
+.controller('pacientesController',function($scope, $state, $stateParams, $q, parseService, pacienteService, $rootScope, driveApiUpload, callback, $translate, hefesoft_util_service){
 	
 	$scope.Paciente = {fecha : new Date()};
+	var currentLang = $translate.proposedLanguage() || $translate.use();
+	
+	if(currentLang === "es"){
+		$scope.colombia = true;	
+	}
+	else{
+		$scope.colombia = false;	
+	}
+	
 	var idPaciente = "";
 	var modo = "nuevo";
 	
-	$scope.Paciente['pictureUrl'] = hefesoft.generoPic($scope.Paciente, "genero");
+	$scope.Paciente['pictureUrl'] = hefesoft_util_service.generoPic($scope.Paciente, "genero");
+	
 	
 	$scope.changeImage = function(file){
         hefesoft.util.loadingBar.start();
@@ -24,7 +34,7 @@
 	}
 	
 	$scope.genero = function(){
-		$scope.Paciente['pictureUrl'] = hefesoft.generoPic($scope.Paciente, "genero");
+		$scope.Paciente['pictureUrl'] = hefesoft_util_service.generoPic($scope.Paciente, "genero");
 	}
 	
 	$scope.today = function() {

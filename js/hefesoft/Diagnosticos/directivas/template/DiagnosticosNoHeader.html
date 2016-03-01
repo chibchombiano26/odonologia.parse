@@ -2,17 +2,17 @@
     
    <thead>
         <tr ng-show="tituloTabla">
-            <th class="col-sm-1">Nombre</th>
+            <th class="col-sm-1"> {{ 'NAME' | translate }}</th>
             <th class="col-sm-1" 
             ng-show="verSuperficie">
-                Superficie
+                 {{ 'SURFACE' | translate }}
             </th>
-            <th ng-hide="modoLectura">Orden</th>
-            <th class="col-sm-1">Tratado</th>
-            <th class="col-sm-1">Tipo</th>
-            <th class="col-sm-1">Simbolo diagnostico</th>
-            <th class="col-sm-1">Simbolo evolucion</th>
-            <th class="col-sm-1">Desc Cie</th>
+            <th ng-hide="modoLectura"> {{ 'ORDER' | translate }}</th>
+            <th class="col-sm-1">{{ 'TREATMENT' | translate }}</th>
+            <th class="col-sm-1">{{ 'TYPE' | translate }}</th>
+            <th class="col-sm-1">{{ 'SYMBOL' | translate }} {{ 'DIAGNOSTICS' | translate }}</th>
+            <th class="col-sm-1">{{ 'SYMBOL' | translate }} {{ 'EVOLUTION' | translate }}</th>
+            <th class="col-sm-1">{{ 'DESCRIPTION' | translate }} Cie</th>
         </tr>
     </thead>
     
@@ -22,7 +22,7 @@
             <td class="col-sm-1" ng-show="verSuperficie">
                 {{sourceLabel | nombreSuperficie}}
             </td>
-            <td ng-hide="modoLectura">orden</td>
+            <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
             <td
                 class="checkbox">                                 
                 <input 
@@ -69,7 +69,7 @@
                 <button 
                     ng-click="openTratamiento(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Tratamientos
+                    {{ 'TREATMENT' | translate }}
                 </button>
             </td>
             
@@ -77,7 +77,7 @@
                 <button 
                     ng-click="open(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Editar
+                    {{ 'EDIT' | translate }}
                 </button>    
             </td>
 
@@ -85,7 +85,7 @@
                 <button 
                     ng-click="eliminar(source, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Eliminar
+                    {{ 'DELETE' | translate }}
                 </button>    
             </td>
         </tr>
@@ -95,7 +95,7 @@
             <td class="col-sm-1" ng-show="verSuperficie">
                 {{source1Label | nombreSuperficie}}
             </td>
-            <td ng-hide="modoLectura">orden</td>
+            <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
             <td
                 class="checkbox">                                 
                 <input 
@@ -142,7 +142,7 @@
                 <button 
                     ng-click="openTratamiento(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Tratamientos
+                    {{ 'TREATMENT' | translate }}
                 </button>
             </td>
             
@@ -150,7 +150,7 @@
                 <button 
                     ng-click="open(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Editar
+                    {{ 'EDIT' | translate }}
                 </button>    
             </td>
 
@@ -158,7 +158,7 @@
                 <button 
                     ng-click="eliminar(source1, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Eliminar
+                    {{ 'DELETE' | translate }}
                 </button>    
             </td>
         </tr>
@@ -168,7 +168,7 @@
             <td class="col-sm-1" ng-show="verSuperficie">
                 {{source2Label | nombreSuperficie}}
             </td>
-            <td ng-hide="modoLectura">orden</td>
+            <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
             <td
                 class="checkbox">                                 
                 <input 
@@ -215,7 +215,7 @@
                 <button 
                     ng-click="openTratamiento(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Tratamientos
+                    {{ 'TREATMENT' | translate }}
                 </button>
             </td>
             
@@ -223,7 +223,7 @@
                 <button 
                     ng-click="open(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Editar
+                    {{ 'EDIT' | translate }}
                 </button>    
             </td>
 
@@ -231,7 +231,7 @@
                 <button 
                     ng-click="eliminar(source2, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Eliminar
+                    {{ 'DELETE' | translate }}
                 </button>    
             </td>
         </tr>
@@ -241,7 +241,7 @@
             <td class="col-sm-1" ng-show="verSuperficie">
                 {{source3Label | nombreSuperficie}}
             </td>
-            <td ng-hide="modoLectura">orden</td>
+            <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
             <td
                 class="checkbox">                                 
                 <input 
@@ -288,7 +288,7 @@
                 <button 
                     ng-click="openTratamiento(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Tratamientos
+                    {{ 'TREATMENT' | translate }}
                 </button>
             </td>
             
@@ -296,7 +296,7 @@
                 <button 
                     ng-click="open(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Editar
+                    {{ 'EDIT' | translate }}
                 </button>    
             </td>
 
@@ -304,7 +304,7 @@
                 <button 
                     ng-click="eliminar(source3, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Eliminar
+                    {{ 'DELETE' | translate }}
                 </button>    
             </td>
         </tr>
@@ -314,7 +314,7 @@
             <td class="col-sm-1" ng-show="verSuperficie">
                 {{source4Label | nombreSuperficie}}
             </td>
-            <td ng-hide="modoLectura">orden</td>
+            <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
             <td
                 class="checkbox">                                 
                 <input 
@@ -361,7 +361,7 @@
                 <button 
                     ng-click="openTratamiento(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Tratamientos
+                    {{ 'TREATMENT' | translate }}
                 </button>
             </td>
             
@@ -369,7 +369,7 @@
                 <button 
                     ng-click="open(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Editar
+                    {{ 'EDIT' | translate }}
                 </button>    
             </td>
 
@@ -377,7 +377,7 @@
                 <button 
                     ng-click="eliminar(source4, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Eliminar
+                    {{ 'DELETE' | translate }}
                 </button>    
             </td>
         </tr>
@@ -387,7 +387,7 @@
             <td class="col-sm-1" ng-show="verSuperficie">
                 {{source5Label | nombreSuperficie}}
             </td>
-            <td ng-hide="modoLectura">orden</td>
+            <td ng-hide="modoLectura">{{ 'ORDER' | translate }}</td>
             <td
                 class="checkbox">                                 
                 <input 
@@ -434,7 +434,7 @@
                 <button 
                     ng-click="openTratamiento(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Tratamientos
+                    {{ 'TREATMENT' | translate }}
                 </button>
             </td>
             
@@ -442,7 +442,7 @@
                 <button 
                     ng-click="open(item)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Editar
+                    {{ 'EDIT' | translate }}
                 </button>    
             </td>
 
@@ -450,7 +450,7 @@
                 <button 
                     ng-click="eliminar(source5, item, $index)" 
                     class="btn btn-info btn-sm waves-effect waves-button waves-float">
-                    Eliminar
+                    {{ 'DELETE' | translate }}
                 </button>    
             </td>
         </tr>

@@ -1,6 +1,6 @@
   angular.module('odontologiaApp')
-  .controller('AddProcedimientoCtrl', ['$scope', 'CieCupsServices', 'dataTableStorageFactory', 'messageService', '$modalInstance', 'listado', 'seleccionado',
-    function ($scope, CieCupsServices, dataTableStorageFactory, messageService, $modalInstance, listado, seleccionado) {
+  .controller('AddProcedimientoCtrl', ['$scope', 'CieCupsServices', 'dataTableStorageFactory', 'messageService', '$modalInstance', 'listado', 'seleccionado', '$translate',
+    function ($scope, CieCupsServices, dataTableStorageFactory, messageService, $modalInstance, listado, seleccionado, $translate) {
 
     var esNuevo = true;
     $scope.Procedimiento = {};
@@ -13,7 +13,7 @@
        esNuevo = false;
     }
 
-    $scope.Especialidades = [{nombre: 'ODONTOLOGIA', codigo : 1}, {nombre: 'ODONTOPEDIATRIA', codigo : 2}, {nombre: 'ORTOPEDIA, ORTODONCIA Y OTROS PROCEDIMIENTOS', codigo : 3}];
+    $scope.Especialidades = [{nombre: $translate.instant('PROCEDURES_TYPES.ODONTOLOGY'), codigo : 1}, {nombre: $translate.instant('PROCEDURES_TYPES.PEDIATRICS'), codigo : 2}, {nombre: $translate.instant('PROCEDURES_TYPES.OTHERS'), codigo : 3}];
   
 
    $scope.adicionar = function(){
