@@ -103,7 +103,8 @@
     "FINISH" : "Finalizar",
     "FILES" :{
       "BUDGET" : "1F-fnU4-KIs1LQY1l2qkfgq6uxNwGLHwFulx31GNjOSY",
-      "HISTORY" : "1Hs8YaOe5dZjzMuw84X4Bipft2NnUK33xovHQ9vKeOEY"
+      "HISTORY" : "1Hs8YaOe5dZjzMuw84X4Bipft2NnUK33xovHQ9vKeOEY",
+      "PROCEDURES" : "https://spreadsheets.google.com/feeds/list/1eTBT2zJir3ihr8sr4kE03z_nRXiklckTj0Y5q_s0VQY/od6/public/values?alt=json"
     },
     "FULL_NAME" : "Nombres y apellidos",
     "IMAGES": "Imagenes",
@@ -135,6 +136,7 @@
     "NUMBER_OF_WORKING_HOURS" : "Numero de horas de trabajo",
     "NUMBER_OF_TEETH" : "Numeros de dientes",
     "NORMAL" : "Normal",
+    "MOUTH" : "boca",
     "ODONTOGRAMA": "ODONTOGRAMA",
     "ODONTOGRAMA_HELP": "Ayuda odontograma",
     "ODONTOGRAMA_INICIAL": "Odontograma inicial",

@@ -1,6 +1,6 @@
 /*global angular, Parse*/
 angular.module('odontologiaApp')
-.service('procedimientosService', function($q, $http, diagnosticosService){
+.service('procedimientosService', function($q, $http, diagnosticosService, $translate){
     
    var datafactory = {};
     
@@ -64,7 +64,7 @@ angular.module('odontologiaApp')
    
    datafactory.getFromGoogleSheet = function(){
        var defered = $q.defer();
-       $http.get('https://spreadsheets.google.com/feeds/list/1eTBT2zJir3ihr8sr4kE03z_nRXiklckTj0Y5q_s0VQY/od6/public/values?alt=json').then(function(data){
+       $http.get($translate.instant("FILES.PROCEDURES")).then(function(data){
            
            var result = data.data.feed.entry;
            

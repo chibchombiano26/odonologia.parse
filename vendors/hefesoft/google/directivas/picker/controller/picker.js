@@ -1,7 +1,7 @@
 /*global angular, Parse, google, gapi, hefesoft*/
 angular.module('hefesoft.google')
 .controller('googlePickerCtrl', 
-	['$scope', 'googlePickerService', 'driveApi', '$q', '$rootScope', function ($scope, googlePickerService, driveApi, $q, $rootScope) {
+	['$scope', 'googlePickerService', 'driveApi', '$q', '$rootScope', '$translate', function ($scope, googlePickerService, driveApi, $q, $rootScope, $translate) {
 
 	var pickerApiLoaded;
 	var developerKey = 'AIzaSyDqLLd0jtzOSqJzZcXVeB70-72PmoBwjRE';
@@ -56,11 +56,11 @@ angular.module('hefesoft.google')
              addView(docsView).
              addView(uploadView).
              addView(webCamView).             
-             setLocale('es').
+             setLocale(hefesoft.languaje()).
              setOAuthToken(hefesoft.googleAuth.access_token).
              setDeveloperKey(developerKey).
              setCallback(pickerCallback).
-             setTitle("Carga de adjuntos").
+             setTitle($translate.instant("ATTACHMENTS_FOR_THIS_PATIENT_MESSAGE")).
              build();
              //picker.setVisible(true);
        }

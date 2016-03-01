@@ -4,24 +4,47 @@ var hefesoft = hefesoft;
 hefesoft.tutorial = {};
 
 hefesoft.tutorial.inicializar = function(state) {
-    introJs()
-    .setOptions({
-        'nextLabel' : 'Siguiente',
-        'prevLabel': 'Anterior',
-        'skipLabel': 'Saltar',
-        'doneLabel': "Listo",
-        'skipLabel': 'Salir'
-    })
-    .goToStep(state)
-    .oncomplete(function(e) {
 
-    }).onexit(function(e) {
-
-    }).onchange(function(sender, e) {
-
+    var lang = hefesoft.languaje();
+    if (lang.startsWith("es")) {
         
-    }).onbeforechange(function(sender, e) {
+        introJs()
+            .setOptions({
+                'nextLabel': 'Siguiente',
+                'prevLabel': 'Anterior',
+                'skipLabel': 'Saltar',
+                'doneLabel': "Listo",
+                'skipLabel': 'Salir'
+            })
+            .goToStep(state)
+            .oncomplete(function(e) {
 
-    }).start(); // Start!
+            }).onexit(function(e) {
+
+            }).onchange(function(sender, e) {
+
+
+            }).onbeforechange(function(sender, e) {
+
+            }).start(); // Start!
+
+    }
+    else {
+
+        introJs()
+            .goToStep(state)
+            .oncomplete(function(e) {
+
+            }).onexit(function(e) {
+
+            }).onchange(function(sender, e) {
+
+
+            }).onbeforechange(function(sender, e) {
+
+            }).start(); // Start!
+    }
+
+
+
 }
-
