@@ -124,7 +124,7 @@ hefesoft = function() {
     
     function languaje() {
         var userLang = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
-        return userLang;
+        return userLang.substr(0,2);
     }
 
 

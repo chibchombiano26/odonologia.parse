@@ -1,8 +1,8 @@
 /*global angular, Parse, _, Hefesot, hefesoft, numeral*/
 angular.module('Historia').
 controller('planTratamientoCtrl', 
-	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams', 'appScriptTemplateServices', 'growlService', 'modalService',
-	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams, appScriptTemplateServices, growlService, modalService) {
+	['$scope', 'tratamientoServices', '$rootScope', 'dataTableStorageFactory', 'piezasDentalesServices', '$q', '$state', '$location', '$timeout', 'messageService', 'odontogramService','$stateParams', 'appScriptTemplateServices', 'growlService', 'modalService', "$translate",
+	function ($scope, tratamientoServices, $rootScope, dataTableStorageFactory, piezasDentalesServices, $q, $state, $location, $timeout, messageService, odontogramService, $stateParams, appScriptTemplateServices, growlService, modalService, $translate) {
 
 
 	var idOdontograma;
@@ -11,6 +11,7 @@ controller('planTratamientoCtrl',
 	var odontograma;
 
 	$scope.Listado = [];
+	$scope.listadoHistorico = [];
 	$scope.Source = [];
 	$scope.contextoProcedimientos = {};
 	$scope.pacienteId = $rootScope.currentPacient.objectId; 
@@ -25,6 +26,7 @@ controller('planTratamientoCtrl',
 		
 		odontograma = hefesoft.util.obtenerTipoOdontograma();
 	  	var result = odontograma.get("listado");
+	  	var historicoProcedimientos = odontograma.get("historico_procedimientos");
 	  	
 	  	idOdontograma = odontograma.get("objectId");
 	  	
@@ -33,6 +35,10 @@ controller('planTratamientoCtrl',
 
       	if(angular.isDefined(result) && result.length > 0){	
 	        $scope.Listado = tratamientoServices.extraerTodosProcedimientos($scope.Source);
+ 		}
+ 		
+ 		if(angular.isDefined(historicoProcedimientos) && historicoProcedimientos.length > 0){	
+	        $scope.listadoHistorico = JSON.parse(historicoProcedimientos);
  		}
  		
  		if (!hefesoft.getStorageObject("tutorialPlanTratamiento")) {
@@ -46,7 +52,13 @@ controller('planTratamientoCtrl',
 	//Como los elementos se estan pasando por referencia se puede guardar el mismo objeto que se cargo inicialmente
 	$scope.guardarCommand = function(){
 		
+		//historico
 		hefesoft.util.loadingBar.start();
+		
+		if($scope.listadoHistorico.length > 0){
+			odontograma.set('historico_procedimientos', angular.toJson($scope.listadoHistorico));
+		}
+		
 		odontograma.save().then(function(){
 			$state.go("pages.tree");
 		});
@@ -59,6 +71,7 @@ controller('planTratamientoCtrl',
 	$scope.procedimientoRealizado = function(item){
 		
    		var diagnostico = buscarDiagnostico(item);
+   		log(item);
 
    		//Si se encuentra el diagostico se prosigue a buscar el tratamiento a que corresponde el procedimiento
    		if(diagnostico){
@@ -160,4 +173,26 @@ controller('planTratamientoCtrl',
 
 		return todosRealizados;
 	}
+	
+	
+	function log(item) {
+		var variablesMostrar = {};
+	
+		if (item.Realizado) {
+			variablesMostrar.realizado = $translate.instant("PROCEDURE_REALIZED");
+	
+		}
+		else {
+			variablesMostrar.realizado = $translate.instant("PROCEDURE_NO_REALIZED");
+		}
+	
+		variablesMostrar.saldo = ", " + $translate.instant("BALANCE") + ":" + item.saldo;
+	
+	
+		$scope.listadoHistorico.push({
+			date: new Date(),
+			change: item.nombre + variablesMostrar.realizado + variablesMostrar.saldo
+		});
+	}
+	
 }])

@@ -7,6 +7,7 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
     var intro = [
         "vendors/bower_components/intro.js/intro.js",
         "vendors/hefesoft/tutorial.js"
+        //"vendors/hefesoft/React/directive/reactNews.js"
     ]
     
     var temp = [
@@ -30,7 +31,8 @@ materialAdmin.controller('preloadCtrl', function($scope, $ocLazyLoad, cfpLoading
         "js/hefesoft/help/helperModalController.js",
         "vendors/hefesoft/google/directivas/signUp/directive/directive.js",
         "js/hefesoft/modal/services.js",
-        "js/hefesoft/Noticias/Directivas/directive/fbPageNews.js"
+        "js/hefesoft/Noticias/Directivas/directive/fbPageNews.js",
+        "js/hefesoft/historia/Odontologia/planTratamiento/directivas/historico.js"
     ]
     
     var templates = [

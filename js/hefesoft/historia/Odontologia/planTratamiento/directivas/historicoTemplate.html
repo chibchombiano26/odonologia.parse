@@ -1,0 +1,47 @@
+
+
+<div class="card">
+     <div class="listview lv-bordered lv-lg">
+          <div class="card-header ch-alt m-b-20">
+            <h2>{{ 'TREATHMENTS_HISTORIC' | translate }} <small> {{ 'TREATHMENTS_CHANGES' | translate }} </small></h2>
+
+          </div>
+     </div>            
+    <div class="card-body m-t-0">
+        <table class="table table-inner table-vmiddle">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{{ 'DATE' | translate }}</th>
+                    <th>{{ 'CHANGE' | translate }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr ng-repeat="item in listado track by $index">
+                    <td>
+                        <button class="btn btn-default waves-effect" ng-click="eliminar(item, $index)"><i class="zmdi zmdi-delete"></i></button>
+                    </td>
+                    
+                    <td>
+                        {{item.date | date:'medium'}}
+                    </td>
+                    
+                    <td>
+                        {{item.change}}
+                    </td>
+                                            
+                </tr>
+
+
+                <!-- Footer -->
+                 <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>           
+</div> 

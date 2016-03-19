@@ -100,6 +100,10 @@ angular.module('odontologiaApp')
  			odontograma.set("ppr", ppr);
  		}
  		
+ 		if(item && item.historico_procedimientos){
+ 			odontograma.set("historico_procedimientos", item.historico_procedimientos);
+ 		}
+ 		
  		
  		if(odontogramaId){
  			odontograma.set("id", odontogramaId);
